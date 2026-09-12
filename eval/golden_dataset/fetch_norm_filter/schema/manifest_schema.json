@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ManifestEntry",
+  "type": "object",
+  "required": [
+    "id",
+    "category",
+    "provider",
+    "description",
+    "fixture_path",
+    "expected_path"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^(GML|DSC)-\\d{3}$"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Fetch happy path",
+        "Permission và scope",
+        "Normalize",
+        "Duplicate và version",
+        "Filter relevance",
+        "Error / partial coverage"
+      ]
+    },
+    "provider": {
+      "type": "string",
+      "enum": [
+        "google",
+        "discord"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "fixture_path": {
+      "type": "string",
+      "pattern": "^fixtures/(gml|dsc)_\\d{3}\\.json$"
+    },
+    "expected_path": {
+      "type": "string",
+      "pattern": "^expected/(gml|dsc)_\\d{3}\\.json$"
+    },
+    "meta": {
+      "type": "object"
+    }
+  }
+}

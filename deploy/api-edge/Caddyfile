@@ -1,0 +1,19 @@
+{
+	# Không giành được :80 nên chuyển hướng tự động là vô nghĩa ở đây.
+	auto_https disable_redirects
+}
+
+{$CADDY_ADDR} {
+	# Chứng chỉ xin qua bản ghi TXT trên DuckDNS. Bắt buộc phải đi đường này
+	# vì port 80 và 443 trên VM thuộc về reverse proxy của app khác, nên cả
+	# HTTP-01 lẫn TLS-ALPN-01 đều không dùng được.
+	tls {
+		dns duckdns {env.DUCKDNS_API_TOKEN}
+	}
+
+	encode gzip
+
+	# Cổng vào chỉ dành cho API. Không phục vụ file tĩnh, không dính gì tới
+	# frontend — frontend có image riêng, dựng sau khi nó xong.
+	reverse_proxy backend:8000
+}

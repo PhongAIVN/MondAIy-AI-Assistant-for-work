@@ -1,0 +1,6 @@
+{
+  "name": "mondaiy",
+  "description": "Helps students and program participants turn fragmented information into clear, traceable next actions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

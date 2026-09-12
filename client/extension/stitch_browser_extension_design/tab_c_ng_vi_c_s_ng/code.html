@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>mondaiy - Công việc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#e7f6ff",
+                      "on-surface-variant": "#40484c",
+                      "on-error": "#ffffff",
+                      "on-surface": "#001f2a",
+                      "on-tertiary": "#ffffff",
+                      "background": "#f4faff",
+                      "on-tertiary-fixed-variant": "#663d11",
+                      "surface-container-highest": "#c9e7f8",
+                      "outline": "#70787c",
+                      "surface-dim": "#c0dfef",
+                      "primary": "#16576a",
+                      "on-secondary-fixed-variant": "#004e60",
+                      "tertiary": "#714619",
+                      "primary-fixed-dim": "#96cfe5",
+                      "surface-container-high": "#ceedfd",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#8ed0e8",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#054d60",
+                      "secondary-fixed": "#b6ebff",
+                      "inverse-surface": "#163441",
+                      "primary-container": "#356f83",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#e0f4ff",
+                      "surface-variant": "#c9e7f8",
+                      "tertiary-container": "#8d5e2f",
+                      "on-tertiary-fixed": "#2d1600",
+                      "surface-tint": "#2a6579",
+                      "on-background": "#001f2a",
+                      "surface-container": "#daf2ff",
+                      "primary-fixed": "#b8eaff",
+                      "on-secondary-container": "#1f697e",
+                      "on-tertiary-container": "#ffe3cd",
+                      "surface": "#f4faff",
+                      "tertiary-fixed": "#ffdcbf",
+                      "surface-bright": "#f4faff",
+                      "inverse-primary": "#96cfe5",
+                      "secondary": "#1b667c",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#001f28",
+                      "secondary-container": "#a5e6ff",
+                      "on-primary-container": "#c6eeff",
+                      "outline-variant": "#c0c8cc",
+                      "tertiary-fixed-dim": "#f7ba83",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#001f28"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "control-gap": "8px",
+                      "internal-padding": "16px",
+                      "panel-width": "400px",
+                      "stack-gap": "12px",
+                      "edge-margin": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "EB Garamond"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "EB Garamond"
+                      ],
+                      "headline-sm": [
+                              "EB Garamond"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "body-main": [
+                              "Geist"
+                      ],
+                      "body-normal": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "17px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-main": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-normal": [
+                              "15px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f4faff;
+            color: #001f2a;
+            font-family: 'Geist', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .extension-panel {
+            width: 100%;
+            max-width: 400px;
+            background-color: #f4faff;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(35,64,77,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 800px; /* Fixed height for extension feel */
+        }
+        
+        /* Checkbox Styling */
+        .task-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #70787c;
+            border-radius: 4px;
+            display: grid;
+            place-content: center;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        .task-checkbox::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em #16576a;
+            background-color: #16576a;
+            transform-origin: center;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+        .task-checkbox:checked {
+            border-color: #16576a;
+        }
+        .task-checkbox:checked::before {
+            transform: scale(1);
+        }
+
+        /* Task Card Hover/Active States */
+        .task-card {
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .task-card:hover {
+            border-color: #c9e7f8;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(35,64,77,0.05), 0 8px 16px rgba(35,64,77,0.08);
+            transform: translateY(-1px);
+        }
+        
+        /* Custom Scrollbar */
+        .scrollable-content {
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .scrollable-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background-color: #c0c8cc;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="extension-panel">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-edge-margin py-4 bg-surface shadow-sm z-10 sticky top-0">
+<div class="flex items-center gap-control-gap">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">mondaiy</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant shadow-sm">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A detailed close-up portrait of a professional individual in a warm, well-lit modern office setting. Soft, natural lighting highlights their features against a slightly blurred, sophisticated background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwukdAyaibzDYKXJPDb0-DacNQsgIaHzGA6AVA-SULOrbaEQUzpu6M0wA8pwpifDCl5mxm3VT0gPw3IAlUI3EmxgaejNeXA0GkgvOjiv1NENI0n8ciyATjxMOw4m2nah9uQq2kRZTgbe7gjBDh5w1tueu37Dp_pS6_XXdQY7FcpEvEw2W-RAudx7icz41zj92s-1Saueht3N21xGs3T_z9s3jhgG3TIrRvWiWoIbFcWcfVAGjdoKu1"/>
+</div>
+</header>
+<!-- Navigation Drawer (Tab Pills) -->
+<div class="flex w-full gap-control-gap p-internal-padding bg-surface-container-low z-10 sticky top-[68px]">
+<button class="flex items-center justify-center bg-surface shadow-[0_2px_4px_rgba(35,64,77,0.05)] text-primary rounded-lg py-2 px-4 flex-1 gap-2 transition-transform duration-300 ease-out active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-label-md text-label-md">Công việc</span>
+</button>
+<button class="flex items-center justify-center text-on-surface-variant py-2 px-4 flex-1 gap-2 hover:text-on-surface transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="data_exploration">data_exploration</span>
+<span class="font-label-md text-label-md">Lấy dữ liệu</span>
+</button>
+</div>
+<!-- Main Content Area -->
+<div class="scrollable-content px-edge-margin pb-24 pt-4 flex flex-col gap-stack-gap">
+<!-- Stats Bar -->
+<div class="flex justify-between items-end bg-surface-container-lowest p-4 rounded-[12px] shadow-[0_2px_4px_rgba(35,64,77,0.02)] border border-surface-container-highest">
+<div class="flex flex-col items-center">
+<span class="font-headline-lg text-headline-lg text-error">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">quá hạn</span>
+</div>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<div class="flex flex-col items-center">
+<span class="font-headline-lg text-headline-lg text-tertiary">5</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">tuần này</span>
+</div>
+<div class="h-8 w-px bg-outline-variant/30"></div>
+<div class="flex flex-col items-center">
+<span class="font-headline-lg text-headline-lg text-on-surface">12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">tổng</span>
+</div>
+</div>
+<!-- Search & Filter / View Toggle -->
+<div class="flex flex-col gap-stack-gap mt-2">
+<div class="flex gap-control-gap">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg py-2 pl-9 pr-3 text-body-normal text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-outline/70" placeholder="Tìm kiếm công việc..." type="text"/>
+</div>
+<button class="bg-surface-container-lowest border border-outline-variant rounded-lg w-10 h-10 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+<div class="bg-surface-container-low rounded-lg p-1 flex">
+<button class="flex-1 py-1.5 px-3 bg-surface shadow-sm rounded text-primary font-label-md text-label-md text-center transition-all">Danh sách</button>
+<button class="flex-1 py-1.5 px-3 text-on-surface-variant font-label-md text-label-md text-center hover:text-on-surface transition-all">Theo ngày</button>
+</div>
+</div>
+<!-- Task List -->
+<div class="flex flex-col gap-6 mt-4">
+<!-- Group: Quá hạn -->
+<div class="flex flex-col gap-stack-gap">
+<h2 class="font-headline-sm text-headline-sm text-error flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                    Quá hạn
+                </h2>
+<!-- Overdue Task Card -->
+<div class="task-card bg-surface-container-lowest rounded-[18px] p-4 flex gap-3 relative shadow-[0_2px_4px_rgba(35,64,77,0.03)] border border-error-container">
+<div class="pt-1">
+<input class="task-checkbox border-error" type="checkbox"/>
+</div>
+<div class="flex flex-col flex-grow gap-2">
+<p class="font-body-normal text-body-normal text-on-surface pr-4">Gửi báo cáo cho khách hàng trước 5h chiều</p>
+<div class="flex flex-wrap gap-2 items-center mt-1">
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">warning</span>
+                                QUÁ HẠN
+                            </span>
+<span class="text-error font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                Hôm qua, 17:00
+                            </span>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="text-on-surface-variant font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">chat</span>
+                                Zalo: S25-64CNTT
+                            </span>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Group: Hôm nay -->
+<div class="flex flex-col gap-stack-gap">
+<h2 class="font-headline-sm text-headline-sm text-primary-container flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                    Hôm nay
+                </h2>
+<!-- Today Task Card -->
+<div class="task-card bg-surface-container-lowest rounded-[18px] p-4 flex gap-3 relative shadow-[0_2px_4px_rgba(35,64,77,0.03)] border border-surface-container-highest">
+<div class="pt-1">
+<input class="task-checkbox" type="checkbox"/>
+</div>
+<div class="flex flex-col flex-grow gap-2">
+<p class="font-body-normal text-body-normal text-on-surface">Họp team sync UI Kit</p>
+<div class="flex flex-wrap gap-2 items-center mt-1">
+<span class="bg-primary-container text-on-primary font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-on-primary">today</span>
+                                HÔM NAY
+                            </span>
+<span class="text-primary-container font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                13:30
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button -->
+<button class="absolute bottom-6 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-[0_4px_8px_rgba(22,87,106,0.3),0_8px_24px_rgba(22,87,106,0.2)] flex items-center justify-center hover:bg-primary-container active:scale-90 transition-all duration-200 z-50 group">
+<span class="material-symbols-outlined text-[28px] group-hover:rotate-90 transition-transform duration-300">add</span>
+</button>
+</div>
+</body></html>

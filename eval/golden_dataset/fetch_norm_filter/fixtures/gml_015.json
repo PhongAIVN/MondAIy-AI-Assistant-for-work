@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-015",
+    "threadId": "thread-gml-015",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng chuẩn bị cho buổi họp cohort ngày mai.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "GVCN <gvcn@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-015"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIGNodeG6qW4gYuG7iyBjaG8gYnXhu5VpIGjhu41wIGNvaG9ydCBuZ8OgeSBtYWku",
+        "size": 47
+      }
+    }
+  }
+]

@@ -1,0 +1,12 @@
+[run]
+branch = True
+source =
+    src.agents.pipeline
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
+    raise NotImplementedError
+show_missing = True
+skip_covered = False

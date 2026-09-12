@@ -1,0 +1,35 @@
+flowchart LR
+    RUN_REQUEST[RunCreateRequest\nsources + time window + mode] --> RUN[(runs)]
+    RUN --> FETCH[fetch]
+    FETCH --> RAW[(pipeline_raw_messages)]
+    RAW --> NORMALIZE[normalize]
+    NORMALIZE --> NORMALIZED[(pipeline_normalized_messages)]
+    NORMALIZED --> FILTER[filter\nscope + importance]
+    FILTER --> FILTERED[(pipeline_filtered_messages)]
+    FILTERED --> MODE{mode}
+
+    MODE -->|summary| SUMMARY[summary result]
+    MODE -->|task_extraction| BATCH[make_batches\nmax 18 messages]
+    BATCH --> BATCH_AUDIT[(pipeline_batches)]
+    BATCH_AUDIT --> EXTRACT[extract_batch\nLLM or rule-based]
+    EXTRACT --> SIGNAL[ExtractedSignal\ntitle + evidence + confidence]
+    SIGNAL --> EXTRACT_AUDIT[(pipeline_extracted_items)]
+    SIGNAL --> RESOLVE[resolve\ntime + identity + action hint]
+    RESOLVE --> RESOLVED[ResolvedItem\ndue_at + assignee + ambiguity]
+    RESOLVED --> RESOLVE_AUDIT[(pipeline_resolved_items)]
+    RESOLVED --> CLUSTER[cluster\nfuzzy title + due date]
+    CLUSTER --> REDUCE[reduce\ndetail + explainability]
+    REDUCE --> CLUSTERS[(clusters)]
+    CLUSTERS --> TASKS[(tasks)]
+    CLUSTERS --> EVIDENCE[(task_evidence)]
+    TASKS --> RESULT[RunResponse + task list]
+    SUMMARY --> RESULT
+
+    classDef input fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    classDef process fill:#FFF4D6,stroke:#B7791F,color:#4A3200;
+    classDef audit fill:#EDF2F7,stroke:#4A5568,color:#1A202C;
+    classDef output fill:#E9F7EF,stroke:#238636,color:#123524;
+    class RUN_REQUEST input;
+    class FETCH,NORMALIZE,FILTER,MODE,BATCH,EXTRACT,RESOLVE,CLUSTER,REDUCE,SUMMARY process;
+    class RUN,RAW,NORMALIZED,FILTERED,BATCH_AUDIT,EXTRACT_AUDIT,RESOLVE_AUDIT audit;
+    class SIGNAL,RESOLVED,CLUSTERS,TASKS,EVIDENCE,RESULT output;

@@ -1,0 +1,26 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-dsc-003",
+      "source_id": "team-channel-id",
+      "provider": "discord",
+      "thread_id": "team-channel-id",
+      "author_id": "usr-mentor",
+      "author_name": "mentor",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Hãy xem đề bài tại https://vlearn.edu.vn/de_bai.pdf",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://discord.com/channels/guild-001/team-channel-id/msg-dsc-003",
+      "capture_mode": "discord_api",
+      "attachments": [
+        {
+          "filename": "de_bai.pdf",
+          "mimeType": "application/pdf",
+          "sizeBytes": 128000
+        }
+      ]
+    }
+  ]
+}

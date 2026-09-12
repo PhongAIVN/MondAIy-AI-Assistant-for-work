@@ -1,0 +1,56 @@
+[
+  {
+    "id": "msg-gml-002-1",
+    "threadId": "thread-gml-002",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Hạn chót nộp bài tập lớn là thứ Sáu.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-002-1"
+        }
+      ],
+      "body": {
+        "data": "SOG6oW4gY2jDs3QgbuG7mXAgYsOgaSB04bqtcCBs4bubbiBsw6AgdGjhu6kgU8OhdS4=",
+        "size": 36
+      }
+    }
+  },
+  {
+    "id": "msg-gml-002-2",
+    "threadId": "thread-gml-002",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng xác nhận xem tôi có thể nộp muộn không?",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Học viên <student@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-002-2"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIHjDoWMgbmjhuq1uIHhlbSB0w7RpIGPDsyB0aOG7gyBu4buZcCBtdeG7mW4ga2jDtG5nPw==",
+        "size": 48
+      }
+    }
+  }
+]

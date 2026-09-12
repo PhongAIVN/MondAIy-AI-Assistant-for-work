@@ -1,0 +1,30 @@
+[
+  {
+    "id": "msg-gml-018",
+    "threadId": "thread-gml-018",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Cần nộp slide gấp.",
+    "historyId": "12345",
+    "sourceUrl": "not-a-valid-gmail-url",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-018"
+        }
+      ],
+      "body": {
+        "data": "Q-G6p24gbuG7mXAgc2xpZGUgZ-G6pXAu",
+        "size": 18
+      }
+    }
+  }
+]

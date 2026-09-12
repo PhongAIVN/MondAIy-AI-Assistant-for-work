@@ -1,0 +1,768 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": false,
+  "title": "P-004 · LangSmith AI traces",
+  "uid": "p004-langsmith-traces",
+  "tags": [
+    "p004",
+    "langsmith",
+    "ai"
+  ],
+  "timezone": "Asia/Ho_Chi_Minh",
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "refresh": "5m",
+  "schemaVersion": 39,
+  "templating": {
+    "list": [
+      {
+        "name": "project",
+        "label": "LangSmith project",
+        "type": "textbox",
+        "query": "p004-production",
+        "current": {
+          "text": "p004-production",
+          "value": "p004-production"
+        },
+        "hide": 0
+      },
+      {
+        "name": "project_id",
+        "label": "Project UUID",
+        "type": "query",
+        "hide": 2,
+        "refresh": 1,
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "p004-langsmith"
+        },
+        "query": {
+          "queryType": "infinity",
+          "infinityQuery": {
+            "refId": "variable",
+            "type": "json",
+            "source": "url",
+            "format": "table",
+            "parser": "backend",
+            "url": "https://api.smith.langchain.com/api/v1/sessions?name=$project&limit=1",
+            "url_options": {
+              "method": "GET"
+            },
+            "root_selector": "",
+            "columns": [
+              {
+                "selector": "id",
+                "text": "id",
+                "type": "string"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "trace_id",
+        "label": "Trace ID (bấm một dòng ở bảng trên để nạp)",
+        "type": "textbox",
+        "query": "",
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "hide": 0
+      },
+      {
+        "name": "run_id",
+        "label": "Run ID (bấm cột run_id ở cây trace)",
+        "type": "textbox",
+        "query": "",
+        "current": {
+          "text": "",
+          "value": ""
+        },
+        "hide": 0
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Tổng quan LangSmith trong khoảng thời gian",
+      "description": "No data có thể do monthly quota hết, project chưa có trace hoặc trace stale; đối chiếu start_time mới nhất ở bảng Trace gần đây trước khi kết luận.",
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "p004-langsmith"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name",
+        "orientation": "horizontal"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "error_rate"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 0.05
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "latency_p50"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "latency_p99"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cost_usd"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "currencyUSD"
+              },
+              {
+                "id": "decimals",
+                "value": 4
+              }
+            ]
+          }
+        ]
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "p004-langsmith"
+          },
+          "type": "json",
+          "source": "url",
+          "format": "table",
+          "parser": "backend",
+          "url": "https://api.smith.langchain.com/api/v1/runs/stats",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"session\":[\"$project_id\"],\"is_root\":true,\"start_time\":\"${__from:date:iso}\"}"
+          },
+          "root_selector": "",
+          "columns": [
+            {
+              "selector": "run_count",
+              "text": "runs",
+              "type": "number"
+            },
+            {
+              "selector": "error_rate",
+              "text": "error_rate",
+              "type": "number"
+            },
+            {
+              "selector": "latency_p50",
+              "text": "latency_p50",
+              "type": "number"
+            },
+            {
+              "selector": "latency_p99",
+              "text": "latency_p99",
+              "type": "number"
+            },
+            {
+              "selector": "total_tokens",
+              "text": "tokens",
+              "type": "number"
+            },
+            {
+              "selector": "total_cost",
+              "text": "cost_usd",
+              "type": "number"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Trace gần đây — bấm cột trace để xem chi tiết bên dưới",
+      "description": "Chỉ metadata của run; start_time là latest timestamp để đánh giá freshness. Input/output không nạp vào narrative; No data có thể do quota/staleness, không phải kết quả tốt.",
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "p004-langsmith"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "trace"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Xem trace ngay trong Grafana",
+                    "url": "d/p004-langsmith-traces/?var-project=${project}&var-trace_id=${__data.fields.trace_id}&${__url_time_range}"
+                  },
+                  {
+                    "title": "Mở trong LangSmith (cần ghế trả phí)",
+                    "targetBlank": true,
+                    "url": "https://smith.langchain.com/projects/p/$project_id/r/${__value.raw}?poll=true"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "trace_id"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "p004-langsmith"
+          },
+          "type": "json",
+          "source": "url",
+          "format": "table",
+          "parser": "backend",
+          "url": "https://api.smith.langchain.com/api/v1/runs/query",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"session\":[\"$project_id\"],\"is_root\":true,\"limit\":100,\"order\":\"desc\",\"select\":[\"id\",\"name\",\"run_type\",\"status\",\"start_time\",\"end_time\",\"total_tokens\",\"total_cost\",\"error\",\"trace_id\"],\"filter\":\"gt(start_time, \\\"${__from:date:iso}\\\")\"}"
+          },
+          "root_selector": "runs",
+          "columns": [
+            {
+              "selector": "start_time",
+              "text": "start_time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "end_time",
+              "text": "end_time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "name",
+              "text": "name",
+              "type": "string"
+            },
+            {
+              "selector": "run_type",
+              "text": "type",
+              "type": "string"
+            },
+            {
+              "selector": "status",
+              "text": "status",
+              "type": "string"
+            },
+            {
+              "selector": "total_tokens",
+              "text": "tokens",
+              "type": "number"
+            },
+            {
+              "selector": "total_cost",
+              "text": "cost_usd",
+              "type": "number"
+            },
+            {
+              "selector": "id",
+              "text": "trace",
+              "type": "string"
+            },
+            {
+              "selector": "trace_id",
+              "text": "trace_id",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Chỉ các run lỗi",
+      "description": "Run lỗi trong time range đã chọn, chỉ metadata an toàn. No data không chứng minh không có lỗi khi quota hết hoặc trace stale.",
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "p004-langsmith"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "trace"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Xem trace ngay trong Grafana",
+                    "url": "d/p004-langsmith-traces/?var-project=${project}&var-trace_id=${__data.fields.trace_id}&${__url_time_range}"
+                  },
+                  {
+                    "title": "Mở trong LangSmith (cần ghế trả phí)",
+                    "targetBlank": true,
+                    "url": "https://smith.langchain.com/projects/p/$project_id/r/${__value.raw}?poll=true"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "trace_id"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "p004-langsmith"
+          },
+          "type": "json",
+          "source": "url",
+          "format": "table",
+          "parser": "backend",
+          "url": "https://api.smith.langchain.com/api/v1/runs/query",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"session\":[\"$project_id\"],\"limit\":100,\"order\":\"desc\",\"select\":[\"id\",\"name\",\"status\",\"start_time\",\"end_time\",\"error\",\"trace_id\"],\"filter\":\"and(eq(status, \\\"error\\\"), gt(start_time, \\\"${__from:date:iso}\\\"))\"}"
+          },
+          "root_selector": "runs",
+          "columns": [
+            {
+              "selector": "start_time",
+              "text": "start_time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "end_time",
+              "text": "end_time",
+              "type": "timestamp"
+            },
+            {
+              "selector": "name",
+              "text": "name",
+              "type": "string"
+            },
+            {
+              "selector": "error",
+              "text": "error",
+              "type": "string"
+            },
+            {
+              "selector": "id",
+              "text": "trace",
+              "type": "string"
+            },
+            {
+              "selector": "trace_id",
+              "text": "trace_id",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Cây trace — mọi bước trong $trace_id",
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "datasource": {
+        "type": "yesoreyeram-infinity-datasource",
+        "uid": "p004-langsmith"
+      },
+      "options": {
+        "sortBy": [
+          {
+            "displayName": "thu_tu",
+            "desc": false
+          }
+        ],
+        "cellHeight": "lg"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "p004-langsmith"
+          },
+          "type": "json",
+          "source": "url",
+          "format": "table",
+          "parser": "backend",
+          "url": "https://api.smith.langchain.com/api/v1/runs/query",
+          "url_options": {
+            "method": "POST",
+            "body_type": "raw",
+            "body_content_type": "application/json",
+            "data": "{\"session\":[\"$project_id\"],\"filter\":\"eq(trace_id, \\\"$trace_id\\\")\",\"limit\":100,\"order\":\"asc\",\"select\":[\"id\",\"name\",\"run_type\",\"status\",\"start_time\",\"end_time\",\"dotted_order\",\"parent_run_id\",\"error\",\"inputs_preview\",\"outputs_preview\"]}"
+          },
+          "root_selector": "runs",
+          "columns": [
+            {
+              "selector": "dotted_order",
+              "text": "thu_tu",
+              "type": "string"
+            },
+            {
+              "selector": "name",
+              "text": "buoc",
+              "type": "string"
+            },
+            {
+              "selector": "run_type",
+              "text": "loai",
+              "type": "string"
+            },
+            {
+              "selector": "status",
+              "text": "trang_thai",
+              "type": "string"
+            },
+            {
+              "selector": "start_time",
+              "text": "bat_dau",
+              "type": "timestamp"
+            },
+            {
+              "selector": "end_time",
+              "text": "ket_thuc",
+              "type": "timestamp"
+            },
+            {
+              "selector": "error",
+              "text": "loi",
+              "type": "string"
+            },
+            {
+              "selector": "id",
+              "text": "run_id",
+              "type": "string"
+            },
+            {
+              "selector": "inputs_preview",
+              "text": "inputs",
+              "type": "string"
+            },
+            {
+              "selector": "outputs_preview",
+              "text": "outputs",
+              "type": "string"
+            }
+          ]
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "run_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "Nạp JSON đầy đủ của bước này",
+                    "url": "d/p004-langsmith-traces/?var-project=${project}&var-trace_id=${trace_id}&var-run_id=${__value.raw}&${__url_time_range}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "inputs"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 260
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "outputs"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              },
+              {
+                "id": "custom.minWidth",
+                "value": 260
+              }
+            ]
+          }
+        ]
+      },
+      "description": "Preview do LangSmith cắt sẵn (~6 KB cho cả cây). Muốn payload trọn vẹn thì bấm run_id để mở row JSON đầy đủ bên dưới."
+    },
+    {
+      "type": "row",
+      "title": "JSON đầy đủ (bung ra khi cần — payload có thể vài MB)",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 57
+      },
+      "panels": [
+        {
+          "type": "table",
+          "title": "JSON đầy đủ — chỉ run $run_id",
+          "description": "Payload trọn vẹn của đúng một bước. Cố ý không nạp cả cây: đo trên trace thật là 70 MB cho 27 bước, đủ để treo trình duyệt.",
+          "gridPos": {
+            "h": 16,
+            "w": 24,
+            "x": 0,
+            "y": 58
+          },
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "p004-langsmith"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "cellOptions": {
+                  "type": "json-view"
+                },
+                "inspect": true,
+                "minWidth": 300
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "buoc"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "auto"
+                    }
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 200
+                  }
+                ]
+              }
+            ]
+          },
+          "options": {
+            "cellHeight": "lg"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "p004-langsmith"
+              },
+              "type": "json",
+              "source": "url",
+              "format": "table",
+              "parser": "backend",
+              "url": "https://api.smith.langchain.com/api/v1/runs/query",
+              "url_options": {
+                "method": "POST",
+                "body_type": "raw",
+                "body_content_type": "application/json",
+                "data": "{\"session\":[\"$project_id\"],\"filter\":\"eq(id, \\\"$run_id\\\")\",\"limit\":1,\"select\":[\"id\",\"name\",\"inputs\",\"outputs\",\"error\"]}"
+              },
+              "root_selector": "runs",
+              "columns": [
+                {
+                  "selector": "name",
+                  "text": "buoc",
+                  "type": "string"
+                },
+                {
+                  "selector": "inputs",
+                  "text": "inputs",
+                  "type": "string"
+                },
+                {
+                  "selector": "outputs",
+                  "text": "outputs",
+                  "type": "string"
+                },
+                {
+                  "selector": "error",
+                  "text": "loi",
+                  "type": "string"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "description": "Trace LangSmith đọc qua REST API. Bấm cột trace ở bảng trên để nạp cả cây bước bên dưới; bung row cuối nếu cần payload JSON trọn vẹn của một bước. Panel báo 429 là do LangSmith chặn burst — đợi lần refresh sau."
+}

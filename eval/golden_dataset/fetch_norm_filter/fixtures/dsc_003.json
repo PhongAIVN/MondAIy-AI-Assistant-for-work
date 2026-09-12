@@ -1,0 +1,26 @@
+[
+  {
+    "id": "msg-dsc-003",
+    "channel_id": "team-channel-id",
+    "guild_id": "guild-001",
+    "content": "Hãy xem đề bài tại https://vlearn.edu.vn/de_bai.pdf",
+    "timestamp": "2025-01-01T00:00:00+00:00",
+    "edited_timestamp": null,
+    "author": {
+      "id": "usr-mentor",
+      "username": "mentor",
+      "discriminator": "0"
+    },
+    "attachments": [
+      {
+        "id": "att-003",
+        "filename": "de_bai.pdf",
+        "size": 128000,
+        "url": "https://discord.com/att/de_bai.pdf",
+        "content_type": "application/pdf"
+      }
+    ],
+    "mentions": [],
+    "referenced_message": null
+  }
+]

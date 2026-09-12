@@ -1,0 +1,18 @@
+[
+  {
+    "id": "msg-dsc-004",
+    "channel_id": "random-channel-id",
+    "guild_id": "guild-001",
+    "content": "Game này hay quá nè.",
+    "timestamp": "2025-01-01T00:00:00+00:00",
+    "edited_timestamp": null,
+    "author": {
+      "id": "usr-student",
+      "username": "student",
+      "discriminator": "0"
+    },
+    "attachments": [],
+    "mentions": [],
+    "referenced_message": null
+  }
+]

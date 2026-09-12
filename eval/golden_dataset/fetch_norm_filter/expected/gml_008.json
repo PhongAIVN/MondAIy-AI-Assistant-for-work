@@ -1,0 +1,20 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-gml-008",
+      "source_id": "INBOX",
+      "provider": "google",
+      "thread_id": "thread-gml-008",
+      "author_id": "gvcn@vlearn.edu.vn",
+      "author_name": "GVCN",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Tôi đã nhận được slide. Cần sửa lại trang 3 gấp.\n\nOn Aug 5, 2026, at 10:00 AM, Student <student@vlearn.edu.vn> wrote:\n> Gửi cô slide báo cáo ạ.",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://mail.google.com/mail/u/0/#all/msg-gml-008",
+      "capture_mode": "gmail_api",
+      "attachments": []
+    }
+  ]
+}

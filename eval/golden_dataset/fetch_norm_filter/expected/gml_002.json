@@ -1,0 +1,35 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-gml-002-1",
+      "source_id": "INBOX",
+      "provider": "google",
+      "thread_id": "thread-gml-002",
+      "author_id": "admin@vlearn.edu.vn",
+      "author_name": "Admin",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Hạn chót nộp bài tập lớn là thứ Sáu.",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://mail.google.com/mail/u/0/#all/msg-gml-002-1",
+      "capture_mode": "gmail_api",
+      "attachments": []
+    },
+    {
+      "id": "msg-gml-002-2",
+      "source_id": "INBOX",
+      "provider": "google",
+      "thread_id": "thread-gml-002",
+      "author_id": "student@vlearn.edu.vn",
+      "author_name": "Học viên",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Vui lòng xác nhận xem tôi có thể nộp muộn không?",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://mail.google.com/mail/u/0/#all/msg-gml-002-2",
+      "capture_mode": "gmail_api",
+      "attachments": []
+    }
+  ]
+}

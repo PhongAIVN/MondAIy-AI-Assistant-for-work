@@ -1,0 +1,166 @@
+<mxfile host="Electron">
+  <diagram name="Outlook" id="DVk9bAYrsbSneLEUy37K">
+    <mxGraphModel dx="824" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1520" pageHeight="1060" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-12" parent="1" style="text;html=1;fontSize=16;fontStyle=1;align=left;" value="Email → Verified Work Context → Summary — Processing Pipeline + Golden Dataset + Evaluation" vertex="1">
+          <mxGeometry height="26" width="1460" x="20" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEBD0;strokeColor=#C9860A;dashed=1;fontSize=10;fontStyle=2;" value="EMAIL = UNTRUSTED DATA — chỉ thị bên trong email KHÔNG bao giờ được tin/thực thi. Evidence → Facts → Verified Context → Summary (không phải Email → LLM → Summary)." vertex="1">
+          <mxGeometry height="30" width="1460" x="20" y="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#999999;align=center;verticalAlign=middle;fontStyle=1;" value="Mail đã ingest" vertex="1">
+          <mxGeometry height="130" width="100" x="20" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;NORMALIZATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;HTML→text, chuẩn hóa sender/time, tách quoted/signature, giữ message_id/thread_id&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Deterministic / Rules&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Normalized Email&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="140" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;RELEVANCE FILTER&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Action/deadline/meeting signal, sender relevance, lọc noise/newsletter&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Rules + Lightweight Classifier&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Relevant/Irrelevant + score&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;⚠ Ưu tiên recall cao&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="390" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;EVIDENCE SELECTION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Không đưa cả email vào LLM — chọn câu/đoạn có giá trị, hạ điểm nội dung giống chỉ thị lạ&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Embedding + Ranking + Rules&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Evidence spans (vd 8000→300-800 token)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="640" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1E9F9;strokeColor=#7B4FA0;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;STRUCTURED EXTRACTION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Task/Action/Owner/Deadline/Status/Decision/Entity — mỗi fact giữ evidence ref&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Small LLM + Structured Output&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Structured Facts + Evidence&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;⚠ Text ngoài = DATA, không phải instruction&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="890" y="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-e1" parent="1" source="T5zfb22JKCERXrGTNegS-1" target="T5zfb22JKCERXrGTNegS-2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e2" parent="1" source="T5zfb22JKCERXrGTNegS-2" target="T5zfb22JKCERXrGTNegS-3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e3" parent="1" source="T5zfb22JKCERXrGTNegS-3" target="T5zfb22JKCERXrGTNegS-4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e4" parent="1" source="T5zfb22JKCERXrGTNegS-4" target="T5zfb22JKCERXrGTNegS-5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-g1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: normalized fields&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: field-level accuracy&lt;/span&gt;" vertex="1">
+          <mxGeometry height="54" width="220" x="140" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-g2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: relevant/irrelevant labels&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: Precision / Recall / F1&lt;/span&gt;" vertex="1">
+          <mxGeometry height="54" width="220" x="390" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-g3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: gold evidence spans&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: Evidence Precision / Recall&lt;/span&gt;" vertex="1">
+          <mxGeometry height="54" width="220" x="640" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-g4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: structured facts + evidence&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: Fact P/R/F1, evidence accuracy&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="240" x="1140" y="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D6;strokeColor=#C9860A;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;FACT VERIFICATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Entailment/contradiction/temporal/entity check — reject fact không có evidence support&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Rules + NLI/Verifier (LLM fallback khi uncertain)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Verified/Rejected Facts&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="890" y="334" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;GROUP / RESOLUTION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Gộp facts cùng Work Item, resolve conflict (deadline đổi → current + superseded)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;⚠ 1 thread có thể chứa nhiều Work Item&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Embedding + Metadata + Rules&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Work Items + linked evidence&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="640" y="334" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F1DF;strokeColor=#4B8B3B;" value="&lt;span style=&quot;font-size: 11px; font-weight: bold; text-align: left;&quot;&gt;VERIFIED WORK CONTEXT — SOURCE OF TRUTH&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Task · Status · Owner · Deadline · Decisions · Dependencies · Evidence&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Mọi fact quan trọng trace được về evidence&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;KHÔNG dùng LLM tạo box này — build từ verified facts&lt;/span&gt;" vertex="1">
+          <mxGeometry height="164" width="470" x="140" y="334" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-e5" parent="1" source="T5zfb22JKCERXrGTNegS-5" target="T5zfb22JKCERXrGTNegS-6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e6" parent="1" source="T5zfb22JKCERXrGTNegS-6" target="T5zfb22JKCERXrGTNegS-7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e7" parent="1" source="T5zfb22JKCERXrGTNegS-7" target="T5zfb22JKCERXrGTNegS-8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-g5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: supported/unsupported facts&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: entailment accuracy, unsupported-fact rate&lt;/span&gt;" vertex="1">
+          <mxGeometry height="54" width="220" x="890" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-g6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: work-item grouping/resolution&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: Pairwise F1, resolution accuracy&lt;/span&gt;" vertex="1">
+          <mxGeometry height="54" width="220" x="640" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-g7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: canonical work context&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: context correctness&lt;/span&gt;" vertex="1">
+          <mxGeometry height="54" width="470" x="640" y="558" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1E9F9;strokeColor=#7B4FA0;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;SUMMARY GENERATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Chỉ đọc VERIFIED WORK CONTEXT — KHÔNG đọc raw email&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Simple case → Template&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Complex case (nhiều update/deadline đổi) → Small LLM&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="260" x="245" y="592" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D6;strokeColor=#C9860A;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;OUTPUT VERIFICATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Generated Summary → extract claim → so với Verified Facts → PASS / REGENERATE / FALLBACK&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Method: Claim-level verification&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Out: Verified Summary&lt;/span&gt;" vertex="1">
+          <mxGeometry height="100" width="260" x="245" y="722" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#999999;" value="&lt;span style=&quot;font-size: 10px; font-weight: bold; text-align: left;&quot;&gt;UI SUMMARY&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Representation cuối cho user — KHÔNG phải source of truth&lt;/span&gt;" vertex="1">
+          <mxGeometry height="70" width="260" x="245" y="842" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-e8" parent="1" source="T5zfb22JKCERXrGTNegS-8" target="T5zfb22JKCERXrGTNegS-9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e9" parent="1" source="T5zfb22JKCERXrGTNegS-9" target="T5zfb22JKCERXrGTNegS-10" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-e10" parent="1" source="T5zfb22JKCERXrGTNegS-10" target="T5zfb22JKCERXrGTNegS-11" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-g8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;dashed=1;fontSize=9;" value="&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;GOLD: summary requirements + factual constraints&lt;/span&gt;&lt;br style=&quot;font-size: 9px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 9px; text-align: left;&quot;&gt;Metric: Correctness · Completeness · Faithfulness · Unsupported-claim rate&lt;/span&gt;" vertex="1">
+          <mxGeometry height="100" width="300" x="650" y="722" as="geometry" />
+        </mxCell>
+
+        <mxCell id="T5zfb22JKCERXrGTNegS-22" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F7F3E8;strokeColor=#B8A97A;fontSize=10;" value="&lt;span style=&quot;font-size: 10px; font-weight: bold; text-align: left;&quot;&gt;GOLDEN CASE (1 mẫu đánh giá đầy đủ)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Raw Email → Gold Normalized → Gold Evidence → Gold Facts → Gold Verification → Gold Work Item → Gold Context → Summary Constraints&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;→ Stage-level evaluation: mỗi stage đánh giá độc lập, không chỉ đánh giá summary cuối cùng&lt;/span&gt;" vertex="1">
+          <mxGeometry height="90" width="900" x="20" y="940" as="geometry" />
+        </mxCell>
+        <mxCell id="T5zfb22JKCERXrGTNegS-23" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CCCCCC;fontSize=10;fontStyle=2;" value="Nguyên tắc: (1) LLM không tự đọc raw email làm hết  (2) Email = untrusted data  (3) Fact phải có evidence  (4) Verified Work Context = source of truth  (5) Summary chỉ là representation cuối cho UI" vertex="1">
+          <mxGeometry height="90" width="540" x="940" y="940" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="example" id="ex-page-01">
+    <mxGraphModel dx="824" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="ex-0" />
+        <mxCell id="ex-1" parent="ex-0" />
+
+        <mxCell id="ex-title" parent="ex-1" style="text;html=1;fontSize=16;fontStyle=1;align=left;" value="Ví dụ minh họa: 1 email đi qua toàn bộ pipeline (xem tab Outlook)" vertex="1">
+          <mxGeometry height="26" width="1360" x="20" y="8" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-note" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#999999;dashed=1;fontSize=10;fontStyle=2;" value="Input: 1 email từ mentor nhắc deadline Payment API — dữ liệu minh họa để đọc hiểu pipeline, không phải case thật trong Golden Dataset." vertex="1">
+          <mxGeometry height="30" width="1360" x="20" y="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ex-email" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#999999;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;RAW EMAIL&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;From: mentor@example.edu&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;&quot;...finish Payment API by Friday. Minh handles backend.&quot;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="100" x="20" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-norm" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;NORMALIZED&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;from: mentor@example.edu&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;subject: Payment API update&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;text: &quot;...finish by Friday...Minh handles backend&quot;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="140" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-filter" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;RELEVANCE FILTER&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;action +25, deadline +25, sender +20&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;score = 85 (≥ 35)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;→ Relevant, importance = high&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="390" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-evidence" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;EVIDENCE SELECTED&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;E1: &quot;finish the Payment API by Friday&quot;&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;E2: &quot;Minh will handle the backend&quot;&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;(email ngắn → chọn cả 2 câu)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="640" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-extract" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1E9F9;strokeColor=#7B4FA0;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;STRUCTURED FACTS&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Task: Payment API — Deadline: Friday (E1)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Owner: Minh (E2)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;confidence: 0.92&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="890" y="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ex-e1" parent="ex-1" source="ex-email" target="ex-norm" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e2" parent="ex-1" source="ex-norm" target="ex-filter" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e3" parent="ex-1" source="ex-filter" target="ex-evidence" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e4" parent="ex-1" source="ex-evidence" target="ex-extract" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="ex-verify" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D6;strokeColor=#C9860A;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;FACT VERIFICATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Deadline=Friday ⊨ E1 → supported&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Owner=Minh ⊨ E2 → supported&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;→ cả 2 fact: Verified&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="890" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-group" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;GROUP / RESOLUTION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Gộp với 2 mail khác cùng thread_id&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Deadline Friday (mail mới) &gt; Thu (mail cũ, superseded)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;→ 1 Work Item duy nhất&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="220" x="640" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-vwc" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F1DF;strokeColor=#4B8B3B;" value="&lt;span style=&quot;font-size: 11px; font-weight: bold; text-align: left;&quot;&gt;VERIFIED WORK CONTEXT&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Task: Payment API — Status: In progress&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Owner: Minh — Deadline: Friday&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Evidence: E1, E2, E3 (3 email cùng 1 Work Item)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="130" width="470" x="140" y="260" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ex-e5" parent="ex-1" source="ex-extract" target="ex-verify" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e6" parent="ex-1" source="ex-verify" target="ex-group" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e7" parent="ex-1" source="ex-group" target="ex-vwc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="ex-summary" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1E9F9;strokeColor=#7B4FA0;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;SUMMARY GENERATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Work Item đơn giản → dùng Template (không cần LLM)&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;→ &quot;Minh cần hoàn thành Payment API (backend) trước thứ Sáu.&quot;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="110" width="260" x="245" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-output" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3D6;strokeColor=#C9860A;" value="&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;OUTPUT VERIFICATION&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Claim &quot;Owner=Minh&quot; ⊆ Verified Context ✓&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Claim &quot;Deadline=Friday&quot; ⊆ Verified Context ✓&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;→ PASS&lt;/span&gt;" vertex="1">
+          <mxGeometry height="100" width="260" x="245" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="ex-ui" parent="ex-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#999999;" value="&lt;span style=&quot;font-size: 10px; font-weight: bold; text-align: left;&quot;&gt;UI SUMMARY&lt;/span&gt;&lt;br style=&quot;font-size: 10px; text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 10px; text-align: left;&quot;&gt;Card: Payment API — &quot;Minh cần hoàn thành trước thứ Sáu&quot;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="70" width="260" x="245" y="670" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ex-e8" parent="ex-1" source="ex-vwc" target="ex-summary" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e9" parent="ex-1" source="ex-summary" target="ex-output" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ex-e10" parent="ex-1" source="ex-output" target="ex-ui" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

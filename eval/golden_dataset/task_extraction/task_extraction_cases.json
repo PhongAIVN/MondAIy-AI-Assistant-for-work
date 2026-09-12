@@ -1,0 +1,2202 @@
+[
+  {
+    "id": "TASK-001",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "- [ ] Nộp báo cáo tuần"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-002",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "- [ ] Gửi hợp đồng cho khách hàng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-003",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "[ ] Chuẩn bị slide thuyết trình"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-004",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "* Kiểm tra lại số liệu doanh thu"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-005",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "• Sửa lỗi đăng nhập trên app"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-006",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "1. Gửi email xác nhận cho đối tác"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-007",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "2. Đặt lịch họp với team marketing"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-008",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "3. Cập nhật tài liệu hướng dẫn"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-009",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "1) Liên hệ nhà cung cấp về đơn hàng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-010",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "TODO: sửa lỗi hiển thị trên trang chủ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-011",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "todo: viết lại phần mô tả sản phẩm"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-012",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "To-do: kiểm tra lại hợp đồng thuê nhà"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-013",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "□ Đóng tiền điện tháng này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-014",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "- [ ] Review code trước khi merge"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-015",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "4. Thanh toán hoá đơn internet"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-016",
+    "description": "group=checklist expected_is_task=true",
+    "input": {
+      "text": "- [ ] Đăng ký vé máy bay"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-017",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Hạn chót nộp bài là thứ Sáu tuần này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-018",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Deadline dự án X là 20/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-019",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Deadline nộp báo cáo thuế đã gần kề"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-020",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Hết hạn thanh toán học phí vào cuối tháng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-021",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Đến hạn gia hạn hợp đồng bảo hiểm rồi đó"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-022",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Trước ngày ký hợp đồng cần chuẩn bị đủ giấy tờ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-023",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Due date của task này là thứ Hai tuần sau"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-024",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Việc này gấp lắm, cần xử lý ngay hôm nay"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-025",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Hạn chót đăng ký học phần sắp hết rồi"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-026",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Deadline nộp hồ sơ xin việc là cuối tuần"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-027",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Hết hạn bảo hành sản phẩm vào tháng sau"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-028",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Trước ngày bay cần check-in online"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-029",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Gấp: khách đang chờ báo giá"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-030",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Deadline chỉnh sửa hợp đồng đã cận kề"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-031",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Hạn chót đóng học phí kỳ này là 30/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-032",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Due date bài tập nhóm là hôm nay"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-033",
+    "description": "group=deadline_keyword expected_is_task=true",
+    "input": {
+      "text": "Việc gấp, cần trả lời khách trong hôm nay"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-034",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Gửi báo cáo trước ngày 15/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-035",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Họp lúc 9h ngày 20/08/2026"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-036",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Nộp bài tập trước 10/9"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-037",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Thanh toán hoá đơn trước ngày 5 tháng 9"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-038",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Ký hợp đồng vào ngày 12/8 nhé"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-039",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Xác nhận lịch hẹn ngày 3/9 giúp mình"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-040",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Chuẩn bị quà tặng trước ngày 1/10"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-041",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Đặt lịch khám bệnh vào 25/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-042",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Gửi file thiết kế trước ngày 18/8 nhé?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-043",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Nộp phạt vi phạm giao thông trước 20/8 kẻo bị phạt thêm"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-044",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Đăng ký thi lại trước ngày 5/9"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-045",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Cập nhật báo giá mới trước ngày 22/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-046",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Trả lời email khách hàng trước 16/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-047",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Đóng tiền nhà trước ngày mùng 5 hàng tháng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-048",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Kiểm tra hợp đồng trước ngày 9/9 được không?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-049",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Gọi điện xác nhận đơn hàng ngày 14/8"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-050",
+    "description": "group=date_and_action expected_is_task=true",
+    "input": {
+      "text": "Nạp tiền điện thoại trước ngày 30 nhé"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-051",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Hãy gửi file trước 5h chiều"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-052",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Cần chuẩn bị tài liệu cho buổi họp"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-053",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Phải hoàn thành báo cáo trước khi tan làm"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-054",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Nhớ gửi hợp đồng cho khách"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-055",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Đừng quên đóng tiền điện tháng này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-056",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Làm ơn xác nhận lại lịch họp giúp mình"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-057",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Xin gửi lại file bản cứng qua email"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-058",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Hãy liên hệ nhà cung cấp về đơn hàng bị trễ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-059",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Cần đặt lịch khám sức khoẻ định kỳ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-060",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Phải nộp bài trước khi hết giờ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-061",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Nhớ kiểm tra lại số liệu trước khi gửi"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-062",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Đừng quên gọi điện cho khách vào sáng mai"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-063",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Hãy cập nhật tiến độ dự án lên hệ thống"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-064",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Cần thanh toán tiền thuê văn phòng tháng này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-065",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Phải đăng ký gia hạn visa trước khi hết hạn"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-066",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Nhớ chuẩn bị hợp đồng bản mới"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-067",
+    "description": "group=imperative_start expected_is_task=true",
+    "input": {
+      "text": "Hãy sửa lại lỗi chính tả trong tài liệu"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-068",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "@Phong nhớ gửi hợp đồng cho khách"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-069",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "@Lan chuẩn bị slide cho buổi họp sáng mai"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-070",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Giao cho Lan làm slide thuyết trình"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-071",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Nhờ Minh liên hệ lại với nhà cung cấp"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-072",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "@team gửi báo cáo tuần trước 5h chiều"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-073",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Giao cho Hùng kiểm tra lại hợp đồng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-074",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Nhờ chị Hoa xác nhận lịch họp giúp em"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-075",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "@Phong chốt lại số liệu trước khi gửi khách"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-076",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Giao cho phòng kế toán thanh toán hoá đơn"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-077",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Nhờ anh Tuấn đặt lịch họp với đối tác"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-078",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "@Lan sửa lại phần mô tả sản phẩm"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-079",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Giao cho đội design cập nhật banner mới"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-080",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Nhờ em Mai gọi điện xác nhận đơn hàng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-081",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "@Phong review code trước khi merge"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-082",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Giao cho Nam nộp báo cáo thuế tháng này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-083",
+    "description": "group=assignee expected_is_task=true",
+    "input": {
+      "text": "Nhờ bạn Trang đăng ký vé máy bay giúp mình"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-084",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Chuẩn bị tài liệu họp tuần sau"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-085",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Thanh toán hoá đơn điện tháng này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-086",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Gửi báo cáo doanh thu cho sếp"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-087",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Liên hệ nhà cung cấp về đơn hàng bị trễ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-088",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Đặt lịch họp với team marketing"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-089",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Kiểm tra lại hợp đồng thuê nhà"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-090",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Cập nhật tiến độ dự án lên hệ thống"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-091",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Xác nhận lịch hẹn với khách hàng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-092",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Đăng ký gia hạn visa"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-093",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Sửa lỗi hiển thị trên trang chủ"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-094",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Báo cáo tiến độ công việc cho quản lý"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-095",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Duyệt hồ sơ ứng viên mới"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-096",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Đặt hàng thêm nguyên vật liệu"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-097",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Ký biên bản bàn giao dự án"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-098",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Nộp phạt vi phạm giao thông"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-099",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Trả lời email khách hàng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-100",
+    "description": "group=plain_action expected_is_task=true",
+    "input": {
+      "text": "Đóng góp ý kiến cho bản thảo hợp đồng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-101",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Phong gửi giúp file"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-102",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Lan xác nhận giúp lịch họp"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-103",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Minh kiểm tra lại đơn hàng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-104",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Hùng cập nhật báo giá mới"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-105",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@team đóng góp ý kiến gấp"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-106",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Nam thanh toán tiền phòng"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-107",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@chị Hoa duyệt hồ sơ này"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-108",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Tuấn liên hệ khách hàng A"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-109",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Mai đăng ký lịch khám"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-110",
+    "description": "group=mention_short_request expected_is_task=true",
+    "input": {
+      "text": "@Trang trả lời tin nhắn khách"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-111",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Chào buổi sáng cả nhà"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-112",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Chào mọi người, hôm nay khoẻ không"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-113",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Hi cả nhà, lâu rồi không gặp"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-114",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Hello, bạn có khoẻ không"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-115",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Cảm ơn bạn nhiều nhé"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-116",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Cám ơn anh chị đã giúp đỡ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-117",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Thanks bạn nha"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-118",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Ok, mình hiểu rồi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-119",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Oke, để mình xem lại"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-120",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Vâng, em cảm ơn anh"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-121",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Dạ, em biết rồi ạ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-122",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Haha đúng rồi đó"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-123",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Hihi buồn cười quá"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-124",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Chào bạn, dạo này thế nào"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-125",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Cảm ơn vì đã chia sẻ thông tin"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-126",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Ok bạn, để mình sắp xếp"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-127",
+    "description": "group=greeting expected_is_task=false",
+    "input": {
+      "text": "Vâng ạ, em ghi nhận rồi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-128",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Hôm nay trời đẹp quá"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-129",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Cuộc họp hôm qua rất vui"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-130",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Quán cà phê này decor đẹp thật"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-131",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Bộ phim tối qua hay ơi là hay"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-132",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Trời Hà Nội đang vào thu rồi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-133",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Món ăn ở quán mới ngon lắm"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-134",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Cuối tuần này trời có vẻ sẽ mưa"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-135",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Cô ấy hát hay thật đấy"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-136",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Xe cộ hôm nay đông kinh khủng"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-137",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Chuyến du lịch vừa rồi thật đáng nhớ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-138",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Bức ảnh này chụp đẹp ghê"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-139",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Team mình vừa thắng giải bóng đá công ty"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-140",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Cà phê sáng nay ngon hơn mọi khi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-141",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Buổi tiệc tối qua rất náo nhiệt"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-142",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Con mèo nhà mình dễ thương lắm"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-143",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Thời tiết dạo này thay đổi thất thường"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-144",
+    "description": "group=statement expected_is_task=false",
+    "input": {
+      "text": "Bài hát mới của ca sĩ đó hay thật"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-145",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Bạn khoẻ không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-146",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Đã ăn cơm chưa?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-147",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Có đi chơi cuối tuần không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-148",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Đã gửi báo cáo chưa vậy?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-149",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Bạn đang ở đâu thế?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-150",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Cuộc họp mấy giờ diễn ra nhỉ?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-151",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Bạn thấy bộ phim đó thế nào?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-152",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Có ai biết quán này ngon không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-153",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Mai có đi làm không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-154",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Cuối tuần bạn có rảnh không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-155",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Bạn nghĩ sao về ý tưởng này?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-156",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Có việc gì mà gọi mình gấp vậy?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-157",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Ăn trưa chưa, đói bụng chưa?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-158",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Bạn có xem tin tức sáng nay không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-159",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Trời có mưa không nhỉ?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-160",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Bạn thích màu nào hơn?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-161",
+    "description": "group=question expected_is_task=false",
+    "input": {
+      "text": "Đã kiểm tra chưa vậy?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-162",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Mua được cái áo giá 250k nè"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-163",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Quán đó bán trà sữa 35k một ly"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-164",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Đi được 3 vòng hồ rồi mệt quá"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-165",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Phim đó được 8 điểm trên IMDb"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-166",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Chạy bộ được 5km sáng nay"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-167",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Mua vé xem phim hết 90k hai người"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-168",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Team có 12 người tham gia giải chạy"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-169",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Cân nặng giảm được 2kg tháng này"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-170",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Quán cà phê cách nhà 3 cây số"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-171",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Điểm thi được 9 phẩy khá cao"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-172",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Xem được 3 tập phim liền một mạch"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-173",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Mua 5 quyển sách giảm giá"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-174",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Đi bộ mất 20 phút tới công ty"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-175",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Trận đấu kết thúc với tỉ số 2:1"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-176",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Chuyến bay kéo dài 4 tiếng"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-177",
+    "description": "group=casual_numbers expected_is_task=false",
+    "input": {
+      "text": "Bữa tối hôm nay hết 300k"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-178",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "https://example.com/bai-viet-hay"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-179",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Xem ảnh này nè [hình ảnh]"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-180",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Đây là video mọi người xem thử"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-181",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "www.example.com/tin-tuc"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-182",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "[sticker cười]"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-183",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Link bài viết hôm trước đây nè mọi người"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-184",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "http://example.org/san-pham-moi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-185",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "[voice message 0:15]"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-186",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Ảnh chụp màn hình đính kèm bên dưới"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-187",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Video hài này xem đi cười muốn xỉu"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-188",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "[đã thu hồi tin nhắn]"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-189",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "youtube.com/watch?v=abc123"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-190",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Đính kèm file ảnh cho mọi người xem"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-191",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "[GIF động vật dễ thương]"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-192",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "instagram.com/p/xyz"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-193",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "Xem thử bài viết này coi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-194",
+    "description": "group=links_media expected_is_task=false",
+    "input": {
+      "text": "[hình ảnh] [hình ảnh] [hình ảnh]"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-195",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "😂😂😂"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-196",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Ok"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-197",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Vâng ạ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-198",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Hihi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-199",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Đúng rồi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-200",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Ừ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-201",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Ừm"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-202",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Được đó"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-203",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Quá đỉnh"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-204",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Tuyệt vời"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-205",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "😍😍"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-206",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Hay quá"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-207",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Chuẩn luôn"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-208",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "❤️❤️❤️"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-209",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Ha ha ha"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-210",
+    "description": "group=short_reaction expected_is_task=false",
+    "input": {
+      "text": "Đỉnh của chóp"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-211",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "cháu gửi ạ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-212",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "Cháu gửi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-213",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "Cháu gửi ạ"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-214",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "Con gửi nh"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-215",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "Con gửi nha"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-216",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "@Tính"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-217",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "@Ngọc Bích hết r"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-218",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "@Nguyễn Ngọc Vàng ok chú"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-219",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "@Ngọc Bích ơi"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-220",
+    "description": "group=chat_noise expected_is_task=false",
+    "input": {
+      "text": "My Home: @All khoá 1 xem có kéo cả tài liệu không"
+    },
+    "expected": {
+      "is_task": false
+    }
+  }
+]

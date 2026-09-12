@@ -1,0 +1,15 @@
+{
+  "reported_case": "Tasks page shows calendar items but conflict panel says the week has no conflicts.",
+  "invariant": "Conflict detection must run after the calendar cache used by detection has finished syncing.",
+  "acceptance_criteria": [
+    "A detect result returned before calendar sync does not remain authoritative.",
+    "Calendar sync completion triggers a second detect for the same week.",
+    "Changing the viewed week triggers detection against the new cache window.",
+    "Existing conflict classification and resolution behavior remain unchanged."
+  ],
+  "counterexamples": [
+    "A week with genuinely no conflicts remains empty after the post-sync detect.",
+    "Calendar sync failure does not fabricate a conflict."
+  ],
+  "validation": "client/web-app/tests/ScheduleConflictPanel.test.tsx"
+}

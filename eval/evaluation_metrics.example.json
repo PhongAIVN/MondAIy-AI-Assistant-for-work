@@ -1,0 +1,27 @@
+{
+  "rag": {
+    "faithfulness": 0.85,
+    "answer_relevance": 0.82,
+    "context_precision": 0.78,
+    "context_recall": 0.80
+  },
+  "performance": [
+    {
+      "endpoint": "/api/v1/chat",
+      "avg_response_time": "TBD",
+      "p95": "TBD",
+      "p99": "TBD"
+    },
+    {
+      "endpoint": "/health",
+      "avg_response_time": "TBD",
+      "p95": "TBD",
+      "p99": "TBD"
+    }
+  ],
+  "user_feedback": {
+    "participants": "TBD",
+    "average_rating": "TBD",
+    "summary": "TBD"
+  }
+}

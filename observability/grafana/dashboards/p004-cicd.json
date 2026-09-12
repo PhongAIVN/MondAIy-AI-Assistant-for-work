@@ -1,0 +1,105 @@
+{
+  "annotations": {"list": []},
+  "editable": false,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [
+    {
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Open GitHub Actions",
+      "type": "link",
+      "url": "https://github.com/AI20K-Build-Phase-Cohort-3/P-004/actions"
+    }
+  ],
+  "panels": [
+    {
+      "datasource": {"type": "prometheus", "uid": "p004-prometheus"},
+      "description": "1 means Prometheus can scrape the GitHub Actions exporter.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {"mode": "thresholds"},
+          "mappings": [{"options": {"0": {"color": "red", "text": "DOWN"}, "1": {"color": "green", "text": "UP"}}, "type": "value"}],
+          "thresholds": {"mode": "absolute", "steps": [{"color": "red", "value": null}, {"color": "green", "value": 1}]}
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 5, "w": 6, "x": 0, "y": 0},
+      "id": 1,
+      "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "horizontal", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto", "wideLayout": true},
+      "targets": [{"editorMode": "code", "expr": "max(up{job=\"github-actions\"})", "instant": true, "legendFormat": "Exporter", "range": false, "refId": "A"}],
+      "title": "GitHub exporter",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "p004-prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "orange", "value": 1}]}}, "overrides": []},
+      "gridPos": {"h": 5, "w": 6, "x": 6, "y": 0},
+      "id": 2,
+      "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "horizontal", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto", "wideLayout": true},
+      "targets": [{"editorMode": "code", "expr": "count(github_workflow_run_status{repo=\"AI20K-Build-Phase-Cohort-3/P-004\",head_branch=\"main\"} == 4)", "instant": true, "legendFormat": "Queued", "range": false, "refId": "A"}],
+      "title": "Queued runs",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "p004-prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "blue", "value": 1}]}}, "overrides": []},
+      "gridPos": {"h": 5, "w": 6, "x": 12, "y": 0},
+      "id": 3,
+      "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "horizontal", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto", "wideLayout": true},
+      "targets": [{"editorMode": "code", "expr": "count(github_workflow_run_status{repo=\"AI20K-Build-Phase-Cohort-3/P-004\",head_branch=\"main\"} == 3)", "instant": true, "legendFormat": "Running", "range": false, "refId": "A"}],
+      "title": "Running",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "p004-prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 1}]}}, "overrides": []},
+      "gridPos": {"h": 5, "w": 6, "x": 18, "y": 0},
+      "id": 4,
+      "options": {"colorMode": "background", "graphMode": "none", "justifyMode": "center", "orientation": "horizontal", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto", "wideLayout": true},
+      "targets": [{"editorMode": "code", "expr": "count(github_workflow_run_status{repo=\"AI20K-Build-Phase-Cohort-3/P-004\",head_branch=\"main\"} == 0)", "instant": true, "legendFormat": "Failed", "range": false, "refId": "A"}],
+      "title": "Failed runs",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "p004-prometheus"},
+      "description": "Status values: 0 failed, 1 success, 2 skipped, 3 running, 4 queued.",
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [{"options": {"0": {"color": "red", "text": "FAILED"}, "1": {"color": "green", "text": "SUCCESS"}, "2": {"color": "gray", "text": "SKIPPED"}, "3": {"color": "blue", "text": "RUNNING"}, "4": {"color": "orange", "text": "QUEUED"}}, "type": "value"}]
+        },
+        "overrides": []
+      },
+      "gridPos": {"h": 11, "w": 24, "x": 0, "y": 5},
+      "id": 5,
+      "options": {"cellHeight": "sm", "footer": {"countRows": false, "enablePagination": true, "fields": "", "reducer": ["sum"], "show": false}, "showHeader": true},
+      "targets": [{"editorMode": "code", "expr": "github_workflow_run_status{repo=\"AI20K-Build-Phase-Cohort-3/P-004\",head_branch=\"main\"}", "format": "table", "instant": true, "legendFormat": "{{workflow}} #{{run_number}} {{head_sha}}", "range": false, "refId": "A"}],
+      "title": "Main workflow runs",
+      "type": "table"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "p004-prometheus"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}, "custom": {"axisCenteredZero": false, "axisColorMode": "text", "axisLabel": "seconds", "axisPlacement": "auto", "barAlignment": 0, "drawStyle": "line", "fillOpacity": 12, "gradientMode": "none", "hideFrom": {"legend": false, "tooltip": false, "viz": false}, "lineInterpolation": "linear", "lineWidth": 2, "pointSize": 4, "scaleDistribution": {"type": "linear"}, "showPoints": "auto", "spanNulls": false, "stacking": {"group": "A", "mode": "none"}, "thresholdsStyle": {"mode": "off"}}, "unit": "s"}, "overrides": []},
+      "gridPos": {"h": 9, "w": 24, "x": 0, "y": 16},
+      "id": 6,
+      "options": {"legend": {"calcs": ["lastNotNull", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true}, "tooltip": {"hideZeros": false, "mode": "multi", "sort": "desc"}},
+      "targets": [{"editorMode": "code", "expr": "github_workflow_run_duration_ms{repo=\"AI20K-Build-Phase-Cohort-3/P-004\",head_branch=\"main\"} / 1000", "legendFormat": "{{workflow}} #{{run_number}}", "range": true, "refId": "A"}],
+      "title": "Workflow duration",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 40,
+  "tags": ["p004", "github-actions", "ci-cd"],
+  "templating": {"list": []},
+  "time": {"from": "now-24h", "to": "now"},
+  "timezone": "browser",
+  "title": "P-004 CI/CD",
+  "uid": "p004-cicd",
+  "version": 1,
+  "weekStart": ""
+}

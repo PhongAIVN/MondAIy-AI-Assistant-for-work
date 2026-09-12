@@ -1,0 +1,20 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-gml-007",
+      "source_id": "INBOX",
+      "provider": "google",
+      "thread_id": "thread-gml-007",
+      "author_id": "gvcn@vlearn.edu.vn",
+      "author_name": "GVCN",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Vui lòng nộp báo cáo trước thứ Hai tuần sau.\n\n--\nGVCN Lớp Cohort 3\nEmail: gvcn@vlearn.edu.vn\nPhone: 0987654321",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://mail.google.com/mail/u/0/#all/msg-gml-007",
+      "capture_mode": "gmail_api",
+      "attachments": []
+    }
+  ]
+}

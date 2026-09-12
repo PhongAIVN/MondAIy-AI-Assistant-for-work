@@ -1,0 +1,320 @@
+\documentclass[12pt,a4paper]{article}
+
+% ==================================================
+% PACKAGES
+% ==================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{longtable}[=2020-01-02]
+\makeatletter
+\long\def\LT@p@ftntext#1{%
+    \edef\@tempa{%
+        \the\LT@p@ftn
+        \noexpand\footnotetext[\the\c@footnote]%
+    }%
+    \global\LT@p@ftn\expandafter{\@tempa{#1}}%
+}
+\makeatother
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\geometry{left=2cm,right=2cm,top=1.8cm,bottom=1.8cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.35em}
+
+% ==================================================
+% STYLE
+% ==================================================
+\definecolor{VinBlue}{RGB}{0,56,101}
+\definecolor{VinGold}{RGB}{190,145,50}
+\definecolor{MondBlue}{HTML}{173B57}
+\definecolor{MondTeal}{HTML}{087E8B}
+\definecolor{MondLight}{HTML}{F2F7F8}
+\definecolor{MondRed}{HTML}{B54747}
+\definecolor{MondGray}{HTML}{5B6770}
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+
+\newtcolorbox{summarybox}[1][]{
+    colback=MondLight,
+    colframe=MondTeal,
+    boxrule=0.8pt,
+    arc=2mm,
+    title=#1,
+    fonttitle=\bfseries
+}
+
+\hypersetup{colorlinks=true,linkcolor=VinBlue,urlcolor=VinBlue}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{VinBlue}\textbf{MondAIy -- Team Nerd}}
+\fancyhead[R]{\small\color{VinBlue}\textbf{Nhật ký làm việc}}
+\fancyfoot[C]{\small\color{VinBlue}\thepage}
+\renewcommand{\headrulewidth}{0.6pt}
+\setlength{\headheight}{15pt}
+
+\begin{document}
+\setlength{\emergencystretch}{3em}
+\hbadness=10000
+\vbadness=10000
+\hfuzz=20pt
+\vfuzz=20pt
+\AddToHook{para/begin}{\hbadness=10000\hfuzz=\maxdimen}
+
+% ==================================================
+% TITLE AND TEAM STRUCTURE
+% ==================================================
+\begin{center}
+    {\LARGE\color{VinBlue}\textbf{NHẬT KÝ LÀM VIỆC THEO TUẦN}}\\[0.35em]
+    {\Large\textbf{Dự án MondAIy}}\\[0.3em]
+    {\color{VinGold}\rule{8cm}{1pt}}
+\end{center}
+
+\section{CƠ CẤU NHÂN SỰ VÀ PHÂN CÔNG}
+
+\begin{summarybox}[Nguyên tắc phân công]
+Cả bốn thành viên đều đảm nhiệm vai trò \textbf{AI Engineer}. Mỗi người đồng thời
+sở hữu một vai trò bổ sung để bảo đảm dự án có người chịu trách nhiệm rõ ràng về
+tiến độ, sản phẩm, trải nghiệm, chất lượng và kiến trúc kỹ thuật. Công việc được
+đánh giá theo artifact và kết quả bàn giao, không dựa đơn thuần trên số commit hoặc
+số dòng mã.
+\end{summarybox}
+
+\begin{table}[H]
+\centering
+\caption{Cơ cấu nhân sự và phạm vi trách nhiệm}
+\small
+\sloppy
+\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\textwidth}{P{2.4cm}P{3.6cm}Y P{4.3cm}}
+\rowcolor{MondBlue}
+\color{white}\textbf{Thành viên} & \color{white}\textbf{Vai trò bổ sung} &
+\color{white}\textbf{Trách nhiệm chính} & \color{white}\textbf{Artifact tiêu biểu}\\
+\toprule
+Thái Hoài An & Project Manager (PM) & Điều phối kế hoạch, theo dõi Jira, tổ chức
+workflow và hỗ trợ triển khai các module Agent & Jira plan, Discord ingestion,
+Telegram, Meeting Minutes, Memory, Google Drive search, video trailer\\
+\rowcolor{MondLight}
+Nguyễn Văn Phong & Technical Lead & Kiến trúc tích hợp, connector, extension,
+scanning và độ tin cậy kỹ thuật & Connector Gmail, Calendar, Jira và Slack; browser
+extension, screen scanning, Scan-to-Exact-Task và Golden Dataset\\
+Lê Thị Yến Nhi & UI/UX Designer & Thiết kế trải nghiệm, cải tiến giao diện theo
+feedback và hỗ trợ chất lượng đầu ra Agent & UI/UX draft và mockup, design iteration,
+task metadata filtering, Agent response improvement, Pitch Deck\\
+\rowcolor{MondLight}
+Nguyễn Đức Dũng & Product Owner (PO) và Quality Control (QC) & Định hướng giá trị,
+PRD, tiêu chí nghiệm thu, guardrail, dữ liệu kiểm thử và kiểm soát chất lượng & PRD,
+concept, test cases, guardrail, intent/task extraction, file analysis, mobile app,
+specification và hồ sơ doanh nghiệp\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ==================================================
+% WEEKLY LOG
+% ==================================================
+\clearpage
+\section{NHẬT KÝ TRIỂN KHAI 6 TUẦN}
+
+\small
+\renewcommand{\arraystretch}{1.2}
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{@{}C{1.2cm}P{3.0cm}P{11.8cm}@{}}
+\caption{Nhật ký làm việc theo tuần của nhóm dự án MondAIy}
+\label{tab:weekly-log}\\
+\rowcolor{MondBlue}
+\color{white}\textbf{Tuần} & \color{white}\textbf{Thành viên} &
+\color{white}\textbf{Công việc thực hiện}\\
+\toprule
+\endfirsthead
+
+\rowcolor{MondBlue}
+\color{white}\textbf{Tuần} & \color{white}\textbf{Thành viên} &
+\color{white}\textbf{Công việc thực hiện}\\
+\toprule
+\endhead
+
+\bottomrule
+\endlastfoot
+
+1 & An & Tham gia workshop chốt ý tưởng, phạm vi và kế hoạch phối hợp; tổng hợp đầu việc ban đầu cho nhóm.\\
+\rowcolor{MondLight}
+1 & Phong & Tham gia chốt ý tưởng; đánh giá sơ bộ tính khả thi kỹ thuật và các hướng tích hợp.\\
+1 & Nhi & Tham gia chốt ý tưởng; phác thảo nhu cầu người dùng và định hướng trải nghiệm.\\
+\rowcolor{MondLight}
+1 & Dũng & Tham gia chốt ý tưởng; làm rõ vấn đề, tuyên bố giá trị và tiêu chí đầu ra ban đầu.\\
+
+2 & An & Thiết lập và quản lý kế hoạch trên Jira; phân rã milestone và đầu việc theo tuần.\\
+\rowcolor{MondLight}
+2 & Phong & Khảo sát các giải pháp hiện có; xác định khoảng trống kỹ thuật và hướng connector.\\
+2 & Nhi & Nghiên cứu người dùng; xây dựng bản draft UI/UX và luồng màn hình chính.\\
+\rowcolor{MondLight}
+2 & Dũng & Xây dựng PRD, concept và định hướng giá trị; xác định yêu cầu đầu ra cho các module.\\
+
+3 & An & Xây dựng luồng thu thập và chuẩn hóa dữ liệu từ Discord; phối hợp kiểm tra integration.\\
+\rowcolor{MondLight}
+3 & Phong & Xây dựng connector với Gmail, Google Calendar và Jira; chuẩn hóa interface tích hợp.\\
+3 & Nhi & Phát triển UI/UX mockup; hoàn thiện cấu trúc điều hướng và các màn hình cốt lõi.\\
+\rowcolor{MondLight}
+3 & Dũng & Xây dựng dữ liệu kiểm thử cho luồng lấy dữ liệu và task; thiết kế guardrail cho hệ thống.\\
+
+4 & An & Xây dựng chức năng chat trên Telegram; phát triển tính năng Meeting Minutes.\\
+\rowcolor{MondLight}
+4 & Phong & Xây dựng browser extension; phát triển connector với Slack và rà soát luồng tích hợp.\\
+4 & Nhi & Cải thiện UI/UX dựa trên feedback khách hàng; chuẩn hóa các trạng thái tương tác.\\
+\rowcolor{MondLight}
+4 & Dũng & Cải tiến Intent Recognition; cải tiến luồng tóm tắt và trích xuất task có bằng chứng.\\
+
+5 & An & Xây dựng cơ chế Memory cho Agent; xây dựng video trailer giới thiệu sản phẩm.\\
+\rowcolor{MondLight}
+5 & Phong & Xây dựng luồng scanning màn hình; khảo sát khả năng hỗ trợ Zalo và nền tảng bổ sung.\\
+5 & Nhi & Cải tiến luồng tóm tắt; xây dựng Metadata Filtering cho task và hỗ trợ kiểm tra output.\\
+\rowcolor{MondLight}
+5 & Dũng & Xây dựng luồng phân tích file; phát triển mobile app; triển khai nội dung truyền thông fanpage.\\
+
+6 & An & Rà soát và cải tiến hệ thống; xây dựng luồng tìm kiếm trên Google Drive; tổng hợp tiến độ.\\
+\rowcolor{MondLight}
+6 & Phong & Rà soát hệ thống; cải tiến Scan-to-Exact-Task; xây dựng Golden Dataset và regression cases.\\
+6 & Nhi & Rà soát UI; cải thiện phản hồi Agent; hoàn thiện Pitch Deck và tài liệu trình bày sản phẩm.\\
+\rowcolor{MondLight}
+6 & Dũng & Hoàn thiện hồ sơ doanh nghiệp và specification; thiết kế, kiểm thử và cải tiến theo kết quả testing.\\
+
+\end{longtable}
+
+% ==================================================
+% INDIVIDUAL ASSESSMENT
+% ==================================================
+\section{ĐÁNH GIÁ THEO THÀNH VIÊN}
+
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}P{2.4cm}P{4.5cm}P{4.5cm}P{4.0cm}@{}}
+\caption{Điểm mạnh, điểm cần cải thiện và giá trị đóng góp}
+\label{tab:member-assessment}\\
+\rowcolor{MondBlue}
+\color{white}\textbf{Thành viên} & \color{white}\textbf{Điểm mạnh} &
+\color{white}\textbf{Điểm cần cải thiện} & \color{white}\textbf{Giá trị nổi bật}\\
+\toprule
+\endfirsthead
+\rowcolor{MondBlue}
+\color{white}\textbf{Thành viên} & \color{white}\textbf{Điểm mạnh} &
+\color{white}\textbf{Điểm cần cải thiện} & \color{white}\textbf{Giá trị nổi bật}\\
+\toprule
+\endhead
+\bottomrule
+\endlastfoot
+
+Thái Hoài An &
+Khả năng điều phối và chuyển nhanh giữa quản lý dự án với triển khai AI; bao phủ
+Discord, Telegram, Meeting Minutes, Memory và Drive search; chủ động hỗ trợ truyền thông. &
+Cần khóa acceptance criteria và dependency rõ hơn trên Jira; tránh để PM trở thành
+nút thắt khi đồng thời sở hữu nhiều module; tăng báo cáo định lượng theo milestone. &
+Kết nối kế hoạch nhóm với các workflow chủ động và giữ nhịp triển khai xuyên sáu tuần.\\
+
+\rowcolor{MondLight}
+Nguyễn Văn Phong &
+Năng lực tích hợp hệ thống mạnh; xử lý nhiều connector và nền tảng; có tư duy
+technical lead về interface, scanning, test data và độ tin cậy. &
+Cần chuẩn hóa ADR, SLO và ownership bảo trì connector; hạn chế mở rộng nền tảng
+quá sớm; tăng handover để tri thức kỹ thuật không tập trung vào một người. &
+Xây nền kết nối và pipeline kỹ thuật để sản phẩm có thể đọc dữ liệu thực thay vì chỉ demo.\\
+
+Lê Thị Yến Nhi &
+Khả năng chuyển feedback thành cải tiến trải nghiệm; kết nối UI/UX với metadata,
+chất lượng phản hồi Agent và cách trình bày giá trị sản phẩm. &
+Cần gắn mỗi thay đổi thiết kế với usability metric; hoàn thiện design system và
+research log; làm rõ ranh giới giữa artifact thiết kế và artifact AI engineering. &
+Bảo đảm sản phẩm có trải nghiệm sử dụng nhất quán, dễ trình bày và bám sát nhu cầu người dùng.\\
+
+\rowcolor{MondLight}
+Nguyễn Đức Dũng &
+Khả năng bao quát sản phẩm và chất lượng; kết nối PRD, dữ liệu kiểm thử, guardrail,
+intent/task extraction, tài liệu và kiểm thử end-to-end. &
+Cần phân quyền bớt PO/QC/engineering để tránh quá tải; duy trì traceability từ PRD
+đến test và release gate; tách rõ prototype, benchmark và production claim. &
+Giữ tính nhất quán giữa giá trị sản phẩm, yêu cầu kỹ thuật, bằng chứng kiểm thử và hồ sơ dự án.\\
+\end{longtable}
+
+% ==================================================
+% QUANTITATIVE CONTRIBUTION
+% ==================================================
+\section{ĐỊNH LƯỢNG MỨC ĐỘ ĐÓNG GÓP}
+
+Mức đóng góp được chuẩn hóa thành \textbf{100 đơn vị đóng góp}. Việc phân bổ phản
+ánh sự bổ trợ giữa các vai trò: người thiên về quản lý/sản phẩm không bị đánh giá
+thấp hơn người viết nhiều mã, và artifact thiết kế, kiểm thử, tài liệu hay truyền
+thông được ghi nhận khi phục vụ trực tiếp cho kết quả dự án.
+
+\begin{table}[H]
+\centering
+\caption{Phân bổ đơn vị đóng góp theo nhóm công việc}
+\label{tab:contribution-allocation}
+\small
+\renewcommand{\arraystretch}{1.22}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{P{2.5cm}*{5}{>{\centering\arraybackslash}p{1.75cm}}>{\centering\arraybackslash}p{1.8cm}}
+\rowcolor{MondBlue}
+\color{white}\textbf{Thành viên} & \color{white}\textbf{\shortstack{Product\\PM}} &
+\color{white}\textbf{\shortstack{AI\\Backend}} & \color{white}\textbf{UI/UX} &
+\color{white}\textbf{\shortstack{QA\\Data\\Docs}} & \color{white}\textbf{\shortstack{Hỗ trợ\\TT}} &
+\color{white}\textbf{Tổng}\\
+\toprule
+An & 7 & 10 & 1 & 3 & 4 & \textbf{25}\\
+\rowcolor{MondLight}
+Phong & 3 & 14 & 1 & 6 & 1 & \textbf{25}\\
+Nhi & 3 & 6 & 10 & 4 & 2 & \textbf{25}\\
+\rowcolor{MondLight}
+Dũng & 9 & 8 & 2 & 5 & 1 & \textbf{25}\\
+\midrule
+\textbf{Toàn nhóm} & \textbf{22} & \textbf{38} & \textbf{14} & \textbf{18} &
+\textbf{8} & \textbf{100}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Tỷ lệ đóng góp cuối cùng}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{0.82\textwidth}{Y>{\centering\arraybackslash}P{3.2cm}>{\centering\arraybackslash}P{3.2cm}}
+\rowcolor{MondTeal!15}
+\textbf{Thành viên} & \textbf{Đơn vị đóng góp} & \textbf{Tỷ lệ}\\
+\toprule
+Thái Hoài An & 25/100 & \textbf{25\%}\\
+\rowcolor{MondLight}
+Nguyễn Văn Phong & 25/100 & \textbf{25\%}\\
+Lê Thị Yến Nhi & 25/100 & \textbf{25\%}\\
+\rowcolor{MondLight}
+Nguyễn Đức Dũng & 25/100 & \textbf{25\%}\\
+\midrule
+\textbf{Tổng} & \textbf{100/100} & \textbf{100\%}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{TỔNG QUAN TIẾN ĐỘ}
+
+Trong sáu tuần triển khai, nhóm phát triển MondAIy theo hướng hoàn thiện đồng thời
+sản phẩm, hệ thống AI và trải nghiệm người dùng. Công việc đi từ xác định vấn đề,
+PRD và UI/UX đến connector, Agent, Memory, Intent Recognition, Task Extraction,
+Guardrail, Scanning và tìm kiếm dữ liệu. Song song, nhóm xây dựng test cases,
+Golden Dataset, tài liệu đặc tả, hồ sơ doanh nghiệp, Pitch Deck và nội dung truyền
+thông. Kết quả nổi bật không chỉ là số lượng tính năng mà là việc hình thành một
+workflow xuyên nguồn có bằng chứng, cơ chế kiểm soát và nền tảng để tiếp tục đánh
+giá chất lượng trong các vòng pilot tiếp theo.
+
+\end{document}

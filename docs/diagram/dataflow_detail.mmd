@@ -1,0 +1,201 @@
+%% AI Program Navigator — Detailed Data Flow (P0)
+%% Nguồn: 02-prd.md v0.2 · 01-one-page-brief.md · 03-wireframe-ui-flow.md
+%% Mã FR/BR trong nhãn tham chiếu trực tiếp tới PRD §9 và §10
+
+flowchart TD
+
+    %% ==================== 0. PROGRAM FRAME ====================
+    subgraph FRAME["0 · PROGRAM FRAME — admin nhập trước pilot"]
+        PF["ProgramFrame + Version<br/>cohort, timezone, tuần hiện tại<br/>deliverable, deadline nguyên văn<br/>team, role, mentor<br/>source-of-truth theo loại dữ liệu<br/>priority rule, giờ tạo brief"]
+        PERM["Source + SourcePermission<br/>level A/B, owner, URL<br/>consent scope, connection status<br/>last successful scan"]
+        PF --> PERM
+    end
+
+    %% ==================== 1. NGUỒN ====================
+    subgraph SRC["1 · NGUỒN DỮ LIỆU"]
+        SA1["Lịch, tài liệu chính thức<br/>MỨC A — Cam kết"]
+        SA2["Discord announcements<br/>MỨC A — Cam kết"]
+        SA3["Transcript import fallback<br/>MỨC A — dùng khi thiếu quyền bot"]
+        SB1["Chat team opt-in<br/>MỨC B — Tham khảo · P1"]
+    end
+
+    PERM -->|"chỉ nguồn đã opt-in"| SRC
+
+    %% ==================== 2. INGESTION ====================
+    subgraph ING["2 · INGESTION — delta, idempotent"]
+        CUR["SourceCursor<br/>chỉ đọc dữ liệu mới hoặc sửa<br/>kể từ lần quét trước"]
+        RUN["IngestionRun<br/>source, time range, status, error_class"]
+        DEDUP["Dedup theo external_id<br/>retry KHÔNG sinh bản trùng<br/>FR-003"]
+        RAW[("RawRecord<br/>retention tối thiểu")]
+        PROV["Gắn PROVENANCE — FR-004<br/>program_id, source_id, source_url<br/>source_level, author, channel<br/>source_timestamp, ingested_at<br/>verbatim excerpt, permission_scope"]
+        CUR --> RUN --> DEDUP --> RAW --> PROV
+    end
+
+    SA1 --> CUR
+    SA2 --> CUR
+    SA3 --> CUR
+    SB1 -.->|"P1"| CUR
+
+    %% ==================== COVERAGE GATE ====================
+    COV{"Tất cả nguồn MỨC A<br/>quét thành công?"}
+    RUN --> COV
+    COVC["coverage = complete"]
+    COVP["coverage = partial / unknown<br/>event: source_scan_failed<br/>FR-005 · BR-09"]
+    COV -->|"có"| COVC
+    COV -->|"không"| COVP
+
+    %% ==================== 3. TRÍCH XUẤT ====================
+    subgraph EXT["3 · TRÍCH XUẤT"]
+        LVL{"source_level?"}
+        RULE["RULE ENGINE — MỨC A<br/>rule-first, KHÔNG gọi LLM<br/>mục tiêu recall 100 phần trăm<br/>giảm chi phí, tăng độ tin"]
+        AIX["AI EXTRACTION — MỨC B<br/>LLM + confidence score<br/>không tuyên bố không bỏ sót · P1"]
+        FIELDS["Trích: action text, assignee,<br/>deadline nguyên văn, confidence<br/>FR-010"]
+        UNK{"Nguồn có nêu rõ<br/>ngày + giờ + timezone?"}
+        NORM["Chuẩn hoá thời gian<br/>resolve theo timestamp nguồn<br/>BR-03 · BR-04<br/>LUÔN giữ nguyên văn"]
+        SETUNK["normalized_time = unknown<br/>assignee = unknown<br/>KHÔNG SUY DIỄN — FR-011"]
+    end
+
+    PROV --> LVL
+    LVL -->|"A"| RULE
+    LVL -->|"B"| AIX
+    RULE --> FIELDS
+    AIX --> FIELDS
+    FIELDS --> UNK
+    UNK -->|"có"| NORM
+    UNK -->|"không"| SETUNK
+
+    %% ==================== 4. CHANGE DETECTION ====================
+    subgraph CHG["4 · CHANGE DETECTION — FR-006"]
+        CMP["So khớp với InformationItemVersion trước"]
+        ST{"Phân loại delta"}
+        CONF["CONFLICT<br/>lưu CẢ HAI version + source + timestamp<br/>Mức A thắng authority<br/>nhưng vẫn phải hiển thị — BR-05<br/>KHÔNG tự chọn bản Mức B"]
+    end
+
+    NORM --> CMP
+    SETUNK --> CMP
+    CMP --> ST
+    ST -->|"new"| ITEM
+    ST -->|"updated"| ITEM
+    ST -->|"cancelled"| ITEM
+    ST -->|"replaced"| ITEM
+    ST -->|"none"| DROP["Bỏ qua, không tạo item mới"]
+    ST -->|"trái source-of-truth"| CONF
+    CONF --> ITEM
+
+    ITEM[("InformationItem<br/>+ InformationItemVersion<br/>item_version, extractor_version")]
+
+    PRIO["PRIORITY SCORE — FR-013<br/>time-to-due, consequence từ Frame,<br/>ownership, overdue<br/>LƯU lý do xếp hạng"]
+    ITEM --> PRIO
+
+    %% ==================== PUBLISH GATE ====================
+    GATE{"Có source link + provenance<br/>mở được với user hiện tại?"}
+    PRIO --> GATE
+    BLOCK["CHẶN PUBLISH<br/>No source, no publish — BR-01"]
+    GATE -->|"không"| BLOCK
+    GATE -->|"có"| FANOUT(("Dữ liệu dùng chung<br/>cho Brief · Ask · Act"))
+
+    COVC --> FANOUT
+    COVP --> FANOUT
+
+    %% ==================== 5. BRIEF ====================
+    subgraph BRIEF["5 · BRIEF — Daily Briefing"]
+        SCH["Scheduler theo timezone user/cohort<br/>retry KHÔNG sinh brief trùng — FR-020"]
+        COMPOSE["Briefing composer"]
+        BLK["5 KHỐI CỐ ĐỊNH — FR-021<br/>1 Cần xử lý ngay<br/>2 Thay đổi từ lần trước<br/>3 Việc của bạn<br/>4 Đang chờ<br/>5 Tiến độ và biên lai"]
+        CARRY["Carry-over — FR-025<br/>việc chưa xong xuất hiện lại kèm tuổi việc<br/>completed/cancelled rời khối active"]
+        RECEIPT["BIÊN LAI — FR-023<br/>nguồn đã quét + time range<br/>kênh không có gì mới<br/>nguồn lỗi hoặc chưa quét"]
+        EMPTY["Empty state<br/>không có tin mới vẫn hiển thị<br/>việc tồn, deadline gần nhất, tiến độ"]
+    end
+
+    FANOUT --> SCH --> COMPOSE --> BLK --> CARRY
+    COMPOSE --> RECEIPT
+    COMPOSE --> EMPTY
+
+    %% ==================== 6. ASK ====================
+    subgraph ASK["6 · ASK — Grounded Q and A"]
+        QIN["Câu hỏi: global hoặc contextual<br/>contextual mang source_item_id — FR-031"]
+        SCOPE["PERMISSION-SCOPED RETRIEVAL<br/>chỉ corpus user được phép<br/>giới hạn theo program + time range<br/>KHÔNG đẩy toàn bộ transcript vào prompt"]
+        EV{"Đủ evidence<br/>trong nguồn đã quét?"}
+        ABST["ABSTAIN — FR-033<br/>Chưa tìm thấy trong các nguồn đã quét<br/>nêu coverage, gợi ý mở nguồn hoặc hỏi mentor<br/>KHÔNG sinh deadline/assignee/status"]
+        ANS["Answer tách theo factual block"]
+        CONFA["Nếu mâu thuẫn — FR-034<br/>trình bày các version, thời điểm,<br/>source-of-truth, khuyến nghị xác nhận"]
+        CITE["CITATION mỗi factual block — FR-032<br/>permission-check LÚC RENDER và LÚC MỞ<br/>không chỉ lúc ingest — BR-02"]
+    end
+
+    FANOUT --> QIN --> SCOPE --> EV
+    EV -->|"không"| ABST
+    EV -->|"có"| ANS --> CITE
+    ANS --> CONFA
+    BLK -->|"Hỏi về việc này"| QIN
+
+    %% ==================== 7. ACT ====================
+    subgraph ACT["7 · ACT — Action Draft"]
+        DRAFT["ActionDraft — FR-041<br/>title, action type, due time, timezone,<br/>note, source_url, confidence<br/>field suy luận không chắc chắn PHẢI cảnh báo"]
+        MISS{"Có đủ thời gian<br/>và timezone?"}
+        FORCE["ĐỂ TRỐNG — bắt buộc user nhập<br/>KHÔNG tự điền — FR-041 · BR-06"]
+        PREV["Preview → Edit<br/>user sửa được MỌI field AI đề xuất"]
+        CONFIRM{"User bấm Xác nhận?"}
+        NOOP["Không tạo gì cả<br/>unsafe_action_rate phải = 0<br/>FR-042 · BR-07"]
+        IDEM["Idempotency key — FR-047<br/>double-click hoặc retry không tạo trùng<br/>cảnh báo nếu action tương đương đã có"]
+        REM["REMINDER nội bộ — FR-043<br/>scheduled → due → completed / cancelled<br/>in-app bắt buộc, browser notification<br/>chỉ khi đã cấp quyền — FR-044"]
+        CAL["CALENDAR HANDOFF — FR-045<br/>Google Calendar template URL<br/>+ file .ics<br/>title, start/end, timezone, description, source"]
+        HSTATE["TRẠNG THÁI TRUNG THỰC — FR-046<br/>drafted → handoff_opened → user_confirmed<br/>copy phải là Đã mở bản nháp lịch<br/>KHÔNG được nói Đã thêm"]
+    end
+
+    BLK -->|"Nhắc tôi / Thêm vào lịch"| DRAFT
+    CITE -->|"Suggested action — FR-036"| DRAFT
+    DRAFT --> MISS
+    MISS -->|"không"| FORCE --> PREV
+    MISS -->|"có"| PREV
+    PREV --> CONFIRM
+    CONFIRM -->|"không"| NOOP
+    CONFIRM -->|"có"| IDEM
+    IDEM --> REM
+    IDEM --> CAL --> HSTATE
+    REM --> BLK
+
+    %% ==================== J7. SOURCE CHANGED ====================
+    WARN["CẢNH BÁO source_changed — FR-048<br/>action liên kết item bị update/cancel<br/>KHÔNG âm thầm sửa hoặc huỷ<br/>chỉ đổi sau khi user confirm — BR-08"]
+    ST -->|"updated / cancelled"| WARN
+    WARN --> REM
+    WARN --> HSTATE
+
+    %% ==================== 8. FEEDBACK · AUDIT · EVAL ====================
+    subgraph LOOP["8 · FEEDBACK · AUDIT · EVALUATION"]
+        FB["Feedback — FR-050<br/>completed / irrelevant / incorrect / missing source<br/>lưu user, time, item version, citation IDs"]
+        AUD[("Audit log — FR-051<br/>ingest, extraction version, citation,<br/>draft, confirm, edit, complete, cancel,<br/>permission change")]
+        EXP["Evaluation export đã redacted — FR-052<br/>prediction + ground truth"]
+        GOLD[("Golden sets<br/>A-extraction · Q and A · action fidelity")]
+        MET["Metrics<br/>Recall A = 100 phần trăm<br/>citation coverage = 100 phần trăm<br/>abstention accuracy<br/>action field accuracy<br/>unsafe action rate = 0"]
+        FB --> EXP --> GOLD --> MET
+    end
+
+    BLK --> FB
+    CITE --> FB
+    REM --> FB
+    HSTATE --> FB
+    ING --> AUD
+    CONFIRM --> AUD
+    MET -.->|"chỉnh rule + prompt, versioned"| RULE
+    MET -.-> AIX
+
+    %% ==================== ANALYTICS ====================
+    ANL["Product analytics — PRD §13<br/>brief_generated, chat_answer_rendered,<br/>action_confirmed, calendar_handoff_opened,<br/>source_scan_failed<br/>KHÔNG log raw question/answer"]
+    BLK --> ANL
+    CITE --> ANL
+    IDEM --> ANL
+
+    %% ==================== STYLE ====================
+    classDef gate fill:#fee2e2,stroke:#dc2626,stroke-width:3px,color:#111
+    classDef block fill:#fecaca,stroke:#b91c1c,stroke-width:2px,color:#111
+    classDef rule fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111
+    classDef store fill:#ccfbf1,stroke:#0d9488,stroke-width:2px,color:#111
+    classDef ai fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111
+    classDef warn fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111
+
+    class GATE,CONFIRM,MISS,UNK,EV,COV gate
+    class BLOCK,NOOP,ABST,FORCE,SETUNK block
+    class RULE rule
+    class ITEM,RAW,AUD,GOLD store
+    class AIX,ANS ai
+    class CONF,CONFA,COVP,WARN,HSTATE warn

@@ -1,0 +1,140 @@
+# Bộ kiểm tra dùng chung cho cả CI (pull request) lẫn Deploy (push vào main).
+#
+# Trước đây ci.yml và deploy.yml chép nguyên khối lint+test của nhau. Hai bản
+# chép đã lệch nhau ít nhất một lần — sửa biến môi trường ở một file mà quên
+# file kia thì CI xanh còn deploy đỏ, hoặc tệ hơn là ngược lại. Gộp về đây để
+# chỉ còn một định nghĩa.
+
+name: Checks
+
+on:
+  workflow_call:
+    inputs:
+      run_backend:
+        required: false
+        type: boolean
+        default: true
+      backend_mode:
+        required: false
+        type: string
+        default: full
+      run_frontend:
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  backend:
+    if: inputs.run_backend
+    name: Backend · ruff + pytest
+    runs-on: [self-hosted, linux, x64, cohort3]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint with ruff
+        run: ruff check src/ tests/
+
+      - name: Run tests
+        if: inputs.backend_mode == 'full'
+        run: pytest tests/ -v --tb=short
+        env:
+          APP_ENV: test
+          OPENAI_API_KEY: test-key
+          # Test suite uses deterministic fallbacks in the OpenAI code path.
+          # The production default is OpenRouter, which correctly refuses to
+          # start without a real key and would make an empty-pipeline test fail.
+          LLM_PROVIDER: openai
+          # Thiếu biến này thì các test auth hỏng vì auth.py từ chối ký JWT khi
+          # secret rỗng.
+          APP_SECRET_KEY: ci-test-secret-key-not-for-production
+
+      - name: Run backend smoke tests
+        if: inputs.backend_mode == 'smoke'
+        run: >-
+          pytest -q --tb=short
+          tests/test_api/v1/test_auth.py
+          tests/test_api/v1/test_tasks.py
+          tests/test_api/v1/test_google_login.py
+          tests/test_services/v1/test_slack_rules.py
+          tests/test_agents/v1/pipeline/nodes/test_filter.py
+          tests/test_agents/v1/pipeline/nodes/test_resolve.py
+          tests/test_agents/v1/pipeline/nodes/test_verify.py
+          tests/v1/test_gmail_filter_gold.py
+        env:
+          APP_ENV: test
+          OPENAI_API_KEY: test-key
+          LLM_PROVIDER: openai
+          APP_SECRET_KEY: ci-test-secret-key-not-for-production
+
+  frontend:
+    if: inputs.run_frontend
+    name: Frontend · tsc + oxlint + build
+    runs-on: [self-hosted, linux, x64, cohort3]
+    defaults:
+      run:
+        working-directory: client/web-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          # Phải khớp base image trong client/web-app/Dockerfile. Lệch phiên bản
+          # thì CI xanh mà bước docker build trong deploy.yml vẫn đỏ — đúng thứ
+          # job này sinh ra để chặn.
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: client/web-app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        # Trước đây lỗi kiểu chỉ lộ ra ở bước docker build trong deploy.yml, tức
+        # là sau khi PR đã merge vào main.
+        run: npx tsc -b --force
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  secrets:
+    name: Quét secret
+    runs-on: [self-hosted, linux, x64, cohort3]
+    steps:
+      - uses: actions/checkout@v4
+
+      # Hai lựa chọn có chủ ý ở bước dưới:
+      #
+      # Không dùng gitleaks/gitleaks-action@v2 vì action đó đòi GITLEAKS_LICENSE
+      # cho repo thuộc organization, mà repo này nằm trong
+      # AI20K-Build-Phase-Cohort-3. Chạy thẳng binary thì không vướng.
+      #
+      # Quét thư mục làm việc (`dir`) chứ không quét lịch sử git (`git`) vì
+      # CLAUDE.md ghi .env.example từng chứa key thật và key đó vẫn nằm trong
+      # lịch sử — quét lịch sử là đỏ mọi lần chạy cho tới khi có người rewrite
+      # history. `dir` vẫn bắt được secret mới thêm, kể cả đã commit từ trước.
+      - name: Quét bằng gitleaks
+        run: |
+          set -euo pipefail
+          # Pin version; Docker keeps this image locally on the self-hosted
+          # runner, so ordinary runs do not hit the registry again.
+          docker image inspect zricethezav/gitleaks:v8.30.1 >/dev/null 2>&1 || \
+            docker pull zricethezav/gitleaks:v8.30.1
+          docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1 \
+            dir /repo \
+            --config /repo/.gitleaks.toml \
+            --redact \
+            --no-banner \
+            --exit-code 1

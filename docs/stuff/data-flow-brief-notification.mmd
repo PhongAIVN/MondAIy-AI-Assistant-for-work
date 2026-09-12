@@ -1,0 +1,28 @@
+flowchart LR
+    TASKS[(tasks)] --> COLLECT[Collect due / proposed work]
+    CAL[(calendar_events)] --> COLLECT
+    EVIDENCE[(task_evidence + source_items)] --> COLLECT
+    COLLECT --> RANK[Rank by deadline\nsignal + conflict]
+    RANK --> BRIEF[Build Brief]
+    BRIEF --> BRIEF_DB[(briefs)]
+    BRIEF_DB --> USER_VIEW[Brief page / chat response]
+
+    PREFS[(notification_preferences)] --> SCHEDULE[Apply timezone\nquiet hours + caps]
+    TASKS --> SCHEDULE
+    BRIEF_DB --> SCHEDULE
+    SCHEDULE --> REMINDER[(reminders)]
+    REMINDER --> BUNDLE[Bundle notifications]
+    BUNDLE --> WEB_PUSH[(push_subscriptions)]
+    BUNDLE --> TELEGRAM[Telegram channel]
+    WEB_PUSH --> DELIVERY[(notification_deliveries)]
+    TELEGRAM --> CHANNEL[(channel_notification_deliveries)]
+    DELIVERY --> STATUS[Delivery status]
+    CHANNEL --> STATUS
+    STATUS --> AUDIT[(telemetry + audit_events)]
+
+    classDef data fill:#E9F7EF,stroke:#238636,color:#123524;
+    classDef process fill:#FFF4D6,stroke:#B7791F,color:#4A3200;
+    classDef delivery fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    class TASKS,CAL,EVIDENCE,BRIEF_DB,PREFS,REMINDER,WEB_PUSH,DELIVERY,CHANNEL,AUDIT data;
+    class COLLECT,RANK,BRIEF,SCHEDULE,BUNDLE,STATUS process;
+    class USER_VIEW,TELEGRAM delivery;

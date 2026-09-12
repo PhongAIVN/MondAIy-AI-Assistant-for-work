@@ -1,0 +1,5 @@
+client/web-app/src/assets/*.mp4 filter=lfs diff=lfs merge=lfs -text
+client/web-app/src/assets/*.gif filter=lfs diff=lfs merge=lfs -text
+
+# Shell scripts must keep LF line endings so they run under Bash on Windows.
+*.sh text eol=lf

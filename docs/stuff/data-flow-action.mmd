@@ -1,0 +1,32 @@
+flowchart LR
+    ASK[Agent answer / tool result] --> DETECT{Explicit write request?}
+    DETECT -->|No| READ_ONLY[Return information only]
+    DETECT -->|Yes| DRAFT[Create action draft]
+    DRAFT --> VALIDATE[Validate required fields\ntime + title + scope]
+    VALIDATE --> MISSING{Missing or ambiguous?}
+    MISSING -->|Yes| CLARIFY[Ask clarification\nno side effect]
+    MISSING -->|No| PREVIEW[Preview action\napproval required]
+    PREVIEW --> USER[User reviews / confirms]
+    USER --> APPROVAL{Approved?}
+    APPROVAL -->|No| CANCEL[Cancel draft]
+    APPROVAL -->|Yes| IDEMPOTENCY[Check idempotency key]
+    IDEMPOTENCY --> WRITE[Perform external write]
+    WRITE -->|Task| TASK[(tasks)]
+    WRITE -->|Calendar| CAL[(calendar_operations)]
+    WRITE --> AUDIT[(audit_events)]
+    WRITE --> CONFIRM[Confirmation response]
+    TASK --> CONFIRM
+    CAL --> CONFIRM
+    CONFIRM --> CHAT[(conversation_messages)]
+    WRITE --> ERROR{Provider error?}
+    ERROR -->|Yes| SAFE_ERROR[Sanitized failure\nkeep draft retryable]
+    ERROR -->|No| CONFIRM
+
+    classDef input fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    classDef process fill:#FFF4D6,stroke:#B7791F,color:#4A3200;
+    classDef approval fill:#FCE8F3,stroke:#B83280,color:#4A1632;
+    classDef data fill:#E9F7EF,stroke:#238636,color:#123524;
+    class ASK,USER input;
+    class DETECT,DRAFT,VALIDATE,MISSING,CLARIFY,PREVIEW,IDEMPOTENCY,WRITE,ERROR,SAFE_ERROR,READ_ONLY,CANCEL,CONFIRM process;
+    class APPROVAL approval;
+    class TASK,CAL,AUDIT,CHAT data;

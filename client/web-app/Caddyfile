@@ -1,0 +1,38 @@
+{
+	# Caddy mặc định dựng thêm một site :80 để chuyển hướng HTTP sang HTTPS.
+	# Ở đây vô nghĩa: port 80 công khai thuộc về Caddy của app khác, không ai
+	# tới được :80 của container này. Tắt cho khỏi nhầm khi đọc log.
+	auto_https disable_redirects
+}
+
+{$CADDY_ADDR} {
+	# Xin chứng chỉ qua bản ghi TXT trên DuckDNS thay vì qua port 80/443, vì
+	# hai cổng đó trên VM đã thuộc về app khác.
+	#
+	# Khối này ép ACME công khai trong MỌI trường hợp, không có ngoại lệ nào:
+	# CADDY_ADDR không kèm tên miền thì Caddy vẫn bắt tay TLS và trả 400 cho
+	# request HTTP; CADDY_ADDR=localhost thì chết ở "does not qualify for a
+	# public certificate" chứ không tự rơi về CA nội bộ.
+	#
+	# Nên muốn chạy HTTP thuần sau một reverse proxy khác, hoặc muốn test dưới
+	# máy, thì phải xoá hẳn khối `tls` này rồi build lại image.
+	tls {
+		dns duckdns {env.DUCKDNS_API_TOKEN}
+	}
+
+	encode gzip
+
+	handle /api/* {
+		reverse_proxy backend:8000
+	}
+
+	handle /health {
+		reverse_proxy backend:8000
+	}
+
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}

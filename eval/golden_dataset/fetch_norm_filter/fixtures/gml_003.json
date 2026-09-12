@@ -1,0 +1,41 @@
+[
+  {
+    "id": "msg-gml-003",
+    "threadId": "thread-gml-003",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng đọc đề tài đính kèm.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "GVCN <gvcn@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-003"
+        }
+      ],
+      "parts": [
+        {
+          "mimeType": "text/plain",
+          "body": {
+            "data": "VnVpIGzDsm5nIMSR4buNYyDEkeG7gSB0w6BpIMSRw61uaCBrw6htLg=="
+          }
+        },
+        {
+          "mimeType": "application/pdf",
+          "filename": "de_tai.pdf",
+          "body": {
+            "attachmentId": "att_003_1",
+            "size": 25600
+          }
+        }
+      ]
+    }
+  }
+]

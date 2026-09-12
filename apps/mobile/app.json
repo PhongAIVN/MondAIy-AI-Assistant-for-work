@@ -1,0 +1,130 @@
+{
+  "expo": {
+    "name": "mondaiy",
+    "slug": "mondaiy-mobile",
+    "version": "1.0.2",
+    "icon": "./assets/monbthvippro (1).png",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "mondaiy",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mondaiy.product",
+      "buildNumber": "23",
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "NSAllowsArbitraryLoads": false,
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSSpeechRecognitionUsageDescription": "Mondaiy dùng nhận dạng giọng nói để chuyển câu hỏi bạn nói thành văn bản.",
+        "NSMicrophoneUsageDescription": "Mondaiy cần micro để chuyển giọng nói thành câu hỏi.",
+        "NSPhotoLibraryUsageDescription": "Mondaiy chỉ đọc ảnh bạn chọn để gửi kèm câu hỏi cho chatbot."
+      }
+    },
+    "android": {
+      "package": "ai.mondaiy.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/monbthvippro (1).png",
+        "backgroundColor": "#F3F5F4"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-font",
+      "expo-web-browser",
+      "expo-apple-authentication",
+      "expo-background-task",
+      "expo-document-picker",
+      [
+        "expo-share-intent",
+        {
+          "iosActivationRules": {
+            "NSExtensionActivationSupportsFileWithMaxCount": 5
+          },
+          "iosShareExtensionName": "MondaiyShare",
+          "iosShareExtensionBundleIdentifier": "com.mondaiy.product.share",
+          "iosAppGroupIdentifier": "group.com.mondaiy.product",
+          "androidIntentFilters": [
+            "*/*"
+          ],
+          "androidMultiIntentFilters": [
+            "*/*"
+          ]
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Mondaiy chỉ đọc ảnh bạn chọn để gửi kèm câu hỏi cho chatbot.",
+          "cameraPermission": "Mondaiy chỉ dùng camera khi bạn chủ động chụp ảnh đính kèm câu hỏi."
+        }
+      ],
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "Mondaiy cần micro để chuyển giọng nói thành câu hỏi."
+        }
+      ],
+      [
+        "expo-widgets",
+        {
+          "bundleIdentifier": "com.mondaiy.product.widgets",
+          "groupIdentifier": "group.com.mondaiy.product",
+          "widgets": [
+            {
+              "name": "MondaiyLockScreen",
+              "displayName": "Mondaiy Today",
+              "description": "Lịch hôm nay và việc quan trọng trên Màn hình khoá.",
+              "supportedFamilies": [
+                "systemSmall",
+                "systemMedium",
+                "systemLarge",
+                "accessoryCircular",
+                "accessoryRectangular",
+                "accessoryInline"
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/monbthvippro (1).png",
+          "resizeMode": "contain",
+          "imageWidth": 160,
+          "backgroundColor": "#F3F5F4"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "ExpoWidgetsTarget",
+                  "bundleIdentifier": "com.mondaiy.product.widgets",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.mondaiy.product"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "a684481b-8fd5-4d22-b201-c3bf95635cee"
+      }
+    },
+    "owner": "dungnd1107"
+  }
+}

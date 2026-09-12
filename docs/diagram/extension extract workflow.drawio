@@ -1,0 +1,157 @@
+<mxfile host="Electron">
+  <diagram id="--ZCxUDFoJa9pVUmw4Nt" name="Page-2">
+    <mxGraphModel dx="1052" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1150" pageHeight="1900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Trình duyệt" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Extension" vertex="1">
+          <mxGeometry height="60" width="120" x="300" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-5" edge="1" parent="1" source="8WW3QkHaJ3dk8UL-y9rp-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="8WW3QkHaJ3dk8UL-y9rp-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-6" connectable="0" parent="8WW3QkHaJ3dk8UL-y9rp-5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Lấy thông tin" vertex="1">
+          <mxGeometry relative="1" x="-0.0123" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Bỏ những dòng không có chữ" vertex="1">
+          <mxGeometry height="60" width="170" x="525" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-8" edge="1" parent="1" source="8WW3QkHaJ3dk8UL-y9rp-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="8WW3QkHaJ3dk8UL-y9rp-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8WW3QkHaJ3dk8UL-y9rp-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Backend" vertex="1">
+          <mxGeometry height="60" width="120" x="550" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e-fix" edge="1" parent="1" source="8WW3QkHaJ3dk8UL-y9rp-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="8WW3QkHaJ3dk8UL-y9rp-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Kiểm tra xem có chữ, đủ ký tự, đủ token không?" Explain="Kiểm tra có chữ, đủ ký tự, đủ token không?&#xa;Đếm số ký tự và số từ (token) sau khi tách câu — dưới ngưỡng tối thiểu, hoặc không có ký tự chữ cái nào, thì coi là rác.&#xa;Đếm + so ngưỡng cố định." Example="&#39;...gửi giúp file báo cáo quý 3 trước 5h chiều mai&#39; → 63 ký tự, 13 token → qua&#xa;&#39;ok&#39; → 2 ký tự, 1 token → dưới ngưỡng, loại ngay" id="p2n-chk1">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="60" width="300" x="460" y="400" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="p2e-chk1" edge="1" parent="1" source="8WW3QkHaJ3dk8UL-y9rp-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-chk1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Kiểm tra xem có từ khóa và đúng ngôn ngữ quen thuộc không?" Explain="Có từ khóa và đúng ngôn ngữ quen thuộc không?&#xa;Đoán ngôn ngữ của đoạn text; đối chiếu với từ khóa đặc trưng việc cần làm (hạn chót, checklist, tên hành động...). Lệch ngôn ngữ mục tiêu hoặc không khớp từ khóa nào thì bị nghi ngờ.&#xa;Sử dụng model langid.py (Lui &amp; Baldwin, ACL 2012) đã được train sẵn để detect" Example="&#39;...gửi giúp file báo cáo...&#39; → tiếng Việt, khớp từ khóa &#39;gửi&#39; → qua&#xa;&#39;Tải app Zalo để trải nghiệm đầy đủ&#39; → đúng tiếng Việt nhưng 0 từ khóa khớp → nghi ngờ&#xa;&#39;Ok bro, send me the file pls&#39; → phát hiện tiếng Anh, khác ngôn ngữ hệ thống → nghi ngờ" id="p2n-chk2">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="60" width="300" x="460" y="480" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="p2e-chk2" edge="1" parent="1" source="p2n-chk1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-chk2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Kiểm tra xem từ loại và tân ngữ (đối tượng bị tác động) có hợp lý không?" Explain="Từ loại và tân ngữ (đối tượng bị tác động) có hợp lý không?&#xa;Gán nhãn từ loại (danh từ, động từ) cho từng từ, rồi tìm cụm động từ có cụm danh từ theo sau (vd &#39;gửi báo cáo&#39;). Không thấy tân ngữ nào thì tín hiệu yếu.&#xa;Sử dụng model đã có sẵn: Underthesea" Example="&#39;gửi giúp file báo cáo quý 3&#39; → [gửi giúp]=động từ + [file báo cáo quý 3]=danh từ theo sau → có tân ngữ → qua&#xa;&#39;Xem thêm&#39; → [Xem]=động từ, [thêm]=phó từ, không có danh từ theo sau → không tân ngữ → nghi ngờ" id="p2n-chk3">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="60" width="300" x="460" y="560" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="p2e-chk3" edge="1" parent="1" source="p2n-chk2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-chk3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Kiểm tra xem cặp từ (bigram) có hay đi cùng nhau không?" Explain="Cặp từ (bigram) có hay đi cùng nhau không?&#xa;Tách câu thành từng cặp từ liền kề, so khớp với các cặp hay gặp trong câu việc-cần-làm mẫu đã học trước. Điểm khớp trung bình thấp thì bị nghi ngờ.&#xa;CẦN TỰ TRAIN — đã đo thật: khoảng 280 câu mẫu gán nhãn (220 câu sạch + 60 câu khớp đúng văn phong chat thật) là mốc tốt nhất tìm được, đạt 87.5% trên chat thật. Thêm câu lệch văn phong dù nhiều hơn vẫn làm TỆ ĐI." Example="&#39;gửi giúp file báo cáo&#39; → cặp (gửi,giúp) điểm 0.81, (file,báo cáo) điểm 0.63 → trung bình cao → qua&#xa;&#39;Tải app Zalo&#39; → cặp (tải,app) gần như không có trong tập mẫu việc-cần-làm → điểm ~0.04 → nghi ngờ" id="p2n-chk4">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="60" width="300" x="460" y="640" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="p2e-chk4" edge="1" parent="1" source="p2n-chk3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-chk4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-f1-reject" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Dưới ngưỡng ở bước nào cũng vậy — bỏ qua, coi là rác" vertex="1">
+          <mxGeometry height="80" width="220" x="45" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e-f1a" edge="1" parent="1" source="p2n-chk4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-f1-reject" value="dưới ngưỡng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-f2" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Qua hết nhưng vẫn chưa chắc" vertex="1">
+          <mxGeometry height="100" width="180" x="520" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e-f1b" edge="1" parent="1" source="p2n-chk4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-f2" value="qua hết">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Lọc mềm qua LLM (đắt, chính xác cao)" Model="OpenRouter (mặc định openrouter:inclusionai/ling-3.0-tiny:free, fallback groq:llama-3.1-8b-instant — xem src/config.py work_response_candidates, không phải OpenAI)" id="p2n-f3a">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="80" width="190" x="265" y="890" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="p2e-f2a" edge="1" parent="1" source="p2n-f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-f3a">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <object label="Model SVM rẻ tự học từ vài trăm mẫu đã gán nhãn sẵn (thay cho LLM đắt)" Model="SVM (Support Vector Machine) — huấn luyện trên vector đặc trưng TF-IDF / N-gram từ tập câu mẫu việc-cần-làm đã gán nhãn, chạy local cực nhanh và không tốn chi phí token LLM" Explain="Sử dụng thuật toán học máy SVM (Support Vector Machine) để phân loại câu việc-cần-làm thay thế cho LLM đắt đỏ khi đã qua các bước lọc cơ bản." id="p2n-f3b">
+          <mxCell parent="1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1">
+            <mxGeometry height="80" width="230" x="800" y="910" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="p2e-f2b" edge="1" parent="1" source="p2n-f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-f3b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-f4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Không phải rác — tiếp tục tách việc" vertex="1">
+          <mxGeometry height="70" width="260" x="480" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e-f3a" edge="1" parent="1" source="p2n-f3a" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-f4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="1080" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p2e-f3b" edge="1" parent="1" source="p2n-f3b" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-f4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-ai" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="AI tách việc — kết quả?" vertex="1">
+          <mxGeometry height="100" width="160" x="530" y="1190" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e1" edge="1" parent="1" source="p2n-f4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-ai">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-err" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="AI lỗi: tự quyết bằng quy tắc đơn giản trước, câu nào chưa chắc mới hỏi LLM" vertex="1">
+          <mxGeometry height="100" width="210" x="140" y="1470" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e2" edge="1" parent="1" source="p2n-ai" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-err" value="lỗi/hết quota">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-empty" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Trả nguyên văn làm gợi ý" vertex="1">
+          <mxGeometry height="70" width="180" x="520" y="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e3" edge="1" parent="1" source="p2n-ai" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-empty" value="rỗng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-tasks" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Trả từng việc thành gợi ý" vertex="1">
+          <mxGeometry height="70" width="200" x="960" y="1485" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e4" edge="1" parent="1" source="p2n-ai" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-tasks" value="có việc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-show" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Extension hiện gợi ý" vertex="1">
+          <mxGeometry height="60" width="220" x="500" y="1490" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e5" edge="1" parent="1" source="p2n-err" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-show">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e6" edge="1" parent="1" source="p2n-empty" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-show">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e7" edge="1" parent="1" source="p2n-tasks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-show">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-confirm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Người dùng xác nhận" vertex="1">
+          <mxGeometry height="60" width="220" x="500" y="1610" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e8" edge="1" parent="1" source="p2n-show" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-confirm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="p2n-task" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Tạo việc thật (Task)" vertex="1">
+          <mxGeometry height="60" width="220" x="500" y="1740" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e9" edge="1" parent="1" source="p2n-confirm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="p2n-task">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

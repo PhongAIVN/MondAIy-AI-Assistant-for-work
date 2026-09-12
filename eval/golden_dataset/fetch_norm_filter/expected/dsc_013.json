@@ -1,0 +1,20 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-dsc-013",
+      "source_id": "team-channel-id",
+      "provider": "discord",
+      "thread_id": "team-channel-id",
+      "author_id": "usr-mentor",
+      "author_name": "mentor",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Nộp báo cáo gấp.",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://discord.com/channels/guild-001/team-channel-id/msg-dsc-013",
+      "capture_mode": "discord_api",
+      "attachments": []
+    }
+  ]
+}

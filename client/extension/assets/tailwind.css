@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+
+/* Token rút gọn từ client/web-app/src/index.css (theme "Paper") — chỉ giữ
+   phần options page thật sự dùng. Đổi màu thì đổi bên web-app trước rồi
+   đồng bộ sang đây, không tự chế giá trị mới. */
+@theme {
+  --font-sans: "Geist Variable", "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+  --font-heading: "Cormorant Garamond", "Times New Roman", serif;
+
+  /* #FFFFDD đúng như web-app (index.css) — bản trước ở đây lỡ gõ FFFEDD, lệch
+     1 ký tự, đã sửa lại khớp nguồn thật. */
+  --color-app-bg: #ffffdd;
+  --color-surface: #fffeef;
+  --color-border: #c8d9d6;
+  --color-primary: #356f83;
+  --color-secondary: #55727a;
+  --color-muted: #789096;
+  --color-danger: #b45b54;
+  --color-focus: #61a3ba;
+}
+
+/* Chuyển từ auto theo prefers-color-scheme sang chọn tay qua data-theme, đồng
+   bộ cơ chế với web-app (usePreferencesStore.applyThemeToDOM) — mặc định
+   sáng, người dùng bấm nút mới đổi tối. */
+:root[data-theme="dark"] {
+  --color-app-bg: #17343f;
+  --color-surface: #23404d;
+  --color-border: #325964;
+  --color-primary: #9bcbd2;
+  --color-secondary: #c8d9d6;
+  --color-muted: #9bb3b5;
+  --color-danger: #e3a49a;
+  --color-focus: #9bcbd2;
+}
+
+/* 3 tông màu thêm — đồng bộ giá trị THẬT từ client/web-app/src/index.css
+   ([data-palette="..."]). Web-app chỉ ghi đè NỀN/VIỀN/NHẤN mỗi tông, giữ
+   nguyên chữ (secondary/muted) và danger từ Paper cho mọi tông — bản này
+   làm y hệt, không tự chế thêm giá trị. "Paper" = không có data-palette,
+   dùng thẳng :root ở trên, không cần khối riêng. */
+[data-palette="jade"]:not([data-theme="dark"]) {
+  --color-app-bg: #f2f7f3;
+  --color-surface: #ffffff;
+  --color-border: #c3d9c9;
+  --color-primary: #2f6b4f;
+  --color-focus: #4e9b74;
+}
+[data-palette="jade"][data-theme="dark"] {
+  --color-app-bg: #0d1a14;
+  --color-surface: #14291f;
+  --color-border: #23492f;
+  --color-primary: #57b382;
+  --color-focus: #6cc494;
+}
+
+[data-palette="plum"]:not([data-theme="dark"]) {
+  --color-app-bg: #f8f4f8;
+  --color-surface: #ffffff;
+  --color-border: #d8c6db;
+  --color-primary: #6b3f73;
+  --color-focus: #9563a0;
+}
+[data-palette="plum"][data-theme="dark"] {
+  --color-app-bg: #170f1a;
+  --color-surface: #241829;
+  --color-border: #3d2b45;
+  --color-primary: #b98ac4;
+  --color-focus: #c9a0d2;
+}
+
+[data-palette="quartz"]:not([data-theme="dark"]) {
+  --color-app-bg: #f5f6f7;
+  --color-surface: #ffffff;
+  --color-border: #cfd4d8;
+  --color-primary: #3d4a54;
+  --color-focus: #5b6c78;
+}
+[data-palette="quartz"][data-theme="dark"] {
+  --color-app-bg: #131517;
+  --color-surface: #1d2124;
+  --color-border: #333a40;
+  --color-primary: #9daab4;
+  --color-focus: #b2bdc5;
+}
+
+/* Độ tương phản cao — ghi đè viền/chữ về đen-trắng tuyệt đối, PHẢI thắng mọi
+   tông màu (đặt sau cùng trong file, cùng nguyên tắc với web-app index.css). */
+html.high-contrast {
+  --color-border: #000000;
+  --color-secondary: #000000;
+}
+html[data-theme="dark"].high-contrast {
+  --color-border: #ffffff;
+  --color-secondary: #ffffff;
+}
+
+/* Cỡ chữ S/M/L — cùng hệ số với web-app index.css (html.text-size-*). */
+html.text-size-sm { font-size: 87.5%; }
+html.text-size-md { font-size: 100%; }
+html.text-size-lg { font-size: 112.5%; }
+
+body {
+  background: var(--color-app-bg);
+  color: var(--color-secondary);
+  min-height: 100vh;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.app-shell {
+  background: var(--color-app-bg);
+  color: var(--color-secondary);
+}
+
+.app-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 14px rgba(23, 52, 63, 0.08);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}

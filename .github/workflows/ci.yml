@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+# Push liên tiếp vào cùng một nhánh thì chỉ giữ lần chạy mới nhất. Trước đây
+# mỗi push xếp thêm một run, hàng chờ dài ra mà kết quả cũ không ai đọc.
+#
+# NGOẠI LỆ CHO `main`: huỷ run cũ ở đây là tự bắn vào chân. Deploy chỉ chạy khi
+# CI trên main kết thúc `success` (xem deploy.yml), nên một run bị huỷ giữa
+# chừng có nghĩa là KHÔNG deploy. Runner self-hosted mất ~7 phút, còn merge
+# thường đi thành cụm — ngày 25/08 sáu PR merge liên tiếp huỷ nhau, không lần
+# nào về đích, và cả backend lẫn frontend đều không được phát hành suốt 5 tiếng.
+# Trên main để mỗi run chạy trọn; các nhánh khác vẫn huỷ như cũ.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  changes:
+    name: Detect affected checks
+    runs-on: [self-hosted, linux, x64, cohort3]
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend_mode: ${{ steps.filter.outputs.backend_mode }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: filter
+        name: Detect changed components
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BASE: ${{ github.event.before }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            base="$PR_BASE"
+          else
+            base="$PUSH_BASE"
+          fi
+          python3 scripts/ci_changed_components.py "$base" "$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+
+  checks:
+    needs: changes
+    uses: ./.github/workflows/checks.yml
+    with:
+      run_backend: ${{ needs.changes.outputs.backend == 'true' }}
+      run_frontend: ${{ needs.changes.outputs.frontend == 'true' }}
+      backend_mode: ${{ needs.changes.outputs.backend_mode }}

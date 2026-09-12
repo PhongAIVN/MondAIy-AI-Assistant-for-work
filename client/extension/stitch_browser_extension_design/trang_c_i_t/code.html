@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cấu hình mondaiy</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#e7f6ff",
+                    "on-surface-variant": "#40484c",
+                    "on-error": "#ffffff",
+                    "on-surface": "#001f2a",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f4faff",
+                    "on-tertiary-fixed-variant": "#663d11",
+                    "surface-container-highest": "#c9e7f8",
+                    "outline": "#70787c",
+                    "surface-dim": "#c0dfef",
+                    "primary": "#16576a",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "tertiary": "#714619",
+                    "primary-fixed-dim": "#96cfe5",
+                    "surface-container-high": "#ceedfd",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#8ed0e8",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#054d60",
+                    "secondary-fixed": "#b6ebff",
+                    "inverse-surface": "#163441",
+                    "primary-container": "#356f83",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#e0f4ff",
+                    "surface-variant": "#c9e7f8",
+                    "tertiary-container": "#8d5e2f",
+                    "on-tertiary-fixed": "#2d1600",
+                    "surface-tint": "#2a6579",
+                    "on-background": "#001f2a",
+                    "surface-container": "#daf2ff",
+                    "primary-fixed": "#b8eaff",
+                    "on-secondary-container": "#1f697e",
+                    "on-tertiary-container": "#ffe3cd",
+                    "surface": "#f4faff",
+                    "tertiary-fixed": "#ffdcbf",
+                    "surface-bright": "#f4faff",
+                    "inverse-primary": "#96cfe5",
+                    "secondary": "#1b667c",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#001f28",
+                    "secondary-container": "#a5e6ff",
+                    "on-primary-container": "#c6eeff",
+                    "outline-variant": "#c0c8cc",
+                    "tertiary-fixed-dim": "#f7ba83",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001f28"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "control-gap": "8px",
+                    "internal-padding": "16px",
+                    "panel-width": "400px",
+                    "stack-gap": "12px",
+                    "edge-margin": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["EB Garamond"],
+                    "label-md": ["Geist"],
+                    "headline-md": ["EB Garamond"],
+                    "headline-sm": ["EB Garamond"],
+                    "label-sm": ["Geist"],
+                    "body-main": ["Geist"],
+                    "body-normal": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-md": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-sm": ["17px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-main": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "body-normal": ["15px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f4faff; /* bg-background */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom toggle switch styles for smooth animation */
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #16576a; /* bg-primary */
+        }
+        .toggle-checkbox:checked + .toggle-label .toggle-dot {
+            transform: translateX(20px);
+            background-color: #ffffff; /* on-primary */
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex justify-center text-on-surface">
+<!-- Main Container (Fixed Width Side Panel) -->
+<div class="w-full max-w-[400px] h-screen bg-background flex flex-col relative shadow-[0_0_40px_rgba(35,64,77,0.1)] border-x border-outline-variant/20">
+<!-- TopAppBar (Shared Component) -->
+<header class="docked full-width top-0 bg-surface shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] relative z-20 shrink-0">
+<div class="flex justify-between items-center w-full px-edge-margin py-4">
+<div class="flex items-center gap-control-gap">
+<button class="flex items-center justify-center p-1 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<span class="font-headline-lg text-headline-lg text-primary tracking-tight">mondaiy</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden cursor-pointer active:scale-95 duration-200 shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A meticulously crafted portrait of a sophisticated user avatar, featuring a warm, neutral color palette with soft studio lighting, rendered in a highly detailed, clean academic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBltb79c2wJB4ujxQSopxGOlMAo0bB0eZR9lNLnBtd_5H57U1NmOAgZGl1JDcA_i3OLuP4IHUa74eASc9Rp3ueEQx9nqbA9-ABQSLFOYTQFYFhE6xI2G55_2SmB7U19zPSbvutXDMPZlgewVtkIjIx5_CjPYZm0VmwOpoeG8UWQmgLp67XcLF_PDvXsRj8Frycvtk_p-SFS-hHyp4IOVCkUvpos1RjksR4SpVgjSk3fYzDVy08gbh8b"/>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<main class="flex-1 overflow-y-auto px-edge-margin py-6 flex flex-col gap-8">
+<!-- Page Title -->
+<header>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Cấu hình mondaiy</h1>
+</header>
+<!-- Theme Tone Picker Section -->
+<section class="flex flex-col gap-4">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tông màu</h2>
+<div class="flex gap-4 items-center">
+<!-- Paper (Selected) -->
+<button aria-label="Select Paper Theme" aria-pressed="true" class="w-12 h-12 rounded-full flex items-center justify-center shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] border-2 border-primary relative transition-transform hover:scale-105 active:scale-95 group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background" style="background-color: #FFFFDD;">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="check" style="font-variation-settings: 'FILL' 1; font-weight: 500;">check</span>
+</button>
+<!-- Jade -->
+<button aria-label="Select Jade Theme" aria-pressed="false" class="w-12 h-12 rounded-full border border-outline-variant/50 shadow-sm transition-all hover:scale-105 hover:shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-outline focus:ring-offset-2 focus:ring-offset-background" style="background-color: #2F6B4F;"></button>
+<!-- Plum -->
+<button aria-label="Select Plum Theme" aria-pressed="false" class="w-12 h-12 rounded-full border border-outline-variant/50 shadow-sm transition-all hover:scale-105 hover:shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-outline focus:ring-offset-2 focus:ring-offset-background" style="background-color: #6B3F73;"></button>
+<!-- Quartz -->
+<button aria-label="Select Quartz Theme" aria-pressed="false" class="w-12 h-12 rounded-full border border-outline-variant/50 shadow-sm transition-all hover:scale-105 hover:shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-outline focus:ring-offset-2 focus:ring-offset-background" style="background-color: #3D4A54;"></button>
+</div>
+</section>
+<!-- Appearance Toggles Section -->
+<section class="flex flex-col gap-4">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Hiển thị</h2>
+<div class="bg-surface rounded-xl shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] border border-surface-container overflow-hidden flex flex-col">
+<!-- Dark Mode Toggle -->
+<label class="flex justify-between items-center p-4 border-b border-surface-container cursor-pointer hover:bg-surface-container-lowest transition-colors group">
+<span class="font-body-main text-body-main text-on-surface group-hover:text-primary transition-colors">Chế độ tối</span>
+<div class="relative">
+<input class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label block w-[44px] h-[24px] bg-surface-container-highest rounded-full border border-outline-variant/30 transition-colors duration-300">
+<div class="toggle-dot absolute left-1 top-1 bg-outline w-4 h-4 rounded-full transition-transform duration-300"></div>
+</div>
+</div>
+</label>
+<!-- High Contrast Toggle -->
+<label class="flex justify-between items-center p-4 cursor-pointer hover:bg-surface-container-lowest transition-colors group">
+<span class="font-body-main text-body-main text-on-surface group-hover:text-primary transition-colors">Độ tương phản cao</span>
+<div class="relative">
+<input class="sr-only toggle-checkbox" type="checkbox"/>
+<div class="toggle-label block w-[44px] h-[24px] bg-surface-container-highest rounded-full border border-outline-variant/30 transition-colors duration-300">
+<div class="toggle-dot absolute left-1 top-1 bg-outline w-4 h-4 rounded-full transition-transform duration-300"></div>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Font Size Segmented Control Section -->
+<section class="flex flex-col gap-4">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Cỡ chữ</h2>
+<!-- Pill Style Segmented Control -->
+<div class="bg-surface-container-low rounded-lg p-1 flex relative items-center justify-between border border-outline-variant/20 shadow-inner">
+<!-- Animated Active Background Pill (Set to middle position for 'M') -->
+<div class="absolute left-[33.33%] w-[33.33%] h-[calc(100%-8px)] bg-surface shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] rounded-md border border-surface-container transition-all duration-300 ease-[cubic-bezier(0.2,0,0,1)] z-0 pointer-events-none"></div>
+<button class="flex-1 py-2.5 font-label-md text-label-md text-on-surface-variant text-center rounded-md transition-colors z-10 hover:text-on-surface focus:outline-none">S</button>
+<button class="flex-1 py-2.5 font-label-md text-label-md text-primary text-center rounded-md transition-colors z-10 font-bold focus:outline-none">M</button>
+<button class="flex-1 py-2.5 font-label-md text-label-md text-on-surface-variant text-center rounded-md transition-colors z-10 hover:text-on-surface focus:outline-none">L</button>
+</div>
+</section>
+<!-- Spacer to push Account action to bottom if content is short -->
+<div class="flex-1"></div>
+<!-- Account Actions -->
+<section class="mt-4 pb-4">
+<button class="w-full py-3.5 px-4 bg-error text-on-error font-label-md text-label-md rounded-lg shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] hover:bg-[#a61717] hover:shadow-[0_4px_8px_rgba(35,64,77,0.1),0_12px_24px_rgba(35,64,77,0.12)] transition-all active:scale-[0.98] flex items-center justify-center gap-2 border border-[#93000a]">
+<span class="material-symbols-outlined" data-icon="logout" style="font-size: 18px;">logout</span>
+                    Đăng xuất
+                 </button>
+</section>
+</main>
+</div>
+</body></html>

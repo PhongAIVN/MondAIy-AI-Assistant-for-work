@@ -1,0 +1,4 @@
+{
+  "status": "error",
+  "error_info": "Không lấy được access token Gmail: Token expired or revoked"
+}

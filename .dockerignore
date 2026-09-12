@@ -1,0 +1,37 @@
+.git
+.gitignore
+# Mọi biến thể .env, kể cả .env.bak.* — Dockerfile "COPY . ." nên lọt vào đây
+# là secret nằm luôn trong layer image, ai pull được image là đọc được.
+.env*
+# .venv.hong là venv thứ hai trên máy dev, "*" mới quét hết
+.venv*
+# Cấu hình công cụ AI và nhật ký prompt — không có việc gì trong image chạy thật
+.agents
+.ai-log
+.claude
+.codex
+.cursor
+.gemini
+.github
+.DS_Store
+design-proposal-littlebird/
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+docs/
+presentation/
+eval/
+# Frontend build ở image riêng (client/web-app/Dockerfile); để đây thì node_modules
+# 153M chui vào context của backend.
+client/
+# Dữ liệu thật (~100M), prod mount volume backend_data vào /app/data
+data/
+# Danh sách kênh Discord thật — lộ cấu trúc server ban tổ chức
+scripts/discord/channels*.json
+!scripts/discord/channels.example.json
+*.md
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.prod.yml

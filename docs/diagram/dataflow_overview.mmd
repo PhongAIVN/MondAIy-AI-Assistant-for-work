@@ -1,0 +1,57 @@
+%% AI Program Navigator — Dataflow tổng quan
+%% Dữ liệu đi từ nguồn đến hành động của học viên
+
+flowchart LR
+
+    SRC["<b>Nguồn</b><br/>Lịch · Tài liệu · Discord"]
+    ING["<b>Ingestion</b><br/>đọc phần mới<br/>gắn link nguồn"]
+    EXT["<b>Trích xuất</b><br/>deadline · việc cần làm<br/>thay đổi · mâu thuẫn"]
+
+    G1{"Có link<br/>nguồn?"}
+    STOP["Không hiển thị"]
+
+    ITEM[("<b>InformationItem</b><br/>dữ liệu dùng chung<br/>luôn kèm nguồn")]
+
+    BRIEF["<b>Brief</b><br/>tự đẩy mỗi ngày"]
+    ASK["<b>Hỏi đáp</b><br/>trả lời kèm trích dẫn"]
+    ACT["<b>Bản nháp hành động</b><br/>điền sẵn, cho sửa"]
+
+    G2{"User<br/>xác nhận?"}
+    NOOP["Không tạo gì"]
+
+    OUT["<b>Nhắc việc</b> trong app<br/><b>Lịch</b> — link Google hoặc .ics"]
+
+    USER(("Học viên"))
+    FB["<b>Phản hồi</b><br/>đúng · sai · xong"]
+
+    SRC --> ING --> EXT --> G1
+    G1 -->|"không"| STOP
+    G1 -->|"có"| ITEM
+
+    ITEM --> BRIEF
+    ITEM --> ASK
+    BRIEF --> ASK
+    BRIEF --> ACT
+    ASK --> ACT
+
+    ACT --> G2
+    G2 -->|"không"| NOOP
+    G2 -->|"có"| OUT
+
+    BRIEF --> USER
+    ASK --> USER
+    OUT --> USER
+    USER --> FB
+    FB -.->|"cải thiện"| EXT
+
+    classDef gate fill:#fee2e2,stroke:#dc2626,stroke-width:2.5px
+    classDef stop fill:#f1f5f9,stroke:#94a3b8,stroke-dasharray:4 3
+    classDef store fill:#ccfbf1,stroke:#0d9488,stroke-width:2.5px
+    classDef out fill:#f3e8ff,stroke:#a855f7,stroke-width:2px
+    classDef user fill:#ecfdf5,stroke:#10b981,stroke-width:2.5px
+
+    class G1,G2 gate
+    class STOP,NOOP stop
+    class ITEM store
+    class OUT out
+    class USER user

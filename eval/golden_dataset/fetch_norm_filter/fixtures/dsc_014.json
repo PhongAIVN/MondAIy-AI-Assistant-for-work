@@ -1,0 +1,23 @@
+[
+  {
+    "id": "msg-dsc-014",
+    "channel_id": "team-channel-id",
+    "guild_id": "guild-001",
+    "content": "Này <@!usr-user>, nộp bài nhé.",
+    "timestamp": "2025-01-01T00:00:00+00:00",
+    "edited_timestamp": null,
+    "author": {
+      "id": "usr-mentor",
+      "username": "mentor",
+      "discriminator": "0"
+    },
+    "attachments": [],
+    "mentions": [
+      {
+        "id": "usr-user",
+        "username": "user"
+      }
+    ],
+    "referenced_message": null
+  }
+]

@@ -1,0 +1,61 @@
+# Cấu hình quét secret cho job `secrets` trong .github/workflows/checks.yml.
+#
+# Kế thừa toàn bộ luật mặc định của gitleaks rồi chỉ thêm allowlist. Không viết
+# lại bộ luật: bỏ sót một luật là bỏ sót đúng loại secret mà nó bắt.
+#
+# Mỗi mục allowlist phải nêu vì sao nó không phải secret. Thêm mục mà không giải
+# thích được thì khả năng cao đó là secret thật.
+
+[extend]
+useDefault = true
+
+[[rules]]
+# Ghi đè `generic-api-key` mặc định để gắn allowlist riêng cho nó — bốn dương
+# tính giả hiện có đều rơi vào luật này, còn các luật chuyên biệt (AWS, GitHub,
+# Slack…) giữ nguyên độ nhạy.
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(?:key|api|token|secret|client|passwd|password|auth|access)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:{1,3}=|\|\||:|<=|=>|:=|\?=|,)(?:'|\"|\s|=|\x60){0,5}([0-9a-z\-_.=]{10,150})(?:['|\"|\n|\r|\s|\x60|;|\\]|$)'''
+keywords = ["key", "api", "token", "secret", "client", "passwd", "password", "auth", "access"]
+
+[rules.allowlist]
+regexTarget = "match"
+regexes = [
+  # Tên khoá localStorage phía web app, không phải giá trị bí mật.
+  '''mondaiy_[a-z_]+_v\d+''',
+  '''nav_(session|profiles)''',
+  # Idempotency key trong ví dụ tài liệu API — giá trị bịa, và bản thân
+  # idempotency key không phải thông tin xác thực. `match` mà gitleaks trả về
+  # bắt đầu từ chữ "Key" chứ không phải "Idempotency-Key", nên regex neo theo đó.
+  '''Key["']?\s*:\s*["']?idem_[a-z0-9_]+''',
+  '''Key["']?\s*:\s*["'][0-9]+-[a-f0-9]+["']''',
+  # Placeholder trong tài liệu: <internal_service_token>, ${VAR}, YOUR_KEY_HERE…
+  '''<[a-z_]+>''',
+  '''\$\{[A-Z_]+\}''',
+  '''(?i)(your|my|example|placeholder|changeme|dummy|fake|sample)[-_]?[a-z0-9_]*''',
+  # .ai-log/archive/codex/*.jsonl: "client_id":"<uuid>" là id theo dõi request
+  # nội bộ của tool codex (idempotency/telemetry), không phải credential —
+  # UUID chuẩn không bao giờ là bí mật xác thực thật.
+  '''client_id\\?"\s*:\s*\\?"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\\?"''',
+  # .ai-log/*: client_id trong URL OAuth thật của Google
+  # (accounts.google.com/o/oauth2/v2/auth?client_id=...) — client_id theo
+  # chuẩn OAuth vốn public, lộ ngay trên URL trình duyệt lúc user đăng nhập,
+  # tự nó không cấp quyền truy cập gì (khác client_secret).
+  '''client_id=\d+-[a-z0-9]+''',
+  # .env.example: dòng biến rỗng liền nhau (vd "API_KEY=\nGROQ_API_KEYS=")
+  # khiến regex generic-api-key dính chéo dòng, đọc nhầm tên biến sau làm
+  # "giá trị" của biến trước — không có giá trị nào cả, cả hai đều rỗng.
+  '''[A-Z][A-Z0-9_]*_KEYS?=\s*\n[A-Z][A-Z0-9_]*=''',
+]
+
+[allowlist]
+description = "Đường dẫn không chứa secret thật"
+paths = [
+  # Chương 9 của sách hướng dẫn cố ý in một key hardcode làm ví dụ SAI. Xoá ví
+  # dụ đó đi thì bài học mất luôn phần đối chiếu.
+  '''docs/guide/chapter-09\.md''',
+  # File mẫu chỉ chứa tên biến và giá trị rỗng. CLAUDE.md ghi rõ .env.example
+  # từng chứa key thật, nên nó vẫn được quét bởi các luật chuyên biệt — allowlist
+  # ở đây chỉ áp cho phần khớp generic bên trên.
+  '''\.env\.prod\.example''',
+]

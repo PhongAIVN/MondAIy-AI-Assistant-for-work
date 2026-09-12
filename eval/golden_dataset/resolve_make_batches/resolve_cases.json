@@ -1,0 +1,101 @@
+[
+  {
+    "id": "RSV-001",
+    "description": "Đủ ngày, giờ, timezone -> due_at giải được, không mơ hồ",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "",
+      "time_expression": "23:59 thứ Sáu (GMT+7)"
+    },
+    "expected": {"due_at_resolvable": true, "ambiguous": false, "assignee": "phong@student.mondaiy.vn", "assignee_ambiguous": false}
+  },
+  {
+    "id": "RSV-002",
+    "description": "Có ngày, thiếu giờ và timezone -> due_at để trống, đánh dấu mơ hồ",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "",
+      "time_expression": "trước Chủ Nhật"
+    },
+    "expected": {"due_at_resolvable": false, "ambiguous": true, "assignee": "phong@student.mondaiy.vn", "assignee_ambiguous": false}
+  },
+  {
+    "id": "RSV-003",
+    "description": "Có ngày và giờ, thiếu timezone -> vẫn không đoán (BR-05)",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "",
+      "time_expression": "Friday 9:00am"
+    },
+    "expected": {"due_at_resolvable": false, "ambiguous": true, "assignee": "phong@student.mondaiy.vn", "assignee_ambiguous": false}
+  },
+  {
+    "id": "RSV-004",
+    "description": "Không có time_expression nào (rỗng) -> không mơ hồ (không phải mốc thời gian bị bỏ sót, chỉ là task không có deadline)",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "",
+      "time_expression": ""
+    },
+    "expected": {"due_at_resolvable": false, "ambiguous": false, "assignee": "phong@student.mondaiy.vn", "assignee_ambiguous": false}
+  },
+  {
+    "id": "RSV-005",
+    "description": "Gợi ý nhắc tới nhóm ('các bạn') và user là người nhận trực tiếp -> xác nhận chính user",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "các bạn",
+      "time_expression": ""
+    },
+    "expected": {"due_at_resolvable": false, "ambiguous": false, "assignee": "phong@student.mondaiy.vn", "assignee_ambiguous": false}
+  },
+  {
+    "id": "RSV-006",
+    "description": "Gợi ý chỉ đích danh người khác ('Nam') dù user là người nhận trực tiếp -> không tự gán, để trống",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "Nam",
+      "time_expression": ""
+    },
+    "expected": {"due_at_resolvable": false, "ambiguous": false, "assignee": null, "assignee_ambiguous": true}
+  },
+  {
+    "id": "RSV-007",
+    "description": "User chỉ nằm trong CC, không phải người nhận trực tiếp -> không đủ bằng chứng, để trống",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["ban-to-chuc@mondaiy.vn"], "cc": ["phong@student.mondaiy.vn"]},
+      "assignee_hint": "",
+      "time_expression": ""
+    },
+    "expected": {"due_at_resolvable": false, "ambiguous": false, "assignee": null, "assignee_ambiguous": true}
+  },
+  {
+    "id": "RSV-008",
+    "description": "Thiếu user_email trong state (bug cấu hình) -> không suy diễn, đánh dấu mơ hồ thay vì crash",
+    "input": {
+      "user_email": null,
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "",
+      "time_expression": "23:59 thứ Sáu (GMT+7)"
+    },
+    "expected": {"due_at_resolvable": true, "ambiguous": false, "assignee": null, "assignee_ambiguous": true}
+  },
+  {
+    "id": "RSV-009",
+    "description": "UTC offset tường minh dạng +07:00 -> vẫn đủ điều kiện giải được (không chỉ chấp nhận tên viết tắt ICT/GMT)",
+    "input": {
+      "user_email": "phong@student.mondaiy.vn",
+      "message": {"to": ["phong@student.mondaiy.vn"], "cc": []},
+      "assignee_hint": "",
+      "time_expression": "2026-08-14 17:00 +07:00"
+    },
+    "expected": {"due_at_resolvable": true, "ambiguous": false, "assignee": "phong@student.mondaiy.vn", "assignee_ambiguous": false}
+  }
+]

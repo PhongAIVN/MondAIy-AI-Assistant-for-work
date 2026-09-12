@@ -1,0 +1,101 @@
+flowchart TB
+    USER([User])
+
+    subgraph CLIENT[Client layer]
+        WEB[Web App\nReact + Vite\nclient/web-app]
+        EXT[Browser Extension\noptional helper]
+    end
+
+    subgraph EDGE[Application edge]
+        AUTH[Auth + JWT validation]
+        API[FastAPI API\nREST + SSE streaming]
+        LIMIT[Rate limit + request validation]
+    end
+
+    subgraph INTELLIGENCE[AI and orchestration]
+        ROUTER[Intent / source router]
+        AGENT[LangGraph Agent\nthink → action → observe → respond]
+        LLM[LLM Provider\nmodel routing + fallback]
+        TOOLS[Tool registry\nGmail / Discord / Jira / Calendar / Web]
+        GUARD[Guardrails\nscope + evidence + approval]
+        PIPELINE[Task extraction pipeline\nfetch → normalize → filter → extract → resolve → persist]
+    end
+
+    subgraph CONNECTORS[Connector layer]
+        GOOGLE[Google\nGmail + Calendar]
+        DISCORD[Discord]
+        JIRA[Jira]
+        OUTLOOK[Outlook]
+        TELEGRAM[Telegram]
+        PROGRAM[Program ICS feed]
+    end
+
+    subgraph RUNTIME[Async runtime]
+        WORKER[Worker\nqueued runs + periodic loops]
+        QUEUE[Redis\ncache / coordination]
+    end
+
+    subgraph DATA[Data and storage]
+        DB[(PostgreSQL + pgvector\ncanonical data + audit + FTS)]
+        OBJECT[(MinIO / object storage\nlarge private artifacts)]
+    end
+
+    subgraph OBS[Observability]
+        LOGS[Structured logs]
+        METRICS[Prometheus metrics]
+        TRACE[Telemetry + audit events]
+    end
+
+    USER --> WEB
+    USER --> EXT
+    WEB --> AUTH
+    EXT --> AUTH
+    AUTH --> LIMIT
+    LIMIT --> API
+
+    API --> ROUTER
+    ROUTER --> AGENT
+    AGENT --> LLM
+    AGENT --> TOOLS
+    TOOLS --> GUARD
+    GUARD --> CONNECTORS
+    GUARD --> DB
+    AGENT --> DB
+    API --> DB
+    API --> OBJECT
+
+    GOOGLE --> CONNECTORS
+    DISCORD --> CONNECTORS
+    JIRA --> CONNECTORS
+    OUTLOOK --> CONNECTORS
+    TELEGRAM --> CONNECTORS
+    PROGRAM --> CONNECTORS
+    CONNECTORS --> PIPELINE
+    PIPELINE --> DB
+
+    API --> QUEUE
+    API --> WORKER
+    WORKER --> QUEUE
+    WORKER --> PIPELINE
+    WORKER --> DB
+    WORKER --> CONNECTORS
+
+    API --> LOGS
+    AGENT --> TRACE
+    PIPELINE --> TRACE
+    WORKER --> METRICS
+    DB --> METRICS
+
+    classDef client fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    classDef app fill:#E9F7EF,stroke:#238636,color:#123524;
+    classDef ai fill:#FFF4D6,stroke:#B7791F,color:#4A3200;
+    classDef connector fill:#FCE8F3,stroke:#B83280,color:#4A1632;
+    classDef data fill:#EEE8FF,stroke:#6B46C1,color:#28124D;
+    classDef ops fill:#EDF2F7,stroke:#4A5568,color:#1A202C;
+
+    class WEB,EXT client;
+    class AUTH,API,LIMIT app;
+    class ROUTER,AGENT,LLM,TOOLS,GUARD,PIPELINE ai;
+    class GOOGLE,DISCORD,JIRA,OUTLOOK,TELEGRAM,PROGRAM connector;
+    class DB,OBJECT data;
+    class WORKER,QUEUE,LOGS,METRICS,TRACE ops;

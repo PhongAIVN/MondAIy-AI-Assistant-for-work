@@ -1,0 +1,23 @@
+target-version = "py311"
+line-length = 120
+
+[lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = [
+    "E501",
+    # UP042 giục đổi `class X(str, Enum)` sang StrEnum, nhưng hai thứ đó khác
+    # nhau ở `str(thanh_vien)`: bản cũ trả "X.A", StrEnum trả "a". Các enum
+    # trong guardrail/ và intent_router.py đi thẳng vào log và payload LLM nên
+    # đổi là đổi luôn dữ liệu ghi ra. Muốn bỏ ignore này thì đổi từng enum một
+    # kèm test, không sửa hàng loạt.
+    "UP042",
+]
+
+[lint.isort]
+# `mcp` is an installed dependency. Declaring it avoids version-dependent
+# import ordering between Ruff 0.12 (local) and 0.16 (CI).
+known-third-party = ["mcp"]
+
+[format]
+quote-style = "double"
+indent-style = "space"

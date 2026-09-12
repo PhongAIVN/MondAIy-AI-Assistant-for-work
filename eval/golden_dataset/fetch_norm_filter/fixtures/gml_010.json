@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-010",
+    "threadId": "thread-gml-010",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng kiểm tra mã nguồn gấp.",
+    "historyId": "12345",
+    "internalDate": "",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-010"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIGtp4buDbSB0cmEgbcOjIG5ndeG7k24gZ-G6pXAu",
+        "size": 31
+      }
+    }
+  }
+]

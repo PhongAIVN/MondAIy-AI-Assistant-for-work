@@ -1,0 +1,4528 @@
+[
+  {
+    "id": "OTL-001",
+    "description": "Accepted #1 (vi, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-001",
+        "conversationId": "conv-acc-001",
+        "subject": "Cần báo cáo tài chính trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "vy.nguyen@vietsoft.example",
+            "name": "Nguyễn Thảo Vy"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Chào An,</p><p>Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện báo cáo tài chính trước khi trình bày với ban lãnh đạo vào tuần sau.</p><p>Bạn giúp mình xem lại báo cáo tài chính và phản hồi trước thứ Sáu nhé.</p><p>Đội tài chính đang chờ phần này để chốt số liệu quý.</p><p>Best regards,<br>Nguyễn Thảo Vy<br><span style='color:#666'>Phòng Nhân sự</span></p></div>"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện báo cáo tài chính trước khi trìn",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-001"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "thứ Sáu"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-002",
+    "description": "Accepted #2 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-002",
+        "conversationId": "conv-acc-002",
+        "subject": "Action needed: the client report for Project Phoenix",
+        "from": {
+          "emailAddress": {
+            "address": "priya.nair@contoso.example",
+            "name": "Priya Nair"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Taylor,\n\nThanks for the update in this week's standup. The client is asking for a status update on the client report, and we want to make sure we're aligned before the review call.\n\nPlease submit the client report before Monday so I can compile everything for the client.\n\nHappy to hop on a quick call if anything is unclear.\n\nBest regards,\nPriya Nair\nProduct Management"
+        },
+        "bodyPreview": "Thanks for the update in this week's standup. The client is asking for a status update on the client",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-002"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Monday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-003",
+    "description": "Accepted #3 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-003",
+        "conversationId": "conv-acc-003",
+        "subject": "Reminder: contract renewal paperwork",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Jamie,</p><p>Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple of clauses that still need sign-off from your side.</p><p>Could you please confirm the updated terms before Tuesday?</p><p>Once we have your confirmation, we can move forward with signing.</p><p>Best regards,<br>Marcus Webb<br><span style='color:#666'>Engineering</span></p></div>"
+        },
+        "bodyPreview": "Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-003"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Tuesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-004",
+    "description": "Accepted #4 (vi, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-004",
+        "conversationId": "conv-acc-004",
+        "subject": "Cần hợp đồng đối tác trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "tu.pham@dtsolutions.example",
+            "name": "Phạm Anh Tú"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Chào Duy,\n\nNhư đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện hợp đồng đối tác trước khi trình bày với ban lãnh đạo vào tuần sau.\n\nBạn giúp mình xem lại hợp đồng đối tác và phản hồi trước thứ Tư nhé.\n\nĐội tài chính đang chờ phần này để chốt số liệu quý.\n\nBest regards,\nPhạm Anh Tú\nBan Dự án"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện hợp đồng đối tác trước khi trình",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-004"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "trước thứ Tư"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-005",
+    "description": "Accepted #5 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-005",
+        "conversationId": "conv-acc-005",
+        "subject": "Client escalation — response needed",
+        "from": {
+          "emailAddress": {
+            "address": "daniel.kim@contoso.example",
+            "name": "Daniel Kim"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Casey,</p><p>One of our key clients raised a concern during today's check-in call about the delivery timeline for their project.</p><p>Could you please send a written response to the client before Thursday?</p><p>I'd rather we get ahead of this before it becomes a bigger issue.</p><p>Best regards,<br>Daniel Kim<br><span style='color:#666'>Client Success</span></p></div>"
+        },
+        "bodyPreview": "One of our key clients raised a concern during today's check-in call about the delivery timeline for",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-005"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Thursday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-006",
+    "description": "Accepted #6 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-006",
+        "conversationId": "conv-acc-006",
+        "subject": "Q2 budget sheet — need your review",
+        "from": {
+          "emailAddress": {
+            "address": "grace.osei@fabrikam.example",
+            "name": "Grace Osei"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Riley,\n\nHope you're doing well. As we discussed in yesterday's sync, we still need the Q2 budget sheet finalized before we can present it to leadership next week.\n\nCould you please review the budget sheet and send back your comments before Friday?\n\nThe finance team is waiting on this to close out the quarter. Let me know if you run into any blockers.\n\nBest regards,\nGrace Osei\nLegal"
+        },
+        "bodyPreview": "Hope you're doing well. As we discussed in yesterday's sync, we still need the Q2 budget sheet final",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-006"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Friday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-007",
+    "description": "Accepted #7 (vi, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-007",
+        "conversationId": "conv-acc-007",
+        "subject": "Cần tài liệu thiết kế trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "tram.le@dtsolutions.example",
+            "name": "Lê Bảo Trâm"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Chào An,</p><p>Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện tài liệu thiết kế trước khi trình bày với ban lãnh đạo vào tuần sau.</p><p>Bạn giúp mình xem lại tài liệu thiết kế và phản hồi trước thứ Hai nhé.</p><p>Đội tài chính đang chờ phần này để chốt số liệu quý.</p><p>Best regards,<br>Lê Bảo Trâm<br><span style='color:#666'>Phòng Kế toán</span></p></div>"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện tài liệu thiết kế trước khi trìn",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-007"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "thứ Hai"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-008",
+    "description": "Accepted #8 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-008",
+        "conversationId": "conv-acc-008",
+        "subject": "Reminder: contract renewal paperwork",
+        "from": {
+          "emailAddress": {
+            "address": "nadia.farouk@contoso.example",
+            "name": "Nadia Farouk"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Taylor,\n\nFollowing up on our conversation last week about the vendor contract renewal. Legal flagged a couple of clauses that still need sign-off from your side.\n\nCould you please confirm the updated terms before Tuesday?\n\nOnce we have your confirmation, we can move forward with signing.\n\nBest regards,\nNadia Farouk\nMarketing"
+        },
+        "bodyPreview": "Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-008"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Tuesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-009",
+    "description": "Accepted #9 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-009",
+        "conversationId": "conv-acc-009",
+        "subject": "Please review the onboarding checklist",
+        "from": {
+          "emailAddress": {
+            "address": "jordan.lee@northwind.example",
+            "name": "Jordan Lee"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Jamie,</p><p>We have a new hire starting next month and want to make sure the onboarding checklist is accurate before we send it out.</p><p>Please review the checklist and reply before Wednesday with any changes.</p><p>Thanks so much for helping us get this right.</p><p>Best regards,<br>Jordan Lee<br><span style='color:#666'>Finance Operations</span></p></div>"
+        },
+        "bodyPreview": "We have a new hire starting next month and want to make sure the onboarding checklist is accurate be",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-009"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Wednesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-010",
+    "description": "Accepted #10 (vi, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-010",
+        "conversationId": "conv-acc-010",
+        "subject": "Cần bảng khảo sát khách hàng trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "khoi.tran@vietsoft.example",
+            "name": "Trần Minh Khôi"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Chào Duy,\n\nNhư đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện bảng khảo sát khách hàng trước khi trình bày với ban lãnh đạo vào tuần sau.\n\nBạn giúp mình xem lại bảng khảo sát khách hàng và phản hồi trước thứ Năm nhé.\n\nĐội tài chính đang chờ phần này để chốt số liệu quý.\n\nBest regards,\nTrần Minh Khôi\nPhòng Kỹ thuật"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện bảng khảo sát khách hàng trước k",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-010"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "trước thứ Năm"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-011",
+    "description": "Accepted #11 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-011",
+        "conversationId": "conv-acc-011",
+        "subject": "Q3 budget sheet — need your review",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Casey,</p><p>Hope you're doing well. As we discussed in yesterday's sync, we still need the Q3 budget sheet finalized before we can present it to leadership next week.</p><p>Could you please review the budget sheet and send back your comments before Friday?</p><p>The finance team is waiting on this to close out the quarter. Let me know if you run into any blockers.</p><p>Best regards,<br>Marcus Webb<br><span style='color:#666'>Engineering</span></p></div>"
+        },
+        "bodyPreview": "Hope you're doing well. As we discussed in yesterday's sync, we still need the Q3 budget sheet final",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-011"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Friday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-012",
+    "description": "Accepted #12 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-012",
+        "conversationId": "conv-acc-012",
+        "subject": "Action needed: the vendor invoice for Project Phoenix",
+        "from": {
+          "emailAddress": {
+            "address": "sofia.alvarez@northwind.example",
+            "name": "Sofia Alvarez"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Riley,\n\nThanks for the update in this week's standup. The client is asking for a status update on the vendor invoice, and we want to make sure we're aligned before the review call.\n\nPlease submit the vendor invoice before Monday so I can compile everything for the client.\n\nHappy to hop on a quick call if anything is unclear.\n\nBest regards,\nSofia Alvarez\nPeople Operations"
+        },
+        "bodyPreview": "Thanks for the update in this week's standup. The client is asking for a status update on the vendor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-012"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Monday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-013",
+    "description": "Accepted #13 (vi, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-013",
+        "conversationId": "conv-acc-013",
+        "subject": "Cần báo cáo tài chính trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "vy.nguyen@vietsoft.example",
+            "name": "Nguyễn Thảo Vy"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Chào An,</p><p>Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện báo cáo tài chính trước khi trình bày với ban lãnh đạo vào tuần sau.</p><p>Bạn giúp mình xem lại báo cáo tài chính và phản hồi trước thứ Ba nhé.</p><p>Đội tài chính đang chờ phần này để chốt số liệu quý.</p><p>Best regards,<br>Nguyễn Thảo Vy<br><span style='color:#666'>Phòng Nhân sự</span></p></div>"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện báo cáo tài chính trước khi trìn",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-013"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "thứ Ba"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-014",
+    "description": "Accepted #14 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-014",
+        "conversationId": "conv-acc-014",
+        "subject": "Please review the onboarding checklist",
+        "from": {
+          "emailAddress": {
+            "address": "grace.osei@fabrikam.example",
+            "name": "Grace Osei"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Taylor,\n\nWe have a new hire starting next month and want to make sure the onboarding checklist is accurate before we send it out.\n\nPlease review the checklist and reply before Wednesday with any changes.\n\nThanks so much for helping us get this right.\n\nBest regards,\nGrace Osei\nLegal"
+        },
+        "bodyPreview": "We have a new hire starting next month and want to make sure the onboarding checklist is accurate be",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-014"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Wednesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-015",
+    "description": "Accepted #15 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-015",
+        "conversationId": "conv-acc-015",
+        "subject": "Client escalation — response needed",
+        "from": {
+          "emailAddress": {
+            "address": "ethan.brooks@northwind.example",
+            "name": "Ethan Brooks"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Jamie,</p><p>One of our key clients raised a concern during today's check-in call about the delivery timeline for their project.</p><p>Could you please send a written response to the client before Thursday?</p><p>I'd rather we get ahead of this before it becomes a bigger issue.</p><p>Best regards,<br>Ethan Brooks<br><span style='color:#666'>IT Support</span></p></div>"
+        },
+        "bodyPreview": "One of our key clients raised a concern during today's check-in call about the delivery timeline for",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-015"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Thursday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-016",
+    "description": "Accepted #16 (vi, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-016",
+        "conversationId": "conv-acc-016",
+        "subject": "Cần hợp đồng đối tác trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "tu.pham@dtsolutions.example",
+            "name": "Phạm Anh Tú"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Chào Duy,\n\nNhư đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện hợp đồng đối tác trước khi trình bày với ban lãnh đạo vào tuần sau.\n\nBạn giúp mình xem lại hợp đồng đối tác và phản hồi trước thứ Sáu nhé.\n\nĐội tài chính đang chờ phần này để chốt số liệu quý.\n\nBest regards,\nPhạm Anh Tú\nBan Dự án"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện hợp đồng đối tác trước khi trình",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-016"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "trước thứ Sáu"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-017",
+    "description": "Accepted #17 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-017",
+        "conversationId": "conv-acc-017",
+        "subject": "Action needed: the design doc for Project Phoenix",
+        "from": {
+          "emailAddress": {
+            "address": "jordan.lee@northwind.example",
+            "name": "Jordan Lee"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Casey,</p><p>Thanks for the update in this week's standup. The client is asking for a status update on the design doc, and we want to make sure we're aligned before the review call.</p><p>Please submit the design doc before Monday so I can compile everything for the client.</p><p>Happy to hop on a quick call if anything is unclear.</p><p>Best regards,<br>Jordan Lee<br><span style='color:#666'>Finance Operations</span></p></div>"
+        },
+        "bodyPreview": "Thanks for the update in this week's standup. The client is asking for a status update on the design",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-017"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Monday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-018",
+    "description": "Accepted #18 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-018",
+        "conversationId": "conv-acc-018",
+        "subject": "Reminder: contract renewal paperwork",
+        "from": {
+          "emailAddress": {
+            "address": "priya.nair@contoso.example",
+            "name": "Priya Nair"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Riley,\n\nFollowing up on our conversation last week about the vendor contract renewal. Legal flagged a couple of clauses that still need sign-off from your side.\n\nCould you please confirm the updated terms before Tuesday?\n\nOnce we have your confirmation, we can move forward with signing.\n\nBest regards,\nPriya Nair\nProduct Management"
+        },
+        "bodyPreview": "Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-018"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Tuesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-019",
+    "description": "Accepted #19 (vi, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-019",
+        "conversationId": "conv-acc-019",
+        "subject": "Cần tài liệu thiết kế trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "tram.le@dtsolutions.example",
+            "name": "Lê Bảo Trâm"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Chào An,</p><p>Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện tài liệu thiết kế trước khi trình bày với ban lãnh đạo vào tuần sau.</p><p>Bạn giúp mình xem lại tài liệu thiết kế và phản hồi trước thứ Tư nhé.</p><p>Đội tài chính đang chờ phần này để chốt số liệu quý.</p><p>Best regards,<br>Lê Bảo Trâm<br><span style='color:#666'>Phòng Kế toán</span></p></div>"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện tài liệu thiết kế trước khi trìn",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-019"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "thứ Tư"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-020",
+    "description": "Accepted #20 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-020",
+        "conversationId": "conv-acc-020",
+        "subject": "Client escalation — response needed",
+        "from": {
+          "emailAddress": {
+            "address": "sofia.alvarez@northwind.example",
+            "name": "Sofia Alvarez"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Taylor,\n\nOne of our key clients raised a concern during today's check-in call about the delivery timeline for their project.\n\nCould you please send a written response to the client before Thursday?\n\nI'd rather we get ahead of this before it becomes a bigger issue.\n\nBest regards,\nSofia Alvarez\nPeople Operations"
+        },
+        "bodyPreview": "One of our key clients raised a concern during today's check-in call about the delivery timeline for",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-020"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Thursday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-021",
+    "description": "Accepted #21 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-021",
+        "conversationId": "conv-acc-021",
+        "subject": "Q1 budget sheet — need your review",
+        "from": {
+          "emailAddress": {
+            "address": "daniel.kim@contoso.example",
+            "name": "Daniel Kim"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Jamie,</p><p>Hope you're doing well. As we discussed in yesterday's sync, we still need the Q1 budget sheet finalized before we can present it to leadership next week.</p><p>Could you please review the budget sheet and send back your comments before Friday?</p><p>The finance team is waiting on this to close out the quarter. Let me know if you run into any blockers.</p><p>Best regards,<br>Daniel Kim<br><span style='color:#666'>Client Success</span></p></div>"
+        },
+        "bodyPreview": "Hope you're doing well. As we discussed in yesterday's sync, we still need the Q1 budget sheet final",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-021"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Friday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-022",
+    "description": "Accepted #22 (vi, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-022",
+        "conversationId": "conv-acc-022",
+        "subject": "Cần bảng khảo sát khách hàng trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "khoi.tran@vietsoft.example",
+            "name": "Trần Minh Khôi"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Chào Duy,\n\nNhư đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện bảng khảo sát khách hàng trước khi trình bày với ban lãnh đạo vào tuần sau.\n\nBạn giúp mình xem lại bảng khảo sát khách hàng và phản hồi trước thứ Hai nhé.\n\nĐội tài chính đang chờ phần này để chốt số liệu quý.\n\nBest regards,\nTrần Minh Khôi\nPhòng Kỹ thuật"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện bảng khảo sát khách hàng trước k",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-022"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "trước thứ Hai"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-023",
+    "description": "Accepted #23 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-023",
+        "conversationId": "conv-acc-023",
+        "subject": "Reminder: contract renewal paperwork",
+        "from": {
+          "emailAddress": {
+            "address": "ethan.brooks@northwind.example",
+            "name": "Ethan Brooks"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Casey,</p><p>Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple of clauses that still need sign-off from your side.</p><p>Could you please confirm the updated terms before Tuesday?</p><p>Once we have your confirmation, we can move forward with signing.</p><p>Best regards,<br>Ethan Brooks<br><span style='color:#666'>IT Support</span></p></div>"
+        },
+        "bodyPreview": "Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-023"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Tuesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-024",
+    "description": "Accepted #24 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-024",
+        "conversationId": "conv-acc-024",
+        "subject": "Please review the onboarding checklist",
+        "from": {
+          "emailAddress": {
+            "address": "nadia.farouk@contoso.example",
+            "name": "Nadia Farouk"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Riley,\n\nWe have a new hire starting next month and want to make sure the onboarding checklist is accurate before we send it out.\n\nPlease review the checklist and reply before Wednesday with any changes.\n\nThanks so much for helping us get this right.\n\nBest regards,\nNadia Farouk\nMarketing"
+        },
+        "bodyPreview": "We have a new hire starting next month and want to make sure the onboarding checklist is accurate be",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-024"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Wednesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-025",
+    "description": "Accepted #25 (vi, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-025",
+        "conversationId": "conv-acc-025",
+        "subject": "Cần báo cáo tài chính trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "vy.nguyen@vietsoft.example",
+            "name": "Nguyễn Thảo Vy"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Chào An,</p><p>Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện báo cáo tài chính trước khi trình bày với ban lãnh đạo vào tuần sau.</p><p>Bạn giúp mình xem lại báo cáo tài chính và phản hồi trước thứ Năm nhé.</p><p>Đội tài chính đang chờ phần này để chốt số liệu quý.</p><p>Best regards,<br>Nguyễn Thảo Vy<br><span style='color:#666'>Phòng Nhân sự</span></p></div>"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện báo cáo tài chính trước khi trìn",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-025"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "thứ Năm"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-026",
+    "description": "Accepted #26 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-026",
+        "conversationId": "conv-acc-026",
+        "subject": "Q2 budget sheet — need your review",
+        "from": {
+          "emailAddress": {
+            "address": "priya.nair@contoso.example",
+            "name": "Priya Nair"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Taylor,\n\nHope you're doing well. As we discussed in yesterday's sync, we still need the Q2 budget sheet finalized before we can present it to leadership next week.\n\nCould you please review the budget sheet and send back your comments before Friday?\n\nThe finance team is waiting on this to close out the quarter. Let me know if you run into any blockers.\n\nBest regards,\nPriya Nair\nProduct Management"
+        },
+        "bodyPreview": "Hope you're doing well. As we discussed in yesterday's sync, we still need the Q2 budget sheet final",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-026"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Friday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-027",
+    "description": "Accepted #27 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-027",
+        "conversationId": "conv-acc-027",
+        "subject": "Action needed: the API documentation for Project Phoenix",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Jamie,</p><p>Thanks for the update in this week's standup. The client is asking for a status update on the API documentation, and we want to make sure we're aligned before the review call.</p><p>Please submit the API documentation before Monday so I can compile everything for the client.</p><p>Happy to hop on a quick call if anything is unclear.</p><p>Best regards,<br>Marcus Webb<br><span style='color:#666'>Engineering</span></p></div>"
+        },
+        "bodyPreview": "Thanks for the update in this week's standup. The client is asking for a status update on the API do",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-027"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Monday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-028",
+    "description": "Accepted #28 (vi, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-028",
+        "conversationId": "conv-acc-028",
+        "subject": "Cần hợp đồng đối tác trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "tu.pham@dtsolutions.example",
+            "name": "Phạm Anh Tú"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Chào Duy,\n\nNhư đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện hợp đồng đối tác trước khi trình bày với ban lãnh đạo vào tuần sau.\n\nBạn giúp mình xem lại hợp đồng đối tác và phản hồi trước thứ Ba nhé.\n\nĐội tài chính đang chờ phần này để chốt số liệu quý.\n\nBest regards,\nPhạm Anh Tú\nBan Dự án"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện hợp đồng đối tác trước khi trình",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-028"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "trước thứ Ba"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-029",
+    "description": "Accepted #29 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-029",
+        "conversationId": "conv-acc-029",
+        "subject": "Please review the onboarding checklist",
+        "from": {
+          "emailAddress": {
+            "address": "daniel.kim@contoso.example",
+            "name": "Daniel Kim"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Casey,</p><p>We have a new hire starting next month and want to make sure the onboarding checklist is accurate before we send it out.</p><p>Please review the checklist and reply before Wednesday with any changes.</p><p>Thanks so much for helping us get this right.</p><p>Best regards,<br>Daniel Kim<br><span style='color:#666'>Client Success</span></p></div>"
+        },
+        "bodyPreview": "We have a new hire starting next month and want to make sure the onboarding checklist is accurate be",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-029"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Wednesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-030",
+    "description": "Accepted #30 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-030",
+        "conversationId": "conv-acc-030",
+        "subject": "Client escalation — response needed",
+        "from": {
+          "emailAddress": {
+            "address": "grace.osei@fabrikam.example",
+            "name": "Grace Osei"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Riley,\n\nOne of our key clients raised a concern during today's check-in call about the delivery timeline for their project.\n\nCould you please send a written response to the client before Thursday?\n\nI'd rather we get ahead of this before it becomes a bigger issue.\n\nBest regards,\nGrace Osei\nLegal"
+        },
+        "bodyPreview": "One of our key clients raised a concern during today's check-in call about the delivery timeline for",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-030"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Thursday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-031",
+    "description": "Accepted #31 (vi, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-031",
+        "conversationId": "conv-acc-031",
+        "subject": "Cần tài liệu thiết kế trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "tram.le@dtsolutions.example",
+            "name": "Lê Bảo Trâm"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Chào An,</p><p>Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện tài liệu thiết kế trước khi trình bày với ban lãnh đạo vào tuần sau.</p><p>Bạn giúp mình xem lại tài liệu thiết kế và phản hồi trước thứ Sáu nhé.</p><p>Đội tài chính đang chờ phần này để chốt số liệu quý.</p><p>Best regards,<br>Lê Bảo Trâm<br><span style='color:#666'>Phòng Kế toán</span></p></div>"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện tài liệu thiết kế trước khi trìn",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-031"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "thứ Sáu"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-032",
+    "description": "Accepted #32 (en, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-032",
+        "conversationId": "conv-acc-032",
+        "subject": "Action needed: the vendor invoice for Project Phoenix",
+        "from": {
+          "emailAddress": {
+            "address": "nadia.farouk@contoso.example",
+            "name": "Nadia Farouk"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi Taylor,\n\nThanks for the update in this week's standup. The client is asking for a status update on the vendor invoice, and we want to make sure we're aligned before the review call.\n\nPlease submit the vendor invoice before Monday so I can compile everything for the client.\n\nHappy to hop on a quick call if anything is unclear.\n\nBest regards,\nNadia Farouk\nMarketing"
+        },
+        "bodyPreview": "Thanks for the update in this week's standup. The client is asking for a status update on the vendor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-032"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "before Monday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-033",
+    "description": "Accepted #33 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-033",
+        "conversationId": "conv-acc-033",
+        "subject": "Reminder: contract renewal paperwork",
+        "from": {
+          "emailAddress": {
+            "address": "jordan.lee@northwind.example",
+            "name": "Jordan Lee"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Jamie,</p><p>Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple of clauses that still need sign-off from your side.</p><p>Could you please confirm the updated terms before Tuesday?</p><p>Once we have your confirmation, we can move forward with signing.</p><p>Best regards,<br>Jordan Lee<br><span style='color:#666'>Finance Operations</span></p></div>"
+        },
+        "bodyPreview": "Following up on our conversation last week about the vendor contract renewal. Legal flagged a couple",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-033"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Tuesday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-034",
+    "description": "Accepted #34 (vi, text): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-034",
+        "conversationId": "conv-acc-034",
+        "subject": "Cần bảng khảo sát khách hàng trước cuộc họp tuần sau",
+        "from": {
+          "emailAddress": {
+            "address": "khoi.tran@vietsoft.example",
+            "name": "Trần Minh Khôi"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Chào Duy,\n\nNhư đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện bảng khảo sát khách hàng trước khi trình bày với ban lãnh đạo vào tuần sau.\n\nBạn giúp mình xem lại bảng khảo sát khách hàng và phản hồi trước thứ Tư nhé.\n\nĐội tài chính đang chờ phần này để chốt số liệu quý.\n\nBest regards,\nTrần Minh Khôi\nPhòng Kỹ thuật"
+        },
+        "bodyPreview": "Như đã trao đổi trong buổi họp hôm qua, đội mình vẫn cần hoàn thiện bảng khảo sát khách hàng trước k",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-034"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "trước thứ Tư"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-035",
+    "description": "Accepted #35 (en, html): mail thật nhiều đoạn có chào hỏi + chữ ký, chứa action+deadline -> must_not_miss",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "acc-035",
+        "conversationId": "conv-acc-035",
+        "subject": "Client escalation — response needed",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<div><p>Hi Casey,</p><p>One of our key clients raised a concern during today's check-in call about the delivery timeline for their project.</p><p>Could you please send a written response to the client before Thursday?</p><p>I'd rather we get ahead of this before it becomes a bigger issue.</p><p>Best regards,<br>Marcus Webb<br><span style='color:#666'>Engineering</span></p></div>"
+        },
+        "bodyPreview": "One of our key clients raised a concern during today's check-in call about the delivery timeline for",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/acc-035"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Thursday"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-036",
+    "description": "Rejected #1: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-036",
+        "conversationId": "conv-rej-036",
+        "subject": "Northwind Weekly Digest — Issue 1",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 1",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-036"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-037",
+    "description": "Rejected #2: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-037",
+        "conversationId": "conv-rej-037",
+        "subject": "What's New This Month — February",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — February",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-037"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-038",
+    "description": "Rejected #3: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-038",
+        "conversationId": "conv-rej-038",
+        "subject": "Community Newsletter — March Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — March Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-038"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-039",
+    "description": "Rejected #4: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-039",
+        "conversationId": "conv-rej-039",
+        "subject": "Northwind Weekly Digest — Issue 4",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 4",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-039"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-040",
+    "description": "Rejected #5: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-040",
+        "conversationId": "conv-rej-040",
+        "subject": "What's New This Month — January",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — January",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-040"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-041",
+    "description": "Rejected #6: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-041",
+        "conversationId": "conv-rej-041",
+        "subject": "Community Newsletter — February Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — February Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-041"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-042",
+    "description": "Rejected #7: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-042",
+        "conversationId": "conv-rej-042",
+        "subject": "Northwind Weekly Digest — Issue 7",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 7",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-042"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-043",
+    "description": "Rejected #8: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-043",
+        "conversationId": "conv-rej-043",
+        "subject": "What's New This Month — April",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — April",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-043"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-044",
+    "description": "Rejected #9: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-044",
+        "conversationId": "conv-rej-044",
+        "subject": "Community Newsletter — January Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — January Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-044"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-045",
+    "description": "Rejected #10: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-045",
+        "conversationId": "conv-rej-045",
+        "subject": "Northwind Weekly Digest — Issue 10",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 10",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-045"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-046",
+    "description": "Rejected #11: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-046",
+        "conversationId": "conv-rej-046",
+        "subject": "What's New This Month — March",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — March",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-046"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-047",
+    "description": "Rejected #12: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-047",
+        "conversationId": "conv-rej-047",
+        "subject": "Community Newsletter — April Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — April Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-047"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-048",
+    "description": "Rejected #13: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-048",
+        "conversationId": "conv-rej-048",
+        "subject": "Northwind Weekly Digest — Issue 13",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 13",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-048"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-049",
+    "description": "Rejected #14: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-049",
+        "conversationId": "conv-rej-049",
+        "subject": "What's New This Month — February",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — February",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-049"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-050",
+    "description": "Rejected #15: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-050",
+        "conversationId": "conv-rej-050",
+        "subject": "Community Newsletter — March Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — March Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-050"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-051",
+    "description": "Rejected #16: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-051",
+        "conversationId": "conv-rej-051",
+        "subject": "Northwind Weekly Digest — Issue 16",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 16",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-051"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-052",
+    "description": "Rejected #17: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-052",
+        "conversationId": "conv-rej-052",
+        "subject": "What's New This Month — January",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — January",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-052"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-053",
+    "description": "Rejected #18: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-053",
+        "conversationId": "conv-rej-053",
+        "subject": "Community Newsletter — February Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — February Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-053"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-054",
+    "description": "Rejected #19: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-054",
+        "conversationId": "conv-rej-054",
+        "subject": "Northwind Weekly Digest — Issue 19",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 19",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-054"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-055",
+    "description": "Rejected #20: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-055",
+        "conversationId": "conv-rej-055",
+        "subject": "What's New This Month — April",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — April",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-055"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-056",
+    "description": "Rejected #21: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-056",
+        "conversationId": "conv-rej-056",
+        "subject": "Community Newsletter — January Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — January Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-056"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-057",
+    "description": "Rejected #22: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-057",
+        "conversationId": "conv-rej-057",
+        "subject": "Northwind Weekly Digest — Issue 22",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 22",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-057"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-058",
+    "description": "Rejected #23: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-058",
+        "conversationId": "conv-rej-058",
+        "subject": "What's New This Month — March",
+        "from": {
+          "emailAddress": {
+            "address": "digest@updates.contoso.example",
+            "name": "Contoso Product Updates"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Here's your monthly digest of product updates and announcements.</p><ul><li>New dashboard widgets</li><li>Faster export times</li><li>Bug fixes and improvements</li></ul><p style='font-size:11px;color:#888'>This is an automated digest. Unsubscribe anytime from your notification settings.</p>"
+        },
+        "bodyPreview": "What's New This Month — March",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-058"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-059",
+    "description": "Rejected #24: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-059",
+        "conversationId": "conv-rej-059",
+        "subject": "Community Newsletter — April Edition",
+        "from": {
+          "emailAddress": {
+            "address": "newsletter@community.fabrikam.example",
+            "name": "Fabrikam Community"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<p>Read the latest community digest curated by our newsletter team.</p><p>This month we're featuring member spotlights, upcoming webinars, and a roundup of forum discussions.</p><p style='font-size:11px;color:#888'>You are receiving this because you subscribed. <a href='#'>Unsubscribe here</a>.</p>"
+        },
+        "bodyPreview": "Community Newsletter — April Edition",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-059"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-060",
+    "description": "Rejected #25: newsletter HTML thật nhiều section (heading/list/footer unsubscribe), đã đọc -> filter rejected",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "rej-060",
+        "conversationId": "conv-rej-060",
+        "subject": "Northwind Weekly Digest — Issue 25",
+        "from": {
+          "emailAddress": {
+            "address": "no-reply@newsletter.northwind.example",
+            "name": "Northwind Weekly"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<h2>This Week's Highlights</h2><p>Welcome back to Northwind Weekly! Here's what's new across the company this week.</p><h3>Product Updates</h3><p>Our engineering team shipped several performance improvements this sprint.</p><h3>Upcoming Events</h3><p>Join us for the monthly town hall streaming live on the company portal.</p><p style='font-size:11px;color:#888'>You are receiving this digest because you subscribed to company updates. <a href='#'>Unsubscribe</a> from this newsletter at any time.</p>"
+        },
+        "bodyPreview": "Northwind Weekly Digest — Issue 25",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/rej-060"
+      }
+    },
+    "expected": {
+      "filter": {
+        "status": "rejected"
+      }
+    }
+  },
+  {
+    "id": "OTL-061",
+    "description": "is_self #1: from khớp provider_user_id -> is_self=True",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-061",
+        "conversationId": "conv-self-061",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "Me@Example.EDU",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-061"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": true
+      }
+    }
+  },
+  {
+    "id": "OTL-062",
+    "description": "is_self #2: from khác provider_user_id -> is_self=False",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-062",
+        "conversationId": "conv-self-062",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "other1@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-062"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": false
+      }
+    }
+  },
+  {
+    "id": "OTL-063",
+    "description": "is_self #3: from khớp provider_user_id -> is_self=True",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-063",
+        "conversationId": "conv-self-063",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "Me@Example.EDU",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-063"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": true
+      }
+    }
+  },
+  {
+    "id": "OTL-064",
+    "description": "is_self #4: from khác provider_user_id -> is_self=False",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-064",
+        "conversationId": "conv-self-064",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "other3@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-064"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": false
+      }
+    }
+  },
+  {
+    "id": "OTL-065",
+    "description": "is_self #5: from khớp provider_user_id -> is_self=True",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-065",
+        "conversationId": "conv-self-065",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "Me@Example.EDU",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-065"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": true
+      }
+    }
+  },
+  {
+    "id": "OTL-066",
+    "description": "is_self #6: from khác provider_user_id -> is_self=False",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-066",
+        "conversationId": "conv-self-066",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "other5@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-066"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": false
+      }
+    }
+  },
+  {
+    "id": "OTL-067",
+    "description": "is_self #7: from khớp provider_user_id -> is_self=True",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-067",
+        "conversationId": "conv-self-067",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "Me@Example.EDU",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-067"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": true
+      }
+    }
+  },
+  {
+    "id": "OTL-068",
+    "description": "is_self #8: from khác provider_user_id -> is_self=False",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-068",
+        "conversationId": "conv-self-068",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "other7@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-068"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": false
+      }
+    }
+  },
+  {
+    "id": "OTL-069",
+    "description": "is_self #9: from khớp provider_user_id -> is_self=True",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-069",
+        "conversationId": "conv-self-069",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "Me@Example.EDU",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-069"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": true
+      }
+    }
+  },
+  {
+    "id": "OTL-070",
+    "description": "is_self #10: from khác provider_user_id -> is_self=False",
+    "input": {
+      "provider_user_id": "me@example.edu",
+      "raw_item": {
+        "id": "self-070",
+        "conversationId": "conv-self-070",
+        "subject": "Reminder to self: project tracking",
+        "from": {
+          "emailAddress": {
+            "address": "other9@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi team,\n\nJust leaving a quick reminder note here for my own tracking on this project.\n\nWill follow up after the weekend.\n\nBest regards,\nMe\nProject Lead"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/self-070"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "is_self": false
+      }
+    }
+  },
+  {
+    "id": "OTL-071",
+    "description": "sent_at #1: receivedDateTime hợp lệ -> resolved=True",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-071",
+        "conversationId": "conv-ts-071",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-071"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": true
+      }
+    }
+  },
+  {
+    "id": "OTL-072",
+    "description": "sent_at #2: receivedDateTime thiếu/lỗi -> resolved=False",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-072",
+        "conversationId": "conv-ts-072",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-072"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": false
+      }
+    }
+  },
+  {
+    "id": "OTL-073",
+    "description": "sent_at #3: receivedDateTime thiếu/lỗi -> resolved=False",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-073",
+        "conversationId": "conv-ts-073",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "not-a-date",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-073"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": false
+      }
+    }
+  },
+  {
+    "id": "OTL-074",
+    "description": "sent_at #4: receivedDateTime hợp lệ -> resolved=True",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-074",
+        "conversationId": "conv-ts-074",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-074"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": true
+      }
+    }
+  },
+  {
+    "id": "OTL-075",
+    "description": "sent_at #5: receivedDateTime thiếu/lỗi -> resolved=False",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-075",
+        "conversationId": "conv-ts-075",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": null,
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-075"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": false
+      }
+    }
+  },
+  {
+    "id": "OTL-076",
+    "description": "sent_at #6: receivedDateTime thiếu/lỗi -> resolved=False",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-076",
+        "conversationId": "conv-ts-076",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-076"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": false
+      }
+    }
+  },
+  {
+    "id": "OTL-077",
+    "description": "sent_at #7: receivedDateTime hợp lệ -> resolved=True",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-077",
+        "conversationId": "conv-ts-077",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-077"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": true
+      }
+    }
+  },
+  {
+    "id": "OTL-078",
+    "description": "sent_at #8: receivedDateTime thiếu/lỗi -> resolved=False",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-078",
+        "conversationId": "conv-ts-078",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-13-40T99:99:99Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-078"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": false
+      }
+    }
+  },
+  {
+    "id": "OTL-079",
+    "description": "sent_at #9: receivedDateTime thiếu/lỗi -> resolved=False",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-079",
+        "conversationId": "conv-ts-079",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": null,
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-079"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": false
+      }
+    }
+  },
+  {
+    "id": "OTL-080",
+    "description": "sent_at #10: receivedDateTime hợp lệ -> resolved=True",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "ts-080",
+        "conversationId": "conv-ts-080",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Hi there,\n\nSharing a quick note about the office schedule change for next month.\n\nLet me know if you have questions.\n\nBest regards,\nOps Team\nOperations"
+        },
+        "bodyPreview": "Hello.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/ts-080"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "sent_at_resolved": true
+      }
+    }
+  },
+  {
+    "id": "OTL-081",
+    "description": "HTML strip #1: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-081",
+        "conversationId": "conv-html-081",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.x{color:red;font-family:Arial}</style><div><p>Hi,</p><p>Following up from our sync earlier — please reply before Monday with your availability.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Following up from our sync earlier — please reply before Monday with your availa",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-081"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Following up from our sync earlier — please reply before Monday with your availability."
+        ],
+        "text_excludes": [
+          "color:red"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-082",
+    "description": "HTML strip #2: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-082",
+        "conversationId": "conv-html-082",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<script>trackOpen('outlook');</script><div><p>Hi,</p><p>Please review the attached draft and share feedback before Tuesday's call.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Please review the attached draft and share feedback before Tuesday's call.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-082"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Please review the attached draft and share feedback before Tuesday's call."
+        ],
+        "text_excludes": [
+          "trackOpen"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-083",
+    "description": "HTML strip #3: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-083",
+        "conversationId": "conv-html-083",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.y{}</style><script>reportRead();</script><div><p>Hi,</p><p>Team sync moved to Thursday this week, please confirm you can attend.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Team sync moved to Thursday this week, please confirm you can attend.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-083"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Team sync moved to Thursday this week, please confirm you can attend."
+        ],
+        "text_excludes": [
+          "reportRead"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-084",
+    "description": "HTML strip #4: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-084",
+        "conversationId": "conv-html-084",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.x{color:red;font-family:Arial}</style><div><p>Hi,</p><p>Following up from our sync earlier — please reply before Monday with your availability.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Following up from our sync earlier — please reply before Monday with your availa",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-084"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Following up from our sync earlier — please reply before Monday with your availability."
+        ],
+        "text_excludes": [
+          "color:red"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-085",
+    "description": "HTML strip #5: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-085",
+        "conversationId": "conv-html-085",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<script>trackOpen('outlook');</script><div><p>Hi,</p><p>Please review the attached draft and share feedback before Tuesday's call.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Please review the attached draft and share feedback before Tuesday's call.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-085"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Please review the attached draft and share feedback before Tuesday's call."
+        ],
+        "text_excludes": [
+          "trackOpen"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-086",
+    "description": "HTML strip #6: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-086",
+        "conversationId": "conv-html-086",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.y{}</style><script>reportRead();</script><div><p>Hi,</p><p>Team sync moved to Thursday this week, please confirm you can attend.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Team sync moved to Thursday this week, please confirm you can attend.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-086"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Team sync moved to Thursday this week, please confirm you can attend."
+        ],
+        "text_excludes": [
+          "reportRead"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-087",
+    "description": "HTML strip #7: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-087",
+        "conversationId": "conv-html-087",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.x{color:red;font-family:Arial}</style><div><p>Hi,</p><p>Following up from our sync earlier — please reply before Monday with your availability.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Following up from our sync earlier — please reply before Monday with your availa",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-087"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Following up from our sync earlier — please reply before Monday with your availability."
+        ],
+        "text_excludes": [
+          "color:red"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-088",
+    "description": "HTML strip #8: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-088",
+        "conversationId": "conv-html-088",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<script>trackOpen('outlook');</script><div><p>Hi,</p><p>Please review the attached draft and share feedback before Tuesday's call.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Please review the attached draft and share feedback before Tuesday's call.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-088"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Please review the attached draft and share feedback before Tuesday's call."
+        ],
+        "text_excludes": [
+          "trackOpen"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-089",
+    "description": "HTML strip #9: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-089",
+        "conversationId": "conv-html-089",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.y{}</style><script>reportRead();</script><div><p>Hi,</p><p>Team sync moved to Thursday this week, please confirm you can attend.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Team sync moved to Thursday this week, please confirm you can attend.",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-089"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Team sync moved to Thursday this week, please confirm you can attend."
+        ],
+        "text_excludes": [
+          "reportRead"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-090",
+    "description": "HTML strip #10: script/style bị loại khỏi text, giữ nguyên nội dung thật",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "html-090",
+        "conversationId": "conv-html-090",
+        "subject": "Update",
+        "from": {
+          "emailAddress": {
+            "address": "sender@example.edu",
+            "name": "Sender"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "html",
+          "content": "<style>.x{color:red;font-family:Arial}</style><div><p>Hi,</p><p>Following up from our sync earlier — please reply before Monday with your availability.</p><p>Thanks,<br>Ops Team</p></div>"
+        },
+        "bodyPreview": "Following up from our sync earlier — please reply before Monday with your availa",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": true,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/html-090"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Following up from our sync earlier — please reply before Monday with your availability."
+        ],
+        "text_excludes": [
+          "color:red"
+        ]
+      }
+    }
+  },
+  {
+    "id": "OTL-091",
+    "description": "Quoted reply #1: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-091",
+        "conversationId": "conv-quote-091",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Friday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Friday. Adding a couple mor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-091"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Friday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-092",
+    "description": "Quoted reply #2: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-092",
+        "conversationId": "conv-quote-092",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Monday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Monday. Adding a couple mor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-092"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Monday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-093",
+    "description": "Quoted reply #3: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-093",
+        "conversationId": "conv-quote-093",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Tuesday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Tuesday. Adding a couple mo",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-093"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Tuesday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-094",
+    "description": "Quoted reply #4: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-094",
+        "conversationId": "conv-quote-094",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Wednesday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Wednesday. Adding a couple ",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-094"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Wednesday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-095",
+    "description": "Quoted reply #5: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-095",
+        "conversationId": "conv-quote-095",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Thursday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Thursday. Adding a couple m",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-095"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Thursday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-096",
+    "description": "Quoted reply #6: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-096",
+        "conversationId": "conv-quote-096",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Friday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Friday. Adding a couple mor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-096"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Friday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-097",
+    "description": "Quoted reply #7: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-097",
+        "conversationId": "conv-quote-097",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Monday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Monday. Adding a couple mor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-097"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Monday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-098",
+    "description": "Quoted reply #8: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-098",
+        "conversationId": "conv-quote-098",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Tuesday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Tuesday. Adding a couple mo",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-098"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Tuesday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-099",
+    "description": "Quoted reply #9: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-099",
+        "conversationId": "conv-quote-099",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Wednesday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Wednesday. Adding a couple ",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-099"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Wednesday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-100",
+    "description": "Quoted reply #10: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-100",
+        "conversationId": "conv-quote-100",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Thursday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Thursday. Adding a couple m",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-100"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Thursday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-101",
+    "description": "Quoted reply #11: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-101",
+        "conversationId": "conv-quote-101",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Friday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Friday. Adding a couple mor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-101"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Friday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  },
+  {
+    "id": "OTL-102",
+    "description": "Quoted reply #12: mail trả lời có lịch sử quote bên dưới — text giữ nguyên cả phần quote",
+    "input": {
+      "provider_user_id": "student@example.edu",
+      "raw_item": {
+        "id": "quote-102",
+        "conversationId": "conv-quote-102",
+        "subject": "RE: Status update",
+        "from": {
+          "emailAddress": {
+            "address": "marcus.webb@fabrikam.example",
+            "name": "Marcus Webb"
+          }
+        },
+        "toRecipients": [
+          {
+            "emailAddress": {
+              "address": "student@example.edu"
+            }
+          }
+        ],
+        "ccRecipients": [],
+        "body": {
+          "contentType": "text",
+          "content": "Thanks for the context. I'll make sure to send the updated report before Monday. Adding a couple more people to this thread for visibility.\n\nFrom: Priya Nair\nSent: Monday, August 3, 2026 9:12 AM\nTo: Marcus Webb\nSubject: RE: Status update\n\nSure, sounds good. Let's touch base after the review."
+        },
+        "bodyPreview": "Thanks for the context. I'll make sure to send the updated report before Monday. Adding a couple mor",
+        "receivedDateTime": "2026-08-10T09:00:00Z",
+        "isRead": false,
+        "importance": "normal",
+        "hasAttachments": false,
+        "webLink": "https://outlook.office.com/mail/inbox/id/quote-102"
+      }
+    },
+    "expected": {
+      "normalized": {
+        "text_contains": [
+          "Monday",
+          "From: Priya Nair"
+        ]
+      },
+      "filter": {
+        "status": "accepted",
+        "must_not_miss": true
+      }
+    }
+  }
+]

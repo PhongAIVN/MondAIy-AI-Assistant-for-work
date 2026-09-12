@@ -1,0 +1,1444 @@
+[
+  {
+    "id": "VER-001",
+    "description": "time_expression 'thứ Sáu' khớp nguyên văn trong text #1 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi báo cáo, cần xong trước thứ Sáu nhé.",
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-002",
+    "description": "time_expression 'Monday' khớp nguyên văn trong text #2 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Monday.",
+      "time_expression": "Monday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Monday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-003",
+    "description": "time_expression 'Tuesday' khớp nguyên văn trong text #3 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Tuesday.",
+      "time_expression": "Tuesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Tuesday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-004",
+    "description": "time_expression 'thứ Tư' khớp nguyên văn trong text #4 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi bảng khảo sát, cần xong trước thứ Tư nhé.",
+      "time_expression": "thứ Tư",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Tư",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-005",
+    "description": "time_expression 'Thursday' khớp nguyên văn trong text #5 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the budget sheet before Thursday.",
+      "time_expression": "Thursday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Thursday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-006",
+    "description": "time_expression 'Saturday' khớp nguyên văn trong text #6 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the survey before Saturday.",
+      "time_expression": "Saturday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Saturday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-007",
+    "description": "time_expression 'Chủ nhật' khớp nguyên văn trong text #7 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi hóa đơn, cần xong trước Chủ nhật nhé.",
+      "time_expression": "Chủ nhật",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Chủ nhật",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-008",
+    "description": "time_expression 'Friday' khớp nguyên văn trong text #8 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Friday.",
+      "time_expression": "Friday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Friday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-009",
+    "description": "time_expression 'Monday' khớp nguyên văn trong text #9 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Monday.",
+      "time_expression": "Monday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Monday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-010",
+    "description": "time_expression 'thứ Ba' khớp nguyên văn trong text #10 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi biểu mẫu, cần xong trước thứ Ba nhé.",
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-011",
+    "description": "time_expression 'Wednesday' khớp nguyên văn trong text #11 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the budget sheet before Wednesday.",
+      "time_expression": "Wednesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Wednesday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-012",
+    "description": "time_expression 'Thursday' khớp nguyên văn trong text #12 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the survey before Thursday.",
+      "time_expression": "Thursday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Thursday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-013",
+    "description": "time_expression 'thứ Bảy' khớp nguyên văn trong text #13 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi đề xuất, cần xong trước thứ Bảy nhé.",
+      "time_expression": "thứ Bảy",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Bảy",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-014",
+    "description": "time_expression 'Sunday' khớp nguyên văn trong text #14 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Sunday.",
+      "time_expression": "Sunday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Sunday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-015",
+    "description": "time_expression 'Friday' khớp nguyên văn trong text #15 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Friday.",
+      "time_expression": "Friday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Friday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-016",
+    "description": "time_expression 'thứ Hai' khớp nguyên văn trong text #16 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi báo cáo, cần xong trước thứ Hai nhé.",
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-017",
+    "description": "time_expression 'Tuesday' khớp nguyên văn trong text #17 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the budget sheet before Tuesday.",
+      "time_expression": "Tuesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Tuesday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-018",
+    "description": "time_expression 'Wednesday' khớp nguyên văn trong text #18 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the survey before Wednesday.",
+      "time_expression": "Wednesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Wednesday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-019",
+    "description": "time_expression 'thứ Năm' khớp nguyên văn trong text #19 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi bảng khảo sát, cần xong trước thứ Năm nhé.",
+      "time_expression": "thứ Năm",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Năm",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-020",
+    "description": "time_expression 'Saturday' khớp nguyên văn trong text #20 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Saturday.",
+      "time_expression": "Saturday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Saturday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-021",
+    "description": "time_expression 'Sunday' khớp nguyên văn trong text #21 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Sunday.",
+      "time_expression": "Sunday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "Sunday",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-022",
+    "description": "time_expression 'thứ Sáu' khớp nguyên văn trong text #22 -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi hóa đơn, cần xong trước thứ Sáu nhé.",
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-023",
+    "description": "time_expression 'thứ Tư' KHÔNG có trong text #1 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi báo cáo, cần xong trước thứ Sáu nhé.",
+      "time_expression": "thứ Tư",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-024",
+    "description": "time_expression 'Thursday' KHÔNG có trong text #2 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Monday.",
+      "time_expression": "Thursday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-025",
+    "description": "time_expression 'Saturday' KHÔNG có trong text #3 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Tuesday.",
+      "time_expression": "Saturday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-026",
+    "description": "time_expression 'Chủ nhật' KHÔNG có trong text #4 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi bảng khảo sát, cần xong trước thứ Tư nhé.",
+      "time_expression": "Chủ nhật",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-027",
+    "description": "time_expression 'Friday' KHÔNG có trong text #5 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the budget sheet before Thursday.",
+      "time_expression": "Friday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-028",
+    "description": "time_expression 'Monday' KHÔNG có trong text #6 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the survey before Saturday.",
+      "time_expression": "Monday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-029",
+    "description": "time_expression 'thứ Ba' KHÔNG có trong text #7 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi hóa đơn, cần xong trước Chủ nhật nhé.",
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-030",
+    "description": "time_expression 'Wednesday' KHÔNG có trong text #8 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Friday.",
+      "time_expression": "Wednesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-031",
+    "description": "time_expression 'Thursday' KHÔNG có trong text #9 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Monday.",
+      "time_expression": "Thursday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-032",
+    "description": "time_expression 'thứ Bảy' KHÔNG có trong text #10 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi biểu mẫu, cần xong trước thứ Ba nhé.",
+      "time_expression": "thứ Bảy",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-033",
+    "description": "time_expression 'Sunday' KHÔNG có trong text #11 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the budget sheet before Wednesday.",
+      "time_expression": "Sunday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-034",
+    "description": "time_expression 'Friday' KHÔNG có trong text #12 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the survey before Thursday.",
+      "time_expression": "Friday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-035",
+    "description": "time_expression 'thứ Hai' KHÔNG có trong text #13 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi đề xuất, cần xong trước thứ Bảy nhé.",
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-036",
+    "description": "time_expression 'Tuesday' KHÔNG có trong text #14 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Sunday.",
+      "time_expression": "Tuesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-037",
+    "description": "time_expression 'Wednesday' KHÔNG có trong text #15 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Friday.",
+      "time_expression": "Wednesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-038",
+    "description": "time_expression 'thứ Năm' KHÔNG có trong text #16 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi báo cáo, cần xong trước thứ Hai nhé.",
+      "time_expression": "thứ Năm",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-039",
+    "description": "time_expression 'Saturday' KHÔNG có trong text #17 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the budget sheet before Tuesday.",
+      "time_expression": "Saturday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-040",
+    "description": "time_expression 'Sunday' KHÔNG có trong text #18 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the survey before Wednesday.",
+      "time_expression": "Sunday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-041",
+    "description": "time_expression 'thứ Sáu' KHÔNG có trong text #19 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi bảng khảo sát, cần xong trước thứ Năm nhé.",
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-042",
+    "description": "time_expression 'Monday' KHÔNG có trong text #20 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the invoice before Saturday.",
+      "time_expression": "Monday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-043",
+    "description": "time_expression 'Tuesday' KHÔNG có trong text #21 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Please submit the proposal before Sunday.",
+      "time_expression": "Tuesday",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-044",
+    "description": "time_expression 'thứ Tư' KHÔNG có trong text #22 (LLM bịa) -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Xin gửi hóa đơn, cần xong trước thứ Sáu nhé.",
+      "time_expression": "thứ Tư",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-045",
+    "description": "assignee_hint 'Minh' khớp text #1 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Minh sẽ phụ trách phần the report lần này.",
+      "time_expression": "",
+      "assignee_hint": "Minh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "Minh"
+    }
+  },
+  {
+    "id": "VER-046",
+    "description": "assignee_hint 'lananh' khớp text #2 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Lananh sẽ phụ trách phần hóa đơn lần này.",
+      "time_expression": "",
+      "assignee_hint": "lananh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "lananh"
+    }
+  },
+  {
+    "id": "VER-047",
+    "description": "assignee_hint 'HUY' khớp text #3 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Huy sẽ phụ trách phần the proposal lần này.",
+      "time_expression": "",
+      "assignee_hint": "HUY"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "HUY"
+    }
+  },
+  {
+    "id": "VER-048",
+    "description": "assignee_hint 'Khoa' khớp text #4 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Khoa sẽ phụ trách phần bảng khảo sát lần này.",
+      "time_expression": "",
+      "assignee_hint": "Khoa"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "Khoa"
+    }
+  },
+  {
+    "id": "VER-049",
+    "description": "assignee_hint 'namdo' khớp text #5 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Namdo sẽ phụ trách phần the budget sheet lần này.",
+      "time_expression": "",
+      "assignee_hint": "namdo"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "namdo"
+    }
+  },
+  {
+    "id": "VER-050",
+    "description": "assignee_hint 'TRANG' khớp text #6 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Trang sẽ phụ trách phần báo cáo lần này.",
+      "time_expression": "",
+      "assignee_hint": "TRANG"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "TRANG"
+    }
+  },
+  {
+    "id": "VER-051",
+    "description": "assignee_hint 'Quang' khớp text #7 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Quang sẽ phụ trách phần the report lần này.",
+      "time_expression": "",
+      "assignee_hint": "Quang"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "Quang"
+    }
+  },
+  {
+    "id": "VER-052",
+    "description": "assignee_hint 'linh' khớp text #8 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Linh sẽ phụ trách phần đề xuất lần này.",
+      "time_expression": "",
+      "assignee_hint": "linh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "linh"
+    }
+  },
+  {
+    "id": "VER-053",
+    "description": "assignee_hint 'PHONG' khớp text #9 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Phong sẽ phụ trách phần the proposal lần này.",
+      "time_expression": "",
+      "assignee_hint": "PHONG"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "PHONG"
+    }
+  },
+  {
+    "id": "VER-054",
+    "description": "assignee_hint 'Yen' khớp text #10 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Yen sẽ phụ trách phần biểu mẫu lần này.",
+      "time_expression": "",
+      "assignee_hint": "Yen"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "Yen"
+    }
+  },
+  {
+    "id": "VER-055",
+    "description": "assignee_hint 'duc' khớp text #11 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Duc sẽ phụ trách phần the budget sheet lần này.",
+      "time_expression": "",
+      "assignee_hint": "duc"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "duc"
+    }
+  },
+  {
+    "id": "VER-056",
+    "description": "assignee_hint 'CHI' khớp text #12 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Chi sẽ phụ trách phần hóa đơn lần này.",
+      "time_expression": "",
+      "assignee_hint": "CHI"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "CHI"
+    }
+  },
+  {
+    "id": "VER-057",
+    "description": "assignee_hint 'Minh' khớp text #13 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Minh sẽ phụ trách phần the report lần này.",
+      "time_expression": "",
+      "assignee_hint": "Minh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "Minh"
+    }
+  },
+  {
+    "id": "VER-058",
+    "description": "assignee_hint 'lananh' khớp text #14 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Lananh sẽ phụ trách phần bảng khảo sát lần này.",
+      "time_expression": "",
+      "assignee_hint": "lananh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "lananh"
+    }
+  },
+  {
+    "id": "VER-059",
+    "description": "assignee_hint 'HUY' khớp text #15 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Huy sẽ phụ trách phần the proposal lần này.",
+      "time_expression": "",
+      "assignee_hint": "HUY"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "HUY"
+    }
+  },
+  {
+    "id": "VER-060",
+    "description": "assignee_hint 'Khoa' khớp text #16 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Khoa sẽ phụ trách phần báo cáo lần này.",
+      "time_expression": "",
+      "assignee_hint": "Khoa"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "Khoa"
+    }
+  },
+  {
+    "id": "VER-061",
+    "description": "assignee_hint 'namdo' khớp text #17 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Namdo sẽ phụ trách phần the budget sheet lần này.",
+      "time_expression": "",
+      "assignee_hint": "namdo"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "namdo"
+    }
+  },
+  {
+    "id": "VER-062",
+    "description": "assignee_hint 'TRANG' khớp text #18 (biến thể hoa/thường) -> giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Trang sẽ phụ trách phần đề xuất lần này.",
+      "time_expression": "",
+      "assignee_hint": "TRANG"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": "TRANG"
+    }
+  },
+  {
+    "id": "VER-063",
+    "description": "assignee_hint 'Trang' KHÔNG có trong text #1 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Minh will handle the report this time.",
+      "time_expression": "",
+      "assignee_hint": "Trang"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-064",
+    "description": "assignee_hint 'Quang' KHÔNG có trong text #2 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Lananh will handle the invoice this time.",
+      "time_expression": "",
+      "assignee_hint": "Quang"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-065",
+    "description": "assignee_hint 'Linh' KHÔNG có trong text #3 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Huy will handle the proposal this time.",
+      "time_expression": "",
+      "assignee_hint": "Linh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-066",
+    "description": "assignee_hint 'Phong' KHÔNG có trong text #4 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Khoa will handle the design doc this time.",
+      "time_expression": "",
+      "assignee_hint": "Phong"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-067",
+    "description": "assignee_hint 'Yen' KHÔNG có trong text #5 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Namdo will handle the budget sheet this time.",
+      "time_expression": "",
+      "assignee_hint": "Yen"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-068",
+    "description": "assignee_hint 'Duc' KHÔNG có trong text #6 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Trang will handle the survey this time.",
+      "time_expression": "",
+      "assignee_hint": "Duc"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-069",
+    "description": "assignee_hint 'Chi' KHÔNG có trong text #7 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Quang will handle the report this time.",
+      "time_expression": "",
+      "assignee_hint": "Chi"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-070",
+    "description": "assignee_hint 'Minh' KHÔNG có trong text #8 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Linh will handle the invoice this time.",
+      "time_expression": "",
+      "assignee_hint": "Minh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-071",
+    "description": "assignee_hint 'Lananh' KHÔNG có trong text #9 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Phong will handle the proposal this time.",
+      "time_expression": "",
+      "assignee_hint": "Lananh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-072",
+    "description": "assignee_hint 'Huy' KHÔNG có trong text #10 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Yen will handle the design doc this time.",
+      "time_expression": "",
+      "assignee_hint": "Huy"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-073",
+    "description": "assignee_hint 'Khoa' KHÔNG có trong text #11 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Duc will handle the budget sheet this time.",
+      "time_expression": "",
+      "assignee_hint": "Khoa"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-074",
+    "description": "assignee_hint 'Namdo' KHÔNG có trong text #12 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Chi will handle the survey this time.",
+      "time_expression": "",
+      "assignee_hint": "Namdo"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-075",
+    "description": "assignee_hint 'Trang' KHÔNG có trong text #13 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Minh will handle the report this time.",
+      "time_expression": "",
+      "assignee_hint": "Trang"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-076",
+    "description": "assignee_hint 'Quang' KHÔNG có trong text #14 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Lananh will handle the invoice this time.",
+      "time_expression": "",
+      "assignee_hint": "Quang"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-077",
+    "description": "assignee_hint 'Linh' KHÔNG có trong text #15 -> bị xóa",
+    "input": {
+      "provider": "google",
+      "text": "Huy will handle the proposal this time.",
+      "time_expression": "",
+      "assignee_hint": "Linh"
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-078",
+    "description": "Cả 2 field rỗng #1 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "FYI, sharing the weekly newsletter.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-079",
+    "description": "Cả 2 field rỗng #2 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "Just a heads up on the office schedule.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-080",
+    "description": "Cả 2 field rỗng #3 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "Thanks for joining the call today.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-081",
+    "description": "Cả 2 field rỗng #4 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "Sharing this update for your awareness.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-082",
+    "description": "Cả 2 field rỗng #5 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "Here's a quick summary of the discussion.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-083",
+    "description": "Cả 2 field rỗng #6 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "FYI, sharing the weekly newsletter.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-084",
+    "description": "Cả 2 field rỗng #7 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "Just a heads up on the office schedule.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-085",
+    "description": "Cả 2 field rỗng #8 -> không có gì để verify, hợp lệ",
+    "input": {
+      "provider": "google",
+      "text": "Thanks for joining the call today.",
+      "time_expression": "",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-086",
+    "description": "Jira #1: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Friday not in text",
+      "assignee_hint": "Minh not in text"
+    },
+    "expected": {
+      "time_expression": "Friday not in text",
+      "assignee_hint": "Minh not in text"
+    }
+  },
+  {
+    "id": "VER-087",
+    "description": "Jira #2: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Monday not in text",
+      "assignee_hint": "Lananh not in text"
+    },
+    "expected": {
+      "time_expression": "Monday not in text",
+      "assignee_hint": "Lananh not in text"
+    }
+  },
+  {
+    "id": "VER-088",
+    "description": "Jira #3: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Tuesday not in text",
+      "assignee_hint": "Huy not in text"
+    },
+    "expected": {
+      "time_expression": "Tuesday not in text",
+      "assignee_hint": "Huy not in text"
+    }
+  },
+  {
+    "id": "VER-089",
+    "description": "Jira #4: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Wednesday not in text",
+      "assignee_hint": "Khoa not in text"
+    },
+    "expected": {
+      "time_expression": "Wednesday not in text",
+      "assignee_hint": "Khoa not in text"
+    }
+  },
+  {
+    "id": "VER-090",
+    "description": "Jira #5: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Thursday not in text",
+      "assignee_hint": "Namdo not in text"
+    },
+    "expected": {
+      "time_expression": "Thursday not in text",
+      "assignee_hint": "Namdo not in text"
+    }
+  },
+  {
+    "id": "VER-091",
+    "description": "Jira #6: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Saturday not in text",
+      "assignee_hint": "Trang not in text"
+    },
+    "expected": {
+      "time_expression": "Saturday not in text",
+      "assignee_hint": "Trang not in text"
+    }
+  },
+  {
+    "id": "VER-092",
+    "description": "Jira #7: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Sunday not in text",
+      "assignee_hint": "Quang not in text"
+    },
+    "expected": {
+      "time_expression": "Sunday not in text",
+      "assignee_hint": "Quang not in text"
+    }
+  },
+  {
+    "id": "VER-093",
+    "description": "Jira #8: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Friday not in text",
+      "assignee_hint": "Linh not in text"
+    },
+    "expected": {
+      "time_expression": "Friday not in text",
+      "assignee_hint": "Linh not in text"
+    }
+  },
+  {
+    "id": "VER-094",
+    "description": "Jira #9: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Monday not in text",
+      "assignee_hint": "Phong not in text"
+    },
+    "expected": {
+      "time_expression": "Monday not in text",
+      "assignee_hint": "Phong not in text"
+    }
+  },
+  {
+    "id": "VER-095",
+    "description": "Jira #10: bỏ qua verify hoàn toàn, giữ field kể cả không khớp text (rule-based, grounded theo thiết kế)",
+    "input": {
+      "provider": "jira",
+      "text": "Đội cần nộp trước thứ Sáu.",
+      "time_expression": "Tuesday not in text",
+      "assignee_hint": "Yen not in text"
+    },
+    "expected": {
+      "time_expression": "Tuesday not in text",
+      "assignee_hint": "Yen not in text"
+    }
+  },
+  {
+    "id": "VER-096",
+    "description": "time_expression có dấu #1 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Doi can nop bao cao truoc thu Sau nay.",
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-097",
+    "description": "time_expression có dấu #2 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin hoan thanh truoc thu Hai tuan sau.",
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-098",
+    "description": "time_expression có dấu #3 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Vui long gui lai truoc thu Ba nay.",
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-099",
+    "description": "time_expression có dấu #4 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Can xong truoc thu Tu tuan nay.",
+      "time_expression": "thứ Tư",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Tư",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-100",
+    "description": "time_expression có dấu #5 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Nop bao cao truoc thu Nam ban a.",
+      "time_expression": "thứ Năm",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Năm",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-101",
+    "description": "time_expression có dấu #6 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Doi can nop bao cao truoc thu Sau nay.",
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Sáu",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-102",
+    "description": "time_expression có dấu #7 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Xin hoan thanh truoc thu Hai tuan sau.",
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Hai",
+      "assignee_hint": ""
+    }
+  },
+  {
+    "id": "VER-103",
+    "description": "time_expression có dấu #8 khớp text không dấu -> chuẩn hóa 2 chiều vẫn khớp, giữ nguyên",
+    "input": {
+      "provider": "google",
+      "text": "Vui long gui lai truoc thu Ba nay.",
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    },
+    "expected": {
+      "time_expression": "thứ Ba",
+      "assignee_hint": ""
+    }
+  }
+]

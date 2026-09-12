@@ -1,0 +1,219 @@
+<mxfile host="Electron" agent="mondaiy" pages="2">
+  <diagram id="jira-pipeline" name="Jira pipeline">
+    <mxGraphModel dx="1071" dy="471" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2020" pageHeight="4200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="subnote" parent="1" style="text;html=1;fontSize=11;fontStyle=2;fontColor=#888888;align=left;" value="Thiết kế chung cho nhiều nguồn (Email/Slack/GitHub sau này) — hiện chỉ triển khai Jira. Mọi số điểm/threshold trong diagram là GIÁ TRỊ MẶC ĐỊNH, cấu hình được (xem panel RULE CONFIG bên phải), không phải giá trị cố định." vertex="1">
+          <mxGeometry height="34" width="1240" x="40" y="92" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="text;html=1;fontSize=10;fontStyle=2;fontColor=#666666;align=left;" value="Đỏ = Hard Filter (loại chắc chắn)  |  Cam = Jira-specific rules  |  Xanh dương = Common rules / bước chuẩn  |  Tím = Decision (explainable)  |  Xanh lá = Output/trạng thái cuối  |  Vàng = Rule Config  |  Xám = Audit/Debug  |  Xanh nhạt viền tím = User Context" vertex="1">
+          <mxGeometry height="46" width="700" x="40" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="src" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" value="JIRA" vertex="1">
+          <mxGeometry height="46" width="180" x="960" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;CURRENT USER CONTEXT&lt;/b&gt;&lt;br&gt;(input cho pipeline, không phải 1 bước xử lý)&lt;br&gt;&lt;br&gt;- account_id (Jira accountId — ĐỊNH DANH DUY&lt;br&gt;  NHẤT, dùng để so khớp assigned_to_current_user)&lt;br&gt;- timezone (dùng để quy đổi due_date ở bước 2)&lt;br&gt;&lt;br&gt;Luôn dùng account_id để so khớp người dùng hiện&lt;br&gt;tại — KHÔNG dùng display name / email (trùng tên,&lt;br&gt;đổi email vẫn đúng account_id)." vertex="1">
+          <mxGeometry height="230" width="300" x="40" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="st1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;1. INGESTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;Gọi Jira API (search/jql), phân trang bằng cursor token&lt;br&gt;&lt;br&gt;&lt;b&gt;Loại lỗi:&lt;/b&gt;&lt;br&gt;- Rate limit (HTTP 429), HTTP 5xx, timeout -&gt; RETRYABLE&lt;br&gt;- Lỗi xác thực / phân quyền (401/403) -&gt; NON-RETRYABLE&lt;br&gt;&lt;br&gt;&lt;b&gt;Kết quả 1 lần chạy ingest:&lt;/b&gt;&lt;br&gt;- SUCCESS -&gt; đưa dữ liệu vào pipeline (bước 2)&lt;br&gt;- retryable error -&gt; retry theo backoff, thử lại&lt;br&gt;- non-retryable error -&gt; SYNC_FAILED, dừng, ghi audit&lt;br&gt;- 0 issue trả về -&gt; EMPTY_RESULT (VẪN LÀ THÀNH CÔNG,&lt;br&gt;  chỉ là không có gì để xử lý tiếp — KHÁC SYNC_FAILED,&lt;br&gt;  không được gộp chung 2 khái niệm này)&lt;br&gt;&lt;br&gt;&lt;b&gt;Incremental sync:&lt;/b&gt;&lt;br&gt;- Lần đầu: lấy theo khoảng lịch sử (historical range)&lt;br&gt;- Lần sau: updated &gt;= last_successful_sync_time -&lt;br&gt;  overlap_window (vd 5-10 phút, tránh bỏ sót issue vừa&lt;br&gt;  đổi ngay lúc đồng bộ, cấu hình được)&lt;br&gt;- Checkpoint last_successful_sync_time CHỈ cập nhật&lt;br&gt;  sau khi cả lần đồng bộ = SUCCESS&lt;br&gt;&lt;br&gt;&lt;b&gt;Output:&lt;/b&gt; danh sách issue thô (JSON), có thể trùng&lt;br&gt;giữa các trang / các lần chạy" vertex="1">
+          <mxGeometry height="480" width="560" x="780" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="st2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;2. NORMALIZATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;Chuẩn hoá issue thô về 1 schema nội bộ thống nhất —&lt;br&gt;mọi rule phía sau CHỈ chạy trên schema này, không&lt;br&gt;phụ thuộc trực tiếp response của Jira API:&lt;br&gt;&lt;br&gt;issue_id, issue_key, project, title, description,&lt;br&gt;assignee (kèm account_id), status, status_category,&lt;br&gt;resolution, priority, issue_type, due_date,&lt;br&gt;created_at, updated_at, url&lt;br&gt;&lt;br&gt;Due date -&gt; quy đổi theo timezone lấy từ CURRENT USER&lt;br&gt;CONTEXT (không hard-code UTC) -&gt; suy ra:&lt;br&gt;OVERDUE / DUE_TODAY / DUE_TOMORROW / DUE_SOON /&lt;br&gt;FUTURE / NO_DEADLINE" vertex="1">
+          <mxGeometry height="300" width="560" x="780" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="st3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAEA;strokeColor=#C0392B;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;3. HARD FILTER&lt;/b&gt;  (chỉ loại khi CHẮC CHẮN, không tính điểm)&lt;br&gt;&lt;br&gt;- status_category = Done -&gt; DROP&lt;br&gt;- Sinh tự động / notification, KHÔNG có hành động -&gt; DROP&lt;br&gt;&lt;br&gt;- resolution != null NHƯNG status_category != Done&lt;br&gt;  -&gt; &lt;b&gt;KHÔNG tự DROP tuyệt đối.&lt;/b&gt; Đưa qua REVIEW hoặc&lt;br&gt;  trừ điểm nhẹ ở Scoring (cấu hình được) — có resolution&lt;br&gt;  nhưng trạng thái chưa đóng vẫn có thể cần xem lại&lt;br&gt;&lt;br&gt;&lt;b&gt;Ranh giới rõ với Scoring:&lt;/b&gt; Hard Filter = CHẮC CHẮN&lt;br&gt;loại (không thể là việc-cần-làm, không bàn cãi).&lt;br&gt;Scoring (bước 5) = tín hiệu / khả năng cần làm — mọi&lt;br&gt;trường hợp còn mơ hồ để Scoring quyết định, KHÔNG&lt;br&gt;loại cứng ở đây.&lt;br&gt;&lt;br&gt;Dùng status_category chuẩn Jira (To Do / In Progress /&lt;br&gt;Done) — KHÔNG hard-code theo tên status cụ thể, vì&lt;br&gt;mỗi project có thể custom tên status khác nhau." vertex="1">
+          <mxGeometry height="400" width="560" x="780" y="1100" as="geometry" />
+        </mxCell>
+        <mxCell id="st4label" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#3B5FA6;align=center;" value="4. JIRA RULES  +  COMMON RULES  (tín hiệu đưa vào Scoring)" vertex="1">
+          <mxGeometry height="24" width="900" x="600" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="st4a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D97A2B;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;JIRA-SPECIFIC RULES&lt;/b&gt;&lt;br&gt;&lt;br&gt;- Status: status_category (To Do / In Progress / Done)&lt;br&gt;- Resolution: resolution != null -&gt; tín hiệu &quot;có thể&lt;br&gt;  đã xử lý&quot;. KHÔNG tự DROP nếu status chưa Done —&lt;br&gt;  đánh dấu REVIEW hoặc trừ điểm nhẹ (cấu hình được)&lt;br&gt;- Assignee: assigned_to_current_user = so khớp&lt;br&gt;  assignee.account_id == CURRENT USER CONTEXT&lt;br&gt;  .account_id (SO ACCOUNT_ID, không dùng display&lt;br&gt;  name / email) — 3 trạng thái: assigned_to_current_user&lt;br&gt;  (+điểm) / assigned_to_other_user (không tính là việc&lt;br&gt;  của user) / unassigned (không cộng điểm assignee)&lt;br&gt;- Priority: Highest/High/Medium/Low/Lowest -&gt;&lt;br&gt;  map thành điểm (cấu hình được)&lt;br&gt;- Due date đã chuẩn hoá: OVERDUE/DUE_TODAY/&lt;br&gt;  DUE_TOMORROW/DUE_SOON -&gt; điểm khác nhau" vertex="1">
+          <mxGeometry height="360" width="440" x="600" y="1590" as="geometry" />
+        </mxCell>
+        <mxCell id="st4b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;COMMON RULES&lt;/b&gt;  (dùng chung cho nguồn sau này)&lt;br&gt;&lt;br&gt;- Từ khoá hành động (action keyword)&lt;br&gt;- Từ khoá hạn chót (deadline keyword)&lt;br&gt;- Từ khoá khẩn cấp (urgency keyword)&lt;br&gt;- Liên quan chương trình (assignment/milestone...)&lt;br&gt;- Newsletter / quảng cáo -&gt; penalty&lt;br&gt;- Gửi tự động (no-reply...) -&gt; penalty&lt;br&gt;&lt;br&gt;&lt;b&gt;Ghi chú:&lt;/b&gt; rule thiết kế gốc cho email (người nhận&lt;br&gt;trực tiếp / CC / chưa đọc / đổi thread) KHÔNG áp dụng&lt;br&gt;được cho Jira — đã thay bằng Jira-Specific Rules bên&lt;br&gt;trái, không dùng nữa ở nguồn Jira." vertex="1">
+          <mxGeometry height="360" width="440" x="1060" y="1590" as="geometry" />
+        </mxCell>
+        <mxCell id="st5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;5. SCORING&lt;/b&gt;&lt;br&gt;&lt;br&gt;Chỉ chấm điểm issue đã QUA Hard Filter (chưa bị DROP)&lt;br&gt;Cộng/trừ theo tín hiệu đã khớp ở bước 4&lt;br&gt;&lt;br&gt;&lt;b&gt;Trọng số mặc định (giữ nguyên hiện tại — CONFIGURABLE,&lt;br&gt;không phải giá trị cố định):&lt;/b&gt;&lt;br&gt;- action keyword: +25&lt;br&gt;- deadline keyword: +25&lt;br&gt;- urgency keyword: +25&lt;br&gt;- program/milestone: +20&lt;br&gt;- newsletter: -40&lt;br&gt;- automated: -30&lt;br&gt;- priority (Highest..Lowest): map điểm riêng theo&lt;br&gt;  priority mapping trong RULE_CONFIG&lt;br&gt;- resolution != null nhưng chưa Done (từ bước 3): penalty nhẹ&lt;br&gt;&lt;br&gt;Ngưỡng giữ lại mặc định: điểm &gt;= 35 (CONFIGURABLE)&lt;br&gt;&lt;br&gt;&lt;b&gt;Output mỗi issue:&lt;/b&gt; {score, matched_rule_codes[]}" vertex="1">
+          <mxGeometry height="360" width="560" x="780" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="st6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;6. EXTRACTION&lt;/b&gt;  (rule nâng cao — vẫn KHÔNG AI)&lt;br&gt;&lt;br&gt;- title &lt;- summary (lấy thẳng, không xử lý)&lt;br&gt;- assignee &lt;- assignee (chuẩn hoá, kèm account_id)&lt;br&gt;- deadline &lt;- due_date đã chuẩn hoá&lt;br&gt;- priority &lt;- priority (chuẩn hoá)&lt;br&gt;- status &lt;- status_category (chuẩn hoá)&lt;br&gt;- evidence &lt;- câu/cụm từ trong description khớp rule&lt;br&gt;  action hoặc deadline ở bước 4; không câu nào khớp&lt;br&gt;  -&gt; fallback lấy summary làm evidence&lt;br&gt;&lt;br&gt;&quot;Tóm tắt cụm&quot; (khi group) = ghép các evidence theo&lt;br&gt;quy tắc cố định (concatenation), KHÔNG paraphrase" vertex="1">
+          <mxGeometry height="280" width="560" x="780" y="2420" as="geometry" />
+        </mxCell>
+        <mxCell id="st7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;7. DEDUP / GROUP&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Dedup trước&lt;/b&gt; (issue trùng do fetch nhiều trang / nhiều&lt;br&gt;lần chạy) — ưu tiên theo thứ tự:&lt;br&gt;1. issue_id / issue_key&amp;#160;&amp;#160;2. canonical URL&amp;#160;&amp;#160;3. identifier khác&lt;br&gt;&lt;br&gt;&lt;b&gt;Group sau&lt;/b&gt; (các issue khác nhau cùng 1 việc) —&lt;br&gt;ưu tiên theo thứ tự:&lt;br&gt;1. Cùng issue key&amp;nbsp;&amp;nbsp;2. Cùng parent/epic&amp;nbsp;&amp;nbsp;3. Cùng URL liên kết&lt;br&gt;4. Cùng tiêu đề chuẩn hoá + assignee + thời gian liên quan&lt;br&gt;5. Fuzzy title similarity — CHỈ LÀ FALLBACK (72% mặc&lt;br&gt;   định, CONFIGURABLE FALLBACK THRESHOLD)&lt;br&gt;&lt;br&gt;&lt;b&gt;Quan trọng:&lt;/b&gt; Group CHỈ tạo ra 1 candidate task —&lt;br&gt;KHÔNG merge, KHÔNG xoá issue Jira nguồn. Candidate&lt;br&gt;task luôn giữ danh sách references (issue_key) tới&lt;br&gt;TẤT CẢ issue Jira đã gộp vào, để truy vết ngược được." vertex="1">
+          <mxGeometry height="400" width="560" x="780" y="2750" as="geometry" />
+        </mxCell>
+        <mxCell id="st8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;8. DECISION&lt;/b&gt;  (explainable — không chỉ trả score)&lt;br&gt;&lt;br&gt;Mỗi candidate task sau xử lý có dạng:&lt;br&gt;{ score: 55, decision: &quot;KEEP&quot;,&lt;br&gt;&amp;#160;&amp;#160;reasons: [&quot;HAS_DEADLINE&quot;, &quot;ASSIGNED_TO_CURRENT_USER&quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&quot;ACTION_REQUIRED&quot;],&lt;br&gt;&amp;#160;&amp;#160;rule_version: &quot;jira-rules-v3&quot; }&lt;br&gt;&lt;br&gt;reason code deterministic, machine-readable — ví dụ:&lt;br&gt;HAS_ACTION · HAS_DEADLINE · URGENT ·&lt;br&gt;ASSIGNED_TO_CURRENT_USER · HIGH_PRIORITY ·&lt;br&gt;STATUS_DONE · SYSTEM_GENERATED · NO_ACTION_REQUIRED&lt;br&gt;&lt;br&gt;Decision: DROP / REVIEW / KEEP. rule_version đi kèm mọi&lt;br&gt;decision — đổi rule không làm mất khả năng giải thích&lt;br&gt;quyết định cũ (xem thêm RULE CONFIG, AUDIT/DEBUG)." vertex="1">
+          <mxGeometry height="290" width="560" x="780" y="3190" as="geometry" />
+        </mxCell>
+        <mxCell id="dDrop" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#888888;fontSize=10.5;align=center;verticalAlign=middle;" value="&lt;b&gt;DROP&lt;/b&gt;&lt;br&gt;Loại bỏ, không hiện&lt;br&gt;cho user. Chỉ ghi&lt;br&gt;vào Audit/Debug." vertex="1">
+          <mxGeometry height="90" width="170" x="780" y="3520" as="geometry" />
+        </mxCell>
+        <mxCell id="dReview" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9E0;strokeColor=#B8960C;fontSize=10.5;align=center;verticalAlign=middle;" value="&lt;b&gt;REVIEW&lt;/b&gt;&lt;br&gt;Tín hiệu chưa chắc&lt;br&gt;chắn — vẫn hiện cho&lt;br&gt;user, gắn nhãn &quot;cần&lt;br&gt;xem lại&quot;." vertex="1">
+          <mxGeometry height="90" width="170" x="980" y="3520" as="geometry" />
+        </mxCell>
+        <mxCell id="dKeep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=10.5;align=center;verticalAlign=middle;" value="&lt;b&gt;KEEP&lt;/b&gt;&lt;br&gt;Đủ điều kiện, có&lt;br&gt;reason rõ ràng —&lt;br&gt;hiện cho user bình&lt;br&gt;thường." vertex="1">
+          <mxGeometry height="90" width="170" x="1180" y="3520" as="geometry" />
+        </mxCell>
+        <mxCell id="st9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;9. USER CONFIRMATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;Task hiện trong &quot;Công việc của tôi&quot; (KEEP/REVIEW)&lt;br&gt;&lt;br&gt;&lt;b&gt;State machine:&lt;/b&gt;&lt;br&gt;NEW -&gt; PENDING_CONFIRMATION -&gt; CONFIRMED -&gt; (bước 10)&lt;br&gt;PENDING_CONFIRMATION -&gt; SKIPPED (user bỏ qua)&lt;br&gt;PENDING_CONFIRMATION -&gt; EXPIRED (quá hạn xử lý, cấu hình được)&lt;br&gt;Bất kỳ trạng thái nào -&gt; UPDATED khi issue Jira gốc&lt;br&gt;đổi (deadline/title/assignee/status) -&gt; quay lại&lt;br&gt;PENDING_CONFIRMATION để user xác nhận lại thay đổi" vertex="1">
+          <mxGeometry height="250" width="560" x="780" y="3650" as="geometry" />
+        </mxCell>
+        <mxCell id="st10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;10. CALENDAR&lt;/b&gt;  (2 khả năng — không gộp chung tên trạng thái)&lt;br&gt;&lt;br&gt;&lt;b&gt;A. Chỉ generate .ics (không tích hợp calendar thật):&lt;/b&gt;&lt;br&gt;CONFIRMED -&gt; xuất file .ics -&gt; &lt;b&gt;EXPORTED&lt;/b&gt;&lt;br&gt;(không gọi là CALENDAR_SYNCED — không có event thật&lt;br&gt;nào được tạo/ghi nhận ở phía calendar provider)&lt;br&gt;&lt;br&gt;&lt;b&gt;B. Có tích hợp Calendar API thật:&lt;/b&gt;&lt;br&gt;CONFIRMED -&gt; gọi API tạo event -&gt; &lt;b&gt;CALENDAR_SYNCED&lt;/b&gt;&lt;br&gt;Lưu calendar_event_id / event_uid ổn định&lt;br&gt;Hỗ trợ CREATE / UPDATE / CANCEL theo thay đổi issue&lt;br&gt;&lt;br&gt;Cả 2 trường hợp: mỗi task lưu external reference&lt;br&gt;issue_key/issue_id (+ calendar_event_id nếu có) — issue&lt;br&gt;Jira gốc đổi sau khi đã EXPORTED/CALENDAR_SYNCED thì&lt;br&gt;UPDATE lại đúng bản ghi cũ, KHÔNG tạo trùng mới" vertex="1">
+          <mxGeometry height="330" width="560" x="780" y="3950" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="src" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="st1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="st2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="st3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st4label">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4a" edge="1" parent="1" source="st4a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="st5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4b" edge="1" parent="1" source="st4b" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="st5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="st5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="st6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="st7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8d" edge="1" parent="1" source="st8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="dDrop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8r" edge="1" parent="1" source="st8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="dReview">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8k" edge="1" parent="1" source="st8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="dKeep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9r" edge="1" parent="1" source="dReview" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;strokeColor=#4B8B3B;" target="st9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9k" edge="1" parent="1" source="dKeep" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;strokeColor=#4B8B3B;" target="st9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="st9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink1" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;" target="st2" value="timezone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink2" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;exitX=1;exitY=0.9;entryX=0;entryY=0.5;" target="st4a" value="account_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rcLabel" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#B8960C;align=left;" value="RULE CONFIG  (cross-cutting — cấu hình được, không hard-code)" vertex="1">
+          <mxGeometry height="24" width="560" x="1400" y="1550" as="geometry" />
+        </mxCell>
+        <mxCell id="rc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9E0;strokeColor=#B8960C;fontSize=11;fontFamily=Courier New;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="RULE_CONFIG&lt;br&gt;├── thresholds (giữ lại &gt;=35, fuzzy match &gt;=72%...)&lt;br&gt;├── scoring weights (action/deadline/urgency/&lt;br&gt;│&amp;#160;&amp;#160;&amp;#160;program/newsletter/automated...)&lt;br&gt;├── status mapping (theo từng project, vì status&lt;br&gt;│&amp;#160;&amp;#160;&amp;#160;tuỳ biến khác nhau)&lt;br&gt;├── priority mapping (Highest..Lowest -&gt; điểm)&lt;br&gt;├── action keywords&lt;br&gt;├── urgency keywords&lt;br&gt;├── deadline keywords&lt;br&gt;├── system-generated patterns&lt;br&gt;├── overlap_window (incremental sync)&lt;br&gt;└── grouping thresholds&lt;br&gt;&lt;br&gt;Có &lt;b&gt;rule_version&lt;/b&gt; — biết 1 decision được tạo ra&lt;br&gt;bởi phiên bản rule nào." vertex="1">
+          <mxGeometry height="380" width="560" x="1400" y="1584" as="geometry" />
+        </mxCell>
+        <mxCell id="rcBracket" parent="1" style="text;html=1;fontSize=10;fontStyle=2;fontColor=#B8960C;align=left;" value="áp dụng cho bước 3, 4, 5, 7&#xa;(Hard Filter / Rules / Scoring / Dedup-Group)" vertex="1">
+          <mxGeometry height="34" width="560" x="1400" y="1970" as="geometry" />
+        </mxCell>
+        <mxCell id="rcLink" edge="1" parent="1" source="rc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#B8960C;" target="st4label">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adLabel" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#666666;align=left;" value="AUDIT / DEBUG  (cross-cutting — xuyên suốt bước 1-8)" vertex="1">
+          <mxGeometry height="24" width="560" x="1400" y="2060" as="geometry" />
+        </mxCell>
+        <mxCell id="ad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="Mỗi lần chạy (sync/run) ghi lại được:&lt;br&gt;&lt;br&gt;- Issue nào được fetch, kết quả ingest (SUCCESS/&lt;br&gt;  SYNC_FAILED/EMPTY_RESULT)&lt;br&gt;- Issue nào DROP / REVIEW / KEEP&lt;br&gt;- score + reasons[] + rule_version của từng issue&lt;br&gt;- candidate task nào gộp từ issue nào (references)&lt;br&gt;- sync/run ID, processing timestamp&lt;br&gt;&lt;br&gt;Mục tiêu: audit lại được toàn bộ quyết định của 1&lt;br&gt;lần đồng bộ mà không cần hỏi AI, không cần đọc code." vertex="1">
+          <mxGeometry height="270" width="560" x="1490" y="2100" as="geometry" />
+        </mxCell>
+        <mxCell id="adLink" edge="1" parent="1" source="ad" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#666666;" target="st8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="jira-example" name="Ví dụ minh họa">
+    <mxGraphModel dx="1667" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1620" pageHeight="1020" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="etitle" parent="1" style="text;html=1;fontSize=16;fontStyle=1;align=left;" value="Ví dụ: issue TO04-42 đi qua đủ 10 bước pipeline (rule-base)" vertex="1">
+          <mxGeometry height="26" width="1100" x="40" y="16" as="geometry" />
+        </mxCell>
+        <mxCell id="uc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;CURRENT USER CONTEXT&lt;/b&gt;&lt;br&gt;&lt;br&gt;account_id: acc-phong-01&lt;br&gt;timezone: Asia/Ho_Chi_Minh" vertex="1">
+          <mxGeometry height="110" width="260" x="1330" y="16" as="geometry" />
+        </mxCell>
+        <mxCell id="ex1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;1. INGESTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;project=TO04&lt;br&gt;last_successful_sync_time&lt;br&gt;= 04/08 09:00 - overlap&lt;br&gt;window 10 phút&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;kết quả = SUCCESS&lt;br&gt;(không phải EMPTY_RESULT)&lt;br&gt;1 issue thô: TO04-42&lt;br&gt;(JSON gốc từ Jira API)" vertex="1">
+          <mxGeometry height="240" width="270" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;2. NORMALIZATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;issue thô TO04-42 +&lt;br&gt;timezone (từ User Context)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt; (schema chuẩn)&lt;br&gt;title: &amp;quot;Hoàn thành báo cáo&lt;br&gt;tuần 3&amp;quot;&lt;br&gt;assignee.account_id:&lt;br&gt;acc-phong-01&lt;br&gt;status_category: In Progress&lt;br&gt;resolution: null&lt;br&gt;priority: High&lt;br&gt;due_date (VN tz): 15/08/2026&lt;br&gt;-&gt; DUE_SOON&lt;br&gt;description: &amp;quot;...cần nộp&lt;br&gt;trước thứ Sáu.&amp;quot;" vertex="1">
+          <mxGeometry height="340" width="270" x="330" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAEA;strokeColor=#C0392B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;3. HARD FILTER&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;status_category: In Progress&lt;br&gt;resolution: null&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;Không khớp điều kiện DROP&lt;br&gt;nào (status != Done, không&lt;br&gt;phải system-generated)&lt;br&gt;-&gt; KHÔNG bị DROP, đi tiếp" vertex="1">
+          <mxGeometry height="240" width="270" x="620" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D97A2B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;4. JIRA + COMMON RULES&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;issue đã qua Hard Filter +&lt;br&gt;account_id (từ User Context)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt; (rule khớp)&lt;br&gt;HAS_ACTION (&amp;quot;hoàn thành&amp;quot;,&lt;br&gt;&amp;quot;cần&amp;quot;, &amp;quot;nộp&amp;quot;)&lt;br&gt;HAS_DEADLINE (&amp;quot;thứ Sáu&amp;quot;)&lt;br&gt;ASSIGNED_TO_CURRENT_USER&lt;br&gt;(assignee.account_id ==&lt;br&gt;acc-phong-01)&lt;br&gt;HIGH_PRIORITY (priority=High)&lt;br&gt;DUE_SOON" vertex="1">
+          <mxGeometry height="320" width="270" x="910" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;5. SCORING&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;5 rule đã khớp ở bước 4&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;HAS_ACTION +25&lt;br&gt;HAS_DEADLINE +25&lt;br&gt;ASSIGNED_TO_CURRENT_USER +15&lt;br&gt;HIGH_PRIORITY +10&lt;br&gt;DUE_SOON +10&lt;br&gt;&lt;br&gt;score = 85 (&gt;= ngưỡng 35&lt;br&gt;mặc định)" vertex="1">
+          <mxGeometry height="240" width="270" x="1200" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;6. EXTRACTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;issue TO04-42, score=85&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;title, assignee, deadline,&lt;br&gt;priority: lấy thẳng field đã&lt;br&gt;chuẩn hoá ở bước 2&lt;br&gt;evidence: &amp;quot;...cần nộp trước&lt;br&gt;thứ Sáu.&amp;quot; (câu khớp rule&lt;br&gt;action + deadline)" vertex="1">
+          <mxGeometry height="440" width="270" x="40" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;7. DEDUP / GROUP&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;issue TO04-42 đã extract&lt;br&gt;+ toàn bộ issue khác trong&lt;br&gt;đợt sync này&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;Dedup: issue_key duy nhất,&lt;br&gt;không trùng trang/lần chạy&lt;br&gt;Group: không issue nào khác&lt;br&gt;cùng epic/tiêu đề -&gt; 1&lt;br&gt;candidate task, references&lt;br&gt;= [TO04-42]" vertex="1">
+          <mxGeometry height="440" width="270" x="330" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=10.5;fontFamily=Courier New;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;8. DECISION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;candidate task, score=85&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;{&lt;br&gt;&amp;#160;score: 85,&lt;br&gt;&amp;#160;decision: &amp;quot;KEEP&amp;quot;,&lt;br&gt;&amp;#160;reasons: [&amp;quot;HAS_ACTION&amp;quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;quot;HAS_DEADLINE&amp;quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;quot;ASSIGNED_TO_CURRENT_USER&amp;quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;quot;HIGH_PRIORITY&amp;quot;, &amp;quot;DUE_SOON&amp;quot;],&lt;br&gt;&amp;#160;rule_version: &amp;quot;jira-rules-v3&amp;quot;&lt;br&gt;}" vertex="1">
+          <mxGeometry height="440" width="270" x="620" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;9. USER CONFIRMATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;candidate task, decision=KEEP&lt;br&gt;state: NEW&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;state -&gt; PENDING_CONFIRMATION&lt;br&gt;(hiện &amp;quot;Hoàn thành báo cáo&lt;br&gt;tuần 3&amp;quot; trong Công việc&lt;br&gt;của tôi)&lt;br&gt;User bấm Xác nhận&lt;br&gt;-&gt; state = CONFIRMED" vertex="1">
+          <mxGeometry height="440" width="270" x="910" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;10. CALENDAR&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;task state = CONFIRMED&lt;br&gt;(P0 hiện tại: chỉ export .ics,&lt;br&gt;chưa tích hợp Calendar API)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;state -&gt; &lt;b&gt;EXPORTED&lt;/b&gt; (không&lt;br&gt;phải CALENDAR_SYNCED — chưa&lt;br&gt;có event thật ở calendar&lt;br&gt;provider nào)&lt;br&gt;file .ics tải về&lt;br&gt;reference lưu: issue_key&lt;br&gt;= TO04-42" vertex="1">
+          <mxGeometry height="440" width="270" x="1200" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ee1" edge="1" parent="1" source="ex1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee2" edge="1" parent="1" source="ex2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee3" edge="1" parent="1" source="ex3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee4" edge="1" parent="1" source="ex4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee5" edge="1" parent="1" source="ex5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee6" edge="1" parent="1" source="ex6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee7" edge="1" parent="1" source="ex7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee8" edge="1" parent="1" source="ex8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee9" edge="1" parent="1" source="ex9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink1" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;" target="ex2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink2" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;" target="ex4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="exnote" parent="1" style="text;html=1;fontSize=11;fontStyle=2;fontColor=#888888;align=left;" value="Điểm số trong ví dụ (85, +25, +15, +10...) chỉ minh hoạ theo trọng số mặc định — thực tế lấy từ RULE_CONFIG, đổi được không cần sửa code. Sơ đồ đủ 10 bước, khớp 1-1 với tab &amp;quot;Jira pipeline&amp;quot;." vertex="1">
+          <mxGeometry height="20" width="1200" x="40" y="1010" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

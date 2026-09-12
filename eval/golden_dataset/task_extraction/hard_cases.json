@@ -1,0 +1,146 @@
+[
+  {
+    "id": "TASK-HARD-001",
+    "description": "Zalo thật (2026-08-20) — báo đã gửi xong (thì quá khứ), không phải yêu cầu",
+    "input": { "text": "con gửi 2 xuất thêm lúc nãy ạ" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-002",
+    "description": "Zalo thật (2026-08-20) — yêu cầu thật viết theo văn phong xin xỏ, không động từ mệnh lệnh",
+    "input": { "text": "Cho cháu 1 suất nữa ra nhà xe nổi b2 gửi bv" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-003",
+    "description": "Zalo thật (2026-08-20) — nhờ vả lịch sự dạng câu hỏi",
+    "input": { "text": "Mọi người xem giúp tài liệu môn này có thiếu gì không nhé" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-004",
+    "description": "Zalo thật (2026-08-20) — cảm ơn kèm tên, không phải task",
+    "input": { "text": "Cảm ơn anh Phong nhiều ạ" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-005",
+    "description": "Zalo thật (2026-08-20) — thông báo/FYI thuần, không yêu cầu hành động",
+    "input": { "text": "Lớp mình nghỉ học thứ Sáu tuần này nhé" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-006",
+    "description": "2026-08-20 — \"xong rồi\" là liên từ thời gian, không phải tường thuật việc đã xong; giới hạn đã biết của heuristic past-tense-marker",
+    "input": { "text": "Họp xong rồi thì gửi biên bản cho cả nhóm nhé" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-007",
+    "description": "2026-08-20 — cảm ơn vì ĐÃ giúp (thì quá khứ), không phải nhờ vả \"xem giúp\"/\"gửi giúp\"",
+    "input": { "text": "Bạn đã giúp mình rất nhiều, cảm ơn nha" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-008",
+    "description": "2026-08-21 — giao việc qua mẫu \"để X lo/làm\" (khác \"giao cho\"/\"nhờ\" đã có), rule chưa nhận dạng mẫu này",
+    "input": { "text": "Để Lan lo vụ báo cáo này nhé" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-009",
+    "description": "2026-08-21 — Vietlish công sở, \"check\" không nằm trong whitelist động từ nhưng \"check giúp\" vẫn khớp _HELP_REQUEST_PATTERN",
+    "input": { "text": "Check giúp PR này với" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-010",
+    "description": "2026-08-21 — có \"rồi\" (marker thì quá khứ) NHƯNG câu vẫn là lời giục nộp bài trong tương lai, không phải tường thuật",
+    "input": { "text": "Mai deadline rồi đó, mọi người tranh thủ nộp bài nha" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-011",
+    "description": "2026-08-21 — nhờ vả điều kiện (\"ai rảnh thì...giúp\"), vẫn là yêu cầu thật dù không chỉ đích danh ai",
+    "input": { "text": "Bạn nào rảnh thì hỗ trợ dọn phòng họp giúp với" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-012",
+    "description": "2026-08-21 — có \"rồi\" (báo lỗi số liệu, thì quá khứ) NHƯNG vế sau \"sửa lại trước chiều nay\" là yêu cầu thật cho tương lai",
+    "input": { "text": "Số liệu tháng này sai rồi, sửa lại trước chiều nay" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-013",
+    "description": "2026-08-21 — \"nhắc\" không nằm trong whitelist động từ nhưng câu vẫn là chỉ thị + deadline rõ ràng",
+    "input": { "text": "Nhắc mọi người nộp phí câu lạc bộ trước cuối tuần" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-014",
+    "description": "2026-08-21 — nhờ vả không chỉ đích danh (\"ai đó\"), vẫn là yêu cầu thật qua \"giúp\"",
+    "input": { "text": "Ai đó gọi taxi giúp em với, em quên mang xe" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-015",
+    "description": "2026-08-21 — nhờ vả gián tiếp (\"ai tiện thì xin giúp\"), động từ \"xin\" không trong whitelist nhưng \"xin giúp\" khớp _HELP_REQUEST_PATTERN",
+    "input": { "text": "Còn thiếu chữ ký của sếp, ai tiện thì xin giúp" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-016",
+    "description": "2026-08-21 — yêu cầu lịch sự không dùng \"giúp/giùm/hộ\", không động từ trong whitelist (\"bổ sung\") — rule không có tín hiệu nào để bắt",
+    "input": { "text": "Tài liệu môn thiếu trang bìa, bạn nào có thì bổ sung nhé" },
+    "expected": { "is_task": true }
+  },
+  {
+    "id": "TASK-HARD-017",
+    "description": "2026-08-21 — tường thuật việc ĐÃ được duyệt xong, chứa động từ hành động nhưng là báo cáo hoàn thành, không phải yêu cầu",
+    "input": { "text": "Hôm qua sếp vừa duyệt xong đề xuất rồi đó mọi người" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-018",
+    "description": "2026-08-21 — mô tả/giới thiệu mục đích nhóm chat, không phải yêu cầu hành động",
+    "input": { "text": "Group này lập ra để trao đổi công việc hàng ngày" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-019",
+    "description": "2026-08-21 — cảm thán/ngạc nhiên, không có hành động nào được yêu cầu",
+    "input": { "text": "Ơ hay nhỉ, sao lại thế được" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-020",
+    "description": "2026-08-21 — than thở/triết lý đời thường chứa \"làm báo cáo\" nhưng không phải chỉ thị cho ai cụ thể",
+    "input": { "text": "Ai mà chẳng phải làm báo cáo, đời là thế" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-021",
+    "description": "2026-08-21 — thông báo lịch nghỉ lễ, không yêu cầu hành động",
+    "input": { "text": "Ngày mai công ty nghỉ lễ nha mọi người" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-022",
+    "description": "2026-08-21 — báo cáo đã gửi xong (thì quá khứ hoàn thành), không phải yêu cầu",
+    "input": { "text": "Hôm nay đã gửi hết tài liệu cho phòng ban rồi" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-023",
+    "description": "2026-08-21 — trì hoãn/gác lại, không phải chỉ thị hành động ngay",
+    "input": { "text": "Ừ thì cứ để đó, mai tính tiếp" },
+    "expected": { "is_task": false }
+  },
+  {
+    "id": "TASK-HARD-024",
+    "description": "2026-08-21 — thông báo thông tin đã có sẵn (đã đính kèm), không yêu cầu hành động thêm",
+    "input": { "text": "Tài liệu đã đính kèm ở tin nhắn phía trên rồi nhé" },
+    "expected": { "is_task": false }
+  }
+]

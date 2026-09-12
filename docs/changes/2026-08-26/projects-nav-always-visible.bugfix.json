@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "change_kind": "behavior_bug",
+  "bug_id": "projects-nav-always-visible",
+  "symptom": "Người dùng không thể mở trang quản lý một loại resource từ sidebar khi chưa có resource nào.",
+  "root_cause": "Sidebar dùng trạng thái inventory để gác cả navigation entry thay vì chỉ gác nội dung phụ thuộc inventory.",
+  "violated_invariant": "Navigation entry dùng để tạo và quản lý resource phải truy cập được dù inventory đang rỗng hay đã có dữ liệu.",
+  "fix_boundary": {
+    "shared_layer": "client/web-app Sidebar navigation và Projects overview empty state",
+    "rationale": "Tách navigation entry khỏi inventory-gated list sửa mọi trạng thái inventory tại đúng boundary người dùng truy cập resource manager."
+  },
+  "generalization_strategy": "shared_boundary",
+  "dimensions": [
+    {"name": "project_inventory", "classes": ["empty", "non_empty"]},
+    {"name": "surface", "classes": ["sidebar_navigation", "projects_overview", "conversation_reminder"]},
+    {"name": "conversation_assignment", "classes": ["not_applicable", "unassigned", "assigned"]}
+  ],
+  "cases": [
+    {
+      "id": "reported-case",
+      "role": "reported",
+      "dimensions": {"project_inventory": "empty", "surface": "sidebar_navigation", "conversation_assignment": "not_applicable"},
+      "expected_invariant": "Sidebar vẫn hiển thị link Projects và click điều hướng tới /projects.",
+      "product_test_ref": "client/web-app/tests/SidebarProjectsNavigation.test.tsx — keeps Projects navigation available when project inventory is empty"
+    },
+    {
+      "id": "sibling-case-one",
+      "role": "sibling",
+      "dimensions": {"project_inventory": "non_empty", "surface": "sidebar_navigation", "conversation_assignment": "not_applicable"},
+      "expected_invariant": "Sidebar hiển thị link Projects cùng danh sách project hiện hữu.",
+      "product_test_ref": "client/web-app/tests/SidebarProjectsNavigation.test.tsx — keeps Projects navigation and renders the project list when inventory is non-empty"
+    },
+    {
+      "id": "sibling-case-two",
+      "role": "sibling",
+      "dimensions": {"project_inventory": "empty", "surface": "projects_overview", "conversation_assignment": "not_applicable"},
+      "expected_invariant": "Overview rỗng giải thích trạng thái và có CTA tạo project đầu tiên.",
+      "product_test_ref": "client/web-app/tests/SidebarProjectsNavigation.test.tsx — shows an actionable Vietnamese empty state and focuses project creation"
+    },
+    {
+      "id": "sibling-case-three",
+      "role": "sibling",
+      "dimensions": {"project_inventory": "non_empty", "surface": "conversation_reminder", "conversation_assignment": "unassigned"},
+      "expected_invariant": "Hội thoại chưa xếp vẫn có chấm nhắc khi người dùng đã có project.",
+      "product_test_ref": "client/web-app/tests/SidebarProjectsNavigation.test.tsx — shows an unassigned reminder when projects exist and the conversation is unassigned"
+    },
+    {
+      "id": "counterexample",
+      "role": "counterexample",
+      "dimensions": {"project_inventory": "non_empty", "surface": "conversation_reminder", "conversation_assignment": "assigned"},
+      "expected_invariant": "Hội thoại đã xếp project không có chấm nhắc chưa xếp.",
+      "product_test_ref": "client/web-app/tests/SidebarProjectsNavigation.test.tsx — does not show an unassigned reminder for a conversation already in a project"
+    }
+  ],
+  "implementation": {
+    "changed_shared_boundary": true,
+    "special_case_literals": [],
+    "known_exceptions": []
+  }
+}

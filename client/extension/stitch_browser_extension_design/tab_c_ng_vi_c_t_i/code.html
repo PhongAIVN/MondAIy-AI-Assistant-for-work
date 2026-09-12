@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Công việc - mondaiy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#e7f6ff",
+                        "on-surface-variant": "#40484c",
+                        "on-error": "#ffffff",
+                        "on-surface": "#001f2a",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f4faff",
+                        "on-tertiary-fixed-variant": "#663d11",
+                        "surface-container-highest": "#c9e7f8",
+                        "outline": "#70787c",
+                        "surface-dim": "#c0dfef",
+                        "primary": "#16576a",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "tertiary": "#714619",
+                        "primary-fixed-dim": "#96cfe5",
+                        "surface-container-high": "#ceedfd",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#8ed0e8",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#054d60",
+                        "secondary-fixed": "#b6ebff",
+                        "inverse-surface": "#163441",
+                        "primary-container": "#356f83",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#e0f4ff",
+                        "surface-variant": "#c9e7f8",
+                        "tertiary-container": "#8d5e2f",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-tint": "#2a6579",
+                        "on-background": "#001f2a",
+                        "surface-container": "#daf2ff",
+                        "primary-fixed": "#b8eaff",
+                        "on-secondary-container": "#1f697e",
+                        "on-tertiary-container": "#ffe3cd",
+                        "surface": "#f4faff",
+                        "tertiary-fixed": "#ffdcbf",
+                        "surface-bright": "#f4faff",
+                        "inverse-primary": "#96cfe5",
+                        "secondary": "#1b667c",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f28",
+                        "secondary-container": "#a5e6ff",
+                        "on-primary-container": "#c6eeff",
+                        "outline-variant": "#c0c8cc",
+                        "tertiary-fixed-dim": "#f7ba83",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001f28"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "control-gap": "8px",
+                        "internal-padding": "16px",
+                        "panel-width": "400px",
+                        "stack-gap": "12px",
+                        "edge-margin": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["EB Garamond"],
+                        "label-md": ["Geist"],
+                        "headline-md": ["EB Garamond"],
+                        "headline-sm": ["EB Garamond"],
+                        "label-sm": ["Geist"],
+                        "body-main": ["Geist"],
+                        "body-normal": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-sm": ["17px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-main": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-normal": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #17343F; /* Overriding for specific dark paper tone requested */
+            color: #FFFFDD;
+        }
+        .task-card {
+            background-color: #23404D;
+            border-radius: 18px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 8px 16px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(155, 203, 210, 0.1);
+        }
+        .task-card:hover {
+            border-color: rgba(155, 203, 210, 0.3);
+        }
+        .checkbox-lucide {
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #FFFFDD;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .checkbox-lucide.checked {
+            background-color: #9BCBD2;
+            border-color: #9BCBD2;
+        }
+        .text-accent {
+            color: #9BCBD2;
+        }
+        /* Custom TopAppBar Overrides for dark paper */
+        .top-app-bar-dark {
+            background-color: #23404D;
+            color: #FFFFDD;
+            border-bottom: 1px solid rgba(255, 255, 221, 0.1);
+        }
+    </style>
+</head>
+<body class="font-body-normal antialiased min-h-screen flex justify-center">
+<div class="w-full max-w-[400px] flex flex-col h-screen relative">
+<!-- TopAppBar -->
+<header class="top-app-bar-dark flex justify-between items-center w-full px-edge-margin py-4 max-w-[400px] mx-auto shadow-[0_2px_4px_rgba(0,0,0,0.2),0_8px_16px_rgba(0,0,0,0.15)] sticky top-0 z-50">
+<div class="flex items-center gap-control-gap">
+<span class="material-symbols-outlined text-accent" style="font-variation-settings: 'FILL' 0; font-weight: 300;">terminal</span>
+<h1 class="font-headline-lg text-headline-lg text-accent tracking-tight">mondaiy</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-[#17343F] flex items-center justify-center overflow-hidden border border-accent">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A small, stylized avatar portrait of a person with a warm, minimalist illustration style, fitting the sophisticated dark paper aesthetic of the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcxUWE3JKXZqEX5fCCAfCK7OcpgqQ5pMP4vF91NtUfAFiPV2YqsaEZaLZPfS0QdyvExqVQEgm9OfGx0MDIr6QrnOn1SRTWSlQCjF6cb3uoUGZ3jsnsl3kB8b3EVJ5GzBLTYE2P9Dg7eH7q_qAxY9H77WXwfMe7qDT_RhZ1Cm6TY72lykgakkwwtbQ1jvzTnMBtZPGng4MAgyrEDnLCWMQYGyefYap2Z36L8s5VhDsQ6SZAVLSca51K"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto px-edge-margin py-4 flex flex-col gap-stack-gap">
+<div class="flex justify-between items-center mb-2">
+<h2 class="font-headline-md text-headline-md">Hôm nay</h2>
+<span class="font-label-md text-label-md text-accent">Thứ Hai, 24 Thg 10</span>
+</div>
+<!-- Task Cards -->
+<div class="task-card p-4 flex gap-4 cursor-pointer group">
+<div class="pt-1">
+<div class="checkbox-lucide"></div>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-[#FFFFDD] group-hover:text-accent transition-colors">Hoàn thiện tài liệu kiến trúc hệ thống</h3>
+<p class="font-body-normal text-body-normal text-[#FFFFDD] opacity-70 mt-1 line-clamp-2 text-sm">Cập nhật sơ đồ luồng dữ liệu và thêm mô tả cho các service mới theo feedback của team.</p>
+<div class="flex items-center gap-2 mt-3">
+<span class="px-2 py-1 bg-[#17343F] rounded text-[10px] font-label-sm uppercase tracking-wider text-accent border border-accent/20">Công việc</span>
+<span class="font-label-sm text-label-sm opacity-50">10:00 AM</span>
+</div>
+</div>
+</div>
+<div class="task-card p-4 flex gap-4 cursor-pointer group">
+<div class="pt-1">
+<div class="checkbox-lucide checked">
+<span class="material-symbols-outlined text-[#17343F]" style="font-size: 14px; font-weight: 700;">check</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-[#FFFFDD] opacity-50 line-through">Review PR #142 - Optimize Database Queries</h3>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-1 bg-[#17343F] rounded text-[10px] font-label-sm uppercase tracking-wider text-accent border border-accent/20 opacity-50">Code Review</span>
+</div>
+</div>
+</div>
+<div class="task-card p-4 flex gap-4 cursor-pointer group border-dashed border-accent/30 bg-transparent">
+<div class="pt-1">
+<span class="material-symbols-outlined text-accent/70" style="font-variation-settings: 'FILL' 0;">lightbulb</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-[#FFFFDD]">Đề xuất ý tưởng</h3>
+<p class="font-body-normal text-body-normal text-[#FFFFDD] opacity-70 mt-1 text-sm">Xem xét việc chuyển đổi thư viện biểu đồ sang Recharts để cải thiện hiệu suất render.</p>
+</div>
+</div>
+</main>
+<!-- NavigationDrawer (Bottom Nav Layout for Mobile) -->
+<nav class="flex w-full gap-control-gap p-internal-padding bg-[#17343F] border-t border-[#23404D] sticky bottom-0 z-50">
+<!-- Active Tab: Công việc -->
+<a class="flex-1 flex flex-col items-center justify-center bg-[#23404D] shadow-sm text-accent rounded-lg py-2 px-4 transition-transform duration-300 ease-out active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-label-md text-label-md text-[10px]">Công việc</span>
+</a>
+<!-- Inactive Tab: Lấy dữ liệu -->
+<a class="flex-1 flex flex-col items-center justify-center text-[#FFFFDD] opacity-60 hover:opacity-100 hover:bg-[#23404D]/50 rounded-lg py-2 px-4 transition-all duration-300 ease-out active:scale-95" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">data_exploration</span>
+<span class="font-label-md text-label-md text-[10px]">Lấy dữ liệu</span>
+</a>
+</nav>
+</div>
+<script>
+        // Simple toggle for unchecked checkboxes
+        document.querySelectorAll('.task-card').forEach(card => {
+            const checkbox = card.querySelector('.checkbox-lucide:not(.checked)');
+            if (checkbox) {
+                card.addEventListener('click', () => {
+                    checkbox.classList.toggle('checked');
+                    if(checkbox.classList.contains('checked')) {
+                        checkbox.innerHTML = '<span class="material-symbols-outlined text-[#17343F]" style="font-size: 14px; font-weight: 700;">check</span>';
+                        card.querySelector('h3').classList.add('opacity-50', 'line-through');
+                    } else {
+                        checkbox.innerHTML = '';
+                        card.querySelector('h3').classList.remove('opacity-50', 'line-through');
+                    }
+                });
+            }
+        });
+    </script>
+</body></html>

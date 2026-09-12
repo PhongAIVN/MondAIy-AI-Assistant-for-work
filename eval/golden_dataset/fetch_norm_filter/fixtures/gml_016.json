@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-016",
+    "threadId": "thread-gml-016",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Tháng này có phim mới cực hấp dẫn!",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Netflix <info@netflix.com>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-016"
+        }
+      ],
+      "body": {
+        "data": "VGjDoW5nIG7DoHkgY8OzIHBoaW0gbeG7m2kgY-G7sWMgaOG6pXAgZOG6q24h",
+        "size": 34
+      }
+    }
+  }
+]

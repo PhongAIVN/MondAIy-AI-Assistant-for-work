@@ -1,0 +1,58 @@
+diff --git a/node_modules/expo-speech-recognition/ios/ExpoSpeechRecognitionModule.swift b/node_modules/expo-speech-recognition/ios/ExpoSpeechRecognitionModule.swift
+index 5264fa4..25c6e09 100644
+--- a/node_modules/expo-speech-recognition/ios/ExpoSpeechRecognitionModule.swift
++++ b/node_modules/expo-speech-recognition/ios/ExpoSpeechRecognitionModule.swift
+@@ -115,7 +115,7 @@ public class ExpoSpeechRecognitionModule: Module {
+       }
+       permissions.askForPermission(
+         usingRequesterClass: EXSpeechRecognitionPermissionRequester.self,
+-        resolve: promise.resolver,
++        resolve: promise.legacyResolver,
+         reject: promise.legacyRejecter
+       )
+     }
+@@ -126,7 +126,7 @@ public class ExpoSpeechRecognitionModule: Module {
+       }
+       permissions.getPermissionUsingRequesterClass(
+         EXSpeechRecognitionPermissionRequester.self,
+-        resolve: promise.resolver,
++        resolve: promise.legacyResolver,
+         reject: promise.legacyRejecter
+       )
+     }
+@@ -134,7 +134,7 @@ public class ExpoSpeechRecognitionModule: Module {
+     AsyncFunction("getMicrophonePermissionsAsync") { (promise: Promise) in
+       appContext?.permissions?.getPermissionUsingRequesterClass(
+         MicrophoneRequester.self,
+-        resolve: promise.resolver,
++        resolve: promise.legacyResolver,
+         reject: promise.legacyRejecter
+       )
+     }
+@@ -142,7 +142,7 @@ public class ExpoSpeechRecognitionModule: Module {
+     AsyncFunction("requestMicrophonePermissionsAsync") { (promise: Promise) in
+       appContext?.permissions?.askForPermission(
+         usingRequesterClass: MicrophoneRequester.self,
+-        resolve: promise.resolver,
++        resolve: promise.legacyResolver,
+         reject: promise.legacyRejecter
+       )
+     }
+@@ -150,7 +150,7 @@ public class ExpoSpeechRecognitionModule: Module {
+     AsyncFunction("getSpeechRecognizerPermissionsAsync") { (promise: Promise) in
+       appContext?.permissions?.getPermissionUsingRequesterClass(
+         SpeechRecognizerRequester.self,
+-        resolve: promise.resolver,
++        resolve: promise.legacyResolver,
+         reject: promise.legacyRejecter
+       )
+     }
+@@ -158,7 +158,7 @@ public class ExpoSpeechRecognitionModule: Module {
+     AsyncFunction("requestSpeechRecognizerPermissionsAsync") { (promise: Promise) in
+       appContext?.permissions?.askForPermission(
+         usingRequesterClass: SpeechRecognizerRequester.self,
+-        resolve: promise.resolver,
++        resolve: promise.legacyResolver,
+         reject: promise.legacyRejecter
+       )
+     }

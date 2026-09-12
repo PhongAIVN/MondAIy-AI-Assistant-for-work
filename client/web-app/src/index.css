@@ -1,0 +1,1261 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
+/* App content lives beside a collapsible sidebar and several intentionally
+   wide calendar views. Keep accidental child overflow inside its own surface;
+   the viewport itself must never acquire a second horizontal scrollbar on a
+   phone. */
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  /* Long source titles, URLs and generated evidence must wrap rather than
+     widen cards beyond the viewport. */
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  a,
+  button,
+  label {
+    overflow-wrap: anywhere;
+  }
+
+  /* Keep controls comfortable for touch without forcing desktop density. */
+  button,
+  select,
+  input[type='button'],
+  input[type='submit'] {
+    min-height: 2.5rem;
+  }
+}
+
+.mobile-bottom-nav__item {
+  position: relative;
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.mobile-bottom-nav__item:hover,
+.mobile-bottom-nav__item:focus-visible,
+.mobile-bottom-nav__item.is-active {
+  color: var(--color-primary);
+  background: var(--color-accent-soft);
+}
+
+.mobile-bottom-nav__item:active,
+.mobile-bottom-nav__assistant:active { transform: scale(0.92); }
+
+.mobile-bottom-nav__assistant {
+  position: relative;
+  display: inline-flex;
+  width: 52px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--color-accent) 55%, white);
+  border-radius: 999px;
+  background: var(--color-surface);
+  box-shadow: 0 5px 17px color-mix(in srgb, var(--color-primary) 22%, transparent);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.mobile-bottom-nav__assistant-glow {
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--color-accent) 32%, transparent);
+  filter: blur(7px);
+}
+
+.mobile-bottom-nav__badge {
+  position: absolute;
+  right: 1px;
+  top: 0;
+  min-width: 15px;
+  padding: 1px 4px;
+  border-radius: 999px;
+  background: var(--color-danger);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 13px;
+  text-align: center;
+}
+
+/* Nguồn chuẩn của hệ token nằm ở design-proposal-littlebird/tokens.css.
+   Sửa màu hay bậc chữ thì sửa bên đó trước rồi đồng bộ sang đây.
+
+   Tên biến giữ nguyên như bản cũ để mọi chỗ đang dùng var() không phải sửa,
+   chỉ có giá trị là đổi. */
+
+@theme {
+  --font-sans: 'Geist Variable', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+
+  /* Bậc chữ nâng lên một nấc. Bản cũ dùng text-xs tức 12px cho gần như toàn
+     app, đó là lý do lớn nhất khiến giao diện trông chật và khó đọc. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.6;
+  --text-base: 1rem;
+  --text-base--line-height: 1.65;
+}
+
+/* Token riêng cho landing — không đè font/màu app nội bộ ở @theme bên trên. */
+@theme static {
+  --font-landing: 'Geist Variable', system-ui, -apple-system, sans-serif;
+  --font-landing-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, monospace;
+  --font-landing-heading: 'Cormorant Garamond', 'Times New Roman', serif;
+
+  --color-ink-900: #23404D;
+  --color-ink-700: #315A68;
+  --color-ink-500: #55727A;
+  --color-ink-400: #789096;
+
+  --color-paper: #FFFFDD;
+  --color-paper-raised: #FFFEEF;
+  --color-paper-sunken: #F2F3D8;
+
+  --color-wash-porcelain: #E8F3F2;
+  --color-wash-sage: #E8F0CF;
+  --color-wash-apricot: #FFF0D6;
+  --color-wash-mist: #F1F4DF;
+
+  --color-action-solid: #356F83;
+  --color-action-hover: #295E70;
+  --color-action-highlight: #61A3BA;
+  --color-action-tint: #D9EEF2;
+  --color-success-solid: #4F7F5B;
+  --color-success-tint: #E4F0D8;
+  --color-warning-solid: #8A6B2A;
+  --color-warning-tint: #F6E9B8;
+  --color-danger-solid: #B45B54;
+  --color-danger-tint: #F5DAD5;
+
+  --color-hairline: rgba(35, 64, 77, 0.14);
+
+  --radius-field: 8px;
+  --radius-control: 12px;
+  --radius-panel: 18px;
+  --radius-overlay: 26px;
+
+  --shadow-e1: 0 1px 2px rgba(35, 64, 77, 0.04);
+  --shadow-e2: 0 2px 4px rgba(35, 64, 77, 0.04), 0 6px 16px rgba(35, 64, 77, 0.06);
+  --shadow-e3: 0 4px 8px rgba(35, 64, 77, 0.05), 0 14px 32px rgba(35, 64, 77, 0.08);
+  --shadow-e4: 0 8px 16px rgba(35, 64, 77, 0.06), 0 28px 64px rgba(35, 64, 77, 0.12);
+
+  --ease-out-quint: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --d-fast: 180ms;
+  --d-base: 320ms;
+  --d-slow: 520ms;
+}
+
+:root,
+[data-theme="light"] {
+  --color-app-bg: #FFFFDD;
+  --color-page-bg: #FFFFDD;
+  --color-sidebar-bg: #F4F5DC;
+  --color-topbar-bg: #FFFFDD;
+
+  --color-surface: #FFFEEF;
+  --color-surface-subtle: #FFFEEF;
+  --color-surface-muted: #F1F4DF;
+  --color-surface-hover: #E8F3F2;
+
+  --color-border: #C8D9D6;
+  --color-border-subtle: #DDE8E4;
+  --color-border-strong: #A6C4C7;
+
+  --color-text-primary: #23404D;
+  --color-text-secondary: #55727A;
+  /* WCAG AA audit 2026-08-28: #789096 chỉ đạt 3.0–3.3:1 trên mọi nền sáng
+     dùng chung (app-bg/surface/surface-muted) — dưới ngưỡng 4.5:1 bắt buộc
+     cho chữ thường (token này dùng ở 174 chỗ, toàn nhãn/hint/timestamp thật,
+     không phải chữ trang trí). Đậm hơn, giữ nguyên hue/saturation, đạt
+     4.51:1 ở trường hợp xấu nhất. */
+  --color-text-muted: #5F7277;
+  /* text-disabled CHỦ ĐỘNG không cần đạt AA — WCAG 1.4.3 miễn trừ text thuộc
+     UI component đang inactive; độ mờ thấp chính là tín hiệu "đã tắt". */
+  --color-text-disabled: #9BAFAF;
+
+  --color-primary: #356F83;
+  --color-primary-hover: #295E70;
+  --color-primary-active: #214E5E;
+  --color-on-primary: #FFFFDD;
+
+  --color-accent: #61A3BA;
+  --color-accent-hover: #3E879F;
+  --color-accent-soft: #D9EEF2;
+
+  --color-focus-ring: rgba(97, 163, 186, 0.38);
+
+  /* success/warning/danger bên dưới: giá trị cũ chỉ đạt 3.5–4.1:1 khi dùng
+     làm CHỮ trên chính -soft nền của nó (Badge.tsx text-success/warning/
+     danger trên bg-*-soft — status pill "Đã xác nhận"/"Đã bỏ qua" khắp app,
+     cỡ chữ nhỏ nên không được tính là "large text"). Đậm hơn tới ≥4.5:1,
+     giữ hue để vẫn đọc đúng "thành công/cảnh báo/nguy hiểm". */
+  --color-success: #487453;
+  --color-success-soft: #E4F0D8;
+  --color-green-accent: #A2C579;
+  --color-lime-accent: #D2DE32;
+
+  --color-warning: #826427;
+  --color-warning-soft: #F6E9B8;
+
+  --color-danger: #994D47;
+  --color-danger-soft: #F5DAD5;
+
+  /* info trùng accent theo giá trị cũ (#61A3BA) nhưng Badge variant="info"
+     dùng riêng token này làm CHỮ trên info-soft — chỉ 2.34:1. Tách khỏi
+     accent (accent giữ nguyên, chỉ dùng trang trí/icon, không phải chữ) và
+     đậm riêng info để đạt AA mà không ảnh hưởng chỗ khác đang dùng accent. */
+  --color-info: #437080;
+  --color-info-soft: #D9EEF2;
+
+  --shadow-sm: 0 1px 2px rgba(35, 64, 77, 0.04);
+  --shadow-md: 0 4px 14px rgba(35, 64, 77, 0.07);
+  --shadow-lg: 0 12px 32px rgba(35, 64, 77, 0.12);
+
+  --navigator-900: #0F1F38;
+  --navigator-800: #1E4E85;
+  --navigator-700: #2563A6;
+  --navigator-600: #3B7AB8;
+  --navigator-100: #E1EBFA;
+  --navigator-50: #F0F5FC;
+
+  --bg-canvas: #EDF2FB;
+  --bg-surface: #FFFFFF;
+  --bg-surface-subtle: #F5F7FC;
+
+  --text-primary: #0F1F38;
+  --text-secondary: #5A6A85;
+  --text-tertiary: #8B98AB;
+
+  --border-default: #D5DDEB;
+
+  --success: #2A6B4F;
+  --success-subtle: #DFF0E6;
+
+  --warning: #8A5712;
+  --warning-subtle: #FBEBD2;
+
+  --danger: #A03D3D;
+  --danger-subtle: #F9DEDE;
+
+  --info: #2563A6;
+  --info-subtle: #E1EBFA;
+
+  font-family: 'Geist Variable', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+  --color-ink-900: #FFFFDD;
+  --color-ink-700: #D4E1DC;
+  --color-ink-500: #B5C9C7;
+  --color-ink-400: #9BB3B5;
+
+  --color-paper: #17343F;
+  --color-paper-raised: #23404D;
+  --color-paper-sunken: #294A55;
+
+  --color-wash-porcelain: #1E3E49;
+  --color-wash-sage: #294A3A;
+  --color-wash-apricot: #463D2B;
+  --color-wash-mist: #294A55;
+
+  --color-action-solid: #9BCBD2;
+  --color-action-hover: #B4DDE0;
+  --color-action-highlight: #61A3BA;
+  --color-action-tint: #234F5D;
+  --color-success-solid: #9AC6A0;
+  --color-success-tint: #2A4538;
+  --color-warning-solid: #D9C47A;
+  --color-warning-tint: #453D28;
+  --color-danger-solid: #E3A49A;
+  --color-danger-tint: #4A3532;
+
+  --color-hairline: rgba(200, 217, 214, 0.16);
+
+  --color-app-bg: #17343F;
+  --color-page-bg: #17343F;
+  --color-sidebar-bg: #1E3E49;
+  --color-topbar-bg: #1E3E49;
+
+  --color-surface: #23404D;
+  --color-surface-subtle: #294A55;
+  --color-surface-muted: #2E4E58;
+  --color-surface-hover: #3D6771;
+
+  --color-border: #325964;
+  --color-border-subtle: #294A55;
+  --color-border-strong: #4D7780;
+
+  --color-text-primary: #FFFFDD;
+  --color-text-secondary: #C8D9D6;
+  --color-text-muted: #9BB3B5;
+  --color-text-disabled: #789096;
+
+  --color-primary: #9BCBD2;
+  --color-primary-hover: #B4DDE0;
+  --color-primary-active: #D2EEEE;
+  --color-on-primary: #17343F;
+
+  --color-accent: #9BCBD2;
+  --color-accent-hover: #B4DDE0;
+  --color-accent-soft: #234F5D;
+
+  --color-focus-ring: rgba(155, 203, 210, 0.45);
+
+  --color-success: #9AC6A0;
+  --color-success-soft: rgba(79, 127, 91, 0.3);
+
+  --color-warning: #D9C47A;
+  --color-warning-soft: rgba(138, 107, 42, 0.32);
+
+  --color-danger: #E3A49A;
+  --color-danger-soft: rgba(180, 91, 84, 0.32);
+
+  --color-info: #9BCBD2;
+  --color-info-soft: rgba(97, 163, 186, 0.32);
+
+  --shadow-sm: 0 1px 2px rgba(12, 30, 36, 0.4);
+  --shadow-md: 0 4px 14px rgba(12, 30, 36, 0.5);
+  --shadow-lg: 0 12px 32px rgba(12, 30, 36, 0.6);
+
+  --navigator-900: #17343F;
+  --navigator-800: #234F5D;
+  --navigator-700: #9BCBD2;
+  --navigator-100: #2E4E58;
+  --navigator-50: #23404D;
+
+  --bg-canvas: #17343F;
+  --bg-surface: #23404D;
+  --bg-surface-subtle: #294A55;
+
+  --text-primary: #FFFFDD;
+  --text-secondary: #C8D9D6;
+  --text-tertiary: #9BB3B5;
+
+  --border-default: #325964;
+
+  --success: #9AC6A0;
+  --success-subtle: rgba(79, 127, 91, 0.3);
+
+  --warning: #D9C47A;
+  --warning-subtle: rgba(138, 107, 42, 0.32);
+
+  --danger: #E3A49A;
+  --danger-subtle: rgba(180, 91, 84, 0.32);
+
+  --info: #9BCBD2;
+  --info-subtle: rgba(97, 163, 186, 0.32);
+}
+
+/* Hai chế độ đơn sắc: giữ accent Mondaiy nhưng nền và bề mặt tuyệt đối trắng/đen. */
+[data-theme="white"] {
+  color-scheme: light;
+  --color-app-bg: #ffffff;
+  --color-page-bg: #ffffff;
+  --color-sidebar-bg: #ffffff;
+  --color-topbar-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #ffffff;
+  --color-surface-muted: #f7f7f7;
+  --color-surface-hover: #eeeeee;
+  --color-border: #d9d9d9;
+  --color-border-subtle: #e9e9e9;
+  --color-border-strong: #b8b8b8;
+  --color-text-primary: #111111;
+  --color-text-secondary: #555555;
+  --color-text-muted: #777777;
+  --color-text-disabled: #a3a3a3;
+  --color-on-primary: #ffffff;
+  --color-accent-soft: #e8f3f2;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --bg-canvas: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-subtle: #f7f7f7;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-tertiary: #777777;
+  --border-default: #d9d9d9;
+}
+
+[data-theme="black"] {
+  color-scheme: dark;
+  --color-app-bg: #000000;
+  --color-page-bg: #000000;
+  --color-sidebar-bg: #000000;
+  --color-topbar-bg: #000000;
+  --color-surface: #000000;
+  --color-surface-subtle: #000000;
+  --color-surface-muted: #111111;
+  --color-surface-hover: #1d1d1d;
+  --color-border: #2b2b2b;
+  --color-border-subtle: #1d1d1d;
+  --color-border-strong: #444444;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c6c6c6;
+  --color-text-muted: #929292;
+  --color-text-disabled: #666666;
+  --color-primary: #b7dfe4;
+  --color-primary-hover: #d3eff1;
+  --color-primary-active: #ffffff;
+  --color-on-primary: #000000;
+  --color-accent: #b7dfe4;
+  --color-accent-hover: #d3eff1;
+  --color-accent-soft: #17343f;
+  --color-focus-ring: rgba(183, 223, 228, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.7);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.8);
+  --bg-canvas: #000000;
+  --bg-surface: #000000;
+  --bg-surface-subtle: #111111;
+  --text-primary: #ffffff;
+  --text-secondary: #c6c6c6;
+  --text-tertiary: #929292;
+  --border-default: #2b2b2b;
+}
+
+body {
+  background-color: var(--color-app-bg);
+  color: var(--color-text-primary);
+  font-family: 'Geist Variable', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Checkbox/radio/date-picker gốc trình duyệt không tự đọc theme của app —
+   không có accent-color/color-scheme thì luôn ra khung sáng mặc định của OS,
+   lệch hẳn với theme tối. Set một lần ở đây, mọi input thường trong app ăn
+   theo, không phải tự vá từng chỗ. */
+input,
+select,
+textarea {
+  accent-color: var(--color-primary);
+}
+
+/* Product workspace primitives */
+.app-shell {
+  background: var(--color-app-bg);
+  color: var(--color-text-primary);
+}
+
+.app-sidebar {
+  background: var(--color-sidebar-bg);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.app-toolbar {
+  background: color-mix(in srgb, var(--color-topbar-bg) 92%, transparent);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.app-panel {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-panel-muted {
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+}
+
+.app-control,
+.app-icon-button {
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: background-color 160ms ease-out, border-color 160ms ease-out,
+    color 160ms ease-out, box-shadow 160ms ease-out, transform 160ms ease-out;
+}
+
+.app-control:hover,
+.app-icon-button:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.app-control:focus-visible,
+.app-icon-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 38%, transparent);
+  outline-offset: 2px;
+}
+
+.app-field:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
+.app-icon-button:active {
+  transform: translateY(1px);
+}
+
+/* Ô hỏi trên trang briefing. Trước đây nó dùng nền surface-muted + viền hairline
+   giống hệt mọi thẻ khác trên trang, nên chìm nghỉm — người mới vào không thấy
+   ngay là mình nên gõ vào đâu trước. Bản ring cứng (viền 4px + halo tròn) đầu
+   tiên lại quá lộ, nhìn như khung lỗi/focus quên tắt. Đổi sang gradient mềm:
+   nền chính nó ngả sắc accent rất nhạt ở góc trên-trái rồi tan vào nền surface
+   bình thường, cộng một bóng đổ lớn-mờ-nhạt phía dưới làm điểm nhấn thay vì
+   viền cứng bao quanh.
+
+   Toàn bộ lấy từ biến theme nên tự đúng theo cả 3 bảng màu (jade/plum/quartz)
+   và cả sáng lẫn tối — không hardcode màu nào. */
+.app-composer-hero {
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--color-accent) 8%, var(--color-surface)) 0%,
+    var(--color-surface) 60%
+  );
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-e2), 0 20px 48px -20px color-mix(in srgb, var(--color-accent) 35%, transparent);
+  transition: box-shadow 240ms var(--ease-out-quint), background 240ms var(--ease-out-quint), border-color 240ms var(--ease-out-quint);
+}
+
+/* Đang gõ thì gradient/bóng đậm lên một chút — xác nhận đúng chỗ vừa bấm vào,
+   vẫn không dùng viền cứng. */
+.app-composer-hero:focus-within {
+  border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--color-accent) 13%, var(--color-surface)) 0%,
+    var(--color-surface) 65%
+  );
+  box-shadow: var(--shadow-e3), 0 24px 56px -18px color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-composer-hero {
+    transition: none;
+  }
+}
+
+.app-nav-item,
+.app-menu-item {
+  color: var(--color-text-secondary);
+  border: 1px solid transparent;
+  transition: background-color 240ms var(--ease-out-quint), border-color 240ms var(--ease-out-quint),
+    color 240ms var(--ease-out-quint), transform 240ms var(--ease-out-quint);
+}
+
+.app-nav-item:hover,
+.app-menu-item:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-subtle);
+}
+
+.app-nav-item-active {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.app-nav-active-pill {
+  background: var(--color-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 24%, transparent);
+  box-shadow: inset 2px 0 0 var(--color-accent);
+}
+
+.app-field {
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  transition: background-color 160ms ease-out, border-color 160ms ease-out,
+    box-shadow 160ms ease-out;
+}
+
+.app-field::placeholder {
+  color: var(--color-text-muted);
+}
+
+.app-field:hover {
+  border-color: var(--color-border-strong);
+}
+
+.app-field:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+.app-overlay {
+  background: color-mix(in srgb, #17343f 54%, transparent);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-control,
+  .app-icon-button,
+  .app-nav-item,
+  .app-menu-item,
+  .app-field {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* Tour hướng dẫn (driver.js) — map theo token màu/font của app thay vì để
+   mặc định trắng/đen cứng của thư viện, để tự đổi theo sáng/tối. */
+.mondaiy-tour.driver-popover {
+  font-family: 'Geist Variable', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-lg);
+  padding: 18px;
+  max-width: 320px;
+}
+
+.mondaiy-tour .driver-popover-title {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.mondaiy-tour .driver-popover-title[style*='block'] + .driver-popover-description {
+  margin-top: 6px;
+}
+
+.mondaiy-tour .driver-popover-description {
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.mondaiy-tour .driver-popover-close-btn {
+  color: var(--color-text-muted);
+}
+
+.mondaiy-tour .driver-popover-close-btn:hover,
+.mondaiy-tour .driver-popover-close-btn:focus {
+  color: var(--color-text-primary);
+}
+
+.mondaiy-tour .driver-popover-progress-text {
+  font-family: inherit;
+  color: var(--color-text-muted);
+}
+
+.mondaiy-tour .driver-popover-footer-btn {
+  font-family: inherit;
+  background: var(--color-surface-muted);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-field);
+  padding: 5px 12px;
+  transition: background-color 160ms ease-out, border-color 160ms ease-out;
+}
+
+.mondaiy-tour .driver-popover-footer-btn:hover,
+.mondaiy-tour .driver-popover-footer-btn:focus {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
+}
+
+.mondaiy-tour .driver-popover-next-btn,
+.mondaiy-tour .driver-popover-done-btn {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}
+
+.mondaiy-tour .driver-popover-next-btn:hover,
+.mondaiy-tour .driver-popover-done-btn:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+}
+
+.mondaiy-tour .driver-popover-arrow-side-left { border-right-color: var(--color-surface); }
+.mondaiy-tour .driver-popover-arrow-side-right { border-left-color: var(--color-surface); }
+.mondaiy-tour .driver-popover-arrow-side-top { border-bottom-color: var(--color-surface); }
+.mondaiy-tour .driver-popover-arrow-side-bottom { border-top-color: var(--color-surface); }
+
+/* Cầu nối có phạm vi cho utility cũ còn dùng mã màu trực tiếp.
+   Dùng class-token chính xác để class `dark:*` không vô tình đổi giao diện
+   sáng. Đây là lớp tương thích trong lúc app chuyển dần sang semantic token. */
+[class~="bg-white"] { background-color: var(--color-surface) !important; }
+[class~="bg-[#EDF2FB]"] { background-color: var(--color-surface-muted) !important; }
+[class~="bg-[#F5F7FC]"],
+[class~="bg-[#F7F9FC]"] { background-color: var(--color-surface-subtle) !important; }
+[class~="bg-[#EBEFF8]"],
+[class~="bg-[#F0F5FC]"],
+[class~="bg-[#E2E8F0]"] { background-color: var(--color-surface-muted) !important; }
+[class~="bg-[#E1EBFA]"],
+[class~="bg-[#E4EAF6]"] { background-color: var(--color-accent-soft) !important; }
+[class~="bg-[#DFF0E6]"] { background-color: var(--color-success-soft) !important; }
+[class~="bg-[#0F1F38]"],
+[class~="bg-[#12305B]"] { background-color: var(--color-text-primary) !important; }
+[class~="bg-[#2563A6]"] { background-color: var(--color-primary) !important; }
+
+[class~="text-[#0F1F38]"],
+[class~="text-[#12305B]"],
+[class~="text-[#1B1C14]"] { color: var(--color-text-primary) !important; }
+[class~="text-[#243A5C]"],
+[class~="text-[#5A6A85]"],
+[class~="text-[#52657A]"],
+[class~="text-[#5C5D50]"],
+[class~="text-[#6E6F62]"] { color: var(--color-text-secondary) !important; }
+[class~="text-[#8B98AB]"] { color: var(--color-text-muted) !important; }
+[class~="text-[#2563A6]"],
+[class~="text-[#175C70]"] { color: var(--color-primary) !important; }
+[class~="text-[#2A6B4F]"],
+[class~="text-[#2F6B4F]"] { color: var(--color-success) !important; }
+
+[class~="border-[#D5DDEB]"],
+[class~="border-[#DDE3EA]"],
+[class~="border-[#E4EAF6]"],
+[class~="border-[#E7E3D5]"] { border-color: var(--color-border) !important; }
+[class~="border-[#2563A6]"],
+[class~="border-[#175C70]"] { border-color: var(--color-accent) !important; }
+[class~="ring-[#2563A6]"] { --tw-ring-color: var(--color-focus-ring) !important; }
+
+[class~="hover:bg-[#1E4E85]"]:hover,
+[class~="hover:bg-[#0F4959]"]:hover { background-color: var(--color-primary-hover) !important; }
+[class~="hover:text-[#1E4E85]"]:hover,
+[class~="hover:text-[#0F4959]"]:hover { color: var(--color-primary-hover) !important; }
+
+:where([data-theme="dark"], .dark) [class~="dark:bg-[#0A1628]"],
+:where([data-theme="dark"], .dark)[class~="dark:bg-[#0A1628]"] { background-color: var(--color-app-bg) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:bg-[#0F1F38]"],
+:where([data-theme="dark"], .dark)[class~="dark:bg-[#0F1F38]"] { background-color: var(--color-surface-subtle) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:bg-[#122038]"],
+:where([data-theme="dark"], .dark)[class~="dark:bg-[#122038]"] { background-color: var(--color-surface) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:bg-[#15243E]"],
+:where([data-theme="dark"], .dark) [class~="dark:bg-[#1A2A42]"],
+:where([data-theme="dark"], .dark) [class~="dark:bg-[#1E2E4A]"] { background-color: var(--color-surface-muted) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:text-[#E2E8F0]"],
+:where([data-theme="dark"], .dark) [class~="dark:text-[#F4F7FC]"] { color: var(--color-text-primary) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:text-[#AEB9CC]"] { color: var(--color-text-secondary) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:text-[#7EB0E8]"] { color: var(--color-primary) !important; }
+:where([data-theme="dark"], .dark) [class~="dark:border-[#1E2E4A]"],
+:where([data-theme="dark"], .dark) [class~="dark:border-[#1A2A42]"],
+:where([data-theme="dark"], .dark) [class~="dark:border-[#273653]"] { border-color: var(--color-border) !important; }
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 34%, transparent);
+  color: var(--color-text-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Ô nhập chữ: bỏ khung outline chữ nhật (focus:outline-none không chặn :focus-visible). */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[contenteditable='true']:focus-visible {
+  outline: none;
+  outline-offset: 0;
+}
+
+/* Tiêu đề: Cormorant — chỉ font/weight, không khóa size
+   (để utility text-[clamp(...)] trên landing và text-3xl trên app thắng) */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+h1, h2 {
+  line-height: 1.18;
+}
+
+.font-heading {
+  letter-spacing: -0.012em;
+}
+
+/* Landing giữ Geist + Cormorant, không kéo font app nội bộ */
+.landing-root {
+  font-family: var(--font-landing);
+}
+
+.landing-root h1,
+.landing-root h2,
+.landing-root h3,
+.landing-root h4,
+.landing-root h5,
+.landing-root h6,
+.landing-root .font-heading {
+  font-family: var(--font-landing-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  text-wrap: balance;
+}
+
+/* Tuỳ chọn trợ năng */
+.high-contrast {
+  --border-default: #000000;
+  --color-border: #000000;
+  --text-primary: #000000;
+  --color-text-primary: #000000;
+  --text-secondary: #000000;
+  --color-text-secondary: #000000;
+}
+
+[data-theme="dark"].high-contrast,
+.dark.high-contrast {
+  --border-default: #FFFFFF;
+  --color-border: #FFFFFF;
+  --text-primary: #FFFFFF;
+  --color-text-primary: #FFFFFF;
+  --text-secondary: #E2E8F0;
+  --color-text-secondary: #E2E8F0;
+}
+
+/*
+  Cỡ chữ S/M/L scale rem trên html — Tailwind (text-xs/sm/…) dùng rem nên
+  cần gắn ở đây thì Briefing History, Settings, v.v. mới đổi được.
+
+  Landing dùng rem trong clamp → nếu không chống lại sẽ bị nhỏ/to theo.
+  .landing-root zoom ngược để giữ kích thước marketing ổn định.
+*/
+html.text-size-sm {
+  font-size: 87.5%;
+}
+
+html.text-size-md {
+  font-size: 100%;
+}
+
+html.text-size-lg,
+html.large-text {
+  font-size: 112.5%;
+}
+
+html.text-size-sm .landing-root {
+  zoom: calc(1 / 0.875);
+}
+
+html.text-size-lg .landing-root,
+html.large-text .landing-root {
+  zoom: calc(1 / 1.125);
+}
+
+@supports not (zoom: 1) {
+  html.text-size-sm .landing-root {
+    font-size: 114.2857%;
+  }
+
+  html.text-size-lg .landing-root,
+  html.large-text .landing-root {
+    font-size: 88.8889%;
+  }
+}
+
+/*
+  BỘ NỀN MÀU (PALETTE)
+  ====================
+  Trục RIÊNG, vuông góc với sáng/tối: người dùng chọn "tông" (mặc định / ngọc
+  bích / mận / thạch anh) và vẫn giữ được chế độ sáng hoặc tối của mình. Gộp
+  hai thứ vào một danh sách sẽ nhân đôi số lựa chọn và làm mất chế độ tối khi
+  đổi tông.
+
+  Chỉ ghi đè nhóm token NỀN / VIỀN / NHẤN. Token chữ giữ nguyên vì cặp
+  chữ-trên-nền của bản gốc đã được cân tương phản; đổi cả chữ là phải kiểm lại
+  toàn bộ, và mỗi tông sai một chỗ là lỗi tiếp cận.
+
+  Mỗi tông đều có bản sáng và bản tối. Thiếu một bản thì người dùng đang ở chế
+  độ tối chọn tông mới sẽ rơi về nền sáng chói mắt.
+*/
+
+/* --- Ngọc bích: xanh lục trầm, hợp làm việc lâu --- */
+[data-palette="jade"][data-theme="light"] {
+  --color-app-bg: #F2F7F3;
+  --color-page-bg: #F2F7F3;
+  --color-sidebar-bg: #E7F0E9;
+  --color-topbar-bg: #F2F7F3;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #FBFDFB;
+  --color-surface-muted: #E9F1EB;
+  --color-surface-hover: #DDEBE1;
+  --color-border: #C3D9C9;
+  --color-border-subtle: #DCE9DF;
+  --color-border-strong: #9FC0A9;
+  --color-primary: #2F6B4F;
+  --color-primary-hover: #275B43;
+  --color-primary-active: #1F4A37;
+  --color-accent: #4E9B74;
+  --color-accent-hover: #3C8460;
+  --color-accent-soft: #D8EDE0;
+  --color-focus-ring: rgba(78, 155, 116, 0.4);
+}
+
+[data-palette="jade"][data-theme="dark"],
+[data-palette="jade"].dark {
+  --color-app-bg: #0D1A14;
+  --color-page-bg: #0D1A14;
+  --color-sidebar-bg: #10231A;
+  --color-topbar-bg: #0D1A14;
+  --color-surface: #14291F;
+  --color-surface-subtle: #112318;
+  --color-surface-muted: #17301F;
+  --color-surface-hover: #1D3B29;
+  --color-border: #23492F;
+  --color-border-subtle: #1A3524;
+  --color-border-strong: #336A45;
+  --color-primary: #57B382;
+  --color-primary-hover: #6CC494;
+  --color-primary-active: #47A071;
+  --color-accent: #6CC494;
+  --color-accent-hover: #85D3A8;
+  --color-accent-soft: #1C3E2B;
+  --color-focus-ring: rgba(108, 196, 148, 0.45);
+}
+
+/* --- Mận: tím trầm, tương phản ấm --- */
+[data-palette="plum"][data-theme="light"] {
+  --color-app-bg: #F8F4F8;
+  --color-page-bg: #F8F4F8;
+  --color-sidebar-bg: #F0E8F1;
+  --color-topbar-bg: #F8F4F8;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #FDFBFD;
+  --color-surface-muted: #F1E9F2;
+  --color-surface-hover: #E8DCEA;
+  --color-border: #D8C6DB;
+  --color-border-subtle: #E9DDEB;
+  --color-border-strong: #BFA3C4;
+  --color-primary: #6B3F73;
+  --color-primary-hover: #5A3461;
+  --color-primary-active: #4A2A50;
+  --color-accent: #9563A0;
+  --color-accent-hover: #7F4F8A;
+  --color-accent-soft: #EEDFF1;
+  --color-focus-ring: rgba(149, 99, 160, 0.4);
+}
+
+[data-palette="plum"][data-theme="dark"],
+[data-palette="plum"].dark {
+  --color-app-bg: #170F1A;
+  --color-page-bg: #170F1A;
+  --color-sidebar-bg: #1D1421;
+  --color-topbar-bg: #170F1A;
+  --color-surface: #241829;
+  --color-surface-subtle: #1E1322;
+  --color-surface-muted: #2A1C30;
+  --color-surface-hover: #33233A;
+  --color-border: #3D2B45;
+  --color-border-subtle: #2C1E32;
+  --color-border-strong: #5A3F66;
+  --color-primary: #B98AC4;
+  --color-primary-hover: #C9A0D2;
+  --color-primary-active: #A776B3;
+  --color-accent: #C9A0D2;
+  --color-accent-hover: #D8B8DF;
+  --color-accent-soft: #33233A;
+  --color-focus-ring: rgba(201, 160, 210, 0.45);
+}
+
+/* --- Thạch anh: xám trung tính, ít màu nhất --- */
+[data-palette="quartz"][data-theme="light"] {
+  --color-app-bg: #F5F6F7;
+  --color-page-bg: #F5F6F7;
+  --color-sidebar-bg: #ECEEF0;
+  --color-topbar-bg: #F5F6F7;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #FAFBFB;
+  --color-surface-muted: #EDEFF1;
+  --color-surface-hover: #E2E5E8;
+  --color-border: #CFD4D8;
+  --color-border-subtle: #E2E5E8;
+  --color-border-strong: #AEB6BC;
+  --color-primary: #3D4A54;
+  --color-primary-hover: #313C45;
+  --color-primary-active: #273038;
+  --color-accent: #5B6C78;
+  --color-accent-hover: #47565F;
+  --color-accent-soft: #E1E6EA;
+  --color-focus-ring: rgba(91, 108, 120, 0.4);
+}
+
+[data-palette="quartz"][data-theme="dark"],
+[data-palette="quartz"].dark {
+  --color-app-bg: #131517;
+  --color-page-bg: #131517;
+  --color-sidebar-bg: #171A1D;
+  --color-topbar-bg: #131517;
+  --color-surface: #1D2124;
+  --color-surface-subtle: #181B1E;
+  --color-surface-muted: #22272B;
+  --color-surface-hover: #2A3035;
+  --color-border: #333A40;
+  --color-border-subtle: #24292E;
+  --color-border-strong: #4A545C;
+  --color-primary: #9DAAB4;
+  --color-primary-hover: #B2BDC5;
+  --color-primary-active: #8896A1;
+  --color-accent: #B2BDC5;
+  --color-accent-hover: #C6CFD5;
+  --color-accent-soft: #2A3035;
+  --color-focus-ring: rgba(178, 189, 197, 0.45);
+}
+
+/* Tương phản cao là chế độ TIẾP CẬN, không phải một tông thẩm mỹ — nó phải
+   thắng mọi palette, nếu không người bật nó rồi đổi tông sẽ mất hết tương
+   phản vừa bật. */
+html.high-contrast[data-palette] {
+  --color-border: currentColor;
+}
+
+/*
+  BÙ X-HEIGHT CHO TIÊU ĐỀ
+  =======================
+  Cormorant (font-heading) có x-height ~0.36em, Geist (body) ~0.52em. Cùng một
+  `font-size` thì tiêu đề trông NHỎ HƠN nội dung — người đọc không phân biệt
+  được đâu là tiêu đề. Đây là đặc tính của bộ chữ, không sửa được bằng cách
+  chọn utility khác.
+
+  Bản trước chỉ liệt kê vài tổ hợp class (text-sm/base/lg/3xl/xs) và chỉ chạy
+  trong `.app-shell`. Hai lỗ hổng thật:
+    - `text-2xl` (14 chỗ), `text-xl`, `text-4xl` không được bù gì cả.
+    - Trang ngoài app-shell không được bù.
+
+  Nay phủ TRỌN thang xs -> 5xl. Hệ số giảm dần theo cỡ: chữ nhỏ cần bù mạnh
+  (~1.3x) vì đó là chỗ tiêu đề dễ lẫn vào nội dung nhất; cỡ lớn đã hiển nhiên
+  là tiêu đề nên chỉ cần ~1.12x, bù mạnh sẽ vỡ layout.
+
+  Không đụng `.landing-root`: trang giới thiệu dùng thang clamp() riêng và chủ
+  ý để chữ mảnh.
+
+  Dùng rem để vẫn co giãn theo cỡ chữ S/M/L người dùng chọn trên `html`.
+*/
+.font-heading.text-xs,
+h1.text-xs, h2.text-xs, h3.text-xs, h4.text-xs, h5.text-xs, h6.text-xs {
+  font-size: 0.9375rem; /* 0.75 -> 1.25x */
+  line-height: 1.4;
+}
+
+.font-heading.text-sm,
+h1.text-sm, h2.text-sm, h3.text-sm, h4.text-sm, h5.text-sm, h6.text-sm {
+  font-size: 1.125rem; /* 0.875 -> 1.29x */
+  line-height: 1.35;
+}
+
+.font-heading.text-base,
+h1.text-base, h2.text-base, h3.text-base, h4.text-base, h5.text-base, h6.text-base {
+  font-size: 1.25rem; /* 1 -> 1.25x */
+  line-height: 1.35;
+}
+
+.font-heading.text-lg,
+h1.text-lg, h2.text-lg, h3.text-lg, h4.text-lg, h5.text-lg, h6.text-lg {
+  font-size: 1.375rem; /* 1.125 -> 1.22x */
+  line-height: 1.3;
+}
+
+.font-heading.text-xl,
+h1.text-xl, h2.text-xl, h3.text-xl, h4.text-xl, h5.text-xl, h6.text-xl {
+  font-size: 1.5rem; /* 1.25 -> 1.2x */
+  line-height: 1.28;
+}
+
+.font-heading.text-2xl,
+h1.text-2xl, h2.text-2xl, h3.text-2xl, h4.text-2xl, h5.text-2xl, h6.text-2xl {
+  font-size: 1.75rem; /* 1.5 -> 1.17x */
+  line-height: 1.24;
+}
+
+.font-heading.text-3xl,
+h1.text-3xl, h2.text-3xl, h3.text-3xl, h4.text-3xl, h5.text-3xl, h6.text-3xl {
+  font-size: 2.125rem; /* 1.875 -> 1.13x */
+  line-height: 1.2;
+}
+
+.font-heading.text-4xl,
+h1.text-4xl, h2.text-4xl, h3.text-4xl, h4.text-4xl, h5.text-4xl, h6.text-4xl {
+  font-size: 2.5rem; /* 2.25 -> 1.11x */
+  line-height: 1.16;
+}
+
+.font-heading.text-5xl,
+h1.text-5xl, h2.text-5xl, h3.text-5xl, h4.text-5xl, h5.text-5xl, h6.text-5xl {
+  font-size: 3.25rem; /* 3 -> 1.08x */
+  line-height: 1.12;
+}
+
+/* Tiêu đề KHÔNG kèm utility cỡ nào: trước đây thừa hưởng cỡ body nên trông
+   nhỏ hơn hẳn phần nội dung ngay bên dưới. */
+.app-shell h1:not([class*='text-']) { font-size: 2.125rem; line-height: 1.2; }
+.app-shell h2:not([class*='text-']) { font-size: 1.625rem; line-height: 1.25; }
+.app-shell h3:not([class*='text-']) { font-size: 1.375rem; line-height: 1.3; }
+.app-shell h4:not([class*='text-']) { font-size: 1.1875rem; line-height: 1.35; }
+
+/* Landing giữ nguyên thang riêng — clamp() của nó đã tính cả x-height, và
+   marketing page có nhịp chữ được thiết kế riêng. Phải phủ CẢ h1-h6 trần chứ
+   không chỉ tổ hợp .font-heading: landing dùng `h3.text-xl` không kèm class
+   .font-heading, nên bản đầu vẫn bị nâng 20px -> 24px trái với chủ ý. */
+.landing-root .font-heading[class*='text-'],
+.landing-root h1[class*='text-'],
+.landing-root h2[class*='text-'],
+.landing-root h3[class*='text-'],
+.landing-root h4[class*='text-'],
+.landing-root h5[class*='text-'],
+.landing-root h6[class*='text-'] {
+  font-size: revert-layer;
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-strong);
+}
+
+/* Hero living field: chỉ animate container (transform/opacity),
+   không chồng CSS lên chính animation của gif/video. */
+@keyframes hero-bg-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
+  50% { transform: translate3d(0, -1.2%, 0) scale(1.1); }
+}
+
+@keyframes hero-float-far {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes hero-float-mid {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -16px, 0); }
+}
+
+@keyframes hero-float-near {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(0, -22px, 0) rotate(0.4deg); }
+}
+
+@keyframes hero-content-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-bg-drift {
+    animation: hero-bg-drift 48s var(--ease-in-out-soft) infinite;
+    will-change: transform;
+  }
+
+  .hero-float-far {
+    animation: hero-float-far 22s var(--ease-in-out-soft) infinite;
+    will-change: transform;
+  }
+
+  .hero-float-mid {
+    animation: hero-float-mid 16s var(--ease-in-out-soft) infinite;
+    will-change: transform;
+  }
+
+  .hero-float-near {
+    animation: hero-float-near 11s var(--ease-in-out-soft) infinite;
+    will-change: transform;
+  }
+
+  .hero-content-in {
+    animation: hero-content-in var(--d-slow) var(--ease-out-quint) both;
+  }
+
+  .hero-content-in-delay-1 { animation-delay: 80ms; }
+  .hero-content-in-delay-2 { animation-delay: 140ms; }
+  .hero-content-in-delay-3 { animation-delay: 200ms; }
+  .hero-content-in-delay-4 { animation-delay: 260ms; }
+}
+
+.hero-fragment-shell {
+  position: relative;
+  isolation: isolate;
+  background: color-mix(in srgb, var(--color-paper-raised) 55%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+.reduce-motion .hero-bg-drift,
+.reduce-motion .hero-float-far,
+.reduce-motion .hero-float-mid,
+.reduce-motion .hero-float-near,
+.reduce-motion .hero-content-in {
+  animation: none !important;
+}

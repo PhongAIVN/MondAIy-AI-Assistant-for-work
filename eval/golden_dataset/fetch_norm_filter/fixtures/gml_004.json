@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-004",
+    "threadId": "thread-gml-004",
+    "labelIds": [
+      "SPAM"
+    ],
+    "snippet": "Mua ngay khóa học hôm nay!",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Spammer <spam@market.com>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-004"
+        }
+      ],
+      "body": {
+        "data": "TXVhIG5nYXkga2jDs2EgaOG7jWMgaMO0bSBuYXkh",
+        "size": 26
+      }
+    }
+  }
+]

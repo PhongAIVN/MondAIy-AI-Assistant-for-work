@@ -1,0 +1,21 @@
+[
+  {
+    "id": "msg-dsc-008",
+    "channel_id": "team-channel-id",
+    "guild_id": "guild-001",
+    "content": "Vâng tôi sẽ làm xong.",
+    "timestamp": "2025-01-01T00:00:00+00:00",
+    "edited_timestamp": null,
+    "author": {
+      "id": "usr-student",
+      "username": "student",
+      "discriminator": "0"
+    },
+    "attachments": [],
+    "mentions": [],
+    "referenced_message": {
+      "id": "msg-parent",
+      "content": "Cần nộp slide trước 5h chiều."
+    }
+  }
+]

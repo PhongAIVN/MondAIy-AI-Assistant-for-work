@@ -1,0 +1,6166 @@
+[
+  {
+    "id": "SLK-001",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_join kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB001:1755230401.000100",
+      "channel_id": "C0PUB001",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_join",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-002",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_join với nội dung trơn",
+    "input": {
+      "message_id": "D0DM002:1755230402.000100",
+      "channel_id": "D0DM002",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_join",
+      "text": "channel_join event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-003",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_leave kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB003:1755230403.000100",
+      "channel_id": "C0PUB003",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_leave",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-004",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_leave với nội dung trơn",
+    "input": {
+      "message_id": "D0DM004:1755230404.000100",
+      "channel_id": "D0DM004",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_leave",
+      "text": "channel_leave event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-005",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_topic kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB005:1755230405.000100",
+      "channel_id": "C0PUB005",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_topic",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-006",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_topic với nội dung trơn",
+    "input": {
+      "message_id": "D0DM006:1755230406.000100",
+      "channel_id": "D0DM006",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_topic",
+      "text": "channel_topic event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-007",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_purpose kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB007:1755230407.000100",
+      "channel_id": "C0PUB007",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_purpose",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-008",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_purpose với nội dung trơn",
+    "input": {
+      "message_id": "D0DM008:1755230408.000100",
+      "channel_id": "D0DM008",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_purpose",
+      "text": "channel_purpose event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-009",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_name kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB009:1755230409.000100",
+      "channel_id": "C0PUB009",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_name",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-010",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_name với nội dung trơn",
+    "input": {
+      "message_id": "D0DM010:1755230410.000100",
+      "channel_id": "D0DM010",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_name",
+      "text": "channel_name event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-011",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_archive kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB011:1755230411.000100",
+      "channel_id": "C0PUB011",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_archive",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-012",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_archive với nội dung trơn",
+    "input": {
+      "message_id": "D0DM012:1755230412.000100",
+      "channel_id": "D0DM012",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_archive",
+      "text": "channel_archive event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-013",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_unarchive kèm nội dung có tín hiệu mạnh vẫn bị DROP trước khi chấm điểm",
+    "input": {
+      "message_id": "C0PUB013:1755230413.000100",
+      "channel_id": "C0PUB013",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "channel_unarchive",
+      "text": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Vui lòng xác nhận trước thứ Sáu, việc này khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-014",
+    "group": "hard_filter_system_subtype",
+    "description": "subtype=channel_unarchive với nội dung trơn",
+    "input": {
+      "message_id": "D0DM014:1755230414.000100",
+      "channel_id": "D0DM014",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "channel_unarchive",
+      "text": "channel_unarchive event notice",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "SYSTEM_SUBTYPE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-015",
+    "group": "hard_filter_message_changed",
+    "description": "subtype=message_changed luôn DROP, không giữ bản sửa mới nhất (đơn giản hoá có chủ đích)",
+    "input": {
+      "message_id": "C0PUB015:1755230415.000100",
+      "channel_id": "C0PUB015",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "message_changed",
+      "text": "Please review and confirm before Friday, this is urgent.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "MESSAGE_CHANGED_DROPPED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Please review and confirm before Friday, this is urgent."
+    }
+  },
+  {
+    "id": "SLK-016",
+    "group": "hard_filter_message_changed",
+    "description": "subtype=message_changed luôn DROP, không giữ bản sửa mới nhất (đơn giản hoá có chủ đích)",
+    "input": {
+      "message_id": "D0DM016:1755230416.000100",
+      "channel_id": "D0DM016",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "message_changed",
+      "text": "Vui lòng xác nhận gấp giúp mình.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "MESSAGE_CHANGED_DROPPED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-017",
+    "group": "hard_filter_message_changed",
+    "description": "subtype=message_changed luôn DROP, không giữ bản sửa mới nhất (đơn giản hoá có chủ đích)",
+    "input": {
+      "message_id": "G0GROUP017:1755230417.000100",
+      "channel_id": "G0GROUP017",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": "message_changed",
+      "text": "Bản chỉnh sửa mới nhất của tài liệu.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "MESSAGE_CHANGED_DROPPED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-018",
+    "group": "hard_filter_message_changed",
+    "description": "subtype=message_changed luôn DROP, không giữ bản sửa mới nhất (đơn giản hoá có chủ đích)",
+    "input": {
+      "message_id": "C0PRIV018:1755230418.000100",
+      "channel_id": "C0PRIV018",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": "message_changed",
+      "text": "Updated attachment for the proposal.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "MESSAGE_CHANGED_DROPPED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-019",
+    "group": "hard_filter_message_changed",
+    "description": "subtype=message_changed luôn DROP, không giữ bản sửa mới nhất (đơn giản hoá có chủ đích)",
+    "input": {
+      "message_id": "C0PUB019:1755230419.000100",
+      "channel_id": "C0PUB019",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": "message_changed",
+      "text": "Sửa lại nội dung tin nhắn trước đó.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "MESSAGE_CHANGED_DROPPED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "Sửa lại nội dung tin nhắn trước đó."
+    }
+  },
+  {
+    "id": "SLK-020",
+    "group": "hard_filter_message_changed",
+    "description": "subtype=message_changed luôn DROP, không giữ bản sửa mới nhất (đơn giản hoá có chủ đích)",
+    "input": {
+      "message_id": "D0DM020:1755230420.000100",
+      "channel_id": "D0DM020",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": "message_changed",
+      "text": "Edited version of the earlier message.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "MESSAGE_CHANGED_DROPPED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-021",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB021:1755230421.000100",
+      "channel_id": "C0PUB021",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "<@U0PHONG01>",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-022",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB022:1755230422.000100",
+      "channel_id": "C0PUB022",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "<@U0PHONG01> <@U0THAI02>",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-023",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB023:1755230423.000100",
+      "channel_id": "C0PUB023",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": ":smile:",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-024",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB024:1755230424.000100",
+      "channel_id": "C0PUB024",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": ":+1: :eyes:",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-025",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB025:1755230425.000100",
+      "channel_id": "C0PUB025",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "<@U0PHONG01> :wave:",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-026",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB026:1755230426.000100",
+      "channel_id": "C0PUB026",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "   ",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-027",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB027:1755230427.000100",
+      "channel_id": "C0PUB027",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-028",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB028:1755230428.000100",
+      "channel_id": "C0PUB028",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "<@U0PHONG01>  <@U0PHONG01>",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-029",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB029:1755230429.000100",
+      "channel_id": "C0PUB029",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": ":raised_hands:",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-030",
+    "group": "hard_filter_empty_text",
+    "description": "text chỉ còn mention/emoji/khoảng trắng sau khi strip -> EMPTY_TEXT",
+    "input": {
+      "message_id": "C0PUB030:1755230430.000100",
+      "channel_id": "C0PUB030",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "<@U0LAN03> :thumbsup: :tada:",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "EMPTY_TEXT"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-031",
+    "group": "score_mentioned_current_user",
+    "description": "mentions_current_user=True cộng MENTIONED_CURRENT_USER, không có tín hiệu khác",
+    "input": {
+      "message_id": "C0PUB031:1755230431.000100",
+      "channel_id": "C0PUB031",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ảnh mới chụp ở buổi offsite hôm cuối tuần.",
+      "author_id": "U0LAN03",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Ảnh mới chụp ở buổi offsite hôm cuối tuần.",
+      "evidence": "Ảnh mới chụp ở buổi offsite hôm cuối tuần.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-032",
+    "group": "score_mentioned_current_user",
+    "description": "cùng nội dung nhưng không bị mention -> không cộng điểm, không tín hiệu nào khác -> DROP",
+    "input": {
+      "message_id": "C0PUB032:1755230432.000100",
+      "channel_id": "C0PUB032",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ảnh mới chụp ở buổi offsite hôm cuối tuần.",
+      "author_id": "U0LAN03",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-033",
+    "group": "score_mentioned_current_user",
+    "description": "mentions_current_user=True cộng MENTIONED_CURRENT_USER, không có tín hiệu khác",
+    "input": {
+      "message_id": "C0PUB033:1755230433.000100",
+      "channel_id": "C0PUB033",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bộ font chữ mới cho slide thuyết trình.",
+      "author_id": "U0MINH04",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Bộ font chữ mới cho slide thuyết trình.",
+      "evidence": "Bộ font chữ mới cho slide thuyết trình.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-034",
+    "group": "score_mentioned_current_user",
+    "description": "cùng nội dung nhưng không bị mention -> không cộng điểm, không tín hiệu nào khác -> DROP",
+    "input": {
+      "message_id": "C0PUB034:1755230434.000100",
+      "channel_id": "C0PUB034",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bộ font chữ mới cho slide thuyết trình.",
+      "author_id": "U0MINH04",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-035",
+    "group": "score_mentioned_current_user",
+    "description": "mentions_current_user=True cộng MENTIONED_CURRENT_USER, không có tín hiệu khác",
+    "input": {
+      "message_id": "C0PUB035:1755230435.000100",
+      "channel_id": "C0PUB035",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Danh sách quán ăn trưa gần văn phòng.",
+      "author_id": "U0AN05",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Danh sách quán ăn trưa gần văn phòng.",
+      "evidence": "Danh sách quán ăn trưa gần văn phòng.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-036",
+    "group": "score_mentioned_current_user",
+    "description": "cùng nội dung nhưng không bị mention -> không cộng điểm, không tín hiệu nào khác -> DROP",
+    "input": {
+      "message_id": "C0PUB036:1755230436.000100",
+      "channel_id": "C0PUB036",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Danh sách quán ăn trưa gần văn phòng.",
+      "author_id": "U0AN05",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-037",
+    "group": "score_mentioned_current_user",
+    "description": "mentions_current_user=True cộng MENTIONED_CURRENT_USER, không có tín hiệu khác",
+    "input": {
+      "message_id": "C0PUB037:1755230437.000100",
+      "channel_id": "C0PUB037",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Playlist nhạc cho buổi làm việc chiều nay.",
+      "author_id": "U0TRANG06",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Playlist nhạc cho buổi làm việc chiều nay.",
+      "evidence": "Playlist nhạc cho buổi làm việc chiều nay.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-038",
+    "group": "score_mentioned_current_user",
+    "description": "cùng nội dung nhưng không bị mention -> không cộng điểm, không tín hiệu nào khác -> DROP",
+    "input": {
+      "message_id": "C0PUB038:1755230438.000100",
+      "channel_id": "C0PUB038",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Playlist nhạc cho buổi làm việc chiều nay.",
+      "author_id": "U0TRANG06",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-039",
+    "group": "score_mentioned_current_user",
+    "description": "mentions_current_user=True cộng MENTIONED_CURRENT_USER, không có tín hiệu khác",
+    "input": {
+      "message_id": "C0PUB039:1755230439.000100",
+      "channel_id": "C0PUB039",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ghi chú linh tinh về bố cục văn phòng mới.",
+      "author_id": "U0DAT07",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Ghi chú linh tinh về bố cục văn phòng mới.",
+      "evidence": "Ghi chú linh tinh về bố cục văn phòng mới.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-040",
+    "group": "score_mentioned_current_user",
+    "description": "cùng nội dung nhưng không bị mention -> không cộng điểm, không tín hiệu nào khác -> DROP",
+    "input": {
+      "message_id": "C0PUB040:1755230440.000100",
+      "channel_id": "C0PUB040",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ghi chú linh tinh về bố cục văn phòng mới.",
+      "author_id": "U0DAT07",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-041",
+    "group": "score_direct_message",
+    "description": "channel_type=im, không mention/không tín hiệu khác — chỉ im/mpim mới cộng DIRECT_MESSAGE",
+    "input": {
+      "message_id": "D0DM041:1755230441.000100",
+      "channel_id": "D0DM041",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Cảm ơn bạn đã giúp mình hôm qua nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Cảm ơn bạn đã giúp mình hôm qua nhé.",
+      "evidence": "Cảm ơn bạn đã giúp mình hôm qua nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-042",
+    "group": "score_direct_message",
+    "description": "channel_type=mpim, không mention/không tín hiệu khác — chỉ im/mpim mới cộng DIRECT_MESSAGE",
+    "input": {
+      "message_id": "G0GROUP042:1755230442.000100",
+      "channel_id": "G0GROUP042",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chúc cả nhóm nghỉ ngơi vui vẻ.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Chúc cả nhóm nghỉ ngơi vui vẻ.",
+      "evidence": "Chúc cả nhóm nghỉ ngơi vui vẻ.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-043",
+    "group": "score_direct_message",
+    "description": "channel_type=public_channel, không mention/không tín hiệu khác — chỉ im/mpim mới cộng DIRECT_MESSAGE",
+    "input": {
+      "message_id": "C0PUB043:1755230443.000100",
+      "channel_id": "C0PUB043",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hôm nay văn phòng khá yên tĩnh.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-044",
+    "group": "score_direct_message",
+    "description": "channel_type=private_channel, không mention/không tín hiệu khác — chỉ im/mpim mới cộng DIRECT_MESSAGE",
+    "input": {
+      "message_id": "C0PRIV044:1755230444.000100",
+      "channel_id": "C0PRIV044",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ghi chú riêng tư về bố trí bàn ghế.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-045",
+    "group": "score_direct_message",
+    "description": "channel_type=im nhưng text là newsletter -> DIRECT_MESSAGE bị treo (is_newsletter_or_automated=True)",
+    "input": {
+      "message_id": "D0DM045:1755230445.000100",
+      "channel_id": "D0DM045",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Check out this month's newsletter and don't miss our latest offer.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-046",
+    "group": "score_direct_message",
+    "description": "channel_type=mpim nhưng text là newsletter -> DIRECT_MESSAGE bị treo (is_newsletter_or_automated=True)",
+    "input": {
+      "message_id": "G0GROUP046:1755230446.000100",
+      "channel_id": "G0GROUP046",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Check out this month's newsletter and don't miss our latest offer.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-047",
+    "group": "score_direct_message",
+    "description": "channel_type=im plain — thêm biến thể nội dung cho đủ 10 case nhóm này",
+    "input": {
+      "message_id": "D0DM047:1755230447.000100",
+      "channel_id": "D0DM047",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chúc mừng sinh nhật nha, chúc bạn nhiều sức khoẻ.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Chúc mừng sinh nhật nha, chúc bạn nhiều sức khoẻ.",
+      "evidence": "Chúc mừng sinh nhật nha, chúc bạn nhiều sức khoẻ.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-048",
+    "group": "score_direct_message",
+    "description": "channel_type=mpim plain — thêm biến thể nội dung cho đủ 10 case nhóm này",
+    "input": {
+      "message_id": "G0GROUP048:1755230448.000100",
+      "channel_id": "G0GROUP048",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vừa gọi món trà sữa ship tới văn phòng.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Vừa gọi món trà sữa ship tới văn phòng.",
+      "evidence": "Vừa gọi món trà sữa ship tới văn phòng.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-049",
+    "group": "score_direct_message",
+    "description": "channel_type=im plain — thêm biến thể nội dung cho đủ 10 case nhóm này",
+    "input": {
+      "message_id": "D0DM049:1755230449.000100",
+      "channel_id": "D0DM049",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Weekend plans anyone? Thinking about a short trip.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Weekend plans anyone?",
+      "evidence": "Weekend plans anyone? Thinking about a short trip.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-050",
+    "group": "score_direct_message",
+    "description": "channel_type=mpim plain — thêm biến thể nội dung cho đủ 10 case nhóm này",
+    "input": {
+      "message_id": "G0GROUP050:1755230450.000100",
+      "channel_id": "G0GROUP050",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Just sharing a fun photo from yesterday.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Just sharing a fun photo from yesterday.",
+      "evidence": "Just sharing a fun photo from yesterday.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-051",
+    "group": "score_thread_reply_to_self",
+    "description": "is_thread_reply_to_self=True cộng THREAD_REPLY_TO_SELF (hiện luôn False từ connector thật — xem TODO(OD-SLACK1), case này test rule engine độc lập)",
+    "input": {
+      "message_id": "C0PUB051:1755230451.000100",
+      "channel_id": "C0PUB051",
+      "channel_type": "public_channel",
+      "thread_ts": "1755230000.000001",
+      "subtype": null,
+      "text": "Đã gửi lại bản cập nhật trong thread này rồi.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": true,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "THREAD_REPLY_TO_SELF"
+      ],
+      "title": "Đã gửi lại bản cập nhật trong thread này rồi.",
+      "evidence": "Đã gửi lại bản cập nhật trong thread này rồi.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-052",
+    "group": "score_thread_reply_to_self",
+    "description": "cùng nội dung nhưng is_thread_reply_to_self=False -> không cộng điểm",
+    "input": {
+      "message_id": "C0PUB052:1755230452.000100",
+      "channel_id": "C0PUB052",
+      "channel_type": "public_channel",
+      "thread_ts": "1755230000.000001",
+      "subtype": null,
+      "text": "Đã gửi lại bản cập nhật trong thread này rồi.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-053",
+    "group": "score_thread_reply_to_self",
+    "description": "is_thread_reply_to_self=True cộng THREAD_REPLY_TO_SELF (hiện luôn False từ connector thật — xem TODO(OD-SLACK1), case này test rule engine độc lập)",
+    "input": {
+      "message_id": "C0PUB053:1755230453.000100",
+      "channel_id": "C0PUB053",
+      "channel_type": "public_channel",
+      "thread_ts": "1755230000.000001",
+      "subtype": null,
+      "text": "Following up on my earlier message in the thread.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": true,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "THREAD_REPLY_TO_SELF"
+      ],
+      "title": "Following up on my earlier message in the thread.",
+      "evidence": "Following up on my earlier message in the thread.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-054",
+    "group": "score_thread_reply_to_self",
+    "description": "cùng nội dung nhưng is_thread_reply_to_self=False -> không cộng điểm",
+    "input": {
+      "message_id": "C0PUB054:1755230454.000100",
+      "channel_id": "C0PUB054",
+      "channel_type": "public_channel",
+      "thread_ts": "1755230000.000001",
+      "subtype": null,
+      "text": "Following up on my earlier message in the thread.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-055",
+    "group": "score_thread_reply_to_self",
+    "description": "is_thread_reply_to_self=True cộng THREAD_REPLY_TO_SELF (hiện luôn False từ connector thật — xem TODO(OD-SLACK1), case này test rule engine độc lập)",
+    "input": {
+      "message_id": "C0PUB055:1755230455.000100",
+      "channel_id": "C0PUB055",
+      "channel_type": "public_channel",
+      "thread_ts": "1755230000.000001",
+      "subtype": null,
+      "text": "Bổ sung thêm ảnh chụp màn hình vào thread cũ.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": true,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "THREAD_REPLY_TO_SELF"
+      ],
+      "title": "Bổ sung thêm ảnh chụp màn hình vào thread cũ.",
+      "evidence": "Bổ sung thêm ảnh chụp màn hình vào thread cũ.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-056",
+    "group": "score_thread_reply_to_self",
+    "description": "cùng nội dung nhưng is_thread_reply_to_self=False -> không cộng điểm",
+    "input": {
+      "message_id": "C0PUB056:1755230456.000100",
+      "channel_id": "C0PUB056",
+      "channel_type": "public_channel",
+      "thread_ts": "1755230000.000001",
+      "subtype": null,
+      "text": "Bổ sung thêm ảnh chụp màn hình vào thread cũ.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-057",
+    "group": "score_pinned",
+    "description": "is_pinned=True cộng PINNED (connector thật chưa nối pins.list — xem TODO(OD-SLACK3), case này test rule engine độc lập)",
+    "input": {
+      "message_id": "C0PUB057:1755230457.000100",
+      "channel_id": "C0PUB057",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bức ảnh này đẹp ghê, ai chụp vậy?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 10,
+      "reasons": [
+        "PINNED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-058",
+    "group": "score_pinned",
+    "description": "cùng nội dung nhưng is_pinned=False -> không cộng điểm",
+    "input": {
+      "message_id": "C0PUB058:1755230458.000100",
+      "channel_id": "C0PUB058",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bức ảnh này đẹp ghê, ai chụp vậy?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-059",
+    "group": "score_pinned",
+    "description": "is_pinned=True cộng PINNED (connector thật chưa nối pins.list — xem TODO(OD-SLACK3), case này test rule engine độc lập)",
+    "input": {
+      "message_id": "C0PUB059:1755230459.000100",
+      "channel_id": "C0PUB059",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nice view from the rooftop yesterday.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 10,
+      "reasons": [
+        "PINNED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-060",
+    "group": "score_pinned",
+    "description": "cùng nội dung nhưng is_pinned=False -> không cộng điểm",
+    "input": {
+      "message_id": "C0PUB060:1755230460.000100",
+      "channel_id": "C0PUB060",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nice view from the rooftop yesterday.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-061",
+    "group": "score_pinned",
+    "description": "is_pinned=True cộng PINNED (connector thật chưa nối pins.list — xem TODO(OD-SLACK3), case này test rule engine độc lập)",
+    "input": {
+      "message_id": "C0PUB061:1755230461.000100",
+      "channel_id": "C0PUB061",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Món này nhìn ngon quá trời.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 10,
+      "reasons": [
+        "PINNED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-062",
+    "group": "score_pinned",
+    "description": "cùng nội dung nhưng is_pinned=False -> không cộng điểm",
+    "input": {
+      "message_id": "C0PUB062:1755230462.000100",
+      "channel_id": "C0PUB062",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Món này nhìn ngon quá trời.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-063",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB063:1755230463.000100",
+      "channel_id": "C0PUB063",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please check the shared folder for the file.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Please check the shared folder for the file.",
+      "evidence": "Please check the shared folder for the file.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-064",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB064:1755230464.000100",
+      "channel_id": "C0PUB064",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Có thể reply lại tin nhắn này giúp mình không?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Có thể reply lại tin nhắn này giúp mình không?",
+      "evidence": "Có thể reply lại tin nhắn này giúp mình không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-065",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB065:1755230465.000100",
+      "channel_id": "C0PUB065",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Respond in the thread when you have a moment.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Respond in the thread when you have a moment.",
+      "evidence": "Respond in the thread when you have a moment.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-066",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB066:1755230466.000100",
+      "channel_id": "C0PUB066",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Submit your expense form through the portal.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Submit your expense form through the portal.",
+      "evidence": "Submit your expense form through the portal.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-067",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB067:1755230467.000100",
+      "channel_id": "C0PUB067",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Send the photos from the trip to everyone.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Send the photos from the trip to everyone.",
+      "evidence": "Send the photos from the trip to everyone.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-068",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB068:1755230468.000100",
+      "channel_id": "C0PUB068",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Complete the onboarding checklist for new hires.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Complete the onboarding checklist for new hires.",
+      "evidence": "Complete the onboarding checklist for new hires.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-069",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB069:1755230469.000100",
+      "channel_id": "C0PUB069",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Có ai review giúp đoạn code này không?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Có ai review giúp đoạn code này không?",
+      "evidence": "Có ai review giúp đoạn code này không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-070",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB070:1755230470.000100",
+      "channel_id": "C0PUB070",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Confirm your attendance for the team lunch.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Confirm your attendance for the team lunch.",
+      "evidence": "Confirm your attendance for the team lunch.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-071",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB071:1755230471.000100",
+      "channel_id": "C0PUB071",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Mọi người vui lòng điền thông tin liên hệ.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Mọi người vui lòng điền thông tin liên hệ.",
+      "evidence": "Mọi người vui lòng điền thông tin liên hệ.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-072",
+    "group": "score_action",
+    "description": "ACTION_RE khớp -> HAS_ACTION, không có deadline/urgency/program/newsletter khác",
+    "input": {
+      "message_id": "C0PUB072:1755230472.000100",
+      "channel_id": "C0PUB072",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bạn xác nhận giúp mình địa chỉ giao hàng nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Bạn xác nhận giúp mình địa chỉ giao hàng nhé.",
+      "evidence": "Bạn xác nhận giúp mình địa chỉ giao hàng nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-073",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB073:1755230473.000100",
+      "channel_id": "C0PUB073",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "The report deadline is next week for the whole office.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "The report deadline is next week for the whole office.",
+      "evidence": "The report deadline is next week for the whole office.",
+      "deadline_phrase": "The report deadline is next week for the whole office."
+    }
+  },
+  {
+    "id": "SLK-074",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB074:1755230474.000100",
+      "channel_id": "C0PUB074",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Membership renewal is due at the end of this month.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Membership renewal is due at the end of this month.",
+      "evidence": "Membership renewal is due at the end of this month.",
+      "deadline_phrase": "Membership renewal is due at the end of this month."
+    }
+  },
+  {
+    "id": "SLK-075",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB075:1755230475.000100",
+      "channel_id": "C0PUB075",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Let's finish the slides by end of day today.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Let's finish the slides by end of day today.",
+      "evidence": "Let's finish the slides by end of day today.",
+      "deadline_phrase": "Let's finish the slides by end of day today."
+    }
+  },
+  {
+    "id": "SLK-076",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB076:1755230476.000100",
+      "channel_id": "C0PUB076",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Make sure the venue is booked before the holidays.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Make sure the venue is booked before the holidays.",
+      "evidence": "Make sure the venue is booked before the holidays.",
+      "deadline_phrase": "Make sure the venue is booked before the holidays."
+    }
+  },
+  {
+    "id": "SLK-077",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB077:1755230477.000100",
+      "channel_id": "C0PUB077",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "The front desk stays open until 9pm tonight.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "The front desk stays open until 9pm tonight.",
+      "evidence": "The front desk stays open until 9pm tonight.",
+      "deadline_phrase": "The front desk stays open until 9pm tonight."
+    }
+  },
+  {
+    "id": "SLK-078",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB078:1755230478.000100",
+      "channel_id": "C0PUB078",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hạn chót của vòng đăng ký là cuối tháng này.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Hạn chót của vòng đăng ký là cuối tháng này.",
+      "evidence": "Hạn chót của vòng đăng ký là cuối tháng này.",
+      "deadline_phrase": "Hạn chót của vòng đăng ký là cuối tháng này."
+    }
+  },
+  {
+    "id": "SLK-079",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB079:1755230479.000100",
+      "channel_id": "C0PUB079",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Buổi tổng kết dự kiến diễn ra trước kỳ nghỉ lễ.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Buổi tổng kết dự kiến diễn ra trước kỳ nghỉ lễ.",
+      "evidence": "Buổi tổng kết dự kiến diễn ra trước kỳ nghỉ lễ.",
+      "deadline_phrase": "Buổi tổng kết dự kiến diễn ra trước kỳ nghỉ lễ."
+    }
+  },
+  {
+    "id": "SLK-080",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB080:1755230480.000100",
+      "channel_id": "C0PUB080",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chuyến bay khởi hành vào thứ Sáu tuần sau.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Chuyến bay khởi hành vào thứ Sáu tuần sau.",
+      "evidence": "Chuyến bay khởi hành vào thứ Sáu tuần sau.",
+      "deadline_phrase": "Chuyến bay khởi hành vào thứ Sáu tuần sau."
+    }
+  },
+  {
+    "id": "SLK-081",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB081:1755230481.000100",
+      "channel_id": "C0PUB081",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "The trip departs tomorrow morning for everyone joining.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "The trip departs tomorrow morning for everyone joining.",
+      "evidence": "The trip departs tomorrow morning for everyone joining.",
+      "deadline_phrase": "The trip departs tomorrow morning for everyone joining."
+    }
+  },
+  {
+    "id": "SLK-082",
+    "group": "score_deadline_inferred",
+    "description": "DEADLINE_RE khớp -> HAS_DEADLINE_INFERRED (luôn suy luận từ text, Slack không có due_date field cứng)",
+    "input": {
+      "message_id": "C0PUB082:1755230482.000100",
+      "channel_id": "C0PUB082",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ghi chú mốc 15/09 vào lịch nhé mọi người.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Ghi chú mốc 15/09 vào lịch nhé mọi người.",
+      "evidence": "Ghi chú mốc 15/09 vào lịch nhé mọi người.",
+      "deadline_phrase": "Ghi chú mốc 15/09 vào lịch nhé mọi người."
+    }
+  },
+  {
+    "id": "SLK-083",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB083:1755230483.000100",
+      "channel_id": "C0PUB083",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "This is urgent, everyone should look at it right away.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "This is urgent, everyone should look at it right away.",
+      "evidence": "This is urgent, everyone should look at it right away.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-084",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB084:1755230484.000100",
+      "channel_id": "C0PUB084",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Marking this as asap for visibility on the board.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "Marking this as asap for visibility on the board.",
+      "evidence": "Marking this as asap for visibility on the board.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-085",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB085:1755230485.000100",
+      "channel_id": "C0PUB085",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Action required from the ops side on this one.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "Action required from the ops side on this one.",
+      "evidence": "Action required from the ops side on this one.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-086",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB086:1755230486.000100",
+      "channel_id": "C0PUB086",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "This needs immediate attention from the whole group.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "This needs immediate attention from the whole group.",
+      "evidence": "This needs immediate attention from the whole group.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-087",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB087:1755230487.000100",
+      "channel_id": "C0PUB087",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Việc này gấp lắm, mọi người xem giúp với nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "Việc này gấp lắm, mọi người xem giúp với nhé.",
+      "evidence": "Việc này gấp lắm, mọi người xem giúp với nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-088",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB088:1755230488.000100",
+      "channel_id": "C0PUB088",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Tình huống khẩn cấp đang xảy ra ở kho hàng.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "Tình huống khẩn cấp đang xảy ra ở kho hàng.",
+      "evidence": "Tình huống khẩn cấp đang xảy ra ở kho hàng.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-089",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB089:1755230489.000100",
+      "channel_id": "C0PUB089",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "This is urgente, we need an answer soon.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "This is urgente, we need an answer soon.",
+      "evidence": "This is urgente, we need an answer soon.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-090",
+    "group": "score_urgency",
+    "description": "URGENCY_RE khớp -> URGENT, bao gồm nhánh CJK không dùng \\b",
+    "input": {
+      "message_id": "C0PUB090:1755230490.000100",
+      "channel_id": "C0PUB090",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "至急確認をお願いします。",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "至急確認をお願いします。",
+      "evidence": "至急確認をお願いします。",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-091",
+    "group": "score_program_relevance",
+    "description": "\"nhóm\" bị loại trừ khỏi PROGRAM_RELEVANCE (score_message so sánh casefold != 'nhóm')",
+    "input": {
+      "message_id": "C0PUB091:1755230491.000100",
+      "channel_id": "C0PUB091",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào cả nhóm buổi sáng nha.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-092",
+    "group": "score_program_relevance",
+    "description": "PROGRAM_RE khớp từ khoá khác 'nhóm' -> PROGRAM_RELEVANCE",
+    "input": {
+      "message_id": "C0PUB092:1755230492.000100",
+      "channel_id": "C0PUB092",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "The new course starts registration next month.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "The new course starts registration next month.",
+      "evidence": "The new course starts registration next month.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-093",
+    "group": "score_program_relevance",
+    "description": "PROGRAM_RE khớp từ khoá khác 'nhóm' -> PROGRAM_RELEVANCE",
+    "input": {
+      "message_id": "C0PUB093:1755230493.000100",
+      "channel_id": "C0PUB093",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Assignment 3 grading will be posted on the portal.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Assignment 3 grading will be posted on the portal.",
+      "evidence": "Assignment 3 grading will be posted on the portal.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-094",
+    "group": "score_program_relevance",
+    "description": "PROGRAM_RE khớp từ khoá khác 'nhóm' -> PROGRAM_RELEVANCE",
+    "input": {
+      "message_id": "C0PUB094:1755230494.000100",
+      "channel_id": "C0PUB094",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Cohort B kickoff happens in the main hall.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Cohort B kickoff happens in the main hall.",
+      "evidence": "Cohort B kickoff happens in the main hall.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-095",
+    "group": "score_program_relevance",
+    "description": "PROGRAM_RE khớp từ khoá khác 'nhóm' -> PROGRAM_RELEVANCE",
+    "input": {
+      "message_id": "C0PUB095:1755230495.000100",
+      "channel_id": "C0PUB095",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Đồ án tốt nghiệp sẽ trình bày vào buổi hội đồng.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Đồ án tốt nghiệp sẽ trình bày vào buổi hội đồng.",
+      "evidence": "Đồ án tốt nghiệp sẽ trình bày vào buổi hội đồng.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-096",
+    "group": "score_program_relevance",
+    "description": "PROGRAM_RE khớp từ khoá khác 'nhóm' -> PROGRAM_RELEVANCE",
+    "input": {
+      "message_id": "C0PUB096:1755230496.000100",
+      "channel_id": "C0PUB096",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Sync với mentor về roadmap của milestone tiếp theo.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Sync với mentor về roadmap của milestone tiếp theo.",
+      "evidence": "Sync với mentor về roadmap của milestone tiếp theo.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-097",
+    "group": "score_newsletter_or_automated",
+    "description": "NEWSLETTER_RE/AUTOMATED_RE khớp -> NEWSLETTER_OR_AUTOMATED, áp 1 lần dù khớp cả hai, có thể lấn át tín hiệu dương",
+    "input": {
+      "message_id": "C0PUB097:1755230497.000100",
+      "channel_id": "C0PUB097",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Don't miss our newsletter with this week's highlights.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-098",
+    "group": "score_newsletter_or_automated",
+    "description": "NEWSLETTER_RE/AUTOMATED_RE khớp -> NEWSLETTER_OR_AUTOMATED, áp 1 lần dù khớp cả hai, có thể lấn át tín hiệu dương",
+    "input": {
+      "message_id": "C0PUB098:1755230498.000100",
+      "channel_id": "C0PUB098",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "no-reply: your automated status report is ready.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-099",
+    "group": "score_newsletter_or_automated",
+    "description": "NEWSLETTER_RE/AUTOMATED_RE khớp -> NEWSLETTER_OR_AUTOMATED, áp 1 lần dù khớp cả hai, có thể lấn át tín hiệu dương",
+    "input": {
+      "message_id": "C0PUB099:1755230499.000100",
+      "channel_id": "C0PUB099",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "no-reply newsletter digest is now automated for everyone.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-100",
+    "group": "score_newsletter_or_automated",
+    "description": "NEWSLETTER_RE/AUTOMATED_RE khớp -> NEWSLETTER_OR_AUTOMATED, áp 1 lần dù khớp cả hai, có thể lấn át tín hiệu dương",
+    "input": {
+      "message_id": "C0PUB100:1755230500.000100",
+      "channel_id": "C0PUB100",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "no-reply: please submit your report by Friday for the automated review.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 10,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": "no-reply: please submit your report by Friday for the automated review."
+    }
+  },
+  {
+    "id": "SLK-101",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM101:1755230501.000100",
+      "channel_id": "D0DM101",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nhớ nộp báo cáo tuần trước 5h chiều thứ Sáu nhé",
+      "author_id": "U0MENTOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Nhớ nộp báo cáo tuần trước 5h chiều thứ Sáu nhé",
+      "evidence": "Nhớ nộp báo cáo tuần trước 5h chiều thứ Sáu nhé",
+      "deadline_phrase": "Nhớ nộp báo cáo tuần trước 5h chiều thứ Sáu nhé"
+    }
+  },
+  {
+    "id": "SLK-102",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB102:1755230502.000100",
+      "channel_id": "C0PUB102",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng review PR #482 trước khi merge nhé, deadline sáng mai.",
+      "author_id": "U0DEV01",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Vui lòng review PR #482 trước khi merge nhé, deadline sáng mai.",
+      "evidence": "Vui lòng review PR #482 trước khi merge nhé, deadline sáng mai.",
+      "deadline_phrase": "Vui lòng review PR #482 trước khi merge nhé, deadline sáng mai."
+    }
+  },
+  {
+    "id": "SLK-103",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "G0GROUP103:1755230503.000100",
+      "channel_id": "G0GROUP103",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Team ơi, submit expense report by this Friday please.",
+      "author_id": "U0OPS02",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Team ơi, submit expense report by this Friday please.",
+      "evidence": "Team ơi, submit expense report by this Friday please.",
+      "deadline_phrase": "Team ơi, submit expense report by this Friday please."
+    }
+  },
+  {
+    "id": "SLK-104",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM104:1755230504.000100",
+      "channel_id": "D0DM104",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Anh confirm giúp em lịch demo với Northwind trước thứ Ba nha.",
+      "author_id": "U0SALES03",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Anh confirm giúp em lịch demo với Northwind trước thứ Ba nha.",
+      "evidence": "Anh confirm giúp em lịch demo với Northwind trước thứ Ba nha.",
+      "deadline_phrase": "Anh confirm giúp em lịch demo với Northwind trước thứ Ba nha."
+    }
+  },
+  {
+    "id": "SLK-105",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB105:1755230505.000100",
+      "channel_id": "C0PUB105",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Việc này gấp: vui lòng xác nhận thông tin khách hàng trước 5pm hôm nay.",
+      "author_id": "U0CS04",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 100,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "URGENT"
+      ],
+      "title": "Việc này gấp: vui lòng xác nhận thông tin khách hàng trước 5pm hôm nay.",
+      "evidence": "Việc này gấp: vui lòng xác nhận thông tin khách hàng trước 5pm hôm nay.",
+      "deadline_phrase": "Việc này gấp: vui lòng xác nhận thông tin khách hàng trước 5pm hôm nay."
+    }
+  },
+  {
+    "id": "SLK-106",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PRIV106:1755230506.000100",
+      "channel_id": "C0PRIV106",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please review the contract draft, it's due before the client call tomorrow.",
+      "author_id": "U0LEGAL05",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Please review the contract draft, it's due before the client call tomorrow.",
+      "evidence": "Please review the contract draft, it's due before the client call tomorrow.",
+      "deadline_phrase": "Please review the contract draft, it's due before the client call tomorrow."
+    }
+  },
+  {
+    "id": "SLK-107",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM107:1755230507.000100",
+      "channel_id": "D0DM107",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chị ơi nhớ gửi slide thuyết trình cho khách trước thứ Hai giúp em.",
+      "author_id": "U0PM06",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Chị ơi nhớ gửi slide thuyết trình cho khách trước thứ Hai giúp em.",
+      "evidence": "Chị ơi nhớ gửi slide thuyết trình cho khách trước thứ Hai giúp em.",
+      "deadline_phrase": "Chị ơi nhớ gửi slide thuyết trình cho khách trước thứ Hai giúp em."
+    }
+  },
+  {
+    "id": "SLK-108",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "G0GROUP108:1755230508.000100",
+      "channel_id": "G0GROUP108",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Reminder: submit your milestone update before end of day, this is urgent.",
+      "author_id": "U0LEAD07",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 105,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "PROGRAM_RELEVANCE",
+        "URGENT"
+      ],
+      "title": "Reminder: submit your milestone update before end of day, this is urgent.",
+      "evidence": "Reminder: submit your milestone update before end of day, this is urgent.",
+      "deadline_phrase": "Reminder: submit your milestone update before end of day, this is urgent."
+    }
+  },
+  {
+    "id": "SLK-109",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB109:1755230509.000100",
+      "channel_id": "C0PUB109",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Mọi người vui lòng đăng ký tham gia workshop trước thứ Tư, chương trình đã gần đầy chỗ.",
+      "author_id": "U0HR08",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Mọi người vui lòng đăng ký tham gia workshop trước thứ Tư, chương trình đã gần đ…",
+      "evidence": "Mọi người vui lòng đăng ký tham gia workshop trước thứ Tư, chương trình đã gần đầy chỗ.",
+      "deadline_phrase": "Mọi người vui lòng đăng ký tham gia workshop trước thứ Tư, chương trình đã gần đầy chỗ."
+    }
+  },
+  {
+    "id": "SLK-110",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM110:1755230510.000100",
+      "channel_id": "D0DM110",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please respond to the Fabrikam proposal by tomorrow, it's urgent.",
+      "author_id": "U0BIZDEV09",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 135,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "PROGRAM_RELEVANCE",
+        "URGENT"
+      ],
+      "title": "Please respond to the Fabrikam proposal by tomorrow, it's urgent.",
+      "evidence": "Please respond to the Fabrikam proposal by tomorrow, it's urgent.",
+      "deadline_phrase": "Please respond to the Fabrikam proposal by tomorrow, it's urgent."
+    }
+  },
+  {
+    "id": "SLK-111",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB111:1755230511.000100",
+      "channel_id": "C0PUB111",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Anh xác nhận giúp em đơn hàng gấp trước 3h chiều nay nhé.",
+      "author_id": "U0OPS10",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 100,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "URGENT"
+      ],
+      "title": "Anh xác nhận giúp em đơn hàng gấp trước 3h chiều nay nhé.",
+      "evidence": "Anh xác nhận giúp em đơn hàng gấp trước 3h chiều nay nhé.",
+      "deadline_phrase": "Anh xác nhận giúp em đơn hàng gấp trước 3h chiều nay nhé."
+    }
+  },
+  {
+    "id": "SLK-112",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "G0GROUP112:1755230512.000100",
+      "channel_id": "G0GROUP112",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Complete the incident report before the postmortem tomorrow, action required.",
+      "author_id": "U0SRE11",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "URGENT"
+      ],
+      "title": "Complete the incident report before the postmortem tomorrow, action required.",
+      "evidence": "Complete the incident report before the postmortem tomorrow, action required.",
+      "deadline_phrase": "Complete the incident report before the postmortem tomorrow, action required."
+    }
+  },
+  {
+    "id": "SLK-113",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM113:1755230513.000100",
+      "channel_id": "D0DM113",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nộp bản demo cho mentor trước thứ Sáu tuần này giúp mình.",
+      "author_id": "U0STU12",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Nộp bản demo cho mentor trước thứ Sáu tuần này giúp mình.",
+      "evidence": "Nộp bản demo cho mentor trước thứ Sáu tuần này giúp mình.",
+      "deadline_phrase": "Nộp bản demo cho mentor trước thứ Sáu tuần này giúp mình."
+    }
+  },
+  {
+    "id": "SLK-114",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB114:1755230514.000100",
+      "channel_id": "C0PUB114",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng duyệt ngân sách quý này trước cuối tuần, việc khẩn cấp.",
+      "author_id": "U0FIN13",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "URGENT"
+      ],
+      "title": "Vui lòng duyệt ngân sách quý này trước cuối tuần, việc khẩn cấp.",
+      "evidence": "Vui lòng duyệt ngân sách quý này trước cuối tuần, việc khẩn cấp.",
+      "deadline_phrase": "Vui lòng duyệt ngân sách quý này trước cuối tuần, việc khẩn cấp."
+    }
+  },
+  {
+    "id": "SLK-115",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PRIV115:1755230515.000100",
+      "channel_id": "C0PRIV115",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please confirm the Contoso contract terms before Monday's signing.",
+      "author_id": "U0LEGAL14",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Please confirm the Contoso contract terms before Monday's signing.",
+      "evidence": "Please confirm the Contoso contract terms before Monday's signing.",
+      "deadline_phrase": "Please confirm the Contoso contract terms before Monday's signing."
+    }
+  },
+  {
+    "id": "SLK-116",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM116:1755230516.000100",
+      "channel_id": "D0DM116",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chị confirm giúp em số lượng khách mời trước thứ Năm nhé, gấp lắm.",
+      "author_id": "U0EVENT15",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "URGENT"
+      ],
+      "title": "Chị confirm giúp em số lượng khách mời trước thứ Năm nhé, gấp lắm.",
+      "evidence": "Chị confirm giúp em số lượng khách mời trước thứ Năm nhé, gấp lắm.",
+      "deadline_phrase": "Chị confirm giúp em số lượng khách mời trước thứ Năm nhé, gấp lắm."
+    }
+  },
+  {
+    "id": "SLK-117",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "G0GROUP117:1755230517.000100",
+      "channel_id": "G0GROUP117",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Send the updated roadmap slides before tomorrow's sprint review please.",
+      "author_id": "U0PM16",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Send the updated roadmap slides before tomorrow's sprint review please.",
+      "evidence": "Send the updated roadmap slides before tomorrow's sprint review please.",
+      "deadline_phrase": "Send the updated roadmap slides before tomorrow's sprint review please."
+    }
+  },
+  {
+    "id": "SLK-118",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB118:1755230518.000100",
+      "channel_id": "C0PUB118",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Đội dev vui lòng xác nhận đã deploy xong trước 6h chiều, urgent.",
+      "author_id": "U0DEVOPS17",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "URGENT"
+      ],
+      "title": "Đội dev vui lòng xác nhận đã deploy xong trước 6h chiều, urgent.",
+      "evidence": "Đội dev vui lòng xác nhận đã deploy xong trước 6h chiều, urgent.",
+      "deadline_phrase": "Đội dev vui lòng xác nhận đã deploy xong trước 6h chiều, urgent."
+    }
+  },
+  {
+    "id": "SLK-119",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM119:1755230519.000100",
+      "channel_id": "D0DM119",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nhớ phản hồi email khách hàng VietSoft trước thứ Ba nhé, hơi gấp.",
+      "author_id": "U0CS18",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "URGENT"
+      ],
+      "title": "Nhớ phản hồi email khách hàng VietSoft trước thứ Ba nhé, hơi gấp.",
+      "evidence": "Nhớ phản hồi email khách hàng VietSoft trước thứ Ba nhé, hơi gấp.",
+      "deadline_phrase": "Nhớ phản hồi email khách hàng VietSoft trước thứ Ba nhé, hơi gấp."
+    }
+  },
+  {
+    "id": "SLK-120",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB120:1755230520.000100",
+      "channel_id": "C0PUB120",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please submit your leave request before the deadline this Friday.",
+      "author_id": "U0HR19",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Please submit your leave request before the deadline this Friday.",
+      "evidence": "Please submit your leave request before the deadline this Friday.",
+      "deadline_phrase": "Please submit your leave request before the deadline this Friday."
+    }
+  },
+  {
+    "id": "SLK-121",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "G0GROUP121:1755230521.000100",
+      "channel_id": "G0GROUP121",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Anh review giúp bản dịch tài liệu trước khi gửi khách sáng mai.",
+      "author_id": "U0TRANS20",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Anh review giúp bản dịch tài liệu trước khi gửi khách sáng mai.",
+      "evidence": "Anh review giúp bản dịch tài liệu trước khi gửi khách sáng mai.",
+      "deadline_phrase": "Anh review giúp bản dịch tài liệu trước khi gửi khách sáng mai."
+    }
+  },
+  {
+    "id": "SLK-122",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "D0DM122:1755230522.000100",
+      "channel_id": "D0DM122",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Team cần hoàn thành checklist trước buổi demo với mentor thứ Sáu này.",
+      "author_id": "U0STU21",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Team cần hoàn thành checklist trước buổi demo với mentor thứ Sáu này.",
+      "evidence": "Team cần hoàn thành checklist trước buổi demo với mentor thứ Sáu này.",
+      "deadline_phrase": "Team cần hoàn thành checklist trước buổi demo với mentor thứ Sáu này."
+    }
+  },
+  {
+    "id": "SLK-123",
+    "group": "decision_keep_realistic",
+    "description": "tin nhắn công sở thực tế nhiều tín hiệu cộng dồn -> KEEP",
+    "input": {
+      "message_id": "C0PUB123:1755230523.000100",
+      "channel_id": "C0PUB123",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng xác nhận tham dự cuộc họp khẩn trước 4h chiều hôm nay.",
+      "author_id": "U0ADMIN22",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 80,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Vui lòng xác nhận tham dự cuộc họp khẩn trước 4h chiều hôm nay.",
+      "evidence": "Vui lòng xác nhận tham dự cuộc họp khẩn trước 4h chiều hôm nay.",
+      "deadline_phrase": "Vui lòng xác nhận tham dự cuộc họp khẩn trước 4h chiều hôm nay."
+    }
+  },
+  {
+    "id": "SLK-124",
+    "group": "decision_keep_realistic",
+    "description": "hạn chế thật của rule engine: URGENCY_RE khớp thuần regex trên chuỗi con 'gấp' trong 'không gấp đâu' dù câu đang PHỦ ĐỊNH tính khẩn cấp — DM(15)+ACTION(25)+URGENT(20)=60 vẫn KEEP, không phải lỗi dataset mà là giới hạn thật của regex không hiểu phủ định (ghi nhận, không tự ý vá ở đây)",
+    "input": {
+      "message_id": "D0DM124:1755230524.000100",
+      "channel_id": "D0DM124",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chị confirm giúp em nhé, không gấp đâu.",
+      "author_id": "U0OPS16",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 60,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "URGENT"
+      ],
+      "title": "Chị confirm giúp em nhé, không gấp đâu.",
+      "evidence": "Chị confirm giúp em nhé, không gấp đâu.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-125",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB125:1755230525.000100",
+      "channel_id": "C0PUB125",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please review the new onboarding doc when you can.",
+      "author_id": "U0HR01",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Please review the new onboarding doc when you can.",
+      "evidence": "Please review the new onboarding doc when you can.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-126",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "D0DM126:1755230526.000100",
+      "channel_id": "D0DM126",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Cảm ơn team đã hỗ trợ hôm qua nhé.",
+      "author_id": "U0LEAD02",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Cảm ơn team đã hỗ trợ hôm qua nhé.",
+      "evidence": "Cảm ơn team đã hỗ trợ hôm qua nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-127",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB127:1755230527.000100",
+      "channel_id": "C0PUB127",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Có ai confirm giúp mình cái này không?",
+      "author_id": "U0DEV03",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Có ai confirm giúp mình cái này không?",
+      "evidence": "Có ai confirm giúp mình cái này không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-128",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "G0GROUP128:1755230528.000100",
+      "channel_id": "G0GROUP128",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chúc mọi người một tuần làm việc hiệu quả.",
+      "author_id": "U0HR04",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Chúc mọi người một tuần làm việc hiệu quả.",
+      "evidence": "Chúc mọi người một tuần làm việc hiệu quả.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-129",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB129:1755230529.000100",
+      "channel_id": "C0PUB129",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "This needs immediate attention from someone on the team.",
+      "author_id": "U0OPS05",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "This needs immediate attention from someone on the team.",
+      "evidence": "This needs immediate attention from someone on the team.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-130",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "D0DM130:1755230530.000100",
+      "channel_id": "D0DM130",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ghi chú lại giúp mình vài điểm trong buổi họp sáng nay.",
+      "author_id": "U0PM06",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Ghi chú lại giúp mình vài điểm trong buổi họp sáng nay.",
+      "evidence": "Ghi chú lại giúp mình vài điểm trong buổi họp sáng nay.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-131",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB131:1755230531.000100",
+      "channel_id": "C0PUB131",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Việc này khẩn cấp, ai rảnh xử lý giúp với.",
+      "author_id": "U0CS07",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "Việc này khẩn cấp, ai rảnh xử lý giúp với.",
+      "evidence": "Việc này khẩn cấp, ai rảnh xử lý giúp với.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-132",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB132:1755230532.000100",
+      "channel_id": "C0PUB132",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Sync với mentor về roadmap của assignment tuần sau.",
+      "author_id": "U0STU08",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Sync với mentor về roadmap của assignment tuần sau.",
+      "evidence": "Sync với mentor về roadmap của assignment tuần sau.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-133",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "D0DM133:1755230533.000100",
+      "channel_id": "D0DM133",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào cả nhóm, hôm nay có gì mới không?",
+      "author_id": "U0INTERN09",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Chào cả nhóm, hôm nay có gì mới không?",
+      "evidence": "Chào cả nhóm, hôm nay có gì mới không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-134",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB134:1755230534.000100",
+      "channel_id": "C0PUB134",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please submit feedback whenever convenient, no rush.",
+      "author_id": "U0PM10",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Please submit feedback whenever convenient, no rush.",
+      "evidence": "Please submit feedback whenever convenient, no rush.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-135",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PRIV135:1755230535.000100",
+      "channel_id": "C0PRIV135",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Anh xác nhận giúp em số liệu này với.",
+      "author_id": "U0FIN11",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Anh xác nhận giúp em số liệu này với.",
+      "evidence": "Anh xác nhận giúp em số liệu này với.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-136",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB136:1755230536.000100",
+      "channel_id": "C0PUB136",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vừa xem xong bản demo, khá ổn đó.",
+      "author_id": "U0LEAD12",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Vừa xem xong bản demo, khá ổn đó.",
+      "evidence": "Vừa xem xong bản demo, khá ổn đó.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-137",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB137:1755230537.000100",
+      "channel_id": "C0PUB137",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Cohort mới sẽ khai giảng vào tháng sau.",
+      "author_id": "U0ACAD13",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Cohort mới sẽ khai giảng vào tháng sau.",
+      "evidence": "Cohort mới sẽ khai giảng vào tháng sau.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-138",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "G0GROUP138:1755230538.000100",
+      "channel_id": "G0GROUP138",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Reminder về buổi họp chiều nay nhé mọi người.",
+      "author_id": "U0ADMIN14",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Reminder về buổi họp chiều nay nhé mọi người.",
+      "evidence": "Reminder về buổi họp chiều nay nhé mọi người.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-139",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB139:1755230539.000100",
+      "channel_id": "C0PUB139",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Có bạn nào review giúp mình đoạn này không?",
+      "author_id": "U0DEV15",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Có bạn nào review giúp mình đoạn này không?",
+      "evidence": "Có bạn nào review giúp mình đoạn này không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-140",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB140:1755230540.000100",
+      "channel_id": "C0PUB140",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Action required: cập nhật trạng thái vào bảng theo dõi.",
+      "author_id": "U0PM17",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 20,
+      "reasons": [
+        "URGENT"
+      ],
+      "title": "Action required: cập nhật trạng thái vào bảng theo dõi.",
+      "evidence": "Action required: cập nhật trạng thái vào bảng theo dõi.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-141",
+    "group": "decision_review_realistic",
+    "description": "1-2 tín hiệu, tổng điểm nằm giữa review_threshold(15) và keep_threshold(35) -> REVIEW",
+    "input": {
+      "message_id": "C0PUB141:1755230541.000100",
+      "channel_id": "C0PUB141",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hạn chót của vòng tuyển dụng vẫn chưa chốt.",
+      "author_id": "U0HR18",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 25,
+      "reasons": [
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Hạn chót của vòng tuyển dụng vẫn chưa chốt.",
+      "evidence": "Hạn chót của vòng tuyển dụng vẫn chưa chốt.",
+      "deadline_phrase": "Hạn chót của vòng tuyển dụng vẫn chưa chốt."
+    }
+  },
+  {
+    "id": "SLK-142",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB142:1755230542.000100",
+      "channel_id": "C0PUB142",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào cả nhà buổi sáng nha.",
+      "author_id": "U0RANDOM01",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-143",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB143:1755230543.000100",
+      "channel_id": "C0PUB143",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hôm nay văn phòng có trà sữa free nè.",
+      "author_id": "U0RANDOM02",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-144",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB144:1755230544.000100",
+      "channel_id": "C0PUB144",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ai đi ăn trưa không mọi người ơi?",
+      "author_id": "U0RANDOM03",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-145",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB145:1755230545.000100",
+      "channel_id": "C0PUB145",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Cuối tuần này đi đâu chơi không ha?",
+      "author_id": "U0RANDOM04",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-146",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB146:1755230546.000100",
+      "channel_id": "C0PUB146",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Haha đúng rồi đó, buồn cười ghê.",
+      "author_id": "U0RANDOM05",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-147",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB147:1755230547.000100",
+      "channel_id": "C0PUB147",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Trời hôm nay đẹp thật đấy.",
+      "author_id": "U0RANDOM06",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-148",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PRIV148:1755230548.000100",
+      "channel_id": "C0PRIV148",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vừa xem xong bộ phim mới ra, hay lắm.",
+      "author_id": "U0RANDOM07",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-149",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB149:1755230549.000100",
+      "channel_id": "C0PUB149",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Great game last night, did anyone watch it?",
+      "author_id": "U0RANDOM08",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-150",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB150:1755230550.000100",
+      "channel_id": "C0PUB150",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Just grabbed coffee, anyone want some?",
+      "author_id": "U0RANDOM09",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-151",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB151:1755230551.000100",
+      "channel_id": "C0PUB151",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chúc mừng năm mới cả nhà nha.",
+      "author_id": "U0RANDOM10",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-152",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB152:1755230552.000100",
+      "channel_id": "C0PUB152",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Con mèo văn phòng dễ thương ghê.",
+      "author_id": "U0RANDOM11",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-153",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB153:1755230553.000100",
+      "channel_id": "C0PUB153",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ừa được đó, để mình xem lại sau.",
+      "author_id": "U0RANDOM12",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-154",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB154:1755230554.000100",
+      "channel_id": "C0PUB154",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bài nhạc này hay ghê, ai biết tên không?",
+      "author_id": "U0RANDOM13",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-155",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB155:1755230555.000100",
+      "channel_id": "C0PUB155",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Sale off 50% toàn bộ sản phẩm tuần này, đừng bỏ lỡ khuyến mãi.",
+      "author_id": "U0MKT14",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-156",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB156:1755230556.000100",
+      "channel_id": "C0PUB156",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Check out our newsletter, unsubscribe anytime.",
+      "author_id": "U0MKT15",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": -40,
+      "reasons": [
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-157",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB157:1755230557.000100",
+      "channel_id": "C0PUB157",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Cảm ơn mọi người đã tham gia sự kiện hôm qua.",
+      "author_id": "U0EVENT16",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-158",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB158:1755230558.000100",
+      "channel_id": "C0PUB158",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nice weather for a walk, isn't it?",
+      "author_id": "U0RANDOM17",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-159",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB159:1755230559.000100",
+      "channel_id": "C0PUB159",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vừa nghe tin đó, hóng quá.",
+      "author_id": "U0RANDOM18",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-160",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB160:1755230560.000100",
+      "channel_id": "C0PUB160",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ảnh chụp buổi team building hôm đó.",
+      "author_id": "U0HR19",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-161",
+    "group": "decision_drop_realistic",
+    "description": "chat đời thường/quảng cáo, không có tín hiệu việc cần làm hoặc bị treo bởi newsletter -> DROP",
+    "input": {
+      "message_id": "C0PUB161:1755230561.000100",
+      "channel_id": "C0PUB161",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Đợt này công ty có thêm phòng nghỉ mới đó.",
+      "author_id": "U0ADMIN20",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "NO_ACTION_REQUIRED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-162",
+    "group": "decision_threshold_boundary",
+    "description": "score đúng bằng keep_threshold (25 action + 10 pinned = 35) -> KEEP",
+    "input": {
+      "message_id": "C0PUB162:1755230562.000100",
+      "channel_id": "C0PUB162",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng xác nhận file đính kèm trong buổi họp.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 35,
+      "reasons": [
+        "HAS_ACTION",
+        "PINNED"
+      ],
+      "title": "Vui lòng xác nhận file đính kèm trong buổi họp.",
+      "evidence": "Vui lòng xác nhận file đính kèm trong buổi họp.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-163",
+    "group": "decision_threshold_boundary",
+    "description": "score đúng bằng keep_threshold (25 action + 10 pinned = 35) -> KEEP, biến thể tiếng Anh",
+    "input": {
+      "message_id": "C0PUB163:1755230563.000100",
+      "channel_id": "C0PUB163",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please confirm the attached document is correct.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 35,
+      "reasons": [
+        "HAS_ACTION",
+        "PINNED"
+      ],
+      "title": "Please confirm the attached document is correct.",
+      "evidence": "Please confirm the attached document is correct.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-164",
+    "group": "decision_threshold_boundary",
+    "description": "score = 30 (15 direct_message + 15 thread_reply_to_self), ngay dưới keep_threshold -> REVIEW",
+    "input": {
+      "message_id": "D0DM164:1755230564.000100",
+      "channel_id": "D0DM164",
+      "channel_type": "im",
+      "thread_ts": "1755230000.000002",
+      "subtype": null,
+      "text": "Cảm ơn bạn nhiều nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": true,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "THREAD_REPLY_TO_SELF"
+      ],
+      "title": "Cảm ơn bạn nhiều nhé.",
+      "evidence": "Cảm ơn bạn nhiều nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-165",
+    "group": "decision_threshold_boundary",
+    "description": "score = 30 (15 direct_message + 15 thread_reply_to_self), ngay dưới keep_threshold -> REVIEW, biến thể mpim",
+    "input": {
+      "message_id": "G0GROUP165:1755230565.000100",
+      "channel_id": "G0GROUP165",
+      "channel_type": "mpim",
+      "thread_ts": "1755230000.000003",
+      "subtype": null,
+      "text": "Thanks a lot for your help earlier.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": true,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "THREAD_REPLY_TO_SELF"
+      ],
+      "title": "Thanks a lot for your help earlier.",
+      "evidence": "Thanks a lot for your help earlier.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-166",
+    "group": "decision_threshold_boundary",
+    "description": "score đúng bằng review_threshold (15 direct_message) -> REVIEW",
+    "input": {
+      "message_id": "D0DM166:1755230566.000100",
+      "channel_id": "D0DM166",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chúc bạn cuối tuần vui vẻ nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Chúc bạn cuối tuần vui vẻ nhé.",
+      "evidence": "Chúc bạn cuối tuần vui vẻ nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-167",
+    "group": "decision_threshold_boundary",
+    "description": "score đúng bằng review_threshold (15 direct_message) -> REVIEW, biến thể mpim",
+    "input": {
+      "message_id": "G0GROUP167:1755230567.000100",
+      "channel_id": "G0GROUP167",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Have a great weekend everyone.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 15,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "Have a great weekend everyone.",
+      "evidence": "Have a great weekend everyone.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-168",
+    "group": "decision_threshold_boundary",
+    "description": "score = 10 (chỉ pinned), ngay dưới review_threshold -> DROP với reasons=(PINNED,)",
+    "input": {
+      "message_id": "C0PUB168:1755230568.000100",
+      "channel_id": "C0PUB168",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bức ảnh này đẹp ghê.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 10,
+      "reasons": [
+        "PINNED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-169",
+    "group": "decision_threshold_boundary",
+    "description": "score = 10 (chỉ pinned), ngay dưới review_threshold -> DROP, biến thể private_channel",
+    "input": {
+      "message_id": "C0PRIV169:1755230569.000100",
+      "channel_id": "C0PRIV169",
+      "channel_type": "private_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Nice photo from the trip.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 10,
+      "reasons": [
+        "PINNED"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-170",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "D0DM170:1755230570.000100",
+      "channel_id": "D0DM170",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào cả nhóm buổi sáng. Vui lòng gửi báo cáo trước 5h chiều nay. Cảm ơn mọi người.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Vui lòng gửi báo cáo trước 5h chiều nay.",
+      "evidence": "Vui lòng gửi báo cáo trước 5h chiều nay.",
+      "deadline_phrase": "Vui lòng gửi báo cáo trước 5h chiều nay."
+    }
+  },
+  {
+    "id": "SLK-171",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "D0DM171:1755230571.000100",
+      "channel_id": "D0DM171",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Good morning everyone. Please review the proposal by Friday. Thanks so much.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Please review the proposal by Friday.",
+      "evidence": "Please review the proposal by Friday.",
+      "deadline_phrase": "Please review the proposal by Friday."
+    }
+  },
+  {
+    "id": "SLK-172",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "C0PUB172:1755230572.000100",
+      "channel_id": "C0PUB172",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hi team. Submit the timesheet before Monday please. Have a good day.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Submit the timesheet before Monday please.",
+      "evidence": "Submit the timesheet before Monday please.",
+      "deadline_phrase": "Submit the timesheet before Monday please."
+    }
+  },
+  {
+    "id": "SLK-173",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "G0GROUP173:1755230573.000100",
+      "channel_id": "G0GROUP173",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào buổi chiều. Nhớ xác nhận danh sách khách mời trước thứ Tư nhé. Cảm ơn.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Nhớ xác nhận danh sách khách mời trước thứ Tư nhé.",
+      "evidence": "Nhớ xác nhận danh sách khách mời trước thứ Tư nhé.",
+      "deadline_phrase": "Nhớ xác nhận danh sách khách mời trước thứ Tư nhé."
+    }
+  },
+  {
+    "id": "SLK-174",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "D0DM174:1755230574.000100",
+      "channel_id": "D0DM174",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hey there. Confirm your slot before tomorrow please. Appreciate it.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Confirm your slot before tomorrow please.",
+      "evidence": "Confirm your slot before tomorrow please.",
+      "deadline_phrase": "Confirm your slot before tomorrow please."
+    }
+  },
+  {
+    "id": "SLK-175",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "C0PUB175:1755230575.000100",
+      "channel_id": "C0PUB175",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Xin chào cả team. Vui lòng duyệt tài liệu trước thứ Sáu này. Cảm ơn nhiều.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Vui lòng duyệt tài liệu trước thứ Sáu này.",
+      "evidence": "Vui lòng duyệt tài liệu trước thứ Sáu này.",
+      "deadline_phrase": "Vui lòng duyệt tài liệu trước thứ Sáu này."
+    }
+  },
+  {
+    "id": "SLK-176",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "G0GROUP176:1755230576.000100",
+      "channel_id": "G0GROUP176",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Morning all. Send the updated deck before the client call tomorrow. Cheers.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Send the updated deck before the client call tomorrow.",
+      "evidence": "Send the updated deck before the client call tomorrow.",
+      "deadline_phrase": "Send the updated deck before the client call tomorrow."
+    }
+  },
+  {
+    "id": "SLK-177",
+    "group": "extract_title_prefers_signal_sentence",
+    "description": "extract_title ưu tiên câu khớp ACTION_RE/DEADLINE_RE, không lấy câu chào/kết",
+    "input": {
+      "message_id": "D0DM177:1755230577.000100",
+      "channel_id": "D0DM177",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào anh chị. Hoàn thành checklist trước cuối ngày hôm nay giúp em. Em cảm ơn.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Hoàn thành checklist trước cuối ngày hôm nay giúp em.",
+      "evidence": "Hoàn thành checklist trước cuối ngày hôm nay giúp em.",
+      "deadline_phrase": "Hoàn thành checklist trước cuối ngày hôm nay giúp em."
+    }
+  },
+  {
+    "id": "SLK-178",
+    "group": "extract_title_fallback_first_sentence",
+    "description": "không câu nào khớp ACTION_RE/DEADLINE_RE -> extract_title lấy câu đầu tiên",
+    "input": {
+      "message_id": "D0DM178:1755230578.000100",
+      "channel_id": "D0DM178",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hôm nay trời đẹp quá. Mọi người khoẻ không?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Hôm nay trời đẹp quá.",
+      "evidence": "Hôm nay trời đẹp quá. Mọi người khoẻ không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-179",
+    "group": "extract_title_fallback_first_sentence",
+    "description": "không câu nào khớp ACTION_RE/DEADLINE_RE -> extract_title lấy câu đầu tiên",
+    "input": {
+      "message_id": "G0GROUP179:1755230579.000100",
+      "channel_id": "G0GROUP179",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Just finished lunch. Anyone up for coffee later?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Just finished lunch.",
+      "evidence": "Just finished lunch. Anyone up for coffee later?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-180",
+    "group": "extract_title_fallback_first_sentence",
+    "description": "không câu nào khớp ACTION_RE/DEADLINE_RE -> extract_title lấy câu đầu tiên",
+    "input": {
+      "message_id": "D0DM180:1755230580.000100",
+      "channel_id": "D0DM180",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Đang nghe bài hát này hay ghê. Bạn có biết tên bài không?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Đang nghe bài hát này hay ghê.",
+      "evidence": "Đang nghe bài hát này hay ghê. Bạn có biết tên bài không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-181",
+    "group": "extract_title_fallback_first_sentence",
+    "description": "không câu nào khớp ACTION_RE/DEADLINE_RE -> extract_title lấy câu đầu tiên",
+    "input": {
+      "message_id": "C0PUB181:1755230581.000100",
+      "channel_id": "C0PUB181",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vừa dọn xong bàn làm việc. Cảm thấy gọn gàng hẳn.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Vừa dọn xong bàn làm việc.",
+      "evidence": "Vừa dọn xong bàn làm việc. Cảm thấy gọn gàng hẳn.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-182",
+    "group": "extract_title_fallback_first_sentence",
+    "description": "không câu nào khớp ACTION_RE/DEADLINE_RE -> extract_title lấy câu đầu tiên",
+    "input": {
+      "message_id": "G0GROUP182:1755230582.000100",
+      "channel_id": "G0GROUP182",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "The office plant finally bloomed. Kind of a nice surprise.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "The office plant finally bloomed.",
+      "evidence": "The office plant finally bloomed. Kind of a nice surprise.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-183",
+    "group": "extract_title_fallback_first_sentence",
+    "description": "\"Câu thứ hai\" là cách nói thứ tự, KHÔNG tính là câu tín hiệu (_is_signal_sentence loại trừ) dù DEADLINE_RE khớp nguyên văn bản do chứa 'thứ hai'",
+    "input": {
+      "message_id": "D0DM183:1755230583.000100",
+      "channel_id": "D0DM183",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Không có tín hiệu gì đặc biệt ở đây. Câu thứ hai trong tin nhắn này.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Không có tín hiệu gì đặc biệt ở đây.",
+      "evidence": "Không có tín hiệu gì đặc biệt ở đây. Câu thứ hai trong tin nhắn này.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-184",
+    "group": "extract_title_truncation",
+    "description": "câu dài hơn 80 ký tự bị cắt và thêm dấu … (_truncate_title)",
+    "input": {
+      "message_id": "C0PUB184:1755230584.000100",
+      "channel_id": "C0PUB184",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng chuẩn bị đầy đủ toàn bộ hồ sơ giấy tờ cần thiết cho buổi họp tổng kết quý này trước thứ Sáu nhé mọi người trong team",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Vui lòng chuẩn bị đầy đủ toàn bộ hồ sơ giấy tờ cần thiết cho buổi họp tổng kết q…",
+      "evidence": "Vui lòng chuẩn bị đầy đủ toàn bộ hồ sơ giấy tờ cần thiết cho buổi họp tổng kết quý này trước thứ Sáu nhé mọi người trong team",
+      "deadline_phrase": "Vui lòng chuẩn bị đầy đủ toàn bộ hồ sơ giấy tờ cần thiết cho buổi họp tổng kết quý này trước thứ Sáu nhé mọi người trong team"
+    }
+  },
+  {
+    "id": "SLK-185",
+    "group": "extract_title_truncation",
+    "description": "câu dài hơn 80 ký tự bị cắt và thêm dấu … (_truncate_title)",
+    "input": {
+      "message_id": "C0PUB185:1755230585.000100",
+      "channel_id": "C0PUB185",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please make sure every single document required for the quarterly review meeting is fully prepared before Friday for everyone",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED"
+      ],
+      "title": "Please make sure every single document required for the quarterly review meeting…",
+      "evidence": "Please make sure every single document required for the quarterly review meeting is fully prepared before Friday for everyone",
+      "deadline_phrase": "Please make sure every single document required for the quarterly review meeting is fully prepared before Friday for everyone"
+    }
+  },
+  {
+    "id": "SLK-186",
+    "group": "extract_title_truncation",
+    "description": "câu dài hơn 80 ký tự bị cắt và thêm dấu … (_truncate_title)",
+    "input": {
+      "message_id": "D0DM186:1755230586.000100",
+      "channel_id": "D0DM186",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Hôm nay mình vừa dọn dẹp lại toàn bộ góc làm việc và sắp xếp lại tủ tài liệu cho gọn gàng hơn một chút xíu",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Hôm nay mình vừa dọn dẹp lại toàn bộ góc làm việc và sắp xếp lại tủ tài liệu cho…",
+      "evidence": "Hôm nay mình vừa dọn dẹp lại toàn bộ góc làm việc và sắp xếp lại tủ tài liệu cho gọn gàng hơn một chút xíu",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-187",
+    "group": "extract_title_truncation",
+    "description": "câu dài hơn 80 ký tự bị cắt và thêm dấu … (_truncate_title)",
+    "input": {
+      "message_id": "G0GROUP187:1755230587.000100",
+      "channel_id": "G0GROUP187",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Just spent the whole afternoon reorganizing the shared drive folders so everything is easier to find from now on",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Just spent the whole afternoon reorganizing the shared drive folders so everythi…",
+      "evidence": "Just spent the whole afternoon reorganizing the shared drive folders so everything is easier to find from now on",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-188",
+    "group": "extract_evidence_fallback_full_text",
+    "description": "không câu nào khớp -> extract_evidence fallback lấy NGUYÊN text (khác extract_title chỉ lấy câu đầu)",
+    "input": {
+      "message_id": "D0DM188:1755230588.000100",
+      "channel_id": "D0DM188",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chào buổi sáng cả nhà. Hôm nay có ai rảnh không?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Chào buổi sáng cả nhà.",
+      "evidence": "Chào buổi sáng cả nhà. Hôm nay có ai rảnh không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-189",
+    "group": "extract_evidence_fallback_full_text",
+    "description": "không câu nào khớp -> extract_evidence fallback lấy NGUYÊN text (khác extract_title chỉ lấy câu đầu)",
+    "input": {
+      "message_id": "G0GROUP189:1755230589.000100",
+      "channel_id": "G0GROUP189",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vừa pha xong cà phê. Ai muốn uống không?",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Vừa pha xong cà phê.",
+      "evidence": "Vừa pha xong cà phê. Ai muốn uống không?",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-190",
+    "group": "extract_evidence_fallback_full_text",
+    "description": "không câu nào khớp -> extract_evidence fallback lấy NGUYÊN text (khác extract_title chỉ lấy câu đầu)",
+    "input": {
+      "message_id": "D0DM190:1755230590.000100",
+      "channel_id": "D0DM190",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Weather's quite nice this afternoon. Thinking of a short walk soon.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 45,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Weather's quite nice this afternoon.",
+      "evidence": "Weather's quite nice this afternoon. Thinking of a short walk soon.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-191",
+    "group": "extract_evidence_fallback_full_text",
+    "description": "không câu nào khớp -> extract_evidence fallback lấy NGUYÊN text (khác extract_title chỉ lấy câu đầu)",
+    "input": {
+      "message_id": "C0PUB191:1755230591.000100",
+      "channel_id": "C0PUB191",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bàn làm việc mới đến rồi. Trông khá đẹp đó.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "REVIEW",
+      "score": 30,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Bàn làm việc mới đến rồi.",
+      "evidence": "Bàn làm việc mới đến rồi. Trông khá đẹp đó.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-192",
+    "group": "extract_deadline_phrase",
+    "description": "extract_deadline_phrase chỉ trả câu khớp DEADLINE_RE riêng; câu chỉ có action thì trả rỗng",
+    "input": {
+      "message_id": "D0DM192:1755230592.000100",
+      "channel_id": "D0DM192",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng chuẩn bị tài liệu. Hạn chót là thứ Sáu tuần này. Cảm ơn.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 95,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Vui lòng chuẩn bị tài liệu.",
+      "evidence": "Vui lòng chuẩn bị tài liệu.",
+      "deadline_phrase": "Hạn chót là thứ Sáu tuần này."
+    }
+  },
+  {
+    "id": "SLK-193",
+    "group": "extract_deadline_phrase",
+    "description": "extract_deadline_phrase chỉ trả câu khớp DEADLINE_RE riêng; câu chỉ có action thì trả rỗng",
+    "input": {
+      "message_id": "G0GROUP193:1755230593.000100",
+      "channel_id": "G0GROUP193",
+      "channel_type": "mpim",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please prepare the documents. The deadline is next Friday. Thank you.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 115,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "MENTIONED_CURRENT_USER",
+        "PROGRAM_RELEVANCE"
+      ],
+      "title": "Please prepare the documents.",
+      "evidence": "Please prepare the documents.",
+      "deadline_phrase": "The deadline is next Friday."
+    }
+  },
+  {
+    "id": "SLK-194",
+    "group": "extract_deadline_phrase",
+    "description": "extract_deadline_phrase chỉ trả câu khớp DEADLINE_RE riêng; câu chỉ có action thì trả rỗng",
+    "input": {
+      "message_id": "C0PUB194:1755230594.000100",
+      "channel_id": "C0PUB194",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Vui lòng xác nhận giúp mình nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 55,
+      "reasons": [
+        "HAS_ACTION",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Vui lòng xác nhận giúp mình nhé.",
+      "evidence": "Vui lòng xác nhận giúp mình nhé.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-195",
+    "group": "extract_deadline_phrase",
+    "description": "extract_deadline_phrase chỉ trả câu khớp DEADLINE_RE riêng; câu chỉ có action thì trả rỗng",
+    "input": {
+      "message_id": "D0DM195:1755230595.000100",
+      "channel_id": "D0DM195",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please confirm your attendance soon.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {}
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 70,
+      "reasons": [
+        "DIRECT_MESSAGE",
+        "HAS_ACTION",
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "Please confirm your attendance soon.",
+      "evidence": "Please confirm your attendance soon.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-196",
+    "group": "config_override",
+    "description": "action_score=1000 (mặc định 25) biến message REVIEW mặc định thành KEEP",
+    "input": {
+      "message_id": "C0PUB196:1755230596.000100",
+      "channel_id": "C0PUB196",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please review the notes.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {
+        "action_score": 1000
+      }
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 1000,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "Please review the notes.",
+      "evidence": "Please review the notes.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-197",
+    "group": "config_override",
+    "description": "newsletter_or_automated_score=0 (mặc định -40) gỡ penalty, message DROP mặc định thành KEEP",
+    "input": {
+      "message_id": "C0PUB197:1755230597.000100",
+      "channel_id": "C0PUB197",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "no-reply: please submit your report by Friday for the automated review.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {
+        "newsletter_or_automated_score": 0
+      }
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "HAS_ACTION",
+        "HAS_DEADLINE_INFERRED",
+        "NEWSLETTER_OR_AUTOMATED"
+      ],
+      "title": "no-reply: please submit your report by Friday for the automated review.",
+      "evidence": "no-reply: please submit your report by Friday for the automated review.",
+      "deadline_phrase": "no-reply: please submit your report by Friday for the automated review."
+    }
+  },
+  {
+    "id": "SLK-198",
+    "group": "config_override",
+    "description": "review_threshold=100 (mặc định 15) biến message REVIEW mặc định (score=25) thành DROP",
+    "input": {
+      "message_id": "C0PUB198:1755230598.000100",
+      "channel_id": "C0PUB198",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Please submit the form.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {
+        "review_threshold": 100
+      }
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 25,
+      "reasons": [
+        "HAS_ACTION"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-199",
+    "group": "config_override",
+    "description": "pinned_score=50 (mặc định 10) biến message DROP mặc định (chỉ pinned=10) thành KEEP",
+    "input": {
+      "message_id": "C0PUB199:1755230599.000100",
+      "channel_id": "C0PUB199",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Bức ảnh đẹp quá.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": true,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {
+        "pinned_score": 50
+      }
+    },
+    "expected": {
+      "decision": "KEEP",
+      "score": 50,
+      "reasons": [
+        "PINNED"
+      ],
+      "title": "Bức ảnh đẹp quá.",
+      "evidence": "Bức ảnh đẹp quá.",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-200",
+    "group": "config_override",
+    "description": "mentioned_current_user_score=5 (mặc định 30) biến message REVIEW mặc định (chỉ mention=30) thành DROP",
+    "input": {
+      "message_id": "C0PUB200:1755230600.000100",
+      "channel_id": "C0PUB200",
+      "channel_type": "public_channel",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Ghi chú linh tinh không có gì đặc biệt.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": true,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {
+        "mentioned_current_user_score": 5
+      }
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 5,
+      "reasons": [
+        "MENTIONED_CURRENT_USER"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  },
+  {
+    "id": "SLK-201",
+    "group": "config_override",
+    "description": "direct_message_score=0 (mặc định 15) biến message REVIEW mặc định (chỉ direct_message=15) thành DROP",
+    "input": {
+      "message_id": "D0DM201:1755230601.000100",
+      "channel_id": "D0DM201",
+      "channel_type": "im",
+      "thread_ts": null,
+      "subtype": null,
+      "text": "Chúc bạn cuối tuần vui vẻ nhé.",
+      "author_id": "U0AUTHOR",
+      "is_self": false,
+      "mentions_current_user": false,
+      "reactions": [],
+      "is_pinned": false,
+      "is_thread_reply_to_self": false,
+      "config_overrides": {
+        "direct_message_score": 0
+      }
+    },
+    "expected": {
+      "decision": "DROP",
+      "score": 0,
+      "reasons": [
+        "DIRECT_MESSAGE"
+      ],
+      "title": "",
+      "evidence": "",
+      "deadline_phrase": ""
+    }
+  }
+]

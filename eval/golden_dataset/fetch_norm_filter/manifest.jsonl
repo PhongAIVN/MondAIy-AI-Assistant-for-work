@@ -1,0 +1,36 @@
+{"id": "GML-001", "category": "Fetch happy path", "provider": "google", "description": "Email chính thức trong label được phép", "fixture_path": "fixtures/gml_001.json", "expected_path": "expected/gml_001.json"}
+{"id": "GML-002", "category": "Fetch happy path", "provider": "google", "description": "Email thread nhiều message", "fixture_path": "fixtures/gml_002.json", "expected_path": "expected/gml_002.json"}
+{"id": "GML-003", "category": "Fetch happy path", "provider": "google", "description": "Email có attachment metadata", "fixture_path": "fixtures/gml_003.json", "expected_path": "expected/gml_003.json"}
+{"id": "GML-004", "category": "Permission và scope", "provider": "google", "description": "Email ngoài label được phép", "fixture_path": "fixtures/gml_004.json", "expected_path": "expected/gml_004.json"}
+{"id": "GML-005", "category": "Permission và scope", "provider": "google", "description": "Email sau khi consent bị revoke", "fixture_path": "fixtures/gml_005.json", "expected_path": "expected/gml_005.json"}
+{"id": "GML-006", "category": "Permission và scope", "provider": "google", "description": "Email thuộc mailbox user khác", "fixture_path": "fixtures/gml_006.json", "expected_path": "expected/gml_006.json"}
+{"id": "GML-007", "category": "Normalize", "provider": "google", "description": "HTML email có signature", "fixture_path": "fixtures/gml_007.json", "expected_path": "expected/gml_007.json"}
+{"id": "GML-008", "category": "Normalize", "provider": "google", "description": "Email quoted reply", "fixture_path": "fixtures/gml_008.json", "expected_path": "expected/gml_008.json"}
+{"id": "GML-009", "category": "Normalize", "provider": "google", "description": "Email timestamp UTC", "fixture_path": "fixtures/gml_009.json", "expected_path": "expected/gml_009.json"}
+{"id": "GML-010", "category": "Normalize", "provider": "google", "description": "Email thiếu timezone", "fixture_path": "fixtures/gml_010.json", "expected_path": "expected/gml_010.json"}
+{"id": "GML-011", "category": "Duplicate và version", "provider": "google", "description": "Fetch lại cùng message", "fixture_path": "fixtures/gml_011.json", "expected_path": "expected/gml_011.json"}
+{"id": "GML-012", "category": "Duplicate và version", "provider": "google", "description": "Cùng message ID, body đổi", "fixture_path": "fixtures/gml_012.json", "expected_path": "expected/gml_012.json"}
+{"id": "GML-013", "category": "Duplicate và version", "provider": "google", "description": "Retry cùng page", "fixture_path": "fixtures/gml_013.json", "expected_path": "expected/gml_013.json"}
+{"id": "GML-014", "category": "Filter relevance", "provider": "google", "description": "Email mention trực tiếp user", "fixture_path": "fixtures/gml_014.json", "expected_path": "expected/gml_014.json"}
+{"id": "GML-015", "category": "Filter relevance", "provider": "google", "description": "Email toàn cohort", "fixture_path": "fixtures/gml_015.json", "expected_path": "expected/gml_015.json"}
+{"id": "GML-016", "category": "Filter relevance", "provider": "google", "description": "Email marketing không liên quan", "fixture_path": "fixtures/gml_016.json", "expected_path": "expected/gml_016.json"}
+{"id": "GML-017", "category": "Error / partial coverage", "provider": "google", "description": "Gmail API timeout giữa pagination", "fixture_path": "fixtures/gml_017.json", "expected_path": "expected/gml_017.json"}
+{"id": "GML-018", "category": "Error / partial coverage", "provider": "google", "description": "Source URL không mở được", "fixture_path": "fixtures/gml_018.json", "expected_path": "expected/gml_018.json"}
+{"id": "DSC-001", "category": "Fetch happy path", "provider": "discord", "description": "Message trong #announcements", "fixture_path": "fixtures/dsc_001.json", "expected_path": "expected/dsc_001.json"}
+{"id": "DSC-002", "category": "Fetch happy path", "provider": "discord", "description": "Message trong channel team được phép", "fixture_path": "fixtures/dsc_002.json", "expected_path": "expected/dsc_002.json"}
+{"id": "DSC-003", "category": "Fetch happy path", "provider": "discord", "description": "Message có attachment và link", "fixture_path": "fixtures/dsc_003.json", "expected_path": "expected/dsc_003.json"}
+{"id": "DSC-004", "category": "Permission và scope", "provider": "discord", "description": "Message trong channel ngoài allow-list", "fixture_path": "fixtures/dsc_004.json", "expected_path": "expected/dsc_004.json"}
+{"id": "DSC-005", "category": "Permission và scope", "provider": "discord", "description": "Message sau khi channel permission bị revoke", "fixture_path": "fixtures/dsc_005.json", "expected_path": "expected/dsc_005.json"}
+{"id": "DSC-006", "category": "Permission và scope", "provider": "discord", "description": "Message từ server khác", "fixture_path": "fixtures/dsc_006.json", "expected_path": "expected/dsc_006.json"}
+{"id": "DSC-007", "category": "Normalize", "provider": "discord", "description": "Markdown, mention và emoji", "fixture_path": "fixtures/dsc_007.json", "expected_path": "expected/dsc_007.json"}
+{"id": "DSC-008", "category": "Normalize", "provider": "discord", "description": "Message reply", "fixture_path": "fixtures/dsc_008.json", "expected_path": "expected/dsc_008.json"}
+{"id": "DSC-009", "category": "Normalize", "provider": "discord", "description": "Message edited", "fixture_path": "fixtures/dsc_009.json", "expected_path": "expected/dsc_009.json"}
+{"id": "DSC-010", "category": "Normalize", "provider": "discord", "description": "Message bị deleted", "fixture_path": "fixtures/dsc_010.json", "expected_path": "expected/dsc_010.json"}
+{"id": "DSC-011", "category": "Duplicate và version", "provider": "discord", "description": "Fetch lại cùng message", "fixture_path": "fixtures/dsc_011.json", "expected_path": "expected/dsc_011.json"}
+{"id": "DSC-012", "category": "Duplicate và version", "provider": "discord", "description": "Edited message cùng ID", "fixture_path": "fixtures/dsc_012.json", "expected_path": "expected/dsc_012.json"}
+{"id": "DSC-013", "category": "Duplicate và version", "provider": "discord", "description": "Gateway/event retry", "fixture_path": "fixtures/dsc_013.json", "expected_path": "expected/dsc_013.json"}
+{"id": "DSC-014", "category": "Filter relevance", "provider": "discord", "description": "User được mention", "fixture_path": "fixtures/dsc_014.json", "expected_path": "expected/dsc_014.json"}
+{"id": "DSC-015", "category": "Filter relevance", "provider": "discord", "description": "Announcement toàn cohort", "fixture_path": "fixtures/dsc_015.json", "expected_path": "expected/dsc_015.json"}
+{"id": "DSC-016", "category": "Filter relevance", "provider": "discord", "description": "Casual chat không liên quan", "fixture_path": "fixtures/dsc_016.json", "expected_path": "expected/dsc_016.json"}
+{"id": "DSC-017", "category": "Error / partial coverage", "provider": "discord", "description": "Discord rate limit", "fixture_path": "fixtures/dsc_017.json", "expected_path": "expected/dsc_017.json"}
+{"id": "DSC-018", "category": "Error / partial coverage", "provider": "discord", "description": "Một page/channel lỗi, channel khác thành công", "fixture_path": "fixtures/dsc_018.json", "expected_path": "expected/dsc_018.json"}

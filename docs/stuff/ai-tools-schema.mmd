@@ -1,0 +1,350 @@
+classDiagram
+    class ToolRegistry {
+        +string name
+        +string description
+        +ToolLevel level
+        +string execution_phase
+        +bool read_only
+        +bool approval_required
+    }
+    class ToolCall {
+        +string name
+        +object args
+    }
+    class ToolObservation {
+        +string name
+        +object args
+        +string output
+        +object data optional
+        +object guardrail optional
+    }
+    class PolicyEvaluation {
+        +string tool_name
+        +ToolLevel level
+        +ToolDecision decision
+        +ConfidenceBand confidence_band
+        +bool trusted
+        +bool approval_required
+        +bool double_confirmation_required
+        +list reasons
+    }
+    class ToolDecision {
+        <<enumeration>>
+        ALLOW
+        DRAFT_ONLY
+        REQUIRE_APPROVAL
+        REQUIRE_DOUBLE_CONFIRMATION
+        BLOCK
+        ABSTAIN
+        UNCERTAIN
+        SHOW_WARNING
+    }
+    class ToolLevel {
+        <<enumeration>>
+        SAFE_READ
+        INTERNAL_COMPUTATION
+        DRAFT
+        EXTERNAL_WRITE
+        DESTRUCTIVE
+    }
+    class ConfidenceBand {
+        <<enumeration>>
+        HIGH
+        MEDIUM
+        LOW
+        VERY_LOW
+        UNKNOWN
+    }
+
+    class GmailSearchEmails {
+        +string query
+        +string time_from
+        +string time_to
+        +GmailSearchResult output
+    }
+    class GmailDeadlineSweep {
+        +string query
+        +string time_from
+        +string time_to
+        +GmailSearchResult output
+    }
+    class GmailReadEmail {
+        +string message_id
+        +EmailMessage output
+    }
+    class GmailBridgeSearch {
+        +string query
+        +string time_from
+        +string time_to
+        +int max_results
+        +GmailSearchResult output
+    }
+    class GmailBridgeReadThread {
+        +string thread_id
+        +EmailThread output
+    }
+    class GmailSearchResult {
+        +string status
+        +list results
+        +list sources
+        +string error optional
+    }
+    class EmailMessage {
+        +string id
+        +string thread_id
+        +string sender
+        +string recipient
+        +string subject
+        +string body
+        +datetime received_at
+        +string deep_link optional
+    }
+    class EmailThread {
+        +string thread_id
+        +list messages
+        +string subject
+        +string participants
+    }
+
+    class DiscordSearchProgram {
+        +string query
+        +string since
+        +string until
+        +DiscordResult output
+    }
+    class DiscordSearchMyMessages {
+        +string query
+        +string since
+        +string until
+        +DiscordResult output
+    }
+    class DiscordGetMyActivity {
+        +string since
+        +string until
+        +DiscordResult output
+    }
+    class DiscordListAnnouncements {
+        +string query
+        +string since
+        +string until
+        +int limit
+        +DiscordResult output
+    }
+    class DiscordResult {
+        +string status
+        +list results
+        +list sources
+        +string error optional
+    }
+    class JiraSearchIssues {
+        +string query
+        +string due_after
+        +string due_before
+        +JiraResult output
+    }
+    class JiraResult {
+        +string status
+        +list issues
+        +list sources
+        +string error optional
+    }
+    class CalendarSearchEvents {
+        +string query
+        +string time_from
+        +string time_to
+        +CalendarResult output
+    }
+    class CalendarResult {
+        +string status
+        +list events
+        +list sources
+        +string error optional
+    }
+    class ProgramSchedule {
+        +string query
+        +string since
+        +string until
+        +int limit
+        +ProgramScheduleResult output
+    }
+    class ProgramScheduleResult {
+        +string status
+        +list events
+        +list sources
+        +string error optional
+    }
+
+    class ListTasks {
+        +string status
+        +string due_before
+        +string due_after
+        +TaskListResult output
+    }
+    class DraftTask {
+        +string title
+        +string detail
+        +string due_at optional
+        +bool all_day
+        +TaskDraftResult output
+    }
+    class SuggestTasks {
+        +list suggestions
+        +TaskSuggestionResult output
+    }
+    class TaskListResult {
+        +string status
+        +list tasks
+        +list sources
+    }
+    class TaskDraftResult {
+        +string status
+        +int task_id optional
+        +string title
+        +string detail
+        +string due_at optional
+        +bool all_day
+        +string approval_state
+    }
+    class TaskSuggestionResult {
+        +string status
+        +list suggestions
+    }
+    class CreateProductivityItem {
+        +ProductivityKind kind
+        +string title
+        +string starts_at optional
+        +string ends_at optional
+        +int duration_minutes optional
+        +string deadline optional
+        +string description optional
+        +string calendar_id
+        +ProductivityResult output
+    }
+    class ProductivityResult {
+        +string status
+        +string kind
+        +string message
+        +object draft optional
+        +list missing_fields optional
+        +object provenance optional
+        +string approval_id optional
+    }
+
+    class CurrentDatetime {
+        +string no_arguments
+        +DatetimeResult output
+    }
+    class RelativeTime {
+        +string timestamp
+        +DatetimeResult output
+    }
+    class DatetimeResult {
+        +string status
+        +datetime value
+        +string timezone
+        +string display
+    }
+    class Calculate {
+        +string expression
+        +CalculationResult output
+    }
+    class CalculationResult {
+        +string status
+        +number result
+        +string expression
+        +string error optional
+    }
+    class WebSearch {
+        +string query
+        +WebSearchResult output
+    }
+    class WebSearchResult {
+        +string status
+        +list results
+        +list sources
+        +string error optional
+    }
+
+    class DBReadTargets {
+        +connections
+        +messages
+        +source_items
+        +calendar_events
+        +tasks
+        +conversations
+        +user_memories
+        +program_events
+    }
+    class DBWriteTargets {
+        +tasks via approval
+        +calendar_operations via approval
+        +conversations
+        +telemetry_events
+        +audit_events
+    }
+
+    ToolRegistry --> ToolCall : exposes
+    ToolCall --> PolicyEvaluation : evaluated_before_execution
+    PolicyEvaluation --> ToolObservation : decision_recorded
+    ToolObservation --> ToolCall : returned_to_agent_loop
+    PolicyEvaluation --> ToolDecision
+    PolicyEvaluation --> ToolLevel
+    PolicyEvaluation --> ConfidenceBand
+
+    ToolRegistry <|.. GmailSearchEmails : SAFE_READ
+    ToolRegistry <|.. GmailDeadlineSweep : SAFE_READ
+    ToolRegistry <|.. GmailReadEmail : SAFE_READ
+    ToolRegistry <|.. GmailBridgeSearch : SAFE_READ
+    ToolRegistry <|.. GmailBridgeReadThread : SAFE_READ
+    ToolRegistry <|.. DiscordSearchProgram : SAFE_READ
+    ToolRegistry <|.. DiscordSearchMyMessages : SAFE_READ
+    ToolRegistry <|.. DiscordGetMyActivity : SAFE_READ
+    ToolRegistry <|.. DiscordListAnnouncements : SAFE_READ
+    ToolRegistry <|.. JiraSearchIssues : SAFE_READ
+    ToolRegistry <|.. CalendarSearchEvents : SAFE_READ
+    ToolRegistry <|.. ProgramSchedule : SAFE_READ
+    ToolRegistry <|.. ListTasks : SAFE_READ
+    ToolRegistry <|.. SuggestTasks : SAFE_READ
+    ToolRegistry <|.. CurrentDatetime : SAFE_READ
+    ToolRegistry <|.. RelativeTime : SAFE_READ
+    ToolRegistry <|.. WebSearch : SAFE_READ
+    ToolRegistry <|.. Calculate : INTERNAL_COMPUTATION
+    ToolRegistry <|.. DraftTask : DRAFT_ONLY
+    ToolRegistry <|.. CreateProductivityItem : APPROVAL_MEDIATED
+
+    GmailSearchEmails --> GmailSearchResult
+    GmailDeadlineSweep --> GmailSearchResult
+    GmailReadEmail --> EmailMessage
+    GmailBridgeSearch --> GmailSearchResult
+    GmailBridgeReadThread --> EmailThread
+    DiscordSearchProgram --> DiscordResult
+    DiscordSearchMyMessages --> DiscordResult
+    DiscordGetMyActivity --> DiscordResult
+    DiscordListAnnouncements --> DiscordResult
+    JiraSearchIssues --> JiraResult
+    CalendarSearchEvents --> CalendarResult
+    ProgramSchedule --> ProgramScheduleResult
+    ListTasks --> TaskListResult
+    DraftTask --> TaskDraftResult
+    SuggestTasks --> TaskSuggestionResult
+    CreateProductivityItem --> ProductivityResult
+    CurrentDatetime --> DatetimeResult
+    RelativeTime --> DatetimeResult
+    Calculate --> CalculationResult
+    WebSearch --> WebSearchResult
+
+    GmailSearchResult --> ToolObservation : sanitized
+    DiscordResult --> ToolObservation : sanitized
+    JiraResult --> ToolObservation : sanitized
+    CalendarResult --> ToolObservation : sanitized
+    WebSearchResult --> ToolObservation : sanitized
+    TaskDraftResult --> DBWriteTargets : after_user_approval
+    ProductivityResult --> DBWriteTargets : after_user_approval
+    GmailSearchEmails --> DBReadTargets : connection_scope
+    GmailReadEmail --> DBReadTargets : connection_scope
+    DiscordSearchProgram --> DBReadTargets : source_scope
+    JiraSearchIssues --> DBReadTargets : connection_scope
+    CalendarSearchEvents --> DBReadTargets : connection_scope
+    ListTasks --> DBReadTargets : user_scope
+    ProgramSchedule --> DBReadTargets : access_scope
+    ToolObservation --> DBWriteTargets : telemetry_and_audit

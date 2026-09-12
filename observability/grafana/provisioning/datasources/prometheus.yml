@@ -1,0 +1,35 @@
+apiVersion: 1
+
+datasources:
+  - name: P-004 Prometheus
+    uid: p004-prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090/prometheus/
+    isDefault: true
+    editable: false
+
+  - name: P-004 Loki
+    uid: p004-loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    editable: false
+
+  # LangSmith không xuất Prometheus metric và cũng không đẩy log sang Loki, nên
+  # cách duy nhất để admin xem trace ngay trong Grafana là gọi REST API của nó
+  # qua datasource Infinity. access=proxy để key nằm lại phía server Grafana,
+  # trình duyệt của admin không bao giờ thấy giá trị x-api-key.
+  - name: P-004 LangSmith
+    uid: p004-langsmith
+    type: yesoreyeram-infinity-datasource
+    access: proxy
+    editable: false
+    jsonData:
+      auth_method: none
+      # Chặn datasource bị sửa thành URL khác để lấy cắp header chứa API key.
+      allowedHosts:
+        - https://api.smith.langchain.com
+      httpHeaderName1: x-api-key
+    secureJsonData:
+      httpHeaderValue1: ${LANGSMITH_API_KEY}

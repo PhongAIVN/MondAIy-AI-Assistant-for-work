@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "change_kind": "behavior_bug",
+  "bug_id": "p004-task-cards-noise-20260827",
+  "symptom": "Một câu hỏi lịch trình có thể trả hàng trăm decision card, gồm task quá cũ và task đã confirmed.",
+  "root_cause": "Conversation API nạp toàn bộ proposed và confirmed task từ list_tasks mà không có cửa sổ thời gian, trần hiển thị hay backlog count.",
+  "violated_invariant": "Decision card chỉ đại diện proposed task còn cần quyết định, được bó theo thời gian và trần; mọi proposed bị ẩn phải được đếm chính xác, còn draft_task vừa tạo luôn hiện.",
+  "fix_boundary": {
+    "shared_layer": "src/api/conversations.py task-card selection and response contract",
+    "rationale": "Cả sync, SSE và Telegram dùng chung boundary này để biến agent observations thành persisted task cards."
+  },
+  "generalization_strategy": "shared_boundary",
+  "dimensions": [
+    {"name": "candidate_state", "classes": ["proposed", "confirmed"]},
+    {"name": "selection_reason", "classes": ["eligible", "stale", "overflow", "just_created"]}
+  ],
+  "cases": [
+    {
+      "id": "reported-case",
+      "role": "reported",
+      "dimensions": {"candidate_state": "proposed", "selection_reason": "overflow"},
+      "expected_invariant": "Unbounded list_tasks emits at most eight cards and counts every overflow candidate.",
+      "product_test_ref": "tests/test_api/test_conversations.py::test_list_tasks_caps_proposed_cards_and_counts_hidden_tasks"
+    },
+    {
+      "id": "stale-sibling",
+      "role": "sibling",
+      "dimensions": {"candidate_state": "proposed", "selection_reason": "stale"},
+      "expected_invariant": "A proposed task overdue by more than seven days is hidden and counted once.",
+      "product_test_ref": "tests/test_api/test_conversations.py::test_list_tasks_excludes_stale_proposed_card_and_counts_it"
+    },
+    {
+      "id": "confirmed-sibling",
+      "role": "sibling",
+      "dimensions": {"candidate_state": "confirmed", "selection_reason": "eligible"},
+      "expected_invariant": "A confirmed task never becomes a decision card or pending-decision backlog.",
+      "product_test_ref": "tests/test_api/test_conversations.py::test_list_tasks_never_renders_confirmed_tasks_as_decision_cards"
+    },
+    {
+      "id": "exact-count-sibling",
+      "role": "sibling",
+      "dimensions": {"candidate_state": "proposed", "selection_reason": "stale"},
+      "expected_invariant": "Backlog count is the exact owned union of stale and overflow proposed tasks.",
+      "product_test_ref": "tests/test_api/test_conversations.py::test_list_tasks_backlog_count_is_exact_union_of_stale_and_overflow"
+    },
+    {
+      "id": "draft-counterexample",
+      "role": "counterexample",
+      "dimensions": {"candidate_state": "proposed", "selection_reason": "just_created"},
+      "expected_invariant": "The exact draft_task ID bypasses stale window and list cap without being counted as hidden.",
+      "product_test_ref": "tests/test_api/test_conversations.py::test_draft_task_bypasses_stale_window_and_list_cap"
+    }
+  ],
+  "implementation": {
+    "changed_shared_boundary": true,
+    "special_case_literals": [],
+    "known_exceptions": []
+  }
+}

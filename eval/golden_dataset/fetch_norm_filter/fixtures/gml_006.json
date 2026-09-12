@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-006",
+    "threadId": "thread-gml-006",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng xem báo cáo gấp.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Other <other@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-006"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIHhlbSBiw6FvIGPDoW8gZ-G6pXAu",
+        "size": 25
+      }
+    }
+  }
+]

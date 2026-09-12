@@ -1,0 +1,1447 @@
+[
+  {
+    "id": "EVD-001",
+    "description": "Email ngắn tiếng Anh #1 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Hi team, quick heads up: the standup moved to 10am tomorrow."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-002",
+    "description": "Email ngắn tiếng Anh #2 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Thanks everyone for joining the call today."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-003",
+    "description": "Email ngắn tiếng Anh #3 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "FYI, the office will be closed on the public holiday."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-004",
+    "description": "Email ngắn tiếng Anh #4 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Great job on the launch, congrats to the whole team!"
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-005",
+    "description": "Email ngắn tiếng Anh #5 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Just looping you in on this thread for visibility."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-006",
+    "description": "Email ngắn tiếng Anh #6 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Attaching the notes from our sync earlier."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-007",
+    "description": "Email ngắn tiếng Anh #7 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Welcome aboard! Excited to have you on the team."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-008",
+    "description": "Email ngắn tiếng Anh #8 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Here's a quick summary of what we discussed."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-009",
+    "description": "Email ngắn tiếng Anh #9 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Let me know if you have any questions about this."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-010",
+    "description": "Email ngắn tiếng Anh #10 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Sharing this update for your awareness."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-011",
+    "description": "Email ngắn tiếng Anh #11 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Hope you had a great weekend!"
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-012",
+    "description": "Email ngắn tiếng Anh #12 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "This is a short confirmation email for your records."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-013",
+    "description": "Email ngắn tiếng Anh #13 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "See you at the meeting later this afternoon."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-014",
+    "description": "Email ngắn tiếng Anh #14 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Just a quick note before I head out for the day."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-015",
+    "description": "Email ngắn tiếng Anh #15 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Appreciate your patience while we sort this out."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-016",
+    "description": "Email ngắn tiếng Việt #1 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Chào cả nhà, cuộc họp sáng mai dời sang 10 giờ."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-017",
+    "description": "Email ngắn tiếng Việt #2 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Cảm ơn mọi người đã tham gia buổi họp hôm nay."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-018",
+    "description": "Email ngắn tiếng Việt #3 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Thông báo văn phòng nghỉ vào ngày lễ sắp tới."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-019",
+    "description": "Email ngắn tiếng Việt #4 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Chúc mừng cả team đã hoàn thành dự án tốt đẹp."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-020",
+    "description": "Email ngắn tiếng Việt #5 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Gửi mọi người tham khảo file đính kèm nhé."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-021",
+    "description": "Email ngắn tiếng Việt #6 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Chia sẻ ghi chú cuộc họp sáng nay."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-022",
+    "description": "Email ngắn tiếng Việt #7 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Chào mừng bạn mới gia nhập đội ngũ."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-023",
+    "description": "Email ngắn tiếng Việt #8 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Đây là bản tóm tắt ngắn buổi thảo luận."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-024",
+    "description": "Email ngắn tiếng Việt #9 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Có gì thắc mắc cứ nhắn lại cho mình nhé."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-025",
+    "description": "Email ngắn tiếng Việt #10 giữ nguyên toàn bộ, không cắt",
+    "input": {
+      "text": "Chúc mọi người cuối tuần vui vẻ."
+    },
+    "expected": {
+      "unchanged": true
+    }
+  },
+  {
+    "id": "EVD-026",
+    "description": "Email dài (en-action-deadline) #1, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please submit the report before Friday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please submit the report before Friday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-027",
+    "description": "Email dài (vi-action-deadline) #2, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng phản hồi biểu mẫu trước thứ Hai. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng phản hồi biểu mẫu trước thứ Hai."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-028",
+    "description": "Email dài (en-urgency) #3, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-029",
+    "description": "Email dài (vi-action-deadline) #4, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng hoàn thành hóa đơn trước thứ Tư. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng hoàn thành hóa đơn trước thứ Tư."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-030",
+    "description": "Email dài (en-action-deadline) #5, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please confirm the design doc before Wednesday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please confirm the design doc before Wednesday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-031",
+    "description": "Email dài (en-urgency) #6, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-032",
+    "description": "Email dài (en-action-deadline) #7, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please reply the survey by Monday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please reply the survey by Monday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-033",
+    "description": "Email dài (vi-action-deadline) #8, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng xác nhận đề xuất trước thứ Ba. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng xác nhận đề xuất trước thứ Ba."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-034",
+    "description": "Email dài (en-urgency) #9, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This is urgent."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-035",
+    "description": "Email dài (vi-action-deadline) #10, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng duyệt bảng khảo sát trước thứ Năm. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng duyệt bảng khảo sát trước thứ Năm."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-036",
+    "description": "Email dài (en-action-deadline) #11, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please send the report before Friday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please send the report before Friday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-037",
+    "description": "Email dài (en-urgency) #12, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This needs immediate attention. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-038",
+    "description": "Email dài (en-action-deadline) #13, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please review the proposal before Tuesday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please review the proposal before Tuesday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-039",
+    "description": "Email dài (vi-action-deadline) #14, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng hoàn thành hóa đơn trước thứ Tư. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng hoàn thành hóa đơn trước thứ Tư."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-040",
+    "description": "Email dài (en-urgency) #15, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-041",
+    "description": "Email dài (vi-action-deadline) #16, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng nộp báo cáo trước thứ Sáu. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng nộp báo cáo trước thứ Sáu."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-042",
+    "description": "Email dài (en-action-deadline) #17, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please respond the survey by Monday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please respond the survey by Monday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-043",
+    "description": "Email dài (en-urgency) #18, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-044",
+    "description": "Email dài (en-action-deadline) #19, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please submit the contract until Thursday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please submit the contract until Thursday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-045",
+    "description": "Email dài (vi-action-deadline) #20, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng duyệt bảng khảo sát trước thứ Năm. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng duyệt bảng khảo sát trước thứ Năm."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-046",
+    "description": "Email dài (en-urgency) #21, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This is urgent."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-047",
+    "description": "Email dài (vi-action-deadline) #22, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng phản hồi biểu mẫu trước thứ Hai. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng phản hồi biểu mẫu trước thứ Hai."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-048",
+    "description": "Email dài (en-action-deadline) #23, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please confirm the proposal before Tuesday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please confirm the proposal before Tuesday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-049",
+    "description": "Email dài (en-urgency) #24, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This needs immediate attention. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-050",
+    "description": "Email dài (en-action-deadline) #25, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please reply the design doc before Wednesday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please reply the design doc before Wednesday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-051",
+    "description": "Email dài (vi-action-deadline) #26, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng nộp báo cáo trước thứ Sáu. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng nộp báo cáo trước thứ Sáu."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-052",
+    "description": "Email dài (en-urgency) #27, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-053",
+    "description": "Email dài (vi-action-deadline) #28, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Vui lòng xác nhận đề xuất trước thứ Ba. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Vui lòng xác nhận đề xuất trước thứ Ba."
+      ],
+      "excludes": [
+        "Hôm nay trời khá đẹp và mọi ng"
+      ]
+    }
+  },
+  {
+    "id": "EVD-054",
+    "description": "Email dài (en-action-deadline) #29, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Please send the contract until Thursday. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "Please send the contract until Thursday."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-055",
+    "description": "Email dài (en-urgency) #30, 1 câu tín hiệu giữa filler -> chọn đúng câu đó, loại filler",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 1,
+      "contains": [
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "The office plants were watered"
+      ]
+    }
+  },
+  {
+    "id": "EVD-056",
+    "description": "Email dài #1 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please submit the report before Friday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please submit the report before Friday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "The office plants were watered on schedule again this week without any issues."
+      ]
+    }
+  },
+  {
+    "id": "EVD-057",
+    "description": "Email dài #2 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please send the form by Monday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please send the form by Monday.",
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "Weather in the office stayed pleasant all week, nothing else worth noting here."
+      ]
+    }
+  },
+  {
+    "id": "EVD-058",
+    "description": "Email dài #3 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please complete the proposal before Tuesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please complete the proposal before Tuesday.",
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "Our team celebrated a colleague's work anniversary with cake in the break room."
+      ]
+    }
+  },
+  {
+    "id": "EVD-059",
+    "description": "Email dài #4 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Vui lòng hoàn thành hóa đơn trước thứ Tư. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. This needs immediate attention. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng hoàn thành hóa đơn trước thứ Tư.",
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "Bàn ghế mới được thay đổi ở một số khu vực làm việc."
+      ]
+    }
+  },
+  {
+    "id": "EVD-060",
+    "description": "Email dài #5 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please confirm the design doc before Wednesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please confirm the design doc before Wednesday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "Several people mentioned enjoying the new coffee machine in the kitchen area."
+      ]
+    }
+  },
+  {
+    "id": "EVD-061",
+    "description": "Email dài #6 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please update the budget sheet before Friday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please update the budget sheet before Friday.",
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "The parking garage repainted its lines over the weekend without disruption."
+      ]
+    }
+  },
+  {
+    "id": "EVD-062",
+    "description": "Email dài #7 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please reply the survey by Monday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please reply the survey by Monday.",
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "A new plant was added near the reception desk, brightening up the lobby."
+      ]
+    }
+  },
+  {
+    "id": "EVD-063",
+    "description": "Email dài #8 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Vui lòng xác nhận đề xuất trước thứ Ba. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. This needs immediate attention. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng xác nhận đề xuất trước thứ Ba.",
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy."
+      ]
+    }
+  },
+  {
+    "id": "EVD-064",
+    "description": "Email dài #9 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please register the contract until Thursday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please register the contract until Thursday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "Someone left a nice note thanking the cleaning staff for their hard work."
+      ]
+    }
+  },
+  {
+    "id": "EVD-065",
+    "description": "Email dài #10 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please submit the timesheet before Wednesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please submit the timesheet before Wednesday.",
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "The office wifi speed seems noticeably faster since the recent upgrade."
+      ]
+    }
+  },
+  {
+    "id": "EVD-066",
+    "description": "Email dài #11 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please send the report before Friday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please send the report before Friday.",
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The break room fridge got a fresh coat of paint over the holiday period."
+      ]
+    }
+  },
+  {
+    "id": "EVD-067",
+    "description": "Email dài #12 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Vui lòng phản hồi biểu mẫu trước thứ Hai. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. This needs immediate attention. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng phản hồi biểu mẫu trước thứ Hai.",
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần."
+      ]
+    }
+  },
+  {
+    "id": "EVD-068",
+    "description": "Email dài #13 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please review the proposal before Tuesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please review the proposal before Tuesday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "The new ergonomic chairs arrived and were distributed across desks."
+      ]
+    }
+  },
+  {
+    "id": "EVD-069",
+    "description": "Email dài #14 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please confirm the invoice until Thursday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please confirm the invoice until Thursday.",
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "Someone brought homemade cookies and left them near the water cooler."
+      ]
+    }
+  },
+  {
+    "id": "EVD-070",
+    "description": "Email dài #15 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please update the design doc before Wednesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please update the design doc before Wednesday.",
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The lobby television now shows a rotating slideshow of company photos."
+      ]
+    }
+  },
+  {
+    "id": "EVD-071",
+    "description": "Email dài #16 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Vui lòng nộp báo cáo trước thứ Sáu. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. This needs immediate attention. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng nộp báo cáo trước thứ Sáu.",
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+      ]
+    }
+  },
+  {
+    "id": "EVD-072",
+    "description": "Email dài #17 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please respond the survey by Monday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please respond the survey by Monday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "Weather in the office stayed pleasant all week, nothing else worth noting here."
+      ]
+    }
+  },
+  {
+    "id": "EVD-073",
+    "description": "Email dài #18 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please register the slides before Tuesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please register the slides before Tuesday.",
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "Our team celebrated a colleague's work anniversary with cake in the break room."
+      ]
+    }
+  },
+  {
+    "id": "EVD-074",
+    "description": "Email dài #19 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please submit the contract until Thursday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please submit the contract until Thursday.",
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The printer on the third floor got new toner installed yesterday morning."
+      ]
+    }
+  },
+  {
+    "id": "EVD-075",
+    "description": "Email dài #20 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Vui lòng duyệt bảng khảo sát trước thứ Năm. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. This needs immediate attention. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng duyệt bảng khảo sát trước thứ Năm.",
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng."
+      ]
+    }
+  },
+  {
+    "id": "EVD-076",
+    "description": "Email dài #21 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please complete the report before Friday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please complete the report before Friday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "The parking garage repainted its lines over the weekend without disruption."
+      ]
+    }
+  },
+  {
+    "id": "EVD-077",
+    "description": "Email dài #22 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please review the form by Monday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This matter is urgent and important. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please review the form by Monday.",
+        "This matter is urgent and important."
+      ],
+      "excludes": [
+        "A new plant was added near the reception desk, brightening up the lobby."
+      ]
+    }
+  },
+  {
+    "id": "EVD-078",
+    "description": "Email dài #23 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please confirm the proposal before Tuesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. Handle with immediate care. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please confirm the proposal before Tuesday.",
+        "Handle with immediate care."
+      ],
+      "excludes": [
+        "The building management sent a routine notice about elevator maintenance."
+      ]
+    }
+  },
+  {
+    "id": "EVD-079",
+    "description": "Email dài #24 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "Hôm nay trời khá đẹp và mọi người đều ổn. Vui lòng hoàn thành hóa đơn trước thứ Tư. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. This needs immediate attention. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng hoàn thành hóa đơn trước thứ Tư.",
+        "This needs immediate attention."
+      ],
+      "excludes": [
+        "Bàn ghế mới được thay đổi ở một số khu vực làm việc."
+      ]
+    }
+  },
+  {
+    "id": "EVD-080",
+    "description": "Email dài #25 có 2 câu tín hiệu mạnh/yếu + filler, max_sentences=2 -> giữ đúng 2 câu điểm cao nhất",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. Please reply the design doc before Wednesday. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. This is urgent. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please reply the design doc before Wednesday.",
+        "This is urgent."
+      ],
+      "excludes": [
+        "The office wifi speed seems noticeably faster since the recent upgrade."
+      ]
+    }
+  },
+  {
+    "id": "EVD-081",
+    "description": "Email dài #1 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues. The office plants were watered on schedule again this week without any issues."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-082",
+    "description": "Email dài #2 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-083",
+    "description": "Email dài #3 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room. Our team celebrated a colleague's work anniversary with cake in the break room."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-084",
+    "description": "Email dài #4 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Bàn ghế mới được thay đổi ở một số khu vực làm việc."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-085",
+    "description": "Email dài #5 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area. Several people mentioned enjoying the new coffee machine in the kitchen area."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-086",
+    "description": "Email dài #6 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-087",
+    "description": "Email dài #7 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby. A new plant was added near the reception desk, brightening up the lobby."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-088",
+    "description": "Email dài #8 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-089",
+    "description": "Email dài #9 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work. Someone left a nice note thanking the cleaning staff for their hard work."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-090",
+    "description": "Email dài #10 toàn câu filler, không tín hiệu nào -> không crash",
+    "input": {
+      "text": "Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng. Sảnh chính giờ chiếu slideshow ảnh hoạt động công ty xoay vòng."
+    },
+    "expected": {
+      "no_crash": true,
+      "max_selected_sentence_count": 6
+    }
+  },
+  {
+    "id": "EVD-091",
+    "description": "Email dài #1, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please submit the report before Friday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. This matter is urgent and important."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please submit the report before Friday.",
+        "This matter is urgent and important."
+      ],
+      "order": [
+        "Please submit the report before Friday.",
+        "This matter is urgent and important."
+      ]
+    }
+  },
+  {
+    "id": "EVD-092",
+    "description": "Email dài #2, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please send the form by Monday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. Handle with immediate care."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please send the form by Monday.",
+        "Handle with immediate care."
+      ],
+      "order": [
+        "Please send the form by Monday.",
+        "Handle with immediate care."
+      ]
+    }
+  },
+  {
+    "id": "EVD-093",
+    "description": "Email dài #3, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Vui lòng xác nhận đề xuất trước thứ Ba. Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. Handle with immediate care."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng xác nhận đề xuất trước thứ Ba.",
+        "Handle with immediate care."
+      ],
+      "order": [
+        "Vui lòng xác nhận đề xuất trước thứ Ba.",
+        "Handle with immediate care."
+      ]
+    }
+  },
+  {
+    "id": "EVD-094",
+    "description": "Email dài #4, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please review the invoice until Thursday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. This is urgent."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please review the invoice until Thursday.",
+        "This is urgent."
+      ],
+      "order": [
+        "Please review the invoice until Thursday.",
+        "This is urgent."
+      ]
+    }
+  },
+  {
+    "id": "EVD-095",
+    "description": "Email dài #5, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please confirm the design doc before Wednesday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. This matter is urgent and important."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please confirm the design doc before Wednesday.",
+        "This matter is urgent and important."
+      ],
+      "order": [
+        "Please confirm the design doc before Wednesday.",
+        "This matter is urgent and important."
+      ]
+    }
+  },
+  {
+    "id": "EVD-096",
+    "description": "Email dài #6, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Vui lòng nộp báo cáo trước thứ Sáu. Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. This matter is urgent and important."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng nộp báo cáo trước thứ Sáu.",
+        "This matter is urgent and important."
+      ],
+      "order": [
+        "Vui lòng nộp báo cáo trước thứ Sáu.",
+        "This matter is urgent and important."
+      ]
+    }
+  },
+  {
+    "id": "EVD-097",
+    "description": "Email dài #7, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please reply the survey by Monday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. This needs immediate attention."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please reply the survey by Monday.",
+        "This needs immediate attention."
+      ],
+      "order": [
+        "Please reply the survey by Monday.",
+        "This needs immediate attention."
+      ]
+    }
+  },
+  {
+    "id": "EVD-098",
+    "description": "Email dài #8, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please respond the slides before Tuesday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. This is urgent."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please respond the slides before Tuesday.",
+        "This is urgent."
+      ],
+      "order": [
+        "Please respond the slides before Tuesday.",
+        "This is urgent."
+      ]
+    }
+  },
+  {
+    "id": "EVD-099",
+    "description": "Email dài #9, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Vui lòng hoàn thành hóa đơn trước thứ Tư. Hôm nay trời khá đẹp và mọi người đều ổn. Cây cảnh trong văn phòng được tưới nước đều đặn mỗi tuần. Máy pha cà phê mới nhận được nhiều lời khen từ đồng nghiệp. Bàn ghế mới được thay đổi ở một số khu vực làm việc. Wifi văn phòng dạo này chạy nhanh hơn hẳn so với hồi đầu năm. Một vài đồng nghiệp chia sẻ ảnh chuyến dã ngoại cuối tuần vừa rồi. Tủ lạnh khu bếp chung vừa được sơn lại màu mới rất đẹp. Bảo vệ tòa nhà thông báo định kỳ về việc bảo trì thang máy. This is urgent."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Vui lòng hoàn thành hóa đơn trước thứ Tư.",
+        "This is urgent."
+      ],
+      "order": [
+        "Vui lòng hoàn thành hóa đơn trước thứ Tư.",
+        "This is urgent."
+      ]
+    }
+  },
+  {
+    "id": "EVD-100",
+    "description": "Email dài #10, câu tín hiệu ở đầu và cuối -> giữ đúng thứ tự gốc",
+    "input": {
+      "text": "Please submit the timesheet before Wednesday. The office plants were watered on schedule again this week without any issues. Weather in the office stayed pleasant all week, nothing else worth noting here. Our team celebrated a colleague's work anniversary with cake in the break room. The printer on the third floor got new toner installed yesterday morning. Several people mentioned enjoying the new coffee machine in the kitchen area. The parking garage repainted its lines over the weekend without disruption. Handle with immediate care."
+    },
+    "expected": {
+      "max_sentences": 2,
+      "contains": [
+        "Please submit the timesheet before Wednesday.",
+        "Handle with immediate care."
+      ],
+      "order": [
+        "Please submit the timesheet before Wednesday.",
+        "Handle with immediate care."
+      ]
+    }
+  }
+]

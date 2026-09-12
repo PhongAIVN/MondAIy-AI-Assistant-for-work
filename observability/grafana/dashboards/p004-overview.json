@@ -1,0 +1,545 @@
+{
+  "uid": "p004-production-overview",
+  "title": "P-004 · Production story",
+  "description": "Đọc theo thứ tự usage, conversation quality, reliability, worker và trust. No data là metric vắng, không phải giá trị tốt.",
+  "schemaVersion": 39,
+  "version": 5,
+  "timezone": "browser",
+  "refresh": "5m",
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "datasource": {
+    "type": "prometheus",
+    "uid": "p004-prometheus"
+  },
+  "panels": [
+    {
+      "type": "row",
+      "title": "Adoption & product outcomes",
+      "description": "Snapshot sản phẩm; active share luôn có numerator/denominator.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "panels": [
+        {
+          "id": 1,
+          "gridPos": {"h": 4, "w": 5, "x": 0, "y": 1},
+          "type": "stat",
+          "title": "Registered users",
+          "description": "Registered users ở scrape mới nhất; metric vắng là No data.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "p004_product_users_total",
+              "legendFormat": "registered users"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "color": {"mode": "fixed", "fixedColor": "blue"},
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "values": false
+            }
+          }
+        },
+        {
+          "id": 2,
+          "gridPos": {"h": 4, "w": 5, "x": 5, "y": 1},
+          "type": "stat",
+          "title": "Active share · 7d",
+          "description": "100 × active users 7d / registered users. No data khi mẫu số bằng 0 hoặc metric vắng; active là telemetry hoặc pipeline activity.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "(100 * p004_product_active_users_7d / p004_product_users_total) and (p004_product_users_total > 0)",
+              "legendFormat": "active / registered"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percent",
+              "min": 0,
+              "max": 100
+            },
+            "overrides": []
+          },
+          "options": {
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "values": false
+            }
+          }
+        },
+        {
+          "id": 3,
+          "gridPos": {"h": 4, "w": 5, "x": 10, "y": 1},
+          "type": "stat",
+          "title": "Rating · last 30d",
+          "description": "Average rating của sample trong 30 ngày; No data nghĩa là chưa có sample hợp lệ.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "p004_product_rating_avg_30d",
+              "legendFormat": "average rating"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 1,
+              "max": 5,
+              "decimals": 2
+            },
+            "overrides": []
+          },
+          "options": {}
+        },
+        {
+          "id": 4,
+          "gridPos": {"h": 4, "w": 5, "x": 15, "y": 1},
+          "type": "stat",
+          "title": "Rating freshness",
+          "description": "Age of latest rating timestamp. No data nghĩa là chưa có timestamp, không phải rating mới.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "time() - p004_product_rating_last_timestamp_seconds",
+              "legendFormat": "rating age"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "s",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {}
+        },
+        {
+          "id": 5,
+          "gridPos": {"h": 4, "w": 4, "x": 20, "y": 1},
+          "type": "stat",
+          "title": "Pipeline success ratio · cumulative",
+          "description": "100 × succeeded / terminal (succeeded + failed) trong DB snapshot hiện tại. No data khi chưa có terminal run.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "(100 * sum(p004_product_runs_total{status=\"succeeded\"}) / sum(p004_product_runs_total{status=~\"succeeded|failed\"})) and (sum(p004_product_runs_total{status=~\"succeeded|failed\"}) > 0)",
+              "legendFormat": "succeeded / terminal"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percent",
+              "min": 0,
+              "max": 100
+            },
+            "overrides": []
+          },
+          "options": {}
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Conversation quality",
+      "description": "Agent outcome counters theo selected range; không có outcome là No data.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "panels": [
+        {
+          "id": 6,
+          "gridPos": {"h": 5, "w": 12, "x": 0, "y": 7},
+          "type": "timeseries",
+          "title": "Grounded and abstain share",
+          "description": "100 × selected-range grounded hoặc abstain outcomes / all grounding outcomes; $__rate_interval động và mẫu số 0 là No data.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "(100 * sum(rate(p004_agent_grounding_results_total{status=\"grounded\"}[$__rate_interval])) / sum(rate(p004_agent_grounding_results_total[$__rate_interval]))) and (sum(rate(p004_agent_grounding_results_total[$__rate_interval])) > 0)",
+              "legendFormat": "grounded share"
+            },
+            {
+              "refId": "B",
+              "expr": "(100 * sum(rate(p004_agent_grounding_results_total{status=\"abstain\"}[$__rate_interval])) / sum(rate(p004_agent_grounding_results_total[$__rate_interval]))) and (sum(rate(p004_agent_grounding_results_total[$__rate_interval])) > 0)",
+              "legendFormat": "abstain share"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percent",
+              "min": 0,
+              "max": 100
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        },
+        {
+          "id": 7,
+          "gridPos": {"h": 5, "w": 12, "x": 12, "y": 7},
+          "type": "timeseries",
+          "title": "Guardrail blocks · selected range",
+          "description": "Allowlisted guardrail blocks theo stage/reason trong selected range; observed zero khác metric vắng.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (stage, reason) (increase(p004_agent_guardrail_blocked_turns_total[$__rate_interval]))",
+              "legendFormat": "{{stage}} / {{reason}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        },
+        {
+          "id": 8,
+          "gridPos": {"h": 5, "w": 24, "x": 0, "y": 12},
+          "type": "timeseries",
+          "title": "Tool outcomes · selected range",
+          "description": "Allowlisted agent tool outcomes trong selected range: ok, empty, not_connected, error hoặc blocked.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (tool, outcome) (increase(p004_agent_tool_calls_total[$__rate_interval]))",
+              "legendFormat": "{{tool}} / {{outcome}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Latency & reliability",
+      "description": "HTTP tail latency và 5xx ratio theo selected range, không dùng average che tail.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "panels": [
+        {
+          "id": 9,
+          "gridPos": {"h": 5, "w": 12, "x": 0, "y": 18},
+          "type": "timeseries",
+          "title": "HTTP latency · p50 / p90 / p99",
+          "description": "Histogram tail quantiles; $__rate_interval động. No data nghĩa là thiếu histogram series.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "histogram_quantile(0.50, sum by (le) (rate(p004_http_request_duration_seconds_bucket{service=\"p004-backend\"}[$__rate_interval])))",
+              "legendFormat": "p50"
+            },
+            {
+              "refId": "B",
+              "expr": "histogram_quantile(0.90, sum by (le) (rate(p004_http_request_duration_seconds_bucket{service=\"p004-backend\"}[$__rate_interval])))",
+              "legendFormat": "p90"
+            },
+            {
+              "refId": "C",
+              "expr": "histogram_quantile(0.99, sum by (le) (rate(p004_http_request_duration_seconds_bucket{service=\"p004-backend\"}[$__rate_interval])))",
+              "legendFormat": "p99"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "s",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        },
+        {
+          "id": 10,
+          "gridPos": {"h": 5, "w": 12, "x": 12, "y": 18},
+          "type": "timeseries",
+          "title": "HTTP 5xx ratio",
+          "description": "100 × selected-range 5xx / all HTTP requests. $__rate_interval động; không có request là No data, không phải 0% tốt.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "(100 * sum(rate(p004_http_requests_total{service=\"p004-backend\",status=~\"5..\"}[$__rate_interval])) / sum(rate(p004_http_requests_total{service=\"p004-backend\"}[$__rate_interval]))) and (sum(rate(p004_http_requests_total{service=\"p004-backend\"}[$__rate_interval])) > 0)",
+              "legendFormat": "5xx / all requests"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percent",
+              "min": 0,
+              "max": 100
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Worker health",
+      "description": "Worker heartbeat is cumulative snapshot Gauge, not Prometheus Counter; range throughput is unavailable from current contract.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "panels": [
+        {
+          "id": 11,
+          "gridPos": {"h": 5, "w": 8, "x": 0, "y": 24},
+          "type": "stat",
+          "title": "Worker error ratio · cumulative",
+          "description": "100 × cumulative errors / cumulative ticks in the current heartbeat snapshot. No tick is No data, not 0%.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "(100 * sum(p004_worker_errors_total) / sum(p004_worker_ticks_total)) and (sum(p004_worker_ticks_total) > 0)",
+              "legendFormat": "errors / ticks"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percent",
+              "min": 0,
+              "max": 100
+            },
+            "overrides": []
+          },
+          "options": {}
+        },
+        {
+          "id": 12,
+          "gridPos": {"h": 5, "w": 16, "x": 8, "y": 24},
+          "type": "timeseries",
+          "title": "Worker throughput · cumulative",
+          "description": "Cumulative processed items by loop; this is not per-second throughput. No heartbeat metric is No data.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (loop) (p004_worker_processed_total)",
+              "legendFormat": "{{loop}} processed"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        },
+        {
+          "id": 13,
+          "gridPos": {"h": 5, "w": 24, "x": 0, "y": 29},
+          "type": "timeseries",
+          "title": "Worker last tick age",
+          "description": "Seconds since each loop completed a tick. Higher age is an operational cue, not an SLO; heartbeat missing remains No data.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "max by (loop) (p004_worker_last_tick_age_seconds)",
+              "legendFormat": "{{loop}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "s",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Data freshness/trust",
+      "description": "Coverage and timestamps say whether evidence is current; missing metric is No data.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "panels": [
+        {
+          "id": 14,
+          "gridPos": {"h": 5, "w": 16, "x": 0, "y": 35},
+          "type": "bargauge",
+          "title": "Committed test coverage",
+          "description": "Committed coverage by component, evidence at generation time rather than live health. Missing summary is No data.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "p004_test_coverage_percent",
+              "legendFormat": "{{component}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "percent",
+              "min": 0,
+              "max": 100
+            },
+            "overrides": []
+          },
+          "options": {}
+        },
+        {
+          "id": 15,
+          "gridPos": {"h": 5, "w": 8, "x": 16, "y": 35},
+          "type": "stat",
+          "title": "Coverage freshness",
+          "description": "Age of committed coverage summary. Missing timestamp means coverage evidence unavailable, not fresh.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "time() - p004_test_coverage_updated_timestamp_seconds",
+              "legendFormat": "coverage age"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "s",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {}
+        }
+      ]
+    }
+  ]
+}

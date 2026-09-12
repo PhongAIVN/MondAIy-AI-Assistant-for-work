@@ -1,0 +1,18 @@
+[
+  {
+    "id": "msg-dsc-015",
+    "channel_id": "team-channel-id",
+    "guild_id": "guild-001",
+    "content": "Thông báo cho @everyone: Mai có lịch thuyết trình.",
+    "timestamp": "2025-01-01T00:00:00+00:00",
+    "edited_timestamp": null,
+    "author": {
+      "id": "usr-mentor",
+      "username": "mentor",
+      "discriminator": "0"
+    },
+    "attachments": [],
+    "mentions": [],
+    "referenced_message": null
+  }
+]

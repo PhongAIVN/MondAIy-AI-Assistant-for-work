@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GmailFixture",
+  "anyOf": [
+    {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "threadId"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "threadId": {
+            "type": "string"
+          },
+          "labelIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "snippet": {
+            "type": "string"
+          },
+          "historyId": {
+            "type": "string"
+          },
+          "internalDate": {
+            "type": "string"
+          },
+          "payload": {
+            "type": "object",
+            "required": [
+              "mimeType",
+              "headers"
+            ],
+            "properties": {
+              "mimeType": {
+                "type": "string"
+              },
+              "headers": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "value"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "body": {
+                "type": "object",
+                "properties": {
+                  "size": {
+                    "type": "integer"
+                  },
+                  "data": {
+                    "type": "string"
+                  }
+                }
+              },
+              "parts": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "error_response"
+      ],
+      "properties": {
+        "error_response": {
+          "type": "object",
+          "required": [
+            "status_code",
+            "message"
+          ],
+          "properties": {
+            "status_code": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

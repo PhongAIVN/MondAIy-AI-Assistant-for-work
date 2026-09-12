@@ -1,0 +1,46 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: p004-backend-docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 10s
+        filters:
+          - name: label
+            values:
+              - com.docker.compose.service=p004-backend
+          - name: name
+            values:
+              - p-004-p004-backend-1
+    relabel_configs:
+      - source_labels: [__meta_docker_container_label_com_docker_compose_service]
+        regex: p004-backend
+        action: keep
+      - source_labels: [__meta_docker_container_name]
+        regex: /p-004-p004-backend-1
+        action: keep
+      - source_labels: [__meta_docker_container_name]
+        regex: /(.*)
+        target_label: container
+      - source_labels: [__meta_docker_container_label_com_docker_compose_service]
+        target_label: service
+      - source_labels: [__meta_docker_container_label_com_docker_compose_project]
+        target_label: compose_project
+      - source_labels: [__meta_docker_container_log_stream]
+        target_label: stream
+    pipeline_stages:
+      - docker: {}
+      # A fresh Promtail position must not replay weeks of Docker history.
+      # Keep the dashboard focused on recent backend activity and avoid
+      # retrying samples that Loki correctly rejects as too old.
+      - drop:
+          older_than: 1h
+          drop_counter_reason: backend_log_history

@@ -1,0 +1,231 @@
+<mxfile host="Electron" agent="mondaiy" pages="2">
+  <diagram id="slack-pipeline" name="Slack pipeline (DRAFT - chua chot scope)">
+    <mxGraphModel dx="1071" dy="471" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2020" pageHeight="4350" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="subnote" parent="1" style="text;html=1;fontSize=11;fontStyle=2;fontColor=#888888;align=left;" value="DRAFT nghiên cứu — Slack chưa có trong scope chính thức (PRD hiện liệt Slack vào mục loại trừ). Tái dùng kiến trúc rule-based 10 bước đã thiết kế chung cho nhiều nguồn (xem subnote jira-detail.drawio: &quot;Email/Slack/GitHub sau này&quot;). Vẽ để làm cơ sở quyết định thêm Slack vào scope, chưa phải spec đã chốt." vertex="1">
+          <mxGeometry height="48" width="1240" x="40" y="92" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="text;html=1;fontSize=10;fontStyle=2;fontColor=#666666;align=left;" value="Đỏ = Hard Filter (loại chắc chắn)  |  Cam = Slack-specific rules  |  Xanh dương = Common rules / bước chuẩn  |  Tím = Decision (explainable)  |  Xanh lá = Output/trạng thái cuối  |  Vàng = Rule Config  |  Xám = Audit/Debug  |  Xanh nhạt viền tím = User Context  |  Cam đậm nét đứt = RỦI RO CHƯA XÁC NHẬN" vertex="1">
+          <mxGeometry height="46" width="900" x="40" y="148" as="geometry" />
+        </mxCell>
+        <mxCell id="risk1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDEBD0;strokeColor=#C9860A;dashed=1;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;RỦI RO CHƯA XÁC NHẬN — CHẶN THIẾT KẾ INGESTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;Slack siết rate limit conversations.history theo loại app (nguồn: docs.slack.dev, thay đổi hiệu lực 29/05/2025, áp dụng luôn app cũ từ 03/03/2026):&lt;br&gt;- App &lt;b&gt;internal&lt;/b&gt; (build/cài riêng 1 workspace, không đăng Slack Marketplace): Tier 3 — 50+ request/phút, tối đa 1000 message/request (giữ mức cũ)&lt;br&gt;- App &lt;b&gt;phân phối ngoài Marketplace&lt;/b&gt;: siết còn 1 request/phút, tối đa 15 message/request&lt;br&gt;&lt;br&gt;Slack KHÔNG định nghĩa rõ ranh giới &quot;internal&quot; trong tài liệu công khai đọc được — &lt;b&gt;phải xác nhận qua Slack API FAQ / support trước khi chốt chiến lược polling&lt;/b&gt;. Nếu rơi vào nhóm bị siết, polling conversations.history định kỳ KHÔNG khả thi cho hộp thư/channel có lưu lượng vừa — bắt buộc thiết kế lại quanh Events API (push), xem bước 1." vertex="1">
+          <mxGeometry height="220" width="620" x="1400" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="src" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" value="SLACK" vertex="1">
+          <mxGeometry height="46" width="180" x="960" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;CURRENT USER CONTEXT&lt;/b&gt;&lt;br&gt;(input cho pipeline, không phải 1 bước xử lý)&lt;br&gt;&lt;br&gt;- slack_user_id (Slack member ID vd U0123ABC —&lt;br&gt;  ĐỊNH DANH DUY NHẤT, dùng so khớp mention)&lt;br&gt;- team_id (workspace — app có thể cài nhiều&lt;br&gt;  workspace sau này, giữ field này từ đầu)&lt;br&gt;- timezone (quy đổi deadline suy luận từ text&lt;br&gt;  ở bước 6 — Slack không có due_date field&lt;br&gt;  cứng như Jira)&lt;br&gt;&lt;br&gt;Luôn dùng slack_user_id để so khớp mention&lt;br&gt;(&lt;@U0123ABC&gt; trong text) — KHÔNG dùng display&lt;br&gt;name (đổi được bất kỳ lúc nào, không ổn định)." vertex="1">
+          <mxGeometry height="270" width="300" x="40" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="st1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;1. INGESTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Backfill lịch sử (lần đầu / catch-up sau downtime):&lt;/b&gt;&lt;br&gt;conversations.history theo từng channel đã join +&lt;br&gt;conversations.list lấy danh sách channel. Phân trang&lt;br&gt;cursor-based: tham số &amp;quot;cursor&amp;quot;, trang kế lấy từ&lt;br&gt;response_metadata.next_cursor&lt;br&gt;&lt;br&gt;&lt;b&gt;Real-time (khuyến nghị chính, xem RỦI RO bên trên):&lt;/b&gt;&lt;br&gt;Events API / Socket Mode — Slack tự đẩy event&lt;br&gt;message.channels / message.groups / message.im /&lt;br&gt;message.mpim về app, KHÔNG cần poll liên tục.&lt;br&gt;Polling conversations.history CHỈ dùng cho backfill&lt;br&gt;/ catch-up, không dùng làm vòng lặp đồng bộ chính&lt;br&gt;nếu app rơi vào nhóm bị siết rate limit (xem risk1)&lt;br&gt;&lt;br&gt;&lt;b&gt;OAuth scope cần (theo loại conversation):&lt;/b&gt;&lt;br&gt;channels:history, groups:history, im:history,&lt;br&gt;mpim:history + users:read (resolve user_id -&gt; tên)&lt;br&gt;&lt;br&gt;&lt;b&gt;Loại lỗi:&lt;/b&gt;&lt;br&gt;- rate_limited (HTTP 429, có header Retry-After) -&gt;&lt;br&gt;  RETRYABLE, backoff theo đúng Retry-After&lt;br&gt;- missing_scope / not_authed / account_inactive -&gt;&lt;br&gt;  NON-RETRYABLE&lt;br&gt;&lt;br&gt;&lt;b&gt;Kết quả 1 lần chạy ingest:&lt;/b&gt;&lt;br&gt;- SUCCESS -&gt; đưa dữ liệu vào pipeline (bước 2)&lt;br&gt;- retryable error -&gt; retry theo backoff&lt;br&gt;- non-retryable error -&gt; SYNC_FAILED, dừng, ghi audit&lt;br&gt;- 0 message mới -&gt; EMPTY_RESULT (VẪN LÀ THÀNH CÔNG,&lt;br&gt;  khác SYNC_FAILED, không gộp chung 2 khái niệm)&lt;br&gt;&lt;br&gt;&lt;b&gt;Output:&lt;/b&gt; danh sách message thô (JSON) + event push,&lt;br&gt;có thể trùng giữa backfill và real-time (dedup ở bước 7)" vertex="1">
+          <mxGeometry height="620" width="560" x="780" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="st2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;2. NORMALIZATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;Chuẩn hoá message thô về 1 schema nội bộ thống nhất&lt;br&gt;— mọi rule phía sau CHỈ chạy trên schema này:&lt;br&gt;&lt;br&gt;message_ts (ID duy nhất TRONG 1 channel, dạng&lt;br&gt;&amp;quot;1234567890.123456&amp;quot;), channel_id, channel_type&lt;br&gt;(public/private/im/mpim), author (resolve qua&lt;br&gt;users.info, cache theo user_id — KHÔNG gọi lại mỗi&lt;br&gt;message), thread_ts (null nếu không phải reply), text,&lt;br&gt;permalink, created_at&lt;br&gt;&lt;br&gt;&lt;b&gt;Parse mrkdwn:&lt;/b&gt; &amp;lt;@U123&amp;gt; -&gt; tên hiển thị (dùng cache&lt;br&gt;user ở trên), &amp;lt;#C123|ten-kenh&amp;gt; -&gt; tên kênh,&lt;br&gt;&amp;lt;url|label&amp;gt; -&gt; link thường&lt;br&gt;&lt;br&gt;&lt;b&gt;deep_link:&lt;/b&gt; chat.getPermalink(channel, message_ts) —&lt;br&gt;KHÔNG cần scope riêng. Format:&lt;br&gt;https://{workspace}.slack.com/archives/{channel_id}/&lt;br&gt;p{message_ts không dấu chấm}[?thread_ts=...]&lt;br&gt;&lt;br&gt;&lt;b&gt;Khác biệt lớn với Jira:&lt;/b&gt; Slack KHÔNG có field&lt;br&gt;due_date/priority/status/assignee có sẵn — mọi thứ&lt;br&gt;đó phải SUY LUẬN từ text ở bước 4/6, độ tin cậy thấp&lt;br&gt;hơn hẳn Jira (field cứng vs suy luận từ ngôn ngữ tự nhiên)" vertex="1">
+          <mxGeometry height="420" width="560" x="780" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="st3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAEA;strokeColor=#C0392B;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;3. HARD FILTER&lt;/b&gt;  (chỉ loại khi CHẮC CHẮN, không tính điểm)&lt;br&gt;&lt;br&gt;- subtype hệ thống/tự động — channel_join,&lt;br&gt;  channel_leave, channel_topic, channel_purpose,&lt;br&gt;  channel_name, message_deleted -&gt; DROP&lt;br&gt;- message_changed: chỉ giữ bản MỚI NHẤT theo&lt;br&gt;  message_ts gốc, không tạo message riêng&lt;br&gt;- text rỗng sau khi strip mention/emoji (chỉ có&lt;br&gt;  reaction, không phải nội dung) -&gt; DROP&lt;br&gt;&lt;br&gt;&lt;b&gt;Ranh giới rõ với Scoring:&lt;/b&gt; Hard Filter = CHẮC CHẮN&lt;br&gt;loại (message hệ thống, không thể là việc-cần-làm).&lt;br&gt;bot_message CÓ nội dung thật (vd bot workflow/&lt;br&gt;Zapier báo tình trạng công việc) KHÔNG tự DROP ở&lt;br&gt;đây — để Scoring (bước 5) đánh giá, tránh loại nhầm&lt;br&gt;tín hiệu thật từ automation hợp lệ." vertex="1">
+          <mxGeometry height="370" width="560" x="780" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="st4label" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#3B5FA6;align=center;" value="4. SLACK RULES  +  COMMON RULES  (tín hiệu đưa vào Scoring)" vertex="1">
+          <mxGeometry height="24" width="900" x="600" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="st4a" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D97A2B;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;SLACK-SPECIFIC RULES&lt;/b&gt;&lt;br&gt;&lt;br&gt;- Mention: text chứa &amp;lt;@slack_user_id hiện tại&amp;gt; -&gt;&lt;br&gt;  MENTIONED_CURRENT_USER (tín hiệu mạnh nhất,&lt;br&gt;  gần tương đương assigned_to_current_user Jira)&lt;br&gt;- Conversation type: channel_type = im/mpim (DM/&lt;br&gt;  group DM) -&gt; ưu tiên cao hơn public channel&lt;br&gt;  (giả định: nhắn riêng thường quan trọng hơn kênh&lt;br&gt;  chung — CẦN kiểm chứng lại khi có dữ liệu thật)&lt;br&gt;- Thread: reply vào thread mà current_user là người&lt;br&gt;  gửi message gốc -&gt; THREAD_REPLY_TO_SELF&lt;br&gt;- Reaction cần phản hồi: emoji dạng câu hỏi (:question:,&lt;br&gt;  :eyes:...) gắn vào message của current_user — danh&lt;br&gt;  sách emoji CẤU HÌNH ĐƯỢC, không hard-code&lt;br&gt;- Pinned message trong channel (pins.list) -&gt; tín&lt;br&gt;  hiệu ưu tiên&lt;br&gt;&lt;br&gt;KHÔNG áp dụng rule PRIORITY/STATUS/ASSIGNEE kiểu&lt;br&gt;Jira — Slack không có field tương đương có sẵn." vertex="1">
+          <mxGeometry height="420" width="440" x="600" y="1790" as="geometry" />
+        </mxCell>
+        <mxCell id="st4b" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EAF1FB;strokeColor=#3B5FA6;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;COMMON RULES&lt;/b&gt;  (dùng chung với Email/Jira)&lt;br&gt;&lt;br&gt;- Từ khoá hành động (action keyword)&lt;br&gt;- Từ khoá hạn chót (deadline keyword)&lt;br&gt;- Từ khoá khẩn cấp (urgency keyword)&lt;br&gt;- Liên quan chương trình (assignment/milestone...)&lt;br&gt;- Newsletter / thông báo tự động hàng loạt -&gt; penalty&lt;br&gt;- Gửi tự động (bot workflow không có action thật)&lt;br&gt;  -&gt; penalty&lt;br&gt;&lt;br&gt;&lt;b&gt;Ghi chú riêng Slack:&lt;/b&gt; deadline keyword ở đây&lt;br&gt;QUAN TRỌNG HƠN hẳn so với Jira/Email — vì Slack&lt;br&gt;không có due_date field cứng, đây gần như nguồn&lt;br&gt;DUY NHẤT để suy luận hạn chót (regex/NLP thời gian&lt;br&gt;tương đối: &amp;quot;chiều mai&amp;quot;, &amp;quot;thứ 6 tuần này&amp;quot;...)." vertex="1">
+          <mxGeometry height="420" width="440" x="1060" y="1790" as="geometry" />
+        </mxCell>
+        <mxCell id="st5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;5. SCORING&lt;/b&gt;&lt;br&gt;&lt;br&gt;Chỉ chấm điểm message đã QUA Hard Filter&lt;br&gt;Cộng/trừ theo tín hiệu đã khớp ở bước 4&lt;br&gt;&lt;br&gt;&lt;b&gt;Trọng số mặc định (đề xuất, CONFIGURABLE — chưa có&lt;br&gt;dữ liệu thật để hiệu chỉnh, khác Jira đã chạy production):&lt;/b&gt;&lt;br&gt;- mentioned_current_user: +30&lt;br&gt;- direct_message / group_dm: +15&lt;br&gt;- thread_reply_to_self: +15&lt;br&gt;- action keyword: +25&lt;br&gt;- deadline keyword: +25&lt;br&gt;- urgency keyword: +20&lt;br&gt;- pinned message: +10&lt;br&gt;- newsletter/automated: -40&lt;br&gt;&lt;br&gt;Ngưỡng giữ lại mặc định: điểm &gt;= 35 (CONFIGURABLE,&lt;br&gt;giữ nhất quán số với Jira để dễ so sánh chéo nguồn,&lt;br&gt;nhưng đổi độc lập theo từng nguồn được)&lt;br&gt;&lt;br&gt;&lt;b&gt;Output mỗi message:&lt;/b&gt; {score, matched_rule_codes[]}" vertex="1">
+          <mxGeometry height="400" width="560" x="780" y="2250" as="geometry" />
+        </mxCell>
+        <mxCell id="st6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;6. EXTRACTION&lt;/b&gt;  (rule nâng cao — vẫn KHÔNG AI, giữ nguyên tinh thần Jira)&lt;br&gt;&lt;br&gt;- title &lt;- SUY RA từ câu đầu message hoặc câu khớp&lt;br&gt;  action keyword (Slack không có field &amp;quot;summary&amp;quot; sẵn&lt;br&gt;  như Jira -&gt; độ tin cậy thấp hơn)&lt;br&gt;- assignee &lt;- mentioned_current_user, hoặc SUY LUẬN&lt;br&gt;  từ ngữ cảnh câu nếu không có mention rõ (mơ hồ hơn&lt;br&gt;  Jira nhiều — Jira đọc thẳng field assignee cứng)&lt;br&gt;- deadline &lt;- SUY LUẬN từ deadline keyword + regex/NLP&lt;br&gt;  thời gian tương đối, quy đổi theo timezone (User&lt;br&gt;  Context) — KHÔNG có field cứng để đọc thẳng&lt;br&gt;- evidence &lt;- chính message text (hoặc câu khớp rule&lt;br&gt;  nếu message dài)&lt;br&gt;&lt;br&gt;&amp;quot;Tóm tắt cụm&amp;quot; (khi group theo thread) = ghép evidence&lt;br&gt;theo quy tắc cố định (concatenation theo thứ tự&lt;br&gt;thời gian trong thread), KHÔNG paraphrase" vertex="1">
+          <mxGeometry height="340" width="560" x="780" y="2700" as="geometry" />
+        </mxCell>
+        <mxCell id="st7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;7. DEDUP / GROUP&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;Dedup trước&lt;/b&gt; (message trùng do backfill + real-time&lt;br&gt;event cùng đưa 1 message vào, hoặc nhiều lần chạy) —&lt;br&gt;khoá tự nhiên: (channel_id, message_ts)&lt;br&gt;&lt;br&gt;&lt;b&gt;Group sau&lt;/b&gt; (nhiều message khác nhau cùng 1 việc) —&lt;br&gt;ưu tiên theo thứ tự:&lt;br&gt;1. Cùng thread_ts (cùng thread) &amp;#160;&amp;#160;2. Cùng channel + cùng&lt;br&gt;assignee suy luận + thời gian liên quan&lt;br&gt;3. Fuzzy title similarity — CHỈ LÀ FALLBACK (72% mặc&lt;br&gt;   định, CONFIGURABLE, giữ nhất quán ngưỡng Jira)&lt;br&gt;&lt;br&gt;&lt;b&gt;Quan trọng:&lt;/b&gt; Group CHỈ tạo ra 1 candidate task —&lt;br&gt;KHÔNG merge, KHÔNG xoá message Slack nguồn.&lt;br&gt;Candidate task luôn giữ danh sách references&lt;br&gt;(channel_id + message_ts, kèm permalink) tới TẤT CẢ&lt;br&gt;message đã gộp vào, để truy vết ngược được." vertex="1">
+          <mxGeometry height="360" width="560" x="780" y="3070" as="geometry" />
+        </mxCell>
+        <mxCell id="st8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;8. DECISION&lt;/b&gt;  (explainable — không chỉ trả score)&lt;br&gt;&lt;br&gt;Mỗi candidate task sau xử lý có dạng:&lt;br&gt;{ score: 60, decision: &quot;KEEP&quot;,&lt;br&gt;&amp;#160;&amp;#160;reasons: [&quot;MENTIONED_CURRENT_USER&quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&quot;HAS_DEADLINE_INFERRED&quot;, &quot;DIRECT_MESSAGE&quot;],&lt;br&gt;&amp;#160;&amp;#160;rule_version: &quot;slack-rules-v1-draft&quot; }&lt;br&gt;&lt;br&gt;reason code deterministic, machine-readable — ví dụ:&lt;br&gt;MENTIONED_CURRENT_USER · HAS_DEADLINE_INFERRED&lt;br&gt;(gắn rõ INFERRED khác Jira — deadline suy luận, không&lt;br&gt;phải field cứng) · URGENT · DIRECT_MESSAGE ·&lt;br&gt;THREAD_REPLY_TO_SELF · SYSTEM_GENERATED ·&lt;br&gt;NO_ACTION_REQUIRED&lt;br&gt;&lt;br&gt;Decision: DROP / REVIEW / KEEP. rule_version đi kèm mọi&lt;br&gt;decision — đổi rule không làm mất khả năng giải thích&lt;br&gt;quyết định cũ." vertex="1">
+          <mxGeometry height="330" width="560" x="780" y="3470" as="geometry" />
+        </mxCell>
+        <mxCell id="dDrop" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#888888;fontSize=10.5;align=center;verticalAlign=middle;" value="&lt;b&gt;DROP&lt;/b&gt;&lt;br&gt;Loại bỏ, không hiện&lt;br&gt;cho user. Chỉ ghi&lt;br&gt;vào Audit/Debug." vertex="1">
+          <mxGeometry height="90" width="170" x="780" y="3840" as="geometry" />
+        </mxCell>
+        <mxCell id="dReview" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9E0;strokeColor=#B8960C;fontSize=10.5;align=center;verticalAlign=middle;" value="&lt;b&gt;REVIEW&lt;/b&gt;&lt;br&gt;Tín hiệu chưa chắc&lt;br&gt;chắn — vẫn hiện cho&lt;br&gt;user, gắn nhãn &quot;cần&lt;br&gt;xem lại&quot;." vertex="1">
+          <mxGeometry height="90" width="170" x="980" y="3840" as="geometry" />
+        </mxCell>
+        <mxCell id="dKeep" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=10.5;align=center;verticalAlign=middle;" value="&lt;b&gt;KEEP&lt;/b&gt;&lt;br&gt;Đủ điều kiện, có&lt;br&gt;reason rõ ràng —&lt;br&gt;hiện cho user bình&lt;br&gt;thường." vertex="1">
+          <mxGeometry height="90" width="170" x="1180" y="3840" as="geometry" />
+        </mxCell>
+        <mxCell id="st9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;9. USER CONFIRMATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;Task hiện trong &quot;Công việc của tôi&quot; (KEEP/REVIEW)&lt;br&gt;&lt;br&gt;&lt;b&gt;State machine:&lt;/b&gt;&lt;br&gt;NEW -&gt; PENDING_CONFIRMATION -&gt; CONFIRMED -&gt; (bước 10)&lt;br&gt;PENDING_CONFIRMATION -&gt; SKIPPED (user bỏ qua)&lt;br&gt;PENDING_CONFIRMATION -&gt; EXPIRED (quá hạn xử lý, cấu hình được)&lt;br&gt;Bất kỳ trạng thái nào -&gt; UPDATED khi message Slack&lt;br&gt;gốc đổi (event message_changed) hoặc bị xoá (event&lt;br&gt;message_deleted, đánh dấu STALE thay vì im lặng giữ&lt;br&gt;task trỏ tới message không còn tồn tại) -&gt; quay lại&lt;br&gt;PENDING_CONFIRMATION để user xác nhận lại thay đổi" vertex="1">
+          <mxGeometry height="250" width="560" x="780" y="3970" as="geometry" />
+        </mxCell>
+        <mxCell id="st10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=11.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;10. CALENDAR&lt;/b&gt;  (2 khả năng — không gộp chung tên trạng thái, giữ nguyên tinh thần Jira)&lt;br&gt;&lt;br&gt;&lt;b&gt;A. Chỉ generate .ics (không tích hợp calendar thật):&lt;/b&gt;&lt;br&gt;CONFIRMED -&gt; xuất file .ics -&gt; &lt;b&gt;EXPORTED&lt;/b&gt;&lt;br&gt;(không gọi là CALENDAR_SYNCED — không có event thật&lt;br&gt;nào được tạo/ghi nhận ở phía calendar provider)&lt;br&gt;&lt;br&gt;&lt;b&gt;B. Có tích hợp Calendar API thật:&lt;/b&gt;&lt;br&gt;CONFIRMED -&gt; gọi API tạo event -&gt; &lt;b&gt;CALENDAR_SYNCED&lt;/b&gt;&lt;br&gt;Lưu calendar_event_id / event_uid ổn định&lt;br&gt;Hỗ trợ CREATE / UPDATE / CANCEL theo thay đổi message&lt;br&gt;&lt;br&gt;Cả 2 trường hợp: mỗi task lưu external reference&lt;br&gt;channel_id + message_ts (+ calendar_event_id nếu có)&lt;br&gt;— message Slack gốc đổi sau khi đã EXPORTED/&lt;br&gt;CALENDAR_SYNCED thì UPDATE lại đúng bản ghi cũ,&lt;br&gt;KHÔNG tạo trùng mới" vertex="1">
+          <mxGeometry height="330" width="560" x="780" y="4270" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="src" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eRisk" edge="1" parent="1" source="risk1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#C9860A;fontSize=10;fontColor=#C9860A;" target="st1" value="chan chien luoc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="st1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="st2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="st3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st4label">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4a" edge="1" parent="1" source="st4a" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="st5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4b" edge="1" parent="1" source="st4b" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="st5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="st5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="st6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="st7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8d" edge="1" parent="1" source="st8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="dDrop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8r" edge="1" parent="1" source="st8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="dReview">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8k" edge="1" parent="1" source="st8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" target="dKeep">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9r" edge="1" parent="1" source="dReview" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;strokeColor=#4B8B3B;" target="st9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9k" edge="1" parent="1" source="dKeep" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;strokeColor=#4B8B3B;" target="st9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="st9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="st10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink1" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;" target="st2" value="timezone">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink2" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;exitX=1;exitY=0.9;entryX=0;entryY=0.5;" target="st4a" value="slack_user_id">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rcLabel" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#B8960C;align=left;" value="RULE CONFIG  (cross-cutting — cấu hình được, không hard-code)" vertex="1">
+          <mxGeometry height="24" width="560" x="1400" y="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="rc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9E0;strokeColor=#B8960C;fontSize=11;fontFamily=Courier New;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="RULE_CONFIG&lt;br&gt;├── thresholds (giữ lại &gt;=35, fuzzy match &gt;=72%...)&lt;br&gt;├── scoring weights (mention/dm/thread_reply/&lt;br&gt;│&amp;#160;&amp;#160;&amp;#160;action/deadline/urgency/pinned/newsletter...)&lt;br&gt;├── deadline keyword patterns (regex thời gian&lt;br&gt;│&amp;#160;&amp;#160;&amp;#160;tương đối — QUAN TRỌNG hơn nguồn khác, xem st4b)&lt;br&gt;├── priority channel list (channel/DM nào ưu tiên&lt;br&gt;│&amp;#160;&amp;#160;&amp;#160;hơn, nếu cần override mặc định DM &gt; public)&lt;br&gt;├── reaction-question emoji list&lt;br&gt;├── action keywords&lt;br&gt;├── urgency keywords&lt;br&gt;├── system-generated subtype list&lt;br&gt;├── rate-limit tier giả định (internal/distributed —&lt;br&gt;│&amp;#160;&amp;#160;&amp;#160;xem risk1, cần xác nhận trước khi build)&lt;br&gt;└── grouping thresholds&lt;br&gt;&lt;br&gt;Có &lt;b&gt;rule_version&lt;/b&gt; — biết 1 decision được tạo ra&lt;br&gt;bởi phiên bản rule nào." vertex="1">
+          <mxGeometry height="440" width="560" x="1400" y="1784" as="geometry" />
+        </mxCell>
+        <mxCell id="rcBracket" parent="1" style="text;html=1;fontSize=10;fontStyle=2;fontColor=#B8960C;align=left;" value="áp dụng cho bước 3, 4, 5, 7&#xa;(Hard Filter / Rules / Scoring / Dedup-Group)" vertex="1">
+          <mxGeometry height="34" width="560" x="1400" y="2230" as="geometry" />
+        </mxCell>
+        <mxCell id="rcLink" edge="1" parent="1" source="rc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#B8960C;" target="st4label">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="adLabel" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#666666;align=left;" value="AUDIT / DEBUG  (cross-cutting — xuyên suốt bước 1-8)" vertex="1">
+          <mxGeometry height="24" width="560" x="1400" y="2320" as="geometry" />
+        </mxCell>
+        <mxCell id="ad" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0F0F0;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="Mỗi lần chạy (sync/run) ghi lại được:&lt;br&gt;&lt;br&gt;- Message nào được fetch (backfill hay real-time&lt;br&gt;  event), kết quả ingest (SUCCESS/SYNC_FAILED/&lt;br&gt;  EMPTY_RESULT)&lt;br&gt;- Message nào DROP / REVIEW / KEEP&lt;br&gt;- score + reasons[] + rule_version của từng message&lt;br&gt;- candidate task nào gộp từ message nào (references)&lt;br&gt;- sync/run ID, processing timestamp&lt;br&gt;&lt;br&gt;Mục tiêu: audit lại được toàn bộ quyết định của 1&lt;br&gt;lần đồng bộ mà không cần hỏi AI, không cần đọc code." vertex="1">
+          <mxGeometry height="270" width="560" x="1490" y="2360" as="geometry" />
+        </mxCell>
+        <mxCell id="adLink" edge="1" parent="1" source="ad" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#666666;" target="st8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="openLabel" parent="1" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#C0392B;align=left;" value="CÂU HỎI MỞ — CẦN QUYẾT ĐỊNH TRƯỚC KHI CHỐT SCOPE" vertex="1">
+          <mxGeometry height="24" width="560" x="1400" y="2660" as="geometry" />
+        </mxCell>
+        <mxCell id="open1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAEA;strokeColor=#C0392B;fontSize=11;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="1. App Slack của mondaiy có được tính &amp;quot;internal&amp;quot; để giữ rate limit Tier 3 không? (xem risk1 — CHẶN thiết kế ingestion)&lt;br&gt;&lt;br&gt;2. Deadline suy luận từ text tự nhiên (không có due_date field) — độ tin cậy chấp nhận được ở mức nào trước khi hiện cho user? Có cần đánh dấu rõ &amp;quot;deadline suy luận, có thể sai&amp;quot; trên UI không?&lt;br&gt;&lt;br&gt;3. Phạm vi channel: fetch TẤT CẢ channel bot được add, hay chỉ channel user chọn (giống cơ chế chọn nguồn hiện có ở Jira/Gmail)? Ảnh hưởng trực tiếp consent/privacy.&lt;br&gt;&lt;br&gt;4. DM/private channel chứa nội dung nhạy cảm hơn email công việc — có cần review privacy/PRD riêng trước khi bật ingest DM không (khác hẳn mức độ nhạy cảm so với Jira issue)?&lt;br&gt;&lt;br&gt;5. Slack app phải qua App Directory review nếu muốn cài vào workspace không do mình quản trị — có nằm trong phạm vi pilot hiện tại không, hay chỉ tự cài vào 1 workspace nội bộ?" vertex="1">
+          <mxGeometry height="420" width="560" x="1400" y="2696" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="slack-example" name="Vi du minh hoa">
+    <mxGraphModel dx="1667" dy="733" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1620" pageHeight="1020" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="etitle" parent="1" style="text;html=1;fontSize=16;fontStyle=1;align=left;" value="Ví dụ: 1 DM nhắc deadline đi qua đủ 10 bước pipeline (rule-base, DRAFT)" vertex="1">
+          <mxGeometry height="26" width="1100" x="40" y="16" as="geometry" />
+        </mxCell>
+        <mxCell id="uc" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;CURRENT USER CONTEXT&lt;/b&gt;&lt;br&gt;&lt;br&gt;slack_user_id: U0PHONG01&lt;br&gt;team_id: T0MONDAIY&lt;br&gt;timezone: Asia/Ho_Chi_Minh" vertex="1">
+          <mxGeometry height="110" width="260" x="1330" y="16" as="geometry" />
+        </mxCell>
+        <mxCell id="ex1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;1. INGESTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;event Events API: message.im&lt;br&gt;channel=D0MENTOR01&lt;br&gt;(DM với mentor)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;kết quả = SUCCESS&lt;br&gt;1 message thô, ts=&lt;br&gt;1755230400.000100" vertex="1">
+          <mxGeometry height="240" width="270" x="40" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;2. NORMALIZATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;message thô + timezone&lt;br&gt;(từ User Context)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt; (schema chuẩn)&lt;br&gt;channel_type: im&lt;br&gt;text: &amp;quot;&amp;lt;@U0PHONG01&amp;gt; nhớ&lt;br&gt;nộp báo cáo tuần trước&lt;br&gt;5h chiều thứ Sáu nhé&amp;quot;&lt;br&gt;-&gt; parse mention thành&lt;br&gt;&amp;quot;@Phong nhớ nộp báo cáo&lt;br&gt;tuần trước 5h chiều thứ&lt;br&gt;Sáu nhé&amp;quot;&lt;br&gt;deep_link: chat.getPermalink" vertex="1">
+          <mxGeometry height="340" width="270" x="330" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBEAEA;strokeColor=#C0392B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;3. HARD FILTER&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;subtype: (none, message&lt;br&gt;thường của user thật)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;Không khớp điều kiện DROP&lt;br&gt;nào (không phải system/&lt;br&gt;automated subtype)&lt;br&gt;-&gt; KHÔNG bị DROP, đi tiếp" vertex="1">
+          <mxGeometry height="240" width="270" x="620" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#D97A2B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;4. SLACK + COMMON RULES&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;message đã qua Hard Filter&lt;br&gt;+ slack_user_id (User Context)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt; (rule khớp)&lt;br&gt;MENTIONED_CURRENT_USER&lt;br&gt;DIRECT_MESSAGE (channel_type=im)&lt;br&gt;HAS_ACTION (&amp;quot;nộp&amp;quot;)&lt;br&gt;HAS_DEADLINE_INFERRED&lt;br&gt;(&amp;quot;5h chiều thứ Sáu&amp;quot;)" vertex="1">
+          <mxGeometry height="320" width="270" x="910" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;5. SCORING&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;4 rule đã khớp ở bước 4&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;MENTIONED_CURRENT_USER +30&lt;br&gt;DIRECT_MESSAGE +15&lt;br&gt;HAS_ACTION +25&lt;br&gt;HAS_DEADLINE_INFERRED +25&lt;br&gt;&lt;br&gt;score = 95 (&gt;= ngưỡng 35&lt;br&gt;mặc định)" vertex="1">
+          <mxGeometry height="240" width="270" x="1200" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ex6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;6. EXTRACTION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;message DM, score=95&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;title (SUY RA): &amp;quot;Nộp báo&lt;br&gt;cáo tuần&amp;quot;&lt;br&gt;assignee: Phong (mention)&lt;br&gt;deadline (SUY LUẬN từ NLP&lt;br&gt;thời gian, quy đổi Asia/&lt;br&gt;Ho_Chi_Minh): thứ Sáu&lt;br&gt;tuần này, 17:00&lt;br&gt;evidence: &amp;quot;...nộp báo cáo&lt;br&gt;tuần trước 5h chiều thứ&lt;br&gt;Sáu nhé&amp;quot;" vertex="1">
+          <mxGeometry height="440" width="270" x="40" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#3B5FA6;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;7. DEDUP / GROUP&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;message đã extract + toàn&lt;br&gt;bộ message khác trong&lt;br&gt;đợt sync này&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;Dedup: (channel_id, ts) duy&lt;br&gt;nhất, không trùng backfill/&lt;br&gt;event&lt;br&gt;Group: không thread reply&lt;br&gt;nào khác -&gt; 1 candidate&lt;br&gt;task, references =&lt;br&gt;[(D0MENTOR01, ts)]" vertex="1">
+          <mxGeometry height="440" width="270" x="330" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1EBFA;strokeColor=#7B4FBF;fontSize=10.5;fontFamily=Courier New;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;8. DECISION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;candidate task, score=95&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;{&lt;br&gt;&amp;#160;score: 95,&lt;br&gt;&amp;#160;decision: &amp;quot;KEEP&amp;quot;,&lt;br&gt;&amp;#160;reasons: [&amp;quot;MENTIONED_CURRENT_USER&amp;quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;quot;DIRECT_MESSAGE&amp;quot;, &amp;quot;HAS_ACTION&amp;quot;,&lt;br&gt;&amp;#160;&amp;#160;&amp;quot;HAS_DEADLINE_INFERRED&amp;quot;],&lt;br&gt;&amp;#160;rule_version: &amp;quot;slack-rules-v1-draft&amp;quot;&lt;br&gt;}" vertex="1">
+          <mxGeometry height="440" width="270" x="620" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;9. USER CONFIRMATION&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;candidate task, decision=KEEP&lt;br&gt;state: NEW&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;state -&gt; PENDING_CONFIRMATION&lt;br&gt;(hiện &amp;quot;Nộp báo cáo tuần&amp;quot;&lt;br&gt;trong Công việc của tôi,&lt;br&gt;gắn nhãn deadline suy luận)&lt;br&gt;User bấm Xác nhận&lt;br&gt;-&gt; state = CONFIRMED" vertex="1">
+          <mxGeometry height="440" width="270" x="910" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ex10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E9F6E7;strokeColor=#4B8B3B;fontSize=10.5;align=left;spacingLeft=8;verticalAlign=top;spacingTop=8;" value="&lt;b&gt;10. CALENDAR&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;INPUT&lt;/b&gt;&lt;br&gt;task state = CONFIRMED&lt;br&gt;(P0 giả định: chỉ export .ics,&lt;br&gt;giống cách Jira đang làm)&lt;br&gt;&lt;br&gt;&lt;b&gt;OUTPUT&lt;/b&gt;&lt;br&gt;state -&gt; &lt;b&gt;EXPORTED&lt;/b&gt;&lt;br&gt;file .ics tải về&lt;br&gt;reference lưu: channel_id=&lt;br&gt;D0MENTOR01, ts=&lt;br&gt;1755230400.000100" vertex="1">
+          <mxGeometry height="440" width="270" x="1200" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="ee1" edge="1" parent="1" source="ex1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee2" edge="1" parent="1" source="ex2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee3" edge="1" parent="1" source="ex3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee4" edge="1" parent="1" source="ex4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee5" edge="1" parent="1" source="ex5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee6" edge="1" parent="1" source="ex6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee7" edge="1" parent="1" source="ex7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee8" edge="1" parent="1" source="ex8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ee9" edge="1" parent="1" source="ex9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;strokeWidth=2;" target="ex10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink1" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;" target="ex2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ucLink2" edge="1" parent="1" source="uc" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;dashed=1;strokeColor=#7B4FBF;fontSize=10;fontColor=#7B4FBF;" target="ex4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="exnote" parent="1" style="text;html=1;fontSize=11;fontStyle=2;fontColor=#888888;align=left;" value="Điểm số trong ví dụ (95, +30, +15...) chỉ minh hoạ theo trọng số ĐỀ XUẤT (chưa có dữ liệu thật hiệu chỉnh, khác Jira đã chạy production) — thực tế lấy từ RULE_CONFIG. Sơ đồ đủ 10 bước, khớp 1-1 với tab &amp;quot;Slack pipeline&amp;quot;. Toàn bộ tab này là DRAFT, chưa phải scope chính thức." vertex="1">
+          <mxGeometry height="20" width="1200" x="40" y="1010" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

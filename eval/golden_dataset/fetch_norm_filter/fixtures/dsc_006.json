@@ -1,0 +1,18 @@
+[
+  {
+    "id": "msg-dsc-006",
+    "channel_id": "other-channel",
+    "guild_id": "stranger-guild",
+    "content": "Tin nhắn từ server lạ.",
+    "timestamp": "2025-01-01T00:00:00+00:00",
+    "edited_timestamp": null,
+    "author": {
+      "id": "usr-other-user",
+      "username": "other-user",
+      "discriminator": "0"
+    },
+    "attachments": [],
+    "mentions": [],
+    "referenced_message": null
+  }
+]

@@ -1,0 +1,164 @@
+<mxfile host="app.diagrams.net" agent="mondaiy" version="24.0.0">
+  <diagram id="gmail-detail" name="Gmail chi tiet + test coverage">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1560" pageHeight="1060" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Gmail connector — chi tiet fetch/normalize/filter va test coverage (nguon: src/connectors/gmail.py, src/services/filter_classify.py, tests/)" style="text;html=1;fontSize=15;fontStyle=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="30" y="8" width="1500" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="colA" value="OAUTH / TOKEN  ->  FETCH_RANGE (sieu chi tiet)" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#3B5FA6;align=left;" vertex="1" parent="1">
+          <mxGeometry x="30" y="36" width="420" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a1" value="google.py - OAuth&#10;scope: openid email&#10;https://www.googleapis.com/auth/gmail.readonly&#10;chi doc, KHONG gui/xoa/sua duoc mail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="420" height="66" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a2" value="Token luu tru - crypto.py&#10;encrypt_token() / decrypt_token() - Fernet (symmetric)&#10;key: TOKEN_ENCRYPTION_KEY (bien moi truong, khong commit git)&#10;connection.access_token_encrypted / refresh_token_encrypted" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="138" width="420" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a3" value="ensure_valid_access_token() - google.py:90-119&#10;refresh som 60s truoc khi het han that (_REFRESH_SKEW_SECONDS)&#10;Google KHONG tra refresh_token moi trong response refresh&#10;-&gt; giu nguyen ban cu da luu&#10;SQLite co the tra datetime naive -&gt; ep ve UTC truoc khi so sanh" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="220" width="420" height="82" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a4" value="fetch_range(source, time_from, time_to) - gmail.py:86&#10;query = &quot;label:{source.id} after:{ts} before:{ts}&quot;&#10;Bo dem thoi gian bang epoch giay (int(dt.timestamp()))" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="322" width="420" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a5" value="Vong lap GET /messages - gmail.py:95-109&#10;phan trang 100/lan (maxResults=100, pageToken)&#10;CAP _MAX_MESSAGE_IDS = 1000&#10;while len(message_ids) &lt; 1000 ... else: logger.warning() neu&#10;cham cap - id con lai coi nhu chua liet ke duoc&#10;[DA FIX - truoc day khong co cap nao]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D6;strokeColor=#D97A2B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="392" width="420" height="94" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a6" value="Voi moi message_id: GET /messages/{id} - gmail.py:122-134&#10;format=metadata, metadataHeaders=[From,To,Cc,Subject,Date]&#10;try/except GmailAPIError -&gt; skipped_error += 1, KHONG dung&#10;vong lap (skip-and-continue)&#10;[DA FIX - truoc day 1 message loi huy ca fetch_range]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D6;strokeColor=#D97A2B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="496" width="420" height="86" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a7" value="Rule loc evidence-first - gmail.py:143-149&#10;signalled = label thuoc {UNREAD, IMPORTANT, STARRED}&#10;  HOAC _EVIDENCE_HINTS.search(subject + from + snippet)&#10;&#10;_EVIDENCE_HINTS (regex, khong phan biet hoa/thuong):&#10;urgent | action required | deadline | due | submit | reply |&#10;respond | review | confirm | mentor | course | class |&#10;assignment | project | milestone | demo | vlearn | canvas |&#10;jira | han | nop | phan hoi | yeu cau | can lam | thu [2-7]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="592" width="420" height="152" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a8" value="CAP _MAX_METADATA_CANDIDATES = 80 - gmail.py:119-121,150-158&#10;cham cap -&gt; truncated_by_cap=True -&gt; logger.warning()&#10;Log tong ket 1 dong: &quot;N id -&gt; N candidate (N bo qua khong&#10;tin hieu, N loi metadata)&quot;&#10;[DA FIX - truoc day cham cap khong log gi, im lang cat]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D6;strokeColor=#D97A2B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="754" width="420" height="88" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a9" value="Voi moi candidate: GET /messages/{id} format=full - gmail.py:164-169&#10;try/except GmailAPIError -&gt; skipped_full_fetch += 1, KHONG&#10;dung vong lap&#10;[DA FIX - cung 1 loi nhu buoc metadata]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8D6;strokeColor=#D97A2B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="854" width="420" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a10" value="_get() retry 429 - gmail.py:57-68&#10;toi da _MAX_RATE_LIMIT_RETRIES = 5 lan&#10;doc header Retry-After, asyncio.sleep() roi thu lai&#10;het 5 lan van 429 -&gt; raise GmailAPIError&#10;[DA FIX - truoc day khong retry, 429 la loi ngay]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F1DF;strokeColor=#4B8B3B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="932" width="420" height="86" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ea1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a1" target="a2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a2" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a3" target="a4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a4" target="a5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a5" target="a6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a6" target="a7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a7" target="a8"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="a8" target="a9"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ea9" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;dashed=1;strokeColor=#4B8B3B;" edge="1" parent="1" source="a6" target="a10"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="colB" value="NORMALIZE (sieu chi tiet)  ->  BO LOC 2 TANG" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#3B5FA6;align=left;" vertex="1" parent="1">
+          <mxGeometry x="490" y="36" width="420" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b1" value="normalize(raw_item, source) - gmail.py:178&#10;parseaddr(headers[&quot;from&quot;]) -&gt; from_name, from_email&#10;from_email luon ha thanh chu thuong (.lower())" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="60" width="420" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b2" value="text = _extract_plain_text(payload) OR _extract_html_text(payload)&#10;&#10;_extract_plain_text - gmail.py:222-240 (de quy MIME tree)&#10;tim mimeType=&quot;text/plain&quot; dau tien, decode base64url&#10;fallback: body rong nhung con parts -&gt; tim tiep trong parts&#10;&#10;_extract_html_text - gmail.py:243-252 (fallback mail HTML-only)&#10;strip &lt;script&gt;/&lt;style&gt; bang regex, html.unescape(), roi bo&#10;het the con lai bang regex &lt;[^&gt;]+&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="132" width="420" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b3" value="_extract_attachment_metadata() - gmail.py:255-267&#10;chi lay filename / mimeType / sizeBytes&#10;KHONG tai noi dung file dinh kem (chi metadata)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="284" width="420" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b4" value="is_self = from_email == connection.provider_user_id&#10;(so sanh 2 ve deu da .lower())&#10;is_dm = luon False (Gmail khong co khai niem tin nhan rieng)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="356" width="420" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b5" value="sent_at = _internal_date_to_datetime(internalDate) - gmail.py:280-286&#10;Thieu hoac loi internalDate -&gt; tra chuoi &quot;unknown&quot;&#10;(kieu tra ve: datetime | str - KHONG dong nhat)&#10;&#10;He qua: filter_and_classify() kiem tra&#10;isinstance(sent_at, datetime) truoc khi so voi cutoff 14 ngay&#10;-&gt; mail sent_at=&quot;unknown&quot; NE duoc kiem tra lookback,&#10;luon lot qua du gia bao nhieu" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBDCDA;strokeColor=#C0392B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="424" width="420" height="132" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b6" value="deep_link() - gmail.py:218-219&#10;raw_item[&quot;sourceUrl&quot;] neu co, khong thi&#10;https://mail.google.com/mail/u/0/#all/{id}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="564" width="420" height="56" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b7" value="TANG 2 - filter_and_classify() - src/services/filter_classify.py&#10;(khac voi evidence-first o tang 1 trong connector - day la&#10;buoc filter_node rieng trong pipeline 9 node)" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#D97A2B;align=left;" vertex="1" parent="1">
+          <mxGeometry x="490" y="630" width="420" height="34" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b8" value="_dedupe_and_group() - sha256(thread_id + text)&#10;giu ban moi nhat theo sent_at, tinh thread_size&#10;&#10;Loai cung (truoc khi cham diem):&#10;- deep_link phai bat dau &quot;https://mail.google.com/&quot;&#10;- sent_at LA datetime that va ngoai lookback_days=14&#10;- co approved_labels ma label khong khop -&gt; label_not_approved" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="668" width="420" height="118" as="geometry" />
+        </mxCell>
+
+        <mxCell id="b9" value="classify_email() - 7 nhom regex cong/tru diem (toi da 100):&#10;&#10;sender (domain trusted)          +30&#10;recipient (nhan truc tiep)       +20&#10;cc_penalty (chi o CC)            -10&#10;action (vui long/nop/reply..)    +25&#10;deadline (han/thu../deadline)    +25&#10;urgency (gap/khan cap/urgent)    +15&#10;unread                           +10&#10;program_relevance (course/..)    +20&#10;newsletter_penalty                -40&#10;automated_penalty (no-reply)      -30&#10;thread_penalty (thread cu)        -20&#10;thread_change                    +20&#10;&#10;Giu neu: must_not_miss HOAC score &gt;= min_relevant_score (35)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#888888;fontSize=10.5;fontFamily=Courier New;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="490" y="794" width="420" height="230" as="geometry" />
+        </mxCell>
+
+        <mxCell id="eb1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b1" target="b2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eb2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b2" target="b3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eb3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b3" target="b4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eb4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b4" target="b5"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eb5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b5" target="b6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eb6" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b6" target="b8"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="eb7" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="b8" target="b9"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="colC" value="TEST COVERAGE MAP  ->  VI DU CU THE" style="text;html=1;fontSize=13;fontStyle=1;fontColor=#3B5FA6;align=left;" vertex="1" parent="1">
+          <mxGeometry x="960" y="36" width="560" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c1" value="tests/test_connectors/test_gmail_normalize.py  (5 test)&#10;&#10;test_normalize_extracts_plain_text_body&#10;test_normalize_is_self_true_when_from_matches_connection_email&#10;test_normalize_is_self_false_when_from_differs&#10;test_normalize_finds_plain_text_inside_multipart&#10;test_deep_link_points_to_gmail_web_ui" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EEF9;strokeColor=#3B5FA6;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="60" width="560" height="106" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c2" value="tests/test_gmail_filter_gold.py  (1 test, chay 10 case)&#10;doc eval/golden_dataset/fetch_norm_filter/filter_cases.json&#10;kiem: message co lot filter khong + importance +&#10;brief_section + reason bi loai (neu co)&#10;&#10;10 case: GML-F-019 newsletter . 020 automated .&#10;021 low_relevance (bien lai ngoai chuong trinh) .&#10;022 CC-only khong hanh dong . 023 thread cu khong doi .&#10;024 prompt injection trong mail khong lien quan .&#10;025 mentor yeu cau truc tiep -&gt; accepted+critical .&#10;026 thong bao diem thap van giu de recall -&gt; reference .&#10;027 co danh dau xung dot -&gt; accepted+changes .&#10;028 nhan khong duoc duyet -&gt; label_not_approved" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EEF9;strokeColor=#3B5FA6;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="178" width="560" height="216" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c3" value="eval/golden_dataset/fetch_norm_filter/  -  MO COI, CHUA CO TEST&#10;&#10;fixtures/gml_001.json .. gml_018.json (18 file)&#10;expected/gml_001.json .. gml_018.json (18 file)&#10;README.md mo ta du 6 nhom: fetch happy path, permission/&#10;scope, normalize, duplicate/version, filter relevance,&#10;error/partial coverage&#10;&#10;Grep toan bo tests/ theo &quot;fetch_norm_filter&quot; hay &quot;gml_0&quot;&#10;chi ra DUY NHAT 1 file (test_gmail_filter_gold.py, ma no&#10;chi doc filter_cases.json chu khong doc fixtures/gml_*.json)&#10;-&gt; 18 case nay CHUA TUNG duoc chay qua code that" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBDCDA;strokeColor=#C0392B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="410" width="560" height="176" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c4" value="4 fix moi o fetch_range (cap id, cap candidate, retry 429,&#10;skip-and-continue) - CHUA CO TEST UNIT RIENG&#10;6 test cu (test_gmail_normalize + test_gmail_filter_gold)&#10;van pass sau khi fix, nhung do la test cho normalize()/&#10;filter_and_classify(), khong dung lai duoc GmailAPIError,&#10;429, hay cap 80/1000 - nhung nhanh do dang khong co pytest&#10;nao goi truc tiep" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBDCDA;strokeColor=#C0392B;fontSize=11;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="596" width="560" height="106" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c5" value="VI DU CU THE - truy 1 email qua toan bo pipeline (rut gon tu GML-F-025)" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4B8B3B;align=left;" vertex="1" parent="1">
+          <mxGeometry x="960" y="716" width="560" height="24" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c6" value="INPUT (payload.headers rut gon):&#10;From: mentor@example.edu | To: student@example.edu&#10;Subject: Action required: demo update&#10;text: &quot;Please update the demo and reply before Friday.&quot;&#10;label_ids: [INBOX, UNREAD]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#888888;fontSize=10.5;fontFamily=Courier New;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="746" width="560" height="76" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c7" value="TANG 1 (evidence-first, trong connector):&#10;label UNREAD co trong {UNREAD,IMPORTANT,STARRED} -&gt; signalled=True&#10;(khong can xet regex nua) -&gt; tai full body" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#888888;fontSize=10.5;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="828" width="560" height="54" as="geometry" />
+        </mxCell>
+
+        <mxCell id="c8" value="TANG 2 (filter_and_classify, khop GML-F-025):&#10;recipient +20 (to truc tiep) . action +25 (&quot;reply&quot;,&quot;update&quot;) .&#10;deadline +25 (&quot;Friday&quot;) . urgency +15 (&quot;action required&quot;) .&#10;unread +10  =&gt;  score=95, clamp 100&#10;must_not_miss=True (co deadline+action+direct)&#10;=&gt; expected: status=accepted, importance=critical,&#10;brief_section=needs_action  (dung nhu file expected)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F1DF;strokeColor=#4B8B3B;fontSize=10.5;align=left;spacingLeft=6;verticalAlign=top;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="886" width="560" height="112" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ec1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="c1" target="c2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ec2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;dashed=1;strokeColor=#C0392B;" edge="1" parent="1" source="c2" target="c3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ec3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;dashed=1;strokeColor=#C0392B;" edge="1" parent="1" source="c3" target="c4"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ec4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="c6" target="c7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ec5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;" edge="1" parent="1" source="c7" target="c8"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="link_a7c1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#B0B0B0;" edge="1" parent="1" source="a7" target="c1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="link_b5c1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#B0B0B0;" edge="1" parent="1" source="b5" target="c1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="link_b9c2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;dashed=1;strokeColor=#B0B0B0;" edge="1" parent="1" source="b9" target="c2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="link_c2c8" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;dashed=1;strokeColor=#4B8B3B;" edge="1" parent="1" source="c2" target="c8"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

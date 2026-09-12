@@ -1,0 +1,128 @@
+services:
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    # Publish ra host để uvicorn chạy bằng .venv (không trong Compose) vẫn
+    # nối được REDIS_URL=redis://localhost:6379/0 như .env.example. Backend/
+    # worker chạy trong Docker vẫn dùng redis:6379 qua Docker network.
+    ports:
+      - "${REDIS_HOST_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
+    ports:
+      - "${MINIO_HOST_PORT:-9000}:9000"
+      - "${MINIO_CONSOLE_HOST_PORT:-9001}:9001"
+    volumes:
+      - minio_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  db:
+    # postgres:16-alpine gốc không có pgvector — bảng chunks (src/models/evidence.py)
+    # cần kiểu cột VECTOR (architecture.md §3 yêu cầu FTS + pgvector cùng một
+    # Postgres), thiếu là backend sập ngay lúc khởi động. Cùng Postgres 16 nên
+    # volume dữ liệu cũ dùng tiếp được, không cần migrate.
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-app}
+      POSTGRES_DB: ${POSTGRES_DB:-ai20k}
+    ports:
+      # 5432 trên máy này đã có một Postgres khác chiếm, nên map ra 5433.
+      # Trong network docker thì backend vẫn nối tới db:5432 như cũ.
+      - "${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-ai20k}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # Cổng phía máy thật. Đặt khác 8000 nếu máy bạn đã có app khác chiếm cổng
+      # đó — trong network docker thì edge vẫn nối tới backend:8000 như cũ.
+      - "${BACKEND_HOST_PORT:-8000}:8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-app}@db:5432/${POSTGRES_DB:-ai20k}
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_PRESIGN_ENDPOINT: localhost:9000
+      # Topology production tách worker thành container riêng bên dưới (đúng
+      # architecture.md §3) — tắt embed để không chạy 2 claim loop trùng vai
+      # trò trên cùng máy chỉ khác container. Local `make run` một mình vẫn
+      # dùng default true trong src/config.py (embed_worker), không cần biến
+      # này.
+      EMBED_WORKER: "false"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-app}@db:5432/${POSTGRES_DB:-ai20k}
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_PRESIGN_ENDPOINT: localhost:9000
+    command: ["python", "-m", "src.worker"]
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      backend:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    # Image backend có HTTP healthcheck, còn worker không mở HTTP server.
+    healthcheck:
+      disable: true
+
+volumes:
+  db_data:
+  minio_data:
+  redis_data:

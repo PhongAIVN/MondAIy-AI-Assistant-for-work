@@ -1,0 +1,20 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-gml-010",
+      "source_id": "INBOX",
+      "provider": "google",
+      "thread_id": "thread-gml-010",
+      "author_id": "admin@vlearn.edu.vn",
+      "author_name": "Admin",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Vui lòng kiểm tra mã nguồn gấp.",
+      "sent_at": "unknown",
+      "deep_link": "https://mail.google.com/mail/u/0/#all/msg-gml-010",
+      "capture_mode": "gmail_api",
+      "attachments": []
+    }
+  ]
+}

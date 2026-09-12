@@ -1,0 +1,25 @@
+name: Warm runner tool cache
+
+on:
+  workflow_dispatch:
+
+jobs:
+  warm:
+    name: Cache Python 3.11 and Node 20
+    runs-on: [self-hosted, linux, x64, cohort3]
+    steps:
+      # setup-* installs a missing runtime into RUNNER_TOOL_CACHE. Subsequent CI
+      # jobs on this persistent runner resolve it locally instead of downloading.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Confirm runner tool cache
+        run: |
+          python --version
+          node --version
+          test -n "${RUNNER_TOOL_CACHE:-}"

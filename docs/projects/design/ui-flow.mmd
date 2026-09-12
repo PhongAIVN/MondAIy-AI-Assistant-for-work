@@ -1,0 +1,20 @@
+flowchart LR
+  A[Admin: tạo Program Frame] --> B[Học viên: chọn team/role & consent]
+  B --> C[Ingestion: lịch + nguồn chính thức + Discord]
+  C --> D{Nguồn Mức A?}
+  D -->|Có| E[Rule check: deadline / thay đổi / mâu thuẫn]
+  D -->|Không| F[AI: mới / sửa / hủy / mâu thuẫn]
+  E --> G[Briefing composer]
+  F --> G
+  G --> H{Có source link?}
+  H -->|Không| I[Không publish item]
+  H -->|Có| J[Daily Briefing]
+  J --> K[Grounded Q&A]
+  J --> M[Action Draft]
+  K --> M
+  K --> L[Citation · Feedback]
+  M --> N[Preview · Edit · Confirm]
+  N --> O[Internal reminder]
+  N --> P[Calendar link / .ics]
+  O --> Q[Completion & evaluation]
+  P --> Q

@@ -1,0 +1,58 @@
+{
+  "request": {
+    "intent": "gmail_content_summary",
+    "query": "tóm tắt nội dung ngày 8-8-2026 trên gmail",
+    "source": "INBOX",
+    "time_from": "2026-08-08T00:00:00+00:00",
+    "time_to": "2026-08-09T00:00:00+00:00"
+  },
+  "fetch": {
+    "gmail_query": "label:INBOX after:1786147200 before:1786233600",
+    "raw_count": 5,
+    "raw_ids": [
+      "19fe0d0750944c59",
+      "19fe09829a91c412",
+      "19fe097ea47f524f",
+      "19fe09495a5db219",
+      "19fdee34993893fe"
+    ],
+    "note": "Metadata-first fetch; only signalled messages received full MIME content."
+  },
+  "normalize": {
+    "count": 5,
+    "items": [
+      {"id":"19fe0d0750944c59","subject":"Cảnh báo bảo mật","from":"no-reply@accounts.google.com","unread":false,"labels":["CATEGORY_UPDATES","INBOX"]},
+      {"id":"19fe09829a91c412","subject":"One API key for every major model","from":"welcome@openrouter.ai","unread":true,"labels":["CATEGORY_PROMOTIONS","UNREAD","INBOX"]},
+      {"id":"19fe097ea47f524f","subject":"[GitHub] A third-party OAuth application has been added to your account","from":"noreply@github.com","unread":true,"labels":["UNREAD","IMPORTANT","CATEGORY_UPDATES","INBOX"]},
+      {"id":"19fe09495a5db219","subject":"Bạn đã chia sẻ một số dữ liệu trong Tài khoản Google với alphaxiv.org","from":"noreply-accounts@google.com","unread":true,"labels":["UNREAD","CATEGORY_UPDATES","INBOX"]},
+      {"id":"19fdee34993893fe","subject":"[Jira][T004] 1 công việc cần cập nhật • 08/08/2026","from":"jira@vinait004.atlassian.net","unread":false,"labels":["CATEGORY_UPDATES","INBOX"]}
+    ]
+  },
+  "filter": {
+    "candidate_count": 4,
+    "rejected_count": 1,
+    "rejected": [
+      {"id":"19fe0d0750944c59","reason":"low_importance"}
+    ],
+    "candidates": [
+      {"id":"19fe09829a91c412","score":15,"importance":"ignore","must_not_miss":true,"reasons":["action_signal","direct_recipient"],"why":"unread + direct recipient, but newsletter penalty -40"},
+      {"id":"19fe097ea47f524f","score":30,"importance":"ignore","must_not_miss":true,"reasons":["deadline_signal","action_signal"],"why":"unread/important, but automated penalty -30"},
+      {"id":"19fe09495a5db219","score":0,"importance":"ignore","must_not_miss":true,"reasons":["action_signal","direct_recipient"],"why":"automated Google notification + newsletter penalty"},
+      {"id":"19fdee34993893fe","score":90,"importance":"critical","must_not_miss":true,"reasons":["deadline_signal","action_signal","direct_recipient","program_relevance"],"why":"Jira task, deadline Sunday 09/08/2026, project TAPB-124"}
+    ]
+  },
+  "llm_context": {
+    "count": 4,
+    "evidence": [
+      {"message_id":"19fe09829a91c412","quote":"Create a key, paste one request, and read your first response on the free tier.","source_url":"https://mail.google.com/mail/u/0/#all/19fe09829a91c412"},
+      {"message_id":"19fe097ea47f524f","quote":"A third-party OAuth application (OpenRouter) was recently authorized to access your account.","source_url":"https://mail.google.com/mail/u/0/#all/19fe097ea47f524f"},
+      {"message_id":"19fe09495a5db219","quote":"Bạn không cần làm gì vào lúc này.","source_url":"https://mail.google.com/mail/u/0/#all/19fe09495a5db219"},
+      {"message_id":"19fdee34993893fe","quote":"Nộp daily stand-up trên Discord và cập nhật trạng thái Jira. TAPB-124 — Test crawl/normalize/filter Gmail. Deadline: Sunday, 09/08/2026.","source_url":"https://mail.google.com/mail/u/0/#all/19fdee34993893fe"}
+    ]
+  },
+  "finding": {
+    "important_bug": "The filter marks low-score unread/direct-recipient mail as must_not_miss, so 3 noise emails still reach LLM context.",
+    "desired_behavior": "Only the critical Jira evidence should reach task extraction; content-summary mode may include all relevant mail but must exclude newsletter/security noise.",
+    "current_evidence_quality": "Every context item has message_id, quote and Gmail source URL."
+  }
+}

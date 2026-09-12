@@ -1,0 +1,177 @@
+% Compile: xelatex mondaiy-srs.tex && xelatex mondaiy-srs.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{fontspec,polyglossia,microtype,setspace}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setdefaultlanguage{vietnamese}
+\onehalfspacing
+\usepackage{booktabs,longtable,tabularx,array,enumitem,xcolor,hyperref,fancyhdr,titlesec,float}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\definecolor{mondaiyblue}{HTML}{174B63}
+\definecolor{mondaiyteal}{HTML}{167B7F}
+\definecolor{mondaiylight}{HTML}{EEF5F4}
+\hypersetup{colorlinks=true,linkcolor=mondaiyblue,urlcolor=mondaiyteal,pdftitle={SRS mondaiy}}
+\pagestyle{fancy}\fancyhf{}\lhead{mondaiy -- SRS}\rhead{Bản 1.0}\cfoot{\thepage}
+\setlength{\headheight}{14pt}
+\titleformat{\section}{\Large\bfseries\color{mondaiyblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{mondaiyteal}}{\thesubsection}{0.6em}{}
+\renewcommand{\arraystretch}{1.2}
+\setlist[itemize]{leftmargin=1.1cm,itemsep=3pt}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{2.4cm}
+{\Huge\bfseries\color{mondaiyblue} Đặc tả yêu cầu phần mềm\\[0.2cm]
+mondaiy -- Personal Program Navigator\par}
+\vspace{0.9cm}
+{\Large Software Requirements Specification (SRS)\par}
+\vfill
+\begin{tabular}{rl}
+\textbf{Phiên bản:} & 1.0 \\
+\textbf{Ngày lập:} & 23/08/2026 \\
+\textbf{Chuẩn tham chiếu:} & ISO/IEC/IEEE 29148 \\
+\textbf{Nguồn chuẩn:} & PRD, user story map, feature specification và ADR của P-004 \\
+\textbf{Trạng thái:} & Tài liệu tổng hợp phục vụ review và nghiệm thu \\
+\end{tabular}
+\vfill
+\colorbox{mondaiylight}{\parbox{0.86\textwidth}{Tài liệu này trả lời câu hỏi \textbf{``hệ thống phải làm gì?''}. Khi có khác biệt, PRD và các ADR đã được phê duyệt là nguồn quyết định; tài liệu này không tự thay đổi phạm vi sản phẩm.}}
+\end{titlepage}
+
+\tableofcontents\clearpage
+
+\section{Kiểm soát tài liệu và nguyên tắc phê duyệt}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.5cm}X}
+\toprule Thuộc tính & Giá trị \\ \midrule
+Product owner & Chịu trách nhiệm phạm vi, ưu tiên và chỉ số giá trị; trạng thái phê duyệt: \emph{pending}. \\
+CTO/Tech Lead & Chịu trách nhiệm feasibility, security, vận hành và traceability; trạng thái phê duyệt: \emph{pending}. \\
+QA lead & Chịu trách nhiệm điều kiện kiểm thử, evidence và release recommendation; trạng thái phê duyệt: \emph{pending}. \\
+Baseline & PRD 0.5, user story map, ADR và API contract là nguồn chuẩn. File này là baseline SRS 1.0, không thay thế chúng. \\
+Quy tắc thay đổi & Mỗi thay đổi phải ghi ID, nguồn quyết định, tác động FR/NFR/API/test và version; thay đổi scope, privacy hoặc metric cần quyết định product/ADR trước khi sửa tài liệu. \\
+\bottomrule
+\end{tabularx}
+
+\section{Giới thiệu}
+\subsection{Mục đích và phạm vi}
+mondaiy giúp người học và người làm việc tri thức gom thông tin được cấp quyền từ Gmail, Google Calendar, Drive/Docs/Sheets, Jira, Discord, Slack và Outlook; biến dữ liệu đó thành briefing, câu trả lời có dẫn nguồn, task draft, lịch draft và ghi chú cuộc họp. Hệ thống không được tự thực hiện hành động bên ngoài khi chưa có xác nhận rõ ràng của người dùng.
+
+Phạm vi bản này bao gồm web, mobile, browser extension, backend API, worker nền và các connector có trong repo. Không bao gồm cam kết rằng mọi nguồn bên thứ ba luôn sẵn sàng hoặc AI luôn trả lời đúng khi không có evidence.
+
+\subsection{Thuật ngữ}
+\begin{longtable}{p{3cm}p{11cm}}
+\toprule Thuật ngữ & Nghĩa trong tài liệu \\ \midrule\endhead
+Evidence & Nội dung đã lấy từ nguồn theo quyền người dùng, kèm provenance để kiểm chứng. \\
+Draft & Bản nháp task, sự kiện lịch, phản hồi hoặc hành động; người dùng có thể sửa, xác nhận hoặc bỏ. \\
+Citation & Dẫn chiếu từ câu trả lời/briefing về evidence nguồn. \\
+Coverage & Trạng thái đầy đủ, một phần hoặc không xác định của một lần quét/tổng hợp. \\
+Abstain & Phản hồi nêu rõ không đủ bằng chứng thay vì suy đoán. \\
+\bottomrule
+\end{longtable}
+
+\section{Mô tả tổng quan}
+\subsection{Bối cảnh sản phẩm}
+Sản phẩm xử lý vấn đề thông tin bị phân mảnh trên nhiều công cụ. Người dùng không nên phải sao chép lại cùng một nội dung sang chatbot, todo và lịch. Luồng giá trị chính là: cấp quyền nguồn $\rightarrow$ đồng bộ có giới hạn $\rightarrow$ evidence $\rightarrow$ tìm/tóm tắt $\rightarrow$ proposal $\rightarrow$ người dùng xác nhận hành động.
+
+\subsection{Lớp người dùng}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{2.5cm}p{3.4cm}X}
+\toprule Vai trò & Nhu cầu & Quyền chính \\ \midrule
+Người dùng & Xem việc, lịch, briefing, hỏi và tạo draft & Chỉ đọc/ghi dữ liệu thuộc phạm vi tài khoản của mình. \\
+Quản trị chương trình & Cấu hình program frame, nguồn và chính sách & Quản lý dữ liệu chương trình theo quyền được cấp. \\
+QC/Operator & Quan sát run, lỗi, coverage và quality gate & Đọc telemetry/audit đã được che dữ liệu nhạy cảm. \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Giá trị sản phẩm và đo lường}
+Nhóm ưu tiên là học viên/người làm việc tri thức trong một program có thông tin phân tán và người hướng dẫn/quản trị program. Lời hứa giá trị là giảm việc tìm, đối chiếu và nhập lại thông tin \emph{mà không đánh đổi khả năng kiểm chứng hoặc quyền kiểm soát dữ liệu}. Chỉ số chính là tỷ lệ công việc đến hạn trong tuần được hoàn thành, đo trước/sau pilot theo định nghĩa trong PRD. Với pilot 5--10 người, báo cáo số tuyệt đối (\code{x/n}) và chênh lệch trước/sau, không tự đặt ngưỡng phần trăm không có dữ liệu nghiên cứu người dùng.
+
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.4cm}p{4.2cm}X}
+\toprule Mục tiêu & Sự kiện đo không chứa nội dung gốc & Cách diễn giải \\ \midrule
+Activation/trust & \code{capture\_synced}, \code{brief\_opened}, \code{consent\_changed} & Báo số người đã kết nối nguồn, mở briefing và thu hồi consent; không suy diễn mức hài lòng từ một event. \\
+Giá trị hành động & \code{action\_draft\_created}, \code{action\_confirmed} & Báo số draft, edit count và time-to-confirm; confirmation là tín hiệu giá trị, không phải bằng chứng task đã hoàn thành. \\
+Chất lượng answer & \code{answer\_rendered}, \code{answer\_feedback} & Báo citation count, abstained và helpful/incorrect/missing-source; raw question/answer không đi vào analytics. \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Giả định và phụ thuộc}
+OAuth, API và dữ liệu nguồn của nhà cung cấp là phụ thuộc bên ngoài. Người dùng phải cấp consent hợp lệ; token có thể hết hạn hoặc bị thu hồi. LLM chỉ là thành phần hỗ trợ, không phải nguồn sự thật.
+
+\section{Yêu cầu chức năng}
+\begin{longtable}{p{1.7cm}p{4cm}p{8.3cm}}
+\toprule ID & Yêu cầu & Tiêu chí nghiệm thu \\ \midrule\endhead
+FR-01 & Xác thực và session & Người dùng đăng ký/đăng nhập bằng email, Google hoặc Apple; session hết hạn được refresh hoặc yêu cầu đăng nhập lại; không lộ token trên giao diện/log. \\
+FR-02 & Kết nối nguồn & Người dùng kết nối/ngắt nguồn có OAuth hoặc connector hỗ trợ; trạng thái kết nối, nhãn tài khoản và lỗi xác thực được hiển thị. \\
+FR-03 & Đồng bộ evidence & Hệ thống fetch, normalize, lọc và lưu evidence theo user/scope; lỗi một nguồn không được tạo dữ liệu thành công giả. \\
+FR-04 & Quản lý task & Người dùng xem task, xác nhận proposal, cập nhật trạng thái và xem deadline/evidence; task của user khác không bao giờ xuất hiện. \\
+FR-05 & Calendar & Người dùng xem lịch trong phạm vi đã cấp quyền; hành động tạo/sửa event phải qua preview/draft và xác nhận. \\
+FR-06 & Briefing & Hệ thống tổng hợp việc cần xử lý, thay đổi, lịch và coverage; nêu rõ nguồn không quét được hoặc dữ liệu chưa đầy đủ. \\
+FR-07 & Hỏi đáp có căn cứ & Chatbot dùng context đã scope-filter; trả lời factual có citation khi có evidence và abstain khi evidence không đủ. \\
+FR-08 & Consent AI & Trước lần gửi câu hỏi, ảnh hoặc source context cho provider AI, mobile hiển thị consent; người dùng có thể tắt lại trong phần cá nhân. \\
+FR-09 & Ghi chú cuộc họp & Người dùng tạo, sửa, tóm tắt ghi chú; hệ thống đề xuất action item và chỉ tạo task sau thao tác accept. \\
+FR-10 & Nhập việc từ tệp & Người dùng chọn/chia sẻ tối đa 5 tệp DOCX/XLSX, mỗi tệp tối đa 200 KB; hệ thống trả proposal theo tên người dùng hoặc yêu cầu tên cần tìm. \\
+FR-11 & Widget & Ứng dụng iOS đồng bộ snapshot task/lịch cho Lock Screen widget trong native build; không báo widget thành công khi chạy Expo Go. \\
+FR-12 & Audit và quan sát & Run pipeline, proposal, xác nhận và lỗi có trạng thái/audit cần thiết để QA tái lập mà không lưu raw secret. \\
+\bottomrule
+\end{longtable}
+
+\section{Use case trọng yếu}
+\subsection{UC-01: Đồng bộ nguồn và tạo briefing}
+\textbf{Tiền điều kiện:} người dùng đã đăng nhập và connector còn quyền đọc.\\
+\textbf{Luồng chính:} (1) người dùng yêu cầu sync hoặc worker chạy lịch; (2) hệ thống fetch và chuẩn hóa; (3) pipeline lọc/trích xuất/persist; (4) briefing hiển thị nội dung, coverage và nguồn.\\
+\textbf{Ngoại lệ:} thiếu refresh token hoặc connection không tồn tại $\rightarrow$ trả trạng thái \code{blocked}/\code{failed}, counts liên quan bằng 0, kèm nguyên nhân khắc phục được.
+
+\subsection{UC-02: Từ câu hỏi đến action draft}
+\textbf{Tiền điều kiện:} consent AI đang bật và evidence thuộc đúng user.\\
+\textbf{Luồng chính:} chatbot nhận ý định, truy hồi evidence, trả lời/citation hoặc tạo proposal. Người dùng sửa và confirm proposal trước khi hệ thống ghi task hoặc event.\\
+\textbf{Hậu điều kiện:} action được audit; nếu không confirm thì chỉ có draft, không có external write.
+
+\section{Yêu cầu phi chức năng}
+\begin{longtable}{p{1.8cm}p{4cm}p{8.2cm}}
+\toprule ID & Thuộc tính & Yêu cầu \\ \midrule\endhead
+NFR-01 & Bảo mật & JWT/OAuth, kiểm tra ownership ở API/service/query; secrets không commit, không log; datetimes timezone-aware. \\
+NFR-02 & Riêng tư & Chỉ gửi dữ liệu cần thiết cho AI sau consent; người dùng có thể ngắt nguồn/tắt AI sharing; raw source không đưa vào telemetry công khai. \\
+NFR-03 & Độ tin cậy & Pipeline trả \code{completed}, \code{blocked} hoặc \code{failed} rõ ràng; retry không ghi đè draft người dùng. \\
+NFR-04 & Hiệu năng & Request có timeout; fetch/LLM bị giới hạn quota/batch; worker dùng durable queue để không chặn HTTP request dài. \\
+NFR-05 & Khả năng dùng & Mobile hỗ trợ keyboard avoidance, dismiss keyboard; lỗi tệp/OAuth/network có thông điệp hành động được. \\
+NFR-06 & Quan sát & Health endpoint, logs cấu trúc, LangSmith/metrics và evidence test phải cho phép truy vết outcome. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Ngưỡng kiểm chứng được cho release}
+Các ngưỡng dưới đây chỉ áp dụng trên test set/môi trường đã công bố phạm vi, không phải cam kết tuyệt đối với mọi dữ liệu hoặc provider bên ngoài.
+\begin{longtable}{p{1.8cm}p{5.2cm}p{6.8cm}}
+\toprule ID & Tiêu chí đo được & Bằng chứng pass \\ \midrule\endhead
+NFR-07 & 95\% phản hồi nhận batch source và mở briefing không quá 2 giây; 95\% first answer không quá 10 giây; 95\% action draft không quá 3 giây; tải tương đương 50 active users. & Báo cáo load có command, SHA, environment, sample size, percentile và failed request. \\
+NFR-08 & Citation của factual claim, official memory có evidence, retrieval trong scoped set và abstain trên unanswerable set đều đạt 100\%; deadline/owner bịa bằng 0 case. & Evaluation suite versioned, case-level result và reviewer sign-off. \\
+NFR-09 & Cross-user leak, external action trước explicit confirmation, duplicate sau retry và pending item mất sau restart đều bằng 0 case. & Denial/retry/restart regression test chạy trên artifact release. \\
+NFR-10 & Thu hồi consent/xóa dữ liệu làm evidence không xuất hiện ở search, briefing hay answer mới; analytics/log không chứa raw source/question/answer. & Test deletion/revocation, log scan và audit đã redaction. \\
+NFR-11 & Chức năng chính dùng được bằng bàn phím, focus hiển thị rõ, trạng thái không chỉ dựa vào màu, preview action luôn có timezone; mobile không che input khi keyboard mở. & Accessibility/mobile interaction test trên matrix thiết bị nêu trong STD. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Quy tắc vòng đời dữ liệu}
+Người dùng phải xem được nguồn đã kết nối, pause/resume, revoke consent, yêu cầu xóa và export index dữ liệu. Thời hạn lưu cụ thể là quyết định mở có owner; trước khi có quyết định đó, release không được mô tả một thời hạn giữ dữ liệu như sự thật. Thu hồi/xóa phải invalidates evidence, retrieval và memory liên quan theo contract, đồng thời để lại audit metadata an toàn.
+
+\section{Giao diện ngoài}
+\subsection{Giao diện người dùng}
+Web và mobile cung cấp các màn: onboarding/auth, home/task/calendar, sources, chat, meeting notes, profile và widget preview. Thiết kế phải thể hiện rõ trạng thái loading, empty, error, blocked, proposal và confirmed.
+
+\subsection{Giao diện tích hợp}
+Các tích hợp chính là Google OAuth/Calendar/Gmail/Drive, Microsoft/Outlook, Jira, Discord, Slack, provider LLM, Apple Sign In và App Store/TestFlight. Mọi API ngoài được gọi qua connector/service riêng, không từ UI trực tiếp.
+
+\section{Traceability và điều kiện release}
+\begin{longtable}{p{2cm}p{3.3cm}p{3.4cm}p{4.6cm}}
+\toprule SRS requirement & Product source & Thiết kế/contract & Minimum verification \\ \midrule\endhead
+FR-01, FR-02, FR-08 & PRD consent/source; J1--J2 & Identity \& Consent, source state API & TC-AUTH-01/02, TC-CONN-01/02, revoke/expiry test. \\
+FR-03, FR-06, FR-12 & PRD sync/evidence/history & Connector, Evidence, Audit domains & Retry/restart/idempotency, coverage và log-redaction tests. \\
+FR-04, FR-05, FR-09, FR-10 & PRD action; implementation increment file intake & Action Draft, task/calendar/file proposal contracts & Draft-before-confirm, multipart rejection và cross-user tests. \\
+FR-07 & PRD ask/evidence & Briefing \& Ask, retrieval/tool contract & Citation, abstain, conflict và prompt-injection tests. \\
+FR-11, NFR-05 & Mobile delivery scope & iOS App Group/widget integration & Native build/device-family smoke; Expo Go is not evidence. \\
+NFR-07--NFR-11 & PRD quality/release criteria & Ops/security/data-control design & Load, privacy deletion, accessibility and release-gate evidence. \\
+\bottomrule
+\end{longtable}
+Một release chỉ đủ điều kiện khi success path, denial/error path và regression test của thay đổi đều pass, mọi số liệu có artifact/SHA/môi trường, và rủi ro chưa kiểm chứng được ghi \code{blocked} hoặc \code{pending} thay vì pass.
+
+\end{document}

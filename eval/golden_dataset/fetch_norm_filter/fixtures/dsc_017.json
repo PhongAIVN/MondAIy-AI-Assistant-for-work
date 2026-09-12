@@ -1,0 +1,7 @@
+{
+  "error_response": {
+    "status_code": 429,
+    "message": "Too Many Requests",
+    "retry_after": 5.0
+  }
+}

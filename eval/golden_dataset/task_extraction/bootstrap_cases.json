@@ -1,0 +1,602 @@
+[
+  {
+    "id": "TASK-BOOT-001",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Mọi người check giúp cái báo cáo nhé, cần gấp á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-002",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Cảm ơn mọi người đã giúp đỡ tuần vừa rồi nha!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-003",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Ai đi mua đồ cho nhóm đi, hết hàng rồi đó!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-004",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Hôm nay nghỉ học, ai có lịch mới báo cho mình với nha!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-005",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Chị ơi, gửi em slide bài thuyết trình được không ạ?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-006",
+    "description": "LLM-generated, relabeled true→ thì quá khứ ở đầu câu nhưng \"kiểm tra giúp nhé\" là yêu cầu thật, cùng mẫu \"Họp xong rồi thì gửi biên bản...\" trong hard_cases.json",
+    "input": {
+      "text": "Đã nộp bài tập rồi, mọi người kiểm tra giúp nhé!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-007",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Bạn nào có thời gian làm giúp mình cái này không?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-008",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Sáng nay đã gặp thầy chưa, có thông tin gì không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-009",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Cần ai đó làm cái video clip cho sự kiện nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-010",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Hôm nay trời đẹp ghê, đi chơi không mọi người?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-011",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Nhớ nhắc mọi người chuẩn bị cho cuộc họp nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-012",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Mình đã gửi email cho thầy rồi, chờ phản hồi thôi!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-013",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Ai có tài liệu hồi xưa cho mình mượn với nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-014",
+    "description": "LLM-generated, relabeled true→ \"nhanh lên nhé\" là mệnh lệnh giục hành động, cùng mẫu \"Mai deadline rồi đó, mọi người tranh thủ nộp bài nha\" (hard_cases, true)",
+    "input": {
+      "text": "Hết deadline rồi, ai chưa làm thì nhanh lên nhé!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-015",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Cần thiết kế hình cho bài thuyết trình, ai làm không?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-016",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Bài kiểm tra vừa rồi dễ quá, có ai thấy không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-017",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Mọi người nhớ gửi bài tập cho mình trước thứ 5 nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-018",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Chốt lịch đi ăn tối nào, ai có ý kiến không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-019",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Cần tìm người làm slide cho tuần sau đó nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-020",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Đã xong việc rồi, chỉ chờ mọi người phản hồi thôi!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-021",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Hòa nhớ xem lại bài thuyết trình giúp mình nha, sắp tới rồi đó."
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-022",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Cảm ơn mọi người đã giúp mình hoàn thành báo cáo nhé!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-023",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Ai đi mua tài liệu về giùm mình với, hết hạn rồi á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-024",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Thứ 7 này có ai rảnh không, mình cần nhờ chút việc."
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-025",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Mình đã gửi email cho giảng viên rồi nha, chờ phản hồi thôi."
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-026",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Lan nhớ chuẩn bị slide cho buổi họp nha, đừng quên đó!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-027",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Chúc mọi người nghỉ lễ vui vẻ nha, không ai làm việc đâu phải không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-028",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Có ai kiểm tra lại danh sách tham gia không nhỉ, mình quên mất rồi."
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-029",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Mọi người đã nhận được thông báo nghỉ lễ chưa, chờ mãi không thấy?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-030",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Tú có thể gửi lại link tài liệu cho mình không, tìm mãi không thấy!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-031",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Mình đã hoàn thành bài tập hôm trước rồi, gửi cho thầy luôn."
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-032",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Mai có thể làm giúp mình cái báo cáo này không, gấp lắm á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-033",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Hôm qua mình đã gửi thông tin cho nhóm rồi, không ai phản hồi gì hết."
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-034",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Nhờ mọi người kiểm tra lại phần trình bày giúp mình nha, cám ơn nhiều!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-035",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Mình đã đặt lịch họp xong rồi, có ai cần tham gia không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-036",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Nhung, nhớ nhắc mọi người chuẩn bị cho buổi thuyết trình nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-037",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Cảm ơn đã giúp mình hoàn thành công việc này, đã xong rồi."
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-038",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Có ai giúp mình viết nội dung cho bài thuyết trình không, đang bí ý tưởng quá!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-039",
+    "description": "LLM-generated, relabeled true→ \"kiểm tra giúp mình với\" là yêu cầu thật, thì quá khứ ở đầu câu không phủ nhận nó",
+    "input": {
+      "text": "Mình đã gửi tài liệu cho mọi người rồi nha, kiểm tra giúp mình với!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-040",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Hà ơi, giúp mình kiếm tài liệu cho bài thuyết trình nhé, cần gấp á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-041",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Bài tập này xong rồi nha, ai cần mình gửi cho không?"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-042",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Mọi người nhớ chuẩn bị đồ ăn cho buổi họp nha, ai lo được không?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-043",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Chúc mọi người cuối tuần vui vẻ nhé, nghỉ xả hơi thôi mà!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-044",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Nam có rảnh làm slide cho đề tài không, mình không kịp á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-045",
+    "description": "LLM-generated, relabeled true→ \"xem qua giúp mình nha\" là yêu cầu thật",
+    "input": {
+      "text": "Lịch học tuần sau đã có rồi, mọi người xem qua giúp mình nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-046",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Lan nhớ gọi điện cho thầy hỏi về lịch thi nha, mình quên mất!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-047",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Cảm ơn mọi người đã giúp mình hoàn thành dự án này, xong rồi!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-048",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Cho mình hỏi ai có tài liệu môn này không, cần tham khảo gấp á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-049",
+    "description": "LLM-generated, relabeled true→ \"nhớ\" mở đầu mệnh lệnh (imperative_start), câu đầu chỉ là bối cảnh",
+    "input": {
+      "text": "Hôm nay nghỉ học, nhớ check mail để xem thông báo mới nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-050",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Tú ơi, nhờ bạn gửi cho mình file báo cáo đó, mình quên lưu rồi!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-051",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Cuối tháng này có đi chơi không ta, mọi người thống nhất đi nha!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-052",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Mọi người cùng nhau làm bài thuyết trình này nha, chia nhau ra đi!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-053",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "@Mai đã làm xong chưa, mình cần ghép video cho bài cuối á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-054",
+    "description": "LLM-generated, relabeled true→ \"nhớ ôn nha\" là mệnh lệnh nhắc nhở thật",
+    "input": {
+      "text": "Lịch thi đã xong, mình không có gì thêm nữa, mọi người nhớ ôn nha!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-055",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Mọi người có ai rảnh chụp hình cho sự kiện tuần sau không?"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-056",
+    "description": "LLM-generated, relabeled true→ \"xem giúp nhé\" là yêu cầu thật, cùng mẫu lỗi hệ thống đã sửa ở BOOT-006/039/045",
+    "input": {
+      "text": "Tớ đã gửi file lên nhóm rồi, mọi người xem giúp nhé!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-057",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Nhắc mọi người hôm nay họp online lúc 7 giờ nha, đừng quên!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-058",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "@Tuấn, cảm ơn bạn đã giúp đỡ, mọi thứ ổn cả rồi!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  },
+  {
+    "id": "TASK-BOOT-059",
+    "description": "LLM-generated, expected_is_task=True",
+    "input": {
+      "text": "Có ai rảnh giúp mình soát lại bài khóa luận không, cần lắm á!"
+    },
+    "expected": {
+      "is_task": true
+    }
+  },
+  {
+    "id": "TASK-BOOT-060",
+    "description": "LLM-generated, expected_is_task=False",
+    "input": {
+      "text": "Chúc mừng cả nhóm đã hoàn thành dự án, mọi người đều giỏi cả!"
+    },
+    "expected": {
+      "is_task": false
+    }
+  }
+]

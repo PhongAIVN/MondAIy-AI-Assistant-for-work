@@ -1,0 +1,55 @@
+flowchart LR
+    USER([User]) --> WEB[Web App]
+    WEB --> API[FastAPI API]
+    API --> AUTH[Auth + scope check]
+
+    subgraph SOURCES[External sources]
+        GMAIL[Gmail]
+        CAL[Google Calendar]
+        DISC[Discord]
+        JIRA[Jira]
+        OUTLOOK[Outlook]
+        TELEGRAM[Telegram]
+        ICS[Program ICS]
+    end
+
+    subgraph FLOWS[Main data flows]
+        SYNC[Source sync]
+        TASK[Task extraction]
+        ASK[Ask agent]
+        ACTION[Approved action]
+        BRIEF[Brief + notification]
+    end
+
+    subgraph DATA[Persistent data]
+        EVIDENCE[(Evidence store)]
+        RUNS[(Runs + audit)]
+        WORK[(Tasks + calendar)]
+        MEMORY[(Conversation + memory)]
+    end
+
+    SOURCES --> SYNC
+    SYNC --> EVIDENCE
+    AUTH --> TASK
+    EVIDENCE --> TASK
+    TASK --> RUNS
+    TASK --> WORK
+    AUTH --> ASK
+    MEMORY --> ASK
+    EVIDENCE --> ASK
+    WORK --> ASK
+    ASK --> ACTION
+    ACTION --> WORK
+    WORK --> BRIEF
+    EVIDENCE --> BRIEF
+    BRIEF --> WEB
+    BRIEF --> TELEGRAM
+    ASK --> API
+    ACTION --> API
+
+    classDef source fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    classDef flow fill:#FFF4D6,stroke:#B7791F,color:#4A3200;
+    classDef data fill:#E9F7EF,stroke:#238636,color:#123524;
+    class GMAIL,CAL,DISC,JIRA,OUTLOOK,TELEGRAM,ICS source;
+    class SYNC,TASK,ASK,ACTION,BRIEF flow;
+    class EVIDENCE,RUNS,WORK,MEMORY data;

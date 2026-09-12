@@ -1,0 +1,80 @@
+# Core
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+pydantic>=2.10.0
+pydantic-settings>=2.7.0
+python-dotenv>=1.0.0
+# meeting_notes.py nhận file ghi âm qua Form/File — thiếu là FastAPI crash lúc import.
+python-multipart>=0.0.20
+# Chạy thật chứ không chỉ để test: retrieval.py và các connector gọi HTTP qua đây.
+httpx>=0.28.0
+# Portable self-hosted MCP server; keep v1 until the SDK v2 migration is complete.
+mcp[cli]>=1.27,<2
+
+# AI / LangChain
+langchain>=0.3.0
+langchain-openai>=0.3.0
+langgraph>=0.2.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+# Kiểu cột Vector trong src/models/evidence.py — thiếu là app không import nổi.
+pgvector>=0.3.0
+alembic>=1.14.0
+
+# Auth (đăng ký/đăng nhập JWT)
+pyjwt>=2.9.0
+bcrypt>=4.2.0
+slowapi>=0.1.9
+prometheus-client>=0.21.0
+# Shared SlowAPI storage across API replicas.
+redis>=5.2.0
+
+# OAuth connections (Discord/Google/Telegram)
+cryptography>=43.0.0
+itsdangerous>=2.2.0
+minio>=7.2.15
+
+# Web Push (kênh giao thông báo thứ ba). Giao thức Web Push đòi mã hoá payload
+# theo RFC 8291 và ký VAPID theo RFC 8292 — tự viết bằng httpx là tự cài lại
+# mật mã, nên dùng thư viện. src/services/web_push.py import trong hàm để môi
+# trường chưa cài vẫn chạy được app, chỉ là không gửi được thông báo.
+pywebpush>=2.0.0
+
+# Pipeline task-extraction (TAPB-121) — parse time_expression có timezone tường minh
+python-dateutil>=2.9.0
+# zoneinfo (time_tool.py) không có tzdata hệ thống trên Windows / một số base image Linux
+tzdata>=2024.1
+
+# Attachment content extraction (Gmail pdf/docx/xlsx/ảnh)
+pypdf>=5.1.0
+python-docx>=1.1.2
+# XML parser chống XXE cho docx/xlsx (cả 2 là file zip+XML) — không dùng
+# ElementTree mặc định của python-docx/openpyxl khi đọc file từ nguồn ngoài.
+defusedxml>=0.7.1
+# Cap MAX_IMAGE_PIXELS trước khi mở ảnh đính kèm — chặn decompression bomb.
+Pillow>=11.0.0
+# Trích attachment có cấu trúc (theo trang/sheet/section) + grounding, thay
+# nối text phẳng — attachment_structured_extraction_enabled (mặc định tắt).
+# src/services/attachment_extract.py import trong hàm để môi trường chưa cài
+# vẫn chạy được, chỉ fallback về nối text phẳng như cũ.
+langextract>=1.6.0
+
+# Lọc rác rẻ cho tab "Lấy dữ liệu" (extension) — src/services/prefilter.py.
+# Chỉ dùng pos_tag()/chunk() của underthesea (không cần torch) — KHÔNG import
+# dependency_parse() ở bất kỳ đâu, import đó tự kéo torch (nặng, máy dev yếu không cân được).
+underthesea>=9.5.0
+# Đoán ngôn ngữ cho tầng lọc rác trước khi gọi AI (src/services/prefilter.py)
+# — off-the-shelf, train sẵn 97 ngôn ngữ, không cần tự train (Lui & Baldwin, ACL 2012).
+langid>=1.1.6
+
+# Vector Store (uncomment as needed)
+# chromadb>=0.5.0
+
+# Dev tools
+ruff>=0.8.0
+pytest>=8.0.0
+pytest-asyncio>=0.24.0
+pytest-cov>=5.0.0
+openpyxl>=3.1.5

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "change_kind": "behavior_bug",
+  "bug_id": "p004-conversation-latency-20260830",
+  "symptom": "Một turn cần nhiều tool độc lập có thể quay lại planning LLM sau từng batch, lặp prompt/observation và làm độ trễ tăng dù tool I/O đã chạy song song.",
+  "root_cause": "Graph luôn nối observe trở lại think, còn planning và intent classification đầu turn chạy tuần tự; graph không biểu diễn được batch đã đủ evidence để respond.",
+  "violated_invariant": "Một batch read-only độc lập, đã có toàn bộ args, chạy trong một action round và không vượt hai planning round; dependency được phép hai action round nhưng không mở action thứ ba; action approval-mediated không lặp trong cùng turn.",
+  "fix_boundary": {
+    "shared_layer": "src/agents/graph.py routing after observe và src/agents/nodes/core_nodes.py planning contract",
+    "rationale": "Mọi conversation turn đi qua boundary này, nên một quyết định batch-complete ở đây giảm re-plan chung mà không vá theo câu hỏi, connector hay fixture."
+  },
+  "generalization_strategy": "shared_boundary",
+  "dimensions": [
+    {"name": "execution_shape", "classes": ["independent_read_batch", "data_dependent_chain", "single_read"]},
+    {"name": "tool_effect", "classes": ["read_only", "approval_mediated"]}
+  ],
+  "cases": [
+    {
+      "id": "reported-independent-batch",
+      "role": "reported",
+      "dimensions": {"execution_shape": "independent_read_batch", "tool_effect": "read_only"},
+      "expected_invariant": "Three independent reads use one action batch, at most two planner calls, and one call per tool.",
+      "product_test_ref": "tests/test_agents/v1/test_conversation_agent_nodes.py::test_graph_batches_independent_reads_with_bounded_planner_rounds"
+    },
+    {
+      "id": "dependent-chain-sibling",
+      "role": "sibling",
+      "dimensions": {"execution_shape": "data_dependent_chain", "tool_effect": "read_only"},
+      "expected_invariant": "Two dependent action batches remain possible, a third proposed action is not executed, and planner prompt growth remains below 15%.",
+      "product_test_ref": "tests/test_agents/v1/test_conversation_agent_nodes.py::test_graph_caps_dependency_chain_before_a_third_action_batch"
+    },
+    {
+      "id": "approval-write-sibling",
+      "role": "sibling",
+      "dimensions": {"execution_shape": "independent_read_batch", "tool_effect": "approval_mediated"},
+      "expected_invariant": "An approval-mediated action is invoked once even when the planner double has a second distinct write proposal available.",
+      "product_test_ref": "tests/test_agents/v1/test_conversation_agent_nodes.py::test_approval_mediated_action_returns_without_replanning_a_second_write"
+    },
+    {
+      "id": "single-read-counterexample",
+      "role": "counterexample",
+      "dimensions": {"execution_shape": "single_read", "tool_effect": "read_only"},
+      "expected_invariant": "A single read retains the follow-up think path, preserving existing response behavior.",
+      "product_test_ref": "tests/test_agents/v1/test_conversation_agent_nodes.py::test_full_graph_executes_think_action_observe_respond_with_mocked_dependencies"
+    }
+  ],
+  "implementation": {
+    "changed_shared_boundary": true,
+    "special_case_literals": [],
+    "known_exceptions": ["all read batches retain a follow-up think because email, Discord, Jira, or calendar evidence can require a detail read or suggest_tasks"]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "change_kind": "behavior_bug",
+  "bug_id": "p004-routines-summary-overflow-20260823",
+  "symptom": "The Routine overview renders too many historical summaries, making the page noisy and excessively long.",
+  "root_cause": "The RoutinesPage renders every run returned by the recent-runs endpoint without applying the overview's compact-display boundary.",
+  "violated_invariant": "The Routine overview must remain a routine-management screen; historical run records remain available through the routine detail history and are not rendered as a second feed on the overview.",
+  "fix_boundary": {
+    "shared_layer": "client/web-app/src/pages/RoutinesPage.tsx recent-summaries presentation boundary",
+    "rationale": "The API and persisted run history are shared product data and must remain complete; the overview alone owns how much is previewed."
+  },
+  "generalization_strategy": "shared_boundary",
+  "dimensions": [
+    {"name": "run_count", "classes": ["zero-to-three", "more-than-three"]},
+    {"name": "routine_diversity", "classes": ["one-routine-repeated", "multiple-routines"]}
+  ],
+  "cases": [
+    {
+      "id": "reported-case",
+      "role": "reported",
+      "dimensions": {"run_count": "more-than-three", "routine_diversity": "one-routine-repeated"},
+      "expected_invariant": "No historical summary cards are rendered in the overview.",
+      "product_test_ref": "client/web-app/tests/RoutinesPage.test.tsx — bounds repeated recent summaries"
+    },
+    {
+      "id": "sibling-case-one",
+      "role": "sibling",
+      "dimensions": {"run_count": "more-than-three", "routine_diversity": "multiple-routines"},
+      "expected_invariant": "No historical summary cards are rendered even when runs belong to different routines.",
+      "product_test_ref": "client/web-app/tests/RoutinesPage.test.tsx — bounds mixed recent summaries"
+    },
+    {
+      "id": "sibling-case-two",
+      "role": "sibling",
+      "dimensions": {"run_count": "zero-to-three", "routine_diversity": "one-routine-repeated"},
+      "expected_invariant": "The routine management UI remains available when there are no runs to preview.",
+      "product_test_ref": "client/web-app/tests/RoutinesPage.test.tsx — preserves short recent summary list"
+    },
+    {
+      "id": "counterexample",
+      "role": "counterexample",
+      "dimensions": {"run_count": "zero-to-three", "routine_diversity": "multiple-routines"},
+      "expected_invariant": "The fix does not affect routine-card navigation or actions.",
+      "product_test_ref": "client/web-app/tests/RoutinesPage.test.tsx — preserves recent result navigation"
+    }
+  ],
+  "implementation": {
+    "changed_shared_boundary": true,
+    "special_case_literals": [],
+    "known_exceptions": []
+  }
+}

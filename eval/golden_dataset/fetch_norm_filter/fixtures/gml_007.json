@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-007",
+    "threadId": "thread-gml-007",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng nộp báo cáo trước thứ Hai tuần sau.\n\n--\nG",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "GVCN <gvcn@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-007"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIG7hu5lwIGLDoW8gY8OhbyB0csaw4bubYyB0aOG7qSBIYWkgdHXhuqduIHNhdS4KCi0tCkdWQ04gTOG7m3AgQ29ob3J0IDMKRW1haWw6IGd2Y25AdmxlYXJuLmVkdS52bgpQaG9uZTogMDk4NzY1NDMyMQ==",
+        "size": 110
+      }
+    }
+  }
+]

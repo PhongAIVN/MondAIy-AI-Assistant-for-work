@@ -1,0 +1,254 @@
+# Production compose cho VPS — KHÔNG build tại chỗ, chỉ pull image đã build
+# sẵn trên GitHub Actions (xem .github/workflows/deploy.yml).
+#
+# Cách dùng trên VPS:
+#   Tạo .env (copy từ .env.prod.example, điền giá trị thật)
+#   docker compose -f docker-compose.prod.yml pull
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# CI/CD tự chạy lại pull + up mỗi lần push lên main.
+
+services:
+  redis:
+    image: redis:7.4-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:?MINIO_ACCESS_KEY must be set}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:?MINIO_SECRET_KEY must be set}
+    volumes:
+      - minio_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  loki:
+    image: grafana/loki:3.5.1
+    command: -config.file=/etc/loki/config.yml
+    volumes:
+      - loki_data:/loki
+      - ./observability/loki/config.yml:/etc/loki/config.yml:ro
+    restart: unless-stopped
+
+  promtail:
+    image: grafana/promtail:3.5.1
+    command: -config.file=/etc/promtail/config.yml
+    volumes:
+      - ./observability/promtail/config.yml:/etc/promtail/config.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - promtail_positions:/tmp
+    depends_on:
+      - loki
+    restart: unless-stopped
+
+  db:
+    # Phải khớp docker-compose.yml: models/evidence.py có cột Vector nên
+    # postgres trần sẽ chết ngay lúc tạo bảng. Vẫn Postgres 16 nên volume
+    # db_data đang chạy trên VM dùng lại được, không cần dump/restore.
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-app}
+      POSTGRES_DB: ${POSTGRES_DB:-ai20k}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-ai20k}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Tên service phải là duy nhất trên toàn VPS, không được để trùng "backend":
+  # container join mạng dùng chung "caddy" sẽ được Docker DNS đặt alias theo
+  # tên service, mà reverse proxy ngoài đã có route trỏ tới "backend" của một
+  # app khác — trùng tên là cướp traffic của app đó.
+  p004-backend:
+    image: ${BACKEND_IMAGE}
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-app}@db:5432/${POSTGRES_DB:-ai20k}
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_PRESIGN_ENDPOINT: ${MINIO_PRESIGN_ENDPOINT:-minio:9000}
+    volumes:
+      - backend_data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      # Trong mạng riêng của app vẫn giữ alias "backend" để Caddyfile của
+      # frontend (client/web-app/Caddyfile) proxy được mà không phải sửa.
+      default:
+        aliases:
+          - backend
+      caddy: {}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  worker:
+    image: ${BACKEND_IMAGE}
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-app}@db:5432/${POSTGRES_DB:-ai20k}
+      REDIS_URL: redis://redis:6379/0
+      MINIO_ENDPOINT: minio:9000
+      MINIO_PRESIGN_ENDPOINT: ${MINIO_PRESIGN_ENDPOINT:-minio:9000}
+    command: ["python", "-m", "src.worker"]
+    depends_on:
+      p004-backend:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    # Image backend có HTTP healthcheck, còn worker không mở HTTP server.
+    healthcheck:
+      disable: true
+
+  github-actions-exporter:
+    image: ghcr.io/labbs/github-actions-exporter:1.9.0
+    environment:
+      GITHUB_TOKEN: ${GITHUB_ACTIONS_EXPORTER_TOKEN:?GITHUB_ACTIONS_EXPORTER_TOKEN must be set}
+      GITHUB_REPOS: AI20K-Build-Phase-Cohort-3/P-004
+      GITHUB_REFRESH: "30"
+      PORT: "9999"
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    user: "0:0"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=${PROMETHEUS_RETENTION:-15d}
+      - --web.external-url=${PROMETHEUS_ROOT_URL:-https://p004-api.duckdns.org/prometheus/}
+      - --web.enable-lifecycle
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      default: {}
+      caddy:
+        aliases:
+          - p004-prometheus
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter:v1.9.1
+    command: ["--path.rootfs=/host"]
+    volumes:
+      - /:/host:ro,rslave
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.52.1
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:12.1.1
+    environment:
+      GF_SERVER_ROOT_URL: ${GRAFANA_ROOT_URL:-https://p004-api.duckdns.org/grafana/}
+      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?GRAFANA_ADMIN_PASSWORD must be set}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      # Datasource duy nhất đọc được REST API của LangSmith. Grafana tải plugin
+      # lúc khởi động nên container cần ra Internet ở lần `up -d` đầu tiên.
+      GF_INSTALL_PLUGINS: yesoreyeram-infinity-datasource
+      # Để trống thì datasource vẫn provision được, panel LangSmith trả 401 còn
+      # phần Prometheus/Loki không bị ảnh hưởng — cố ý không dùng `:?` để lần
+      # deploy tiếp theo trên VM không gãy vì thiếu biến mới.
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY:-}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+      - loki
+    networks:
+      default: {}
+      caddy:
+        aliases:
+          - p004-grafana
+    restart: unless-stopped
+
+  edge:
+    image: ${FRONTEND_IMAGE}
+    # Frontend production chạy trên Vercel; VM dùng chung chỉ public backend
+    # qua minute_caddy. Chỉ bật profile này nếu thật sự cần một frontend edge
+    # riêng trên VM, tránh chiếm port/routing của các hệ thống khác.
+    profiles: ["vm-edge"]
+    environment:
+      # Tên miền kèm cổng — Caddy tự lo HTTPS cho chính nó, độc lập với reverse
+      # proxy của app khác trên VM. Bắt buộc phải có tên miền: Caddyfile luôn
+      # bật TLS, để trống là client ăn 400. Xem DEPLOY.md mục 1.6.
+      CADDY_ADDR: ${CADDY_ADDR:-p004-api.duckdns.org:8443}
+      # Chỉ dùng ở mode tự lo HTTPS — xin cert bằng bản ghi TXT, không cần
+      # port 80/443 vốn đã bị app khác giữ.
+      DUCKDNS_API_TOKEN: ${DUCKDNS_API_TOKEN:-}
+    ports:
+      # Cổng trong container cố định 8443 ở cả hai mode; đổi vế trái để chọn
+      # công khai ra Internet ("0.0.0.0:8443") hay chỉ nội bộ ("127.0.0.1:8081").
+      - "${EDGE_BIND:-0.0.0.0:8443}:8443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - p004-backend
+    restart: unless-stopped
+
+networks:
+  # Mạng có sẵn của reverse proxy dùng chung trên VPS. Tạo trước khi deploy
+  # nếu VPS mới: docker network create caddy
+  caddy:
+    external: true
+
+volumes:
+  db_data:
+  minio_data:
+  backend_data:
+  caddy_data:
+  caddy_config:
+  prometheus_data:
+  loki_data:
+  promtail_positions:
+  grafana_data:
+  redis_data:

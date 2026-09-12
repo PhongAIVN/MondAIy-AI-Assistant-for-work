@@ -1,0 +1,41 @@
+flowchart LR
+    subgraph SOURCES[External providers]
+        GMAIL[Gmail]
+        CAL[Google Calendar]
+        DISC[Discord]
+        JIRA[Jira]
+        OUTLOOK[Outlook]
+        TELEGRAM[Telegram]
+        ICS[Program ICS feed]
+    end
+
+    CONN[(connections)] --> FETCH[Connector fetch]
+    CURSOR[(sync_cursors)] --> FETCH
+    GMAIL --> FETCH
+    CAL --> FETCH
+    DISC --> FETCH
+    JIRA --> FETCH
+    OUTLOOK --> FETCH
+    TELEGRAM --> FETCH
+    ICS --> FETCH
+
+    FETCH --> RAW[Keep raw payload\nprovider id + timestamps]
+    RAW --> NORMALIZE[Normalize provider shape]
+    NORMALIZE --> HASH[Content hash]
+    HASH --> DEDUPE{Already seen?}
+    DEDUPE -->|No| SCOPE[Apply user/source scope]
+    DEDUPE -->|Yes| CHECKPOINT[Advance safely\nwithout duplicate]
+    SCOPE --> ITEM[(source_items)]
+    ITEM --> VERSION[(source_item_versions)]
+    ITEM --> MESSAGE[(messages)]
+    SCOPE --> CHUNK[Chunk searchable text]
+    CHUNK --> EMBED[(chunks + vector embedding)]
+    CHECKPOINT --> CURSOR
+    ITEM --> ACK[Sync result + freshness]
+
+    classDef source fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    classDef process fill:#FFF4D6,stroke:#B7791F,color:#4A3200;
+    classDef data fill:#E9F7EF,stroke:#238636,color:#123524;
+    class GMAIL,CAL,DISC,JIRA,OUTLOOK,TELEGRAM,ICS source;
+    class FETCH,RAW,NORMALIZE,HASH,DEDUPE,SCOPE,CHECKPOINT,CHUNK,ACK process;
+    class CONN,CURSOR,ITEM,VERSION,MESSAGE,EMBED data;

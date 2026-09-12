@@ -1,0 +1,21 @@
+{
+  "_ghi_chu": [
+    "Chép file này thành channels.json rồi điền channel id thật.",
+    "channels.json đã bị .gitignore chặn vì nó lộ cấu trúc server của ban tổ chức.",
+    "Lấy channel id: bật Settings > Advanced > Developer Mode trong Discord,",
+    "chuột phải vào kênh > Copy Channel ID.",
+    "Thêm kênh mới thì chỉ cần thêm một dòng vào đây, không phải sửa script.",
+    "Tạm bỏ một kênh mà vẫn muốn giữ dòng thì đặt \"skip\": true."
+  ],
+  "guild": "AI20K Build Phase — Cohort 3",
+  "channels": [
+    { "id": "000000000000000000", "label": "thong-bao-chung" },
+    { "id": "000000000000000000", "label": "ly-thuyet" },
+    { "id": "000000000000000000", "label": "thuc-hanh-lab" },
+    { "id": "000000000000000000", "label": "chung" },
+    { "id": "000000000000000000", "label": "hoi-dap" },
+    { "id": "000000000000000000", "label": "chia-se" },
+    { "id": "000000000000000000", "label": "bai-hoc" },
+    { "id": "000000000000000000", "label": "t-004", "skip": true }
+  ]
+}

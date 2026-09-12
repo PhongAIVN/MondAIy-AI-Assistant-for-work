@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-008",
+    "threadId": "thread-gml-008",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Tôi đã nhận được slide. Cần sửa lại trang 3 gấp.\n\n",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "GVCN <gvcn@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-008"
+        }
+      ],
+      "body": {
+        "data": "VMO0aSDEkcOjIG5o4bqtbiDEkcaw4bujYyBzbGlkZS4gQ-G6p24gc-G7rWEgbOG6oWkgdHJhbmcgMyBn4bqlcC4KCk9uIEF1ZyA1LCAyMDI2LCBhdCAxMDowMCBBTSwgU3R1ZGVudCA8c3R1ZGVudEB2bGVhcm4uZWR1LnZuPiB3cm90ZToKPiBH4butaSBjw7Qgc2xpZGUgYsOhbyBjw6FvIOG6oS4=",
+        "size": 143
+      }
+    }
+  }
+]

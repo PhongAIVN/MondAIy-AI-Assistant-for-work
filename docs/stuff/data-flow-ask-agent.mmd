@@ -1,0 +1,37 @@
+flowchart LR
+    USER[User question] --> REQUEST[SendMessageRequest]
+    REQUEST --> AUTH[Authenticate user]
+    AUTH --> CONTEXT[Load context\nhistory + summary + profile + memory]
+    CONTEXT --> INTENT[Classify intent]
+    INTENT --> ROUTE{Need tools?}
+    ROUTE -->|No| RESPOND[Generate grounded response]
+    ROUTE -->|Yes| PLAN[Create ToolCall plan]
+    PLAN --> POLICY[Policy + permission + source scope]
+    POLICY --> DECISION{Allowed?}
+    DECISION -->|Blocked| BLOCK[Safe explanation\nno tool execution]
+    DECISION -->|Allowed| TOOL[Execute read / compute tool]
+    TOOL --> RAW_OUTPUT[Raw provider output]
+    RAW_OUTPUT --> SANITIZE[Sanitize untrusted text]
+    SANITIZE --> OBSERVE[ToolObservation]
+    OBSERVE --> EVIDENCE[Evidence + source links]
+    EVIDENCE --> MORE{Need another tool?}
+    MORE -->|Yes| PLAN
+    MORE -->|No| RESPOND
+    RESPOND --> RESPONSE[SendMessageResponse]
+    BLOCK --> RESPONSE
+    RESPONSE --> SAVE[(conversation_messages)]
+
+    MEMORY[(user_memories + profile)] --> CONTEXT
+    SEARCH[(chunks + source_items)] --> TOOL
+    TASKS[(tasks + calendar_events)] --> TOOL
+    TOOL --> AUDIT[(telemetry + audit_events)]
+    EVIDENCE --> AUDIT
+
+    classDef user fill:#E8F3FF,stroke:#2774AE,color:#102A43;
+    classDef process fill:#EEE8FF,stroke:#6B46C1,color:#28124D;
+    classDef guard fill:#FCE8F3,stroke:#B83280,color:#4A1632;
+    classDef data fill:#E9F7EF,stroke:#238636,color:#123524;
+    class USER,REQUEST,RESPONSE user;
+    class AUTH,CONTEXT,INTENT,ROUTE,PLAN,TOOL,RAW_OUTPUT,SANITIZE,OBSERVE,EVIDENCE,MORE,RESPOND,BLOCK process;
+    class POLICY,DECISION guard;
+    class MEMORY,SEARCH,TASKS,AUDIT,SAVE data;

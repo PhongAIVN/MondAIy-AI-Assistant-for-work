@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-009",
+    "threadId": "thread-gml-009",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng xem thông báo mới nhất hôm nay.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-009"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIHhlbSB0aMO0bmcgYsOhbyBt4bubaSBuaOG6pXQgaMO0bSBuYXku",
+        "size": 40
+      }
+    }
+  }
+]

@@ -1,0 +1,151 @@
+% Compile: xelatex mondaiy-sdd.tex && xelatex mondaiy-sdd.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{fontspec,polyglossia,microtype,setspace}
+\setmainfont{Times New Roman}\setsansfont{Arial}\setdefaultlanguage{vietnamese}\onehalfspacing
+\usepackage{booktabs,longtable,tabularx,array,enumitem,xcolor,hyperref,fancyhdr,titlesec,float,tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\definecolor{mondaiyblue}{HTML}{174B63}\definecolor{mondaiyteal}{HTML}{167B7F}\definecolor{mondaiylight}{HTML}{EEF5F4}
+\hypersetup{colorlinks=true,linkcolor=mondaiyblue,urlcolor=mondaiyteal,pdftitle={SDD mondaiy}}
+\pagestyle{fancy}\fancyhf{}\lhead{mondaiy -- SDD}\rhead{Bản 1.0}\cfoot{\thepage}\setlength{\headheight}{14pt}
+\titleformat{\section}{\Large\bfseries\color{mondaiyblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{mondaiyteal}}{\thesubsection}{0.6em}{}
+\renewcommand{\arraystretch}{1.2}\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\begin{document}
+\begin{titlepage}\centering\vspace*{2.4cm}
+{\Huge\bfseries\color{mondaiyblue} Tài liệu thiết kế phần mềm\\[0.2cm]mondaiy -- Personal Program Navigator\par}
+\vspace{0.9cm}{\Large Software Design Document (SDD)\par}\vfill
+\begin{tabular}{rl}\textbf{Phiên bản:} & 1.0 \\ \textbf{Ngày lập:} & 23/08/2026 \\ \textbf{Chuẩn tham chiếu:} & IEEE 1016 \\ \textbf{Nguồn chuẩn:} & Code, architecture, ADR và API contract P-004 \\ \end{tabular}\vfill
+\colorbox{mondaiylight}{\parbox{0.86\textwidth}{Tài liệu này mô tả \textbf{``hệ thống được xây như thế nào''}. Code và ADR là nguồn chuẩn khi cần xác minh chi tiết implementation.}}
+\end{titlepage}
+\tableofcontents\clearpage
+
+\section{Kiểm soát thiết kế}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.2cm}X}
+\toprule Thuộc tính & Quy định \\ \midrule
+Design authority & CTO/Tech Lead phê duyệt thay đổi boundary, schema, auth, provider hoặc deploy; trạng thái baseline này: \emph{pending review}. \\
+Nguồn chuẩn & PRD quyết định ``what''; ADR/API contract quyết định contract; executable code/schema quyết định implementation hiện hành. Khi mâu thuẫn, mở ADR hoặc cập nhật nguồn chuẩn, không sửa im lặng SDD. \\
+Phạm vi & Mô tả P0/product architecture và các implementation increment hiện hữu. Telegram, custom JWT và runtime LLM provider là drift cần đối chiếu ADR trước khi mở rộng. \\
+Definition of done & Mỗi thay đổi thiết kế phải có owner, threat/rollback impact, migration plan, contract test và traceability về SRS/STD. \\
+\bottomrule
+\end{tabularx}
+
+\section{Kiến trúc tổng thể}
+mondaiy dùng kiến trúc modular monolith: FastAPI là API edge; service và connector tách ranh giới nghiệp vụ; worker xử lý run dài; PostgreSQL là authoritative store; Redis phục vụ queue/rate limit; MinIO lưu object khi cần; React web, Expo mobile, extension và Telegram là client channel. Lựa chọn này giảm chi phí đồng bộ schema, auth và audit ở giai đoạn sản phẩm thay đổi nhanh, nhưng vẫn cho phép tách worker/API khi tải tăng.
+
+\begin{figure}[H]\centering
+\begin{tikzpicture}[node distance=8mm and 10mm,box/.style={draw=mondaiyblue,rounded corners,fill=mondaiylight,align=center,minimum width=2.8cm,minimum height=8mm},store/.style={draw=mondaiyteal,rounded corners,align=center,minimum width=2.8cm,minimum height=8mm},arr/.style={-{Latex[length=2mm]},thick,color=mondaiyblue}]
+\node[box] (client) {Web / Mobile\\Extension / Telegram};
+\node[box,right=of client] (api) {FastAPI API\\auth + validation};
+\node[box,right=of api] (agent) {Agent graph\\tools + guardrail};
+\node[store,below=of api] (db) {PostgreSQL + pgvector\\evidence, task, audit};
+\node[store,below=of agent] (worker) {Redis + Worker\\run queue, schedule};
+\node[box,right=of agent] (ext) {Google, Microsoft, Jira,\\Discord, Slack, LLM};
+\draw[arr](client)--node[above,font=\scriptsize]{REST/SSE}(api);\draw[arr](api)--(agent);\draw[arr](api)--(db);\draw[arr](api)--(worker);\draw[arr](agent)--(ext);\draw[arr](worker)--(ext);\draw[arr](agent)--(db);
+\end{tikzpicture}\caption{Topography và trust boundary cấp cao.}\end{figure}
+
+\section{Thiết kế module}
+\begin{longtable}{p{3.1cm}p{4.1cm}p{6.8cm}}
+\toprule Module & Vị trí & Trách nhiệm/contract \\ \midrule\endhead
+API edge & \code{src/main.py}, \code{src/api/} & Router FastAPI, Pydantic, dependency auth, rate limit, HTTP status và OpenAPI. Router không giữ workflow dài. \\
+Identity/scope & \code{services/auth.py}, \code{api/deps.py}, \code{services/scope.py} & JWT, OAuth identity, ownership, source/program scope. Đây là lớp bắt buộc chống cross-user leak. \\
+Connectors & \code{src/connectors/}, \code{services/connections/} & OAuth token lifecycle, fetch pagination/bounded, normalize payload ngoại vi về model nội bộ. \\
+Pipeline & \code{src/agents/pipeline/} & Fetch $\rightarrow$ normalize $\rightarrow$ filter $\rightarrow$ extract $\rightarrow$ resolve $\rightarrow$ persist/summary; mỗi node trả outcome quan sát được. \\
+Agent/retrieval & \code{src/agents/}, \code{services/llm*.py}, \code{services/retrieval.py} & Route ý định, lấy context đã lọc quyền, tool calling, citation, abstain và provider failover. \\
+Productivity & \code{src/api/tasks.py}, calendar, routines, meeting notes & Task/calendar draft-confirm, reminder, briefing, meeting note và schedule conflict. \\
+Clients & \code{client/web-app/}, \code{apps/mobile/} & Present state, gửi intent, không bypass API authorization; mobile native extension cho share intent/widget. \\
+Ops & Docker Compose, worker, Prometheus/Grafana/LangSmith & Deployment, health, metrics, audit và rollback. \\
+\bottomrule
+\end{longtable}
+
+\section{Luồng chi tiết}
+\subsection{Đồng bộ nguồn tới evidence}
+\begin{enumerate}
+\item API hoặc worker xác thực user, connection và source scope.
+\item Connector lấy dữ liệu trong giới hạn thời gian/trang/kích thước; token lỗi trả về lỗi xác thực có nguyên nhân.
+\item Pipeline normalize dữ liệu, lọc item, trích xuất task/metadata và persist theo transaction/idempotency boundary.
+\item Run ghi counts \code{filtered}, \code{rejected}, \code{extracted}, \code{resolved}, \code{persisted} và trạng thái \code{completed}/\code{blocked}/\code{failed}.
+\end{enumerate}
+
+\subsection{Chat grounded và action draft}
+Client gửi conversation turn $\rightarrow$ API xác thực/kiểm tra consent $\rightarrow$ retrieval chỉ trả evidence thuộc user $\rightarrow$ agent gọi tool được cấp capability $\rightarrow$ response có citation hoặc abstain. Nếu ý định là write, tool tạo proposal/draft; service chỉ ghi task/event sau confirm. Retry phải không ghi đè phần draft do user đã sửa.
+
+\subsection{Nhập task từ DOCX/XLSX}
+Mobile share intent hoặc document picker tạo multipart \code{files}; endpoint \code{/api/v1/excel/task-proposals} kiểm tra tối đa 5 file, suffix DOCX/XLSX và trần 200 KB, đóng file sau xử lý, trích proposal rồi trả để người dùng thêm từng task. Share extension, widget extension và app chính chia sẻ App Group trên iOS nhưng có bundle identifier riêng.
+
+\section{Thiết kế dữ liệu}
+Các aggregate chính gồm \code{users}, \code{connections}, source/evidence, \code{tasks}, calendar events, conversations/messages, routines/reminders, meeting notes/action items, run/audit và memory. Mọi dữ liệu user-scoped dùng ownership filter ở service/query; evidence giữ provenance để answer/briefing trace về nguồn. PostgreSQL/SQLAlchemy là schema authority; cache không được vượt qua permission boundary.
+
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.2cm}p{4.3cm}X}
+\toprule Thực thể & Thuộc tính chính & Quan hệ/ràng buộc \\ \midrule
+User & id, email, display name, role & Chủ sở hữu connection, task, conversation, note và profile memory. \\
+Connection & provider, token metadata, account label, expiry & Thuộc đúng một user; token không trả về client sau khi lưu. \\
+Evidence/Source item & content, provenance, timestamps, scope & Là đầu vào có kiểm chứng cho retrieval, pipeline và citation. \\
+Task & title, detail, dueAt, status & Proposal chỉ chuyển confirmed qua thao tác người dùng. \\
+Run/Audit & state, counts, error, timestamps & Ghi tình trạng pipeline và action có thể quan sát. \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Ownership, integrity và vòng đời}
+\begin{longtable}{p{3.1cm}p{3.4cm}p{6.8cm}}
+\toprule Aggregate & Owner/boundary & Integrity, lifecycle và migration rule \\ \midrule\endhead
+Identity, consent, connection & Identity \& Consent domain & Một connection/consent thuộc đúng một user; connector phải gọi centralized consent check trước sync/retrieval. Revoke/pause chặn ingest mới. \\
+Evidence, source version & Evidence \& Versioning domain & Provenance, source timestamp và version identity là bắt buộc; replay cùng source event không tạo duplicate. Xóa/retention đi qua privacy control, không xóa im lặng. \\
+Memory, brief, answer & Memory và Briefing \& Ask domains & Memory chính thức phải liên kết evidence; factual answer chỉ dùng scoped evidence. Cache không được vượt permission boundary. \\
+Action draft, task, calendar & Action Draft domain & State transition có audit; external write chỉ sau explicit confirmation. Write request dùng idempotency key; cùng key/payload trả cùng logical result. \\
+Audit, evaluation, metrics & Audit \& Evaluation domain & Chỉ lưu metadata an toàn, correlation ID, trạng thái/count/error class; không lưu raw private content trong telemetry. \\
+\bottomrule
+\end{longtable}
+
+Schema, index, retention duration và migration SQL phải được lấy từ migration/code hiện hành. Chúng không được suy đoán trong SDD; mỗi migration release phải nêu forward step, backfill, rollback/compatibility và kiểm thử restore.
+
+\section{API và error contract}
+API versioned dưới \code{/api/v1}. Request mang bearer token trừ auth bootstrap; error dùng HTTP status + \code{detail} có thông điệp hành động được. Các endpoint representative: auth/session, connections/OAuth, tasks, calendar, conversations, meeting notes, routines, notifications và \code{excel/task-proposals}. Pipeline response nên chuẩn hóa:\\
+\begin{center}\code{\{status, filtered\_count, rejected\_count, extracted\_count, persisted\_count, error\}}\end{center}
+Không được mô tả pipeline là thành công nếu connection thiếu refresh token, không tìm thấy connection hoặc fetch bị chặn.
+
+\subsection{Chuẩn giao tiếp bắt buộc}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.1cm}X}
+\toprule Thành phần & Contract \\ \midrule
+Auth & Client gửi \code{Authorization: Bearer <user-session-token>}; service-to-service chỉ dùng internal token ở server. Mọi object read/write kiểm ownership và consent còn hiệu lực. \\
+Correlation/idempotency & Response echo \code{X-Request-ID}. Write quan trọng nhận \code{Idempotency-Key}; key trùng nhưng payload khác trả \code{409 IDEMPOTENCY\_KEY\_CONFLICT}. \\
+Time/pagination & Timestamp ISO 8601 có offset; collection dùng \code{limit}/\code{cursor} và trả \code{next\_cursor}. \\
+Error envelope & \code{\{error: \{code, message, details, request\_id\}\}}; không đưa token, raw source hoặc stack trace cho client. \\
+State machine & Source: \code{not\_connected|connected|syncing|paused|error|revoked}. Action draft: \code{drafted|previewed|confirmed|handoff\_opened|completed|cancelled}. Transition trái phép trả \code{409 STATE\_CONFLICT}. \\
+\bottomrule
+\end{tabularx}
+
+\subsection{API catalogue và contract-test owner}
+\begin{longtable}{p{3.7cm}p{3.4cm}p{6.2cm}}
+\toprule Bounded API & Chính sách & Test bắt buộc \\ \midrule\endhead
+Profile, consent, connection & Session + user ownership; revoke/pause có audit & 401/403/404, token expiry, revoke rồi sync/search. \\
+Ingest, evidence, sync run & Internal token + consent; retry idempotent & duplicate/restart/source unavailable/counts/error contract. \\
+Briefing, ask, conversation & Scoped retrieval, citation/abstain, consent AI & citation correctness, unanswerable, conflict, cross-user, provider timeout. \\
+Action draft/reminder/calendar & Preview/confirm boundary, idempotency & no external write before confirm, retry/update/cancel/state conflict. \\
+Privacy, audit, evaluation & User-scoped export/delete; metadata-only telemetry & deleted/revoked data absent from new retrieval; log redaction; case-level eval result. \\
+\bottomrule
+\end{longtable}
+Canonical endpoint payloads and full error codes are maintained in \code{docs/ADR/api\_contract.md}; implementation may not fork a parallel shape here.
+
+\section{Hạ tầng và bảo mật}
+Production VM dùng Docker Compose. Fast path chỉ build/recreate \code{p004-backend} và \code{worker}; không restart database, Redis, MinIO hay shared proxy. Production \code{.env} trên VM là authoritative và không được sync từ workstation. Health endpoint xác nhận API sau deploy; image trước đó được tag rollback. Vercel quản lý frontend web; EAS/TestFlight là pipeline iOS riêng.
+
+Các boundary an toàn: OAuth scopes tối thiểu, allow-list file/mime/size, chống zip-bomb và timeout extractor; guardrail coi cả attachment lẫn nội dung nguồn là untrusted; secret không commit/log; datetimes timezone-aware; AI consent trước khi gửi question/image/source context cho provider.
+
+\subsection{Threat model và release control}
+\begin{longtable}{p{3.4cm}p{4.3cm}p{5.6cm}}
+\toprule Threat/failure & Control thiết kế & Evidence trước release \\ \midrule\endhead
+Cross-user access hoặc privilege escalation & Ownership check ở API/service/query, RLS theo source of truth, cache permission-scoped & Denial test giữa hai user, RLS/API test và review query mới. \\
+Token/secret hoặc raw private content lộ & Server-only secret, redacted structured log, analytics metadata-only & Secret scan, log/analytics scan và incident-safe error response test. \\
+Prompt injection từ attachment/source & Source treated as untrusted; tool capability allow-list; no direct external write & Malicious fixture giữ nguyên user boundary và không vượt draft-confirm. \\
+Provider/source outage, retry, restart & Timeout, bounded fetch, durable queue, idempotency và explicit blocked/failed state & Chaos/retry/restart cases; no lost pending item/no false success. \\
+Destructive deploy/data migration & Exact SHA artifact, health check, rollback image and tested backup/restore procedure & Deploy record gồm SHA, migration, health, rollback target và restore-test date. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Operational SLO và disaster readiness}
+Mục tiêu release lấy từ SRS: 95th percentile batch/briefing $\leq2$s, first answer $\leq10$s, action draft $\leq3$s tại tải 50 active users. Monitoring phải tách latency, error class, queue retry/age, blocked run và provider availability. Không có RPO/RTO hoặc retention duration được phê duyệt trong nguồn hiện tại; chúng là \textbf{release blocker cho production-scale claim}, không được điền bằng số giả. Trước pilot phải có owner, lịch backup, restore drill và rollback runbook có kết quả.
+
+\section{Quyết định và rủi ro mở}
+Các drift lịch sử (Telegram, custom JWT, runtime LLM provider) phải được đối chiếu với PRD/ADR trước khi mở rộng. Native iOS widgets/share extension cần provisioning profile riêng cho từng bundle identifier; Expo Go không chứng minh được WidgetKit. Tăng tải phải dựa trên metric queue/latency/error thực tế trước khi tách thêm service.
+\end{document}

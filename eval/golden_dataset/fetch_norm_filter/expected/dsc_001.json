@@ -1,0 +1,20 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-dsc-001",
+      "source_id": "announcements-channel-id",
+      "provider": "discord",
+      "thread_id": "announcements-channel-id",
+      "author_id": "usr-admin",
+      "author_name": "admin",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Vui lòng xem thông báo mới về kỳ thi sắp tới.",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://discord.com/channels/guild-001/announcements-channel-id/msg-dsc-001",
+      "capture_mode": "discord_api",
+      "attachments": []
+    }
+  ]
+}

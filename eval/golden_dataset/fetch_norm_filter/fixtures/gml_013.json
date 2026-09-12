@@ -1,0 +1,56 @@
+[
+  {
+    "id": "msg-gml-013-1",
+    "threadId": "thread-gml-013",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Hạn chót là ngày mai.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-013-1"
+        }
+      ],
+      "body": {
+        "data": "SOG6oW4gY2jDs3QgbMOgIG5nw6B5IG1haS4=",
+        "size": 21
+      }
+    }
+  },
+  {
+    "id": "msg-gml-013-1",
+    "threadId": "thread-gml-013",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Hạn chót là ngày mai.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-013-1"
+        }
+      ],
+      "body": {
+        "data": "SOG6oW4gY2jDs3QgbMOgIG5nw6B5IG1haS4=",
+        "size": 21
+      }
+    }
+  }
+]

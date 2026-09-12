@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-014",
+    "threadId": "thread-gml-014",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Chào @nguyendung, vui lòng gửi báo cáo tổng kết.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "GVCN <gvcn@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-014"
+        }
+      ],
+      "body": {
+        "data": "Q2jDoG8gQG5ndXllbmR1bmcsIHZ1aSBsw7JuZyBn4butaSBiw6FvIGPDoW8gdOG7lW5nIGvhur90Lg==",
+        "size": 48
+      }
+    }
+  }
+]

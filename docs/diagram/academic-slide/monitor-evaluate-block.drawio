@@ -1,0 +1,89 @@
+<mxfile host="app.diagrams.net" modified="2026-08-24T00:00:00.000Z" agent="claude-code" version="24.0.0" type="device">
+  <diagram name="Monitor + Evaluate block" id="monitor-eval-block">
+    <mxGraphModel dx="1000" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="420" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="lbl" value="⑤ VẬN HÀNH &amp; ĐÁNH GIÁ" style="text;html=1;fontFamily=Georgia;fontSize=13;fontStyle=1;align=center;fontColor=#334155;" vertex="1" parent="1">
+          <mxGeometry x="0" y="10" width="1000" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Monitor group -->
+        <mxCell id="monbox" value="" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#94a3b8;dashed=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="20" y="45" width="440" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="montitle" value="Monitor — vận hành" style="text;html=1;fontFamily=Georgia;fontSize=12;fontStyle=1;align=center;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="20" y="50" width="440" height="18" as="geometry" />
+        </mxCell>
+
+        <mxCell id="metrics" value="src/observability.py&#10;Prometheus metrics&#10;(requests, users, runs, briefs, tasks)" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=1.5;fontFamily=Georgia;fontSize=10.5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="75" width="160" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="heartbeat" value="worker_health.py&#10;Heartbeat vòng nền" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=1.5;fontFamily=Georgia;fontSize=10.5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="145" width="160" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="telemetry" value="telemetry.py&#10;Product events (allowlist PRD §13)&#10;KHÔNG ghi nội dung gốc" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=1.5;fontFamily=Georgia;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="75" width="150" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prometheus" value="Prometheus" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;strokeWidth=1.5;fontFamily=Georgia;fontSize=11;fontStyle=1;fontColor=#92400e;" vertex="1" parent="1">
+          <mxGeometry x="220" y="145" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lokistack" value="Loki + Promtail&#10;log aggregation" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;strokeWidth=1.5;fontFamily=Georgia;fontSize=10;fontStyle=1;fontColor=#92400e;" vertex="1" parent="1">
+          <mxGeometry x="300" y="145" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="exporters" value="node-exporter · cadvisor&#10;github-actions-exporter" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=1.25;fontFamily=Georgia;fontSize=9.5;" vertex="1" parent="1">
+          <mxGeometry x="220" y="195" width="170" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="grafana" value="Grafana&#10;dashboard" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;strokeWidth=1.5;fontFamily=Georgia;fontSize=11;fontStyle=1;fontColor=#14532d;" vertex="1" parent="1">
+          <mxGeometry x="410" y="75" width="60" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_prom_graf" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;exitX=1;exitY=0.3;entryX=0;entryY=0.5;" edge="1" parent="1" source="prometheus" target="grafana"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_loki_graf" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.8;" edge="1" parent="1" source="lokistack" target="grafana"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_metrics_prom" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.3;" edge="1" parent="1" source="metrics" target="prometheus"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e_hb_exp" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="heartbeat" target="exporters"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="mon-note" value="Nối vào: FastAPI API + Worker (nguồn phát metrics/log)" style="text;html=1;fontFamily=Georgia;fontSize=9.5;fontStyle=2;align=center;fontColor=#6b7280;" vertex="1" parent="1">
+          <mxGeometry x="20" y="228" width="440" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- Evaluate group -->
+        <mxCell id="evalbox" value="" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#94a3b8;dashed=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="500" y="45" width="480" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="evaltitle" value="Evaluate — chất lượng" style="text;html=1;fontFamily=Georgia;fontSize=12;fontStyle=1;align=center;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="500" y="50" width="480" height="18" as="geometry" />
+        </mxCell>
+
+        <mxCell id="goldensets" value="eval/{nguồn}/cases.json&#10;golden sets: Slack · Outlook · Gmail trace" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;strokeWidth=1.5;fontFamily=Georgia;fontSize=10.5;fontStyle=1;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="520" y="75" width="200" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="evalscript" value="eval_{nguồn}_rules.py&#10;chấm điểm extraction/routing" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=1.5;fontFamily=Georgia;fontSize=10.5;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="140" width="200" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gs_es" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="goldensets" target="evalscript"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="metricsjson" value="evaluation_metrics.json&#10;evaluation-evidence.md" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#ccfbf1;strokeColor=#0d9488;strokeWidth=1.5;fontFamily=Georgia;fontSize=10.5;fontStyle=1;fontColor=#0d9488;" vertex="1" parent="1">
+          <mxGeometry x="750" y="75" width="200" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="e_es_mj" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;rounded=1;exitX=1;exitY=0.5;entryX=0.5;entryY=1;" edge="1" parent="1" source="evalscript" target="metricsjson"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="ragmetrics" value="RAG quality: faithfulness,&#10;answer relevance, coverage&#10;test suite: 157 cases, coverage 77%" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#334155;strokeWidth=1.25;fontFamily=Georgia;fontSize=9.5;" vertex="1" parent="1">
+          <mxGeometry x="750" y="140" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mj_rag" style="endArrow=block;html=1;strokeColor=#1f2933;strokeWidth=1.25;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="metricsjson" target="ragmetrics"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="eval-note" value="Nối vào: bước verify (LLM extract) và persist trong Ingestion pipeline" style="text;html=1;fontFamily=Georgia;fontSize=9.5;fontStyle=2;align=center;fontColor=#6b7280;" vertex="1" parent="1">
+          <mxGeometry x="500" y="228" width="480" height="16" as="geometry" />
+        </mxCell>
+
+        <mxCell id="caption" value="Khối bổ sung — dán vào diagram chính, nối metrics từ FastAPI/Worker và nối eval từ bước verify/persist." style="text;html=1;fontFamily=Georgia;fontSize=11;fontStyle=2;align=center;fontColor=#6b7280;" vertex="1" parent="1">
+          <mxGeometry x="0" y="260" width="1000" height="24" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

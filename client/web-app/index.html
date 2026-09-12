@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Xác minh quyền sở hữu domain cho Google Search Console — phục vụ
+         Google OAuth verification (Data Access: gmail.readonly/calendar.*).
+         Giữ nguyên vĩnh viễn, không xoá sau khi verify xong. -->
+    <meta name="google-site-verification" content="hXYzGPREju-qDjbpt7lYBLuaZyzeiQulvRCnXvr_P94" />
+    <!-- viewport-fit=cover: chạy standalone trên iPhone tai thỏ, nội dung phải
+         phủ hết màn hình rồi tự chừa safe-area bằng CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>mondaiy</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <!-- Vỏ PWA: manifest viết tay ở public/, không để plugin tự sinh bản thứ hai -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#356F83" />
+    <meta name="application-name" content="mondaiy" />
+    <!-- iOS bỏ qua manifest: muốn mở dạng app rời thanh địa chỉ phải khai riêng -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="mondaiy" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Nếu module JS lỗi trước createRoot (thường do PWA cache cũ/WebKit cũ),
+         React ErrorBoundary chưa tồn tại để cứu. Fallback HTML này tự hiện sau
+         4 giây; khi React mount bình thường nó bị thay thế trước thời điểm đó. */
+      #app-boot-fallback {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+        background: #ffffdd;
+        color: #173a49;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        text-align: center;
+        visibility: hidden;
+        animation: reveal-boot-fallback 0s 4s forwards;
+      }
+      #app-boot-fallback > div { max-width: 340px; }
+      #app-boot-fallback h1 { margin: 0 0 10px; font-size: 21px; }
+      #app-boot-fallback p { margin: 0; font-size: 14px; line-height: 1.55; color: #55717c; }
+      #app-boot-fallback button {
+        width: 100%;
+        margin-top: 20px;
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 16px;
+        background: #356f83;
+        color: white;
+        font: inherit;
+        font-weight: 700;
+      }
+      @keyframes reveal-boot-fallback { to { visibility: visible; } }
+    </style>
+  </head>
+  <body class="bg-[var(--color-app-bg)] text-[var(--color-text-primary)] antialiased selection:bg-[var(--color-accent-soft)] selection:text-[var(--color-accent)]">
+    <div id="root">
+      <main id="app-boot-fallback" role="alert">
+        <div>
+          <h1>Mondaiy chưa mở được</h1>
+          <p>Thiết bị có thể đang giữ phiên bản ứng dụng cũ. Hãy làm mới dữ liệu ứng dụng rồi thử lại.</p>
+          <button type="button" onclick="window.mondaiyRecover()">Làm mới ứng dụng</button>
+        </div>
+      </main>
+    </div>
+    <script>
+      // Viết ES5 để chính WebKit cũ cũng chạy được khi bundle module không parse.
+      window.mondaiyRecover = function () {
+        var jobs = [];
+        if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+          jobs.push(navigator.serviceWorker.getRegistrations().then(function (items) {
+            return Promise.all(items.map(function (item) { return item.unregister(); }));
+          }));
+        }
+        if (window.caches && window.caches.keys) {
+          jobs.push(window.caches.keys().then(function (keys) {
+            return Promise.all(keys.map(function (key) { return window.caches.delete(key); }));
+          }));
+        }
+        Promise.all(jobs).then(function () { window.location.reload(); }, function () { window.location.reload(); });
+      };
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

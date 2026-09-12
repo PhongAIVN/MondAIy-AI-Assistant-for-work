@@ -1,0 +1,31 @@
+%% Draft — nhánh ui/ux, xem docs/projects/design/ui-flow.md mục 13
+%% Chưa phải canonical flow. Cần PM + Technical Lead review trước khi Approved.
+flowchart TD
+  L["Landing (/)"] -->|Đăng nhập| SI[Sign in]
+  L -->|Đăng ký| SU[Sign up]
+  SI -->|Quên mật khẩu| FP[Forgot password] --> RP[Reset password] --> SI
+  SI --> AUTH{Xác thực}
+  SU --> AUTH
+  AUTH -->|Thất bại| SI
+  AUTH -->|Thành công| ROLE{Role của user}
+  ROLE -->|participant / mentor| UW[User Workspace · AppShell]
+  ROLE -->|admin| CHOOSE{Chọn nơi vào}
+  CHOOSE -->|User Workspace| UW
+  CHOOSE -->|Admin Portal| AP[Admin Portal · AdminShell]
+
+  UW --> UW1[Daily Briefing]
+  UW --> UW2[Tasks]
+  UW --> UW3[Calendar]
+  UW --> UW4[Source Library]
+  UW --> UW5[Activity / Notifications]
+  UW --> UW6[Settings / Profile / Help]
+
+  AP --> AP1[Dashboard]
+  AP --> AP2[Users]
+  AP --> AP3[Programs]
+  AP --> AP4[Sources / Briefings]
+  AP --> AP5[Conflicts / Feedback]
+  AP --> AP6[Activity / Settings]
+
+  GUARD1[Route bảo vệ, chưa đăng nhập] -->|redirect| SI
+  GUARD2[Đã đăng nhập nhưng role không đủ quyền vào /admin] -->|toast Access Restricted + redirect| UW1

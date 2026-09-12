@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tab Lấy dữ liệu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#e7f6ff",
+                        "on-surface-variant": "#40484c",
+                        "on-error": "#ffffff",
+                        "on-surface": "#001f2a",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f4faff",
+                        "on-tertiary-fixed-variant": "#663d11",
+                        "surface-container-highest": "#c9e7f8",
+                        "outline": "#70787c",
+                        "surface-dim": "#c0dfef",
+                        "primary": "#16576a",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "tertiary": "#714619",
+                        "primary-fixed-dim": "#96cfe5",
+                        "surface-container-high": "#ceedfd",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#8ed0e8",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed-variant": "#054d60",
+                        "secondary-fixed": "#b6ebff",
+                        "inverse-surface": "#163441",
+                        "primary-container": "#356f83",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#e0f4ff",
+                        "surface-variant": "#c9e7f8",
+                        "tertiary-container": "#8d5e2f",
+                        "on-tertiary-fixed": "#2d1600",
+                        "surface-tint": "#2a6579",
+                        "on-background": "#001f2a",
+                        "surface-container": "#daf2ff",
+                        "primary-fixed": "#b8eaff",
+                        "on-secondary-container": "#1f697e",
+                        "on-tertiary-container": "#ffe3cd",
+                        "surface": "#f4faff",
+                        "tertiary-fixed": "#ffdcbf",
+                        "surface-bright": "#f4faff",
+                        "inverse-primary": "#96cfe5",
+                        "secondary": "#1b667c",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#001f28",
+                        "secondary-container": "#a5e6ff",
+                        "on-primary-container": "#c6eeff",
+                        "outline-variant": "#c0c8cc",
+                        "tertiary-fixed-dim": "#f7ba83",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001f28"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "control-gap": "8px",
+                        "internal-padding": "16px",
+                        "panel-width": "400px",
+                        "stack-gap": "12px",
+                        "edge-margin": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["EB Garamond"],
+                        "label-md": ["Geist"],
+                        "headline-md": ["EB Garamond"],
+                        "headline-sm": ["EB Garamond"],
+                        "label-sm": ["Geist"],
+                        "body-main": ["Geist"],
+                        "body-normal": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-sm": ["17px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-main": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-normal": ["15px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f4faff; /* surface */
+            color: #001f2a; /* on-surface */
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .extension-panel {
+            width: 100%;
+            max-width: 400px;
+            background-color: #f4faff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c0c8cc;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #70787c;
+        }
+        
+        .lucide-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #70787c;
+            border-radius: 4px;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: #f4faff;
+        }
+        .lucide-checkbox::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em #ffffff;
+            transform-origin: bottom left;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+        .lucide-checkbox:checked {
+            background-color: #16576a;
+            border-color: #16576a;
+        }
+        .lucide-checkbox:checked::before {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-main text-on-surface antialiased">
+<div class="extension-panel h-[600px] border-r border-outline-variant/30 sm:border sm:rounded-xl sm:my-8 sm:h-[800px]">
+<!-- TopAppBar -->
+<header class="bg-surface shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] sticky top-0 z-20">
+<div class="flex justify-between items-center w-full px-edge-margin py-4 max-w-[400px] mx-auto">
+<div class="flex items-center gap-control-gap">
+<span class="material-symbols-outlined text-primary cursor-pointer active:scale-95 duration-200" data-icon="terminal">terminal</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">mondaiy</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden cursor-pointer active:scale-95 duration-200 border border-outline-variant">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of a professional individual in a well-lit, neutral setting. The image should be cropped tightly to the face and shoulders, suitable for a UI profile icon. The style is modern, realistic photography with soft studio lighting, conveying a warm and approachable academic or professional persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFNc2wK0h30kb2XeNqR1kYviPI6ox9PZt8gwZRAQEJL9pQ0Ts91a3vj5dUPjGwZxfvHmikWVvX89Cgf5KuojHX7CFFLA3QulCON2kahQHw4Tgb35EkIhvY0_M3Y1CmN1vuOChjHss3UySHN1-tzuP_kVA5IvtOs-MV8f3yJueyX-78R0qUqbaGE3s_y_AuD-hv36e23zeLhnebf1Cka7nrQIs96hT2USagFqWvvB1NtavQ-gkG7N0_"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (used as horizontal tab bar here) -->
+<nav aria-label="Navigation" class="flex w-full gap-control-gap p-internal-padding bg-surface-container-low">
+<button class="flex-1 flex items-center justify-center text-on-surface-variant py-2 px-4 hover:text-on-surface transition-all rounded-lg" type="button">
+<span class="material-symbols-outlined mr-2 text-[18px]" data-icon="task_alt">task_alt</span>
+<span class="font-label-md text-label-md">Công việc</span>
+</button>
+<button aria-current="page" class="flex-1 flex items-center justify-center bg-surface shadow-sm text-primary rounded-lg py-2 px-4 transition-transform duration-300 ease-out" type="button">
+<span class="material-symbols-outlined icon-fill mr-2 text-[18px]" data-icon="data_exploration">data_exploration</span>
+<span class="font-label-md text-label-md">Lấy dữ liệu</span>
+</button>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 px-edge-margin py-stack-gap flex flex-col gap-stack-gap relative pb-[80px]">
+<!-- Active Tab Info -->
+<div class="bg-surface-container p-internal-padding rounded-xl border border-surface-tint/20 shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)]">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 shrink-0 bg-white rounded-md flex items-center justify-center shadow-sm border border-outline-variant/30">
+<img alt="Gmail Favicon" class="w-5 h-5 object-contain" data-alt="A close-up, high-quality rendering of the official Gmail icon (an envelope with a red 'M' shape forming the flap). The icon should sit cleanly on a pure white background with subtle, soft drop shadows indicating a modern, premium user interface context. No text or other elements, just the icon centered." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnU24GTxXFK4qi_9zaz8Ip0p691MSYlWz2AOaiTcGjm-4frGbHScL7BdM0UeD74ma6ptyTBJyNd6kdXu3EdRZ0LICChv7TMlYC4F_EBeIk-83cscHiDG836Cl6JliLpu_Hw47MX4eKBE_7vxglBwQoBxNPu7k4G8Zu6P8rDO_eeCyZAIBGgINFVmb_z2ZGazNOAzopF7Of4QD85alnXKbfJENZIEKvdY4i_1lufeQvTQv49pTHvvGO"/>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">Gmail - Thảo luận hợp đồng mới</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">mail.google.com</p>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-lg shadow-sm hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                Lấy dữ liệu từ tab này
+            </button>
+<!-- Divider -->
+<div class="flex items-center gap-3 my-2">
+<div class="h-px bg-outline-variant/50 flex-1"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Hoặc chọn từ văn bản</span>
+<div class="h-px bg-outline-variant/50 flex-1"></div>
+</div>
+<!-- Preview List -->
+<div class="bg-surface rounded-xl border border-outline-variant p-4 text-sm text-on-surface-variant font-body-normal leading-relaxed">
+<div class="pb-2 border-b border-outline-variant/30 mb-2">
+                    ...chúng tôi đã xem xét bản nháp và có một vài điểm cần làm rõ trước khi ký kết.
+                </div>
+<div class="pb-2 border-b border-outline-variant/30 mb-2">
+                    Vui lòng <span class="bg-primary/10 text-primary font-medium px-1 rounded">kiểm tra kỹ các điều khoản về thanh toán và bảo trì</span> ở trang 4.
+                </div>
+<div>
+                    Deadline phản hồi là ngày 30/10 nhé. Cảm ơn sự hỗ trợ của team.
+                </div>
+</div>
+<!-- Action Buttons for text selection -->
+<div class="flex gap-control-gap">
+<button class="flex-1 border border-outline text-on-surface-variant font-label-md text-label-md py-2 px-4 rounded-lg hover:bg-surface-container-low transition-colors">
+                    Hủy
+                </button>
+<button class="flex-1 bg-surface-tint text-on-primary font-label-md text-label-md py-2 px-4 rounded-lg shadow-sm hover:bg-surface-tint/90 transition-colors">
+                    Extract công việc
+                </button>
+</div>
+<div class="h-px bg-outline-variant/50 w-full my-1"></div>
+<!-- Results Section Header -->
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-2">Gợi ý từ AI (2)</h3>
+<!-- Suggestion Card 1 (Selected) -->
+<div class="bg-surface rounded-[18px] border border-primary/30 p-internal-padding shadow-[0_2px_4px_rgba(35,64,77,0.05),0_8px_16px_rgba(35,64,77,0.08)] relative overflow-hidden transition-all">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex items-start gap-3">
+<input checked="" class="lucide-checkbox mt-1" type="checkbox"/>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-error-container text-on-error-container border border-error/20">
+                                CẢNH BÁO
+                            </span>
+<span class="font-label-sm text-label-sm text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="event">event</span>
+                                30/10/2023 09:00
+                            </span>
+</div>
+<input class="w-full bg-transparent font-headline-sm text-headline-sm text-on-surface border-b border-transparent hover:border-outline-variant focus:border-primary focus:outline-none transition-colors px-0 py-1" type="text" value="Ký hợp đồng thuê nhà"/>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-2 font-body-normal text-body-normal text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none resize-none h-20 shadow-inner" placeholder="Mô tả công việc...">Cần kiểm tra kỹ các điều khoản về thanh toán và bảo trì</textarea>
+<a class="inline-flex items-center gap-1 text-primary hover:underline font-label-sm text-label-sm mt-1 w-fit" href="#">
+<span class="material-symbols-outlined text-[14px]" data-icon="link">link</span>
+                            Gmail: Nguyễn Văn A
+                        </a>
+</div>
+</div>
+</div>
+<!-- Suggestion Card 2 -->
+<div class="bg-surface rounded-[18px] border border-outline-variant border-dashed p-internal-padding shadow-sm relative overflow-hidden transition-all bg-surface-container-lowest hover:border-primary/50">
+<div class="absolute top-0 left-0 w-1 h-full bg-tertiary"></div>
+<div class="flex items-start gap-3">
+<input class="lucide-checkbox mt-1" type="checkbox"/>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary-container text-on-tertiary-container border border-tertiary/20">
+                                CẦN CHÚ Ý
+                            </span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface cursor-pointer group flex items-center gap-2">
+                            Phản hồi về bản nháp
+                            <span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-[18px]" data-icon="edit">edit</span>
+</h4>
+<!-- Expandable Details -->
+<div class="mt-2 pt-2 border-t border-outline-variant/30 flex flex-col gap-2 bg-surface-container p-3 rounded-lg">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Chi tiết thêm</p>
+<div class="flex justify-between items-center text-sm">
+<span class="text-outline">Người phụ trách:</span>
+<span class="font-medium text-on-surface">Ms. Linh</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-outline">Độ ưu tiên:</span>
+<span class="font-medium text-tertiary">Cao</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Action Bar (Bottom) -->
+<div class="sticky bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 p-internal-padding shadow-[0_-4px_12px_rgba(35,64,77,0.05)] z-20 flex flex-col gap-3">
+<div class="flex justify-between items-center px-1">
+<span class="font-label-md text-label-md text-on-surface-variant">Đã chọn <strong class="text-primary">1</strong> mục</span>
+</div>
+<div class="flex gap-control-gap">
+<button class="flex-1 border border-outline text-on-surface-variant font-label-md text-label-md py-2.5 px-4 rounded-lg hover:bg-surface-container-low transition-colors">
+                    Bỏ qua tất cả
+                </button>
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-2.5 px-4 rounded-lg shadow-sm hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
+                    Lưu tất cả
+                </button>
+</div>
+</div>
+</div>
+</body></html>

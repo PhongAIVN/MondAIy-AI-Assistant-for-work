@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-001",
+    "threadId": "thread-gml-001",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng hoàn thành bài tập lớn trước ngày mai.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-001"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIGhvw6BuIHRow6BuaCBiw6BpIHThuq1wIGzhu5tuIHRyxrDhu5tjIG5nw6B5IG1haS4=",
+        "size": 47
+      }
+    }
+  }
+]

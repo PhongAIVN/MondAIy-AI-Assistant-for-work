@@ -1,0 +1,125 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables — chặn mọi biến thể, chỉ chừa bản .example.
+# Liệt kê từng tên như trước sót bản sao lưu kiểu .env.bak.<timestamp>.
+.env*
+!.env.example
+!.env.prod.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Artifact model đã train — sinh lại bằng "ml/model for extension/train.py",
+# không commit binary, tránh lệch giữa git và dataset lúc train.
+ml/model for extension/artifacts/
+
+# Data (never commit large data)
+data/
+!client/web-app/src/data/
+!client/web-app/src/data/*.ts
+# Golden dataset huấn luyện model_for_extension — JSON nhỏ, cố ý commit
+# (khác data/ chứa db/cache lớn ở trên).
+!ml/model for extension/data/
+!ml/model for extension/data/*.json
+!ml/model for extension/data/*.md
+*.db
+*.sqlite3
+# Raw message kéo từ Discord — dữ liệu thật, không commit
+discord_raw_*.json
+# Danh sách kênh cào — lộ cấu trúc server ban tổ chức, chỉ giữ bản .example
+scripts/discord/channels*.json
+!scripts/discord/channels.example.json
+
+# Bản backup landing local — trùng asset, không đẩy repo
+.landing-backup-*/
+
+# Design prototype local — không phải source production
+design-proposal-littlebird/
+
+# Logs
+logs/
+*.log
+
+# Test coverage
+htmlcov/
+.coverage
+coverage.xml
+test-results/
+
+# Docker
+docker-compose.override.yml
+
+# Node (frontend)
+*node_modules/
+.pnpm-store/
+.next/
+out/
+.nuxt/
+
+# Build
+*.pyc
+*.pyo
+
+# AI logs — tracked structure, ignored content
+.ai-log/*.jsonl
+.ai-log/archive/
+
+# CodeGraph index — generated locally and may contain machine-specific data
+.codegraph/
+
+# Runbook chứa credential thật của VM — chỉ giữ trên máy
+*.local.md
+
+# P-004 local-to-VM deploy automation — chỉ dùng trên máy quản trị cá nhân
+scripts/deploy_vm_local.sh
+tests/test_deploy_vm_script.sh
+skills/p004-vm-local-deploy/
+
+# Local LangSmith trace exports may contain prompts, outputs and user data
+eval/langsmith_export/
+
+.claude/worktrees/
+
+# Rác lặp lại — dọn 19/08/2026, chặn để khỏi mọc lại (tatejo/gc)
+err.txt
+scratch_*.txt
+*.log.err
+nohup.out
+
+https%3a%2f%2fmirrors.kernel.org%2fsourceware%2fcygwin%2f/
+
+# Harness core maintenance binary
+scripts/bin/harness
+scripts/bin/harness.exe
+.harness-core/
+
+# Log/snapshot do Playwright CLI sinh ra khi debug — không phải sự thật của project
+.playwright-cli/
+
+# Ket qua chay eval tom tat — artifact moi lan chay, khong phai du lieu golden.
+eval/golden_dataset/summary/last_run.json
+.claude/settings.local.json
+
+# File tạm của drawio: bản sao tự lưu, sinh lại mỗi lần mở file .drawio.
+# Đã từng có 2,8 MB bkp bị commit nhầm.
+.$*.drawio.bkp

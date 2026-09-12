@@ -1,0 +1,377 @@
+{
+  "version": "summary-golden-v1",
+  "note": "Bộ chấm BƯỚC TÓM TẮT (reduce_node). Các golden khác trong repo đều nhắm vào lọc/trích — phần rule-based. Đây là chỗ LLM thật sự viết ra câu chữ người dùng đọc, và trước bộ này không có gì đo nó. Mỗi case dựng từ một lỗi thật đã gặp trong quá trình làm, không phải ví dụ bịa.",
+  "scoring": {
+    "must_mention": "Chuoi BAT BUOC xuat hien (so khop da bo dau, khong phan biet hoa thuong). Nhieu cach viet hop le ngan bang \"|\" — dat mot trong so do la du.",
+    "must_not_invent": "Neo (số/ngày/mã/email) KHÔNG được xuất hiện vì không có trong bằng chứng. Bắt bịa đặt.",
+    "language": "vi|en — ngôn ngữ giao diện; bản tóm tắt phải theo ngôn ngữ này bất kể tư liệu viết bằng gì.",
+    "require_paraphrase": "true = không được chỉ ghép nguyên văn trích dẫn. Đây là điểm phân biệt bản viết lại với bản nối chuỗi."
+  },
+  "cases": [
+    {
+      "id": "attribution-basic",
+      "why": "Tóm tắt không nêu nguồn thì người dùng không biết việc từ đâu ra.",
+      "language": "vi",
+      "title": "Sửa báo cáo",
+      "items": [
+        {
+          "message": {
+            "id": "m1",
+            "provider": "google",
+            "author_name": "Hatsuki Lynn",
+            "author_id": "lynn@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Nhờ em sửa lại báo cáo và nộp trước thứ Sáu.",
+          "detail": "Mentor nhờ sửa báo cáo theo góp ý."
+        }
+      ],
+      "must_mention": [
+        "hatsuki lynn"
+      ],
+      "must_not_invent": [],
+      "require_paraphrase": true
+    },
+    {
+      "id": "attachment-points",
+      "why": "Điểm chính nằm trong file đính kèm; tóm tắt chỉ nói 'có file' là vô dụng. (detail mang noi dung file, dung nhu extract_batch dung goi.)",
+      "language": "vi",
+      "title": "Sửa bài báo theo review",
+      "items": [
+        {
+          "message": {
+            "id": "m2",
+            "provider": "google",
+            "author_name": "Hatsuki Lynn",
+            "author_id": "lynn@example.com",
+            "to": [
+              "nhi@example.com"
+            ],
+            "attachment_text": "[Đính kèm: review.docx] Sửa lỗi trích dẫn ở Bảng 17a. Bổ sung tài liệu tham khảo còn thiếu. Cắt bớt nội dung để bài không vượt 25 trang."
+          },
+          "evidence_quote": "Em xem file review đính kèm và sửa theo nhé.",
+          "detail": "Các điểm cần sửa nằm trong file review.\n[Đính kèm: review.docx] Sửa lỗi trích dẫn ở Bảng 17a. Bổ sung tài liệu tham khảo còn thiếu. Cắt bớt nội dung để bài không vượt 25 trang."
+        }
+      ],
+      "must_mention": [
+        "17a"
+      ],
+      "must_not_invent": [
+        "30/09",
+        "TAPB-999"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "cross-language-en-source-vi-ui",
+      "why": "Giao diện tiếng Việt, mail tiếng Anh. Grounding từ vựng từng đánh trượt mọi bản dịch.",
+      "language": "vi",
+      "title": "Benchmark review",
+      "items": [
+        {
+          "message": {
+            "id": "m3",
+            "provider": "google",
+            "author_name": "Mentor",
+            "author_id": "mentor@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Please review the attached benchmark sheet for 15 papers and send back the updated version before Friday 22/08.",
+          "detail": "Mentor asks for a benchmark review of 15 papers."
+        }
+      ],
+      "must_mention": [
+        "15",
+        "22/08|august 22|22 thang 8|thang 8|ngay 22"
+      ],
+      "must_not_invent": [
+        "42",
+        "30/09"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "cross-language-vi-source-en-ui",
+      "why": "Chiều ngược lại: giao diện tiếng Anh, mail tiếng Việt.",
+      "language": "en",
+      "title": "Report fix",
+      "items": [
+        {
+          "message": {
+            "id": "m4",
+            "provider": "google",
+            "author_name": "Hatsuki Lynn",
+            "author_id": "lynn@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Em sửa lại bảng số liệu và nộp bản mới trước thứ Sáu 22/08 nhé.",
+          "detail": "Sửa bảng số liệu, nộp trước thứ Sáu."
+        }
+      ],
+      "must_mention": [
+        "22/08|august 22|22 thang 8|thang 8|ngay 22"
+      ],
+      "must_not_invent": [
+        "15",
+        "TAPB-131"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "multi-source-cluster",
+      "why": "Cụm gộp từ 2 nguồn — tóm tắt phải bao cả hai, không chỉ nguồn đầu.",
+      "language": "vi",
+      "title": "Cập nhật TAPB-131",
+      "items": [
+        {
+          "message": {
+            "id": "m5",
+            "provider": "google",
+            "author_name": "Jira automation",
+            "author_id": "jira@example.atlassian.net",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Nhắc: TAPB-131 sắp tới hạn.",
+          "detail": "Thư nhắc hạn từ Jira."
+        },
+        {
+          "message": {
+            "id": "TAPB-131",
+            "provider": "jira",
+            "author_name": "HoaiAn Thai",
+            "author_id": "acc-hoaian",
+            "jira_assignee_name": "Yen Nhi",
+            "jira_status": "In Progress"
+          },
+          "evidence_quote": "FE nhận SSE, hiển thị brief và nút Xác nhận.",
+          "detail": "Việc FE nhận SSE và hiển thị brief."
+        }
+      ],
+      "must_mention": [
+        "sse"
+      ],
+      "must_not_invent": [
+        "TAPB-999"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "fabrication-trap",
+      "why": "Bằng chứng cố tình mơ hồ về thời hạn — mô hình dễ tự điền một ngày cụ thể.",
+      "language": "vi",
+      "title": "Chuẩn bị họp",
+      "items": [
+        {
+          "message": {
+            "id": "m6",
+            "provider": "google",
+            "author_name": "An",
+            "author_id": "an@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Chuẩn bị tài liệu cho buổi họp sắp tới nhé.",
+          "detail": "Chuẩn bị tài liệu họp, chưa nêu ngày."
+        }
+      ],
+      "must_mention": [
+        "an"
+      ],
+      "must_not_invent": [
+        "01/09",
+        "15/09"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "long-attachment-many-points",
+      "why": "File nhiều mục — tóm tắt chỉ nêu mục đầu rồi bỏ phần còn lại là lỗi thật đã gặp. (detail mang noi dung file, dung nhu extract_batch dung goi.)",
+      "language": "vi",
+      "title": "Nhận xét bài báo",
+      "items": [
+        {
+          "message": {
+            "id": "m7",
+            "provider": "google",
+            "author_name": "Mentor",
+            "author_id": "mentor@example.com",
+            "to": [
+              "nhi@example.com"
+            ],
+            "attachment_text": "[Đính kèm: nhanxet.docx] 1. Sửa lỗi trích dẫn Bảng 17a. 2. Thêm biến thể kiến trúc partial decoupling. 3. Tái huấn luyện một baseline để so sánh. 4. Kiểm định thống kê cho các tuyên bố cải thiện. 5. Cắt nội dung xuống 25 trang."
+          },
+          "evidence_quote": "Em đọc kỹ nhận xét trong file rồi sửa nhé.",
+          "detail": "Năm điểm cần sửa nằm trong file nhận xét.\n[Đính kèm: nhanxet.docx] 1. Sửa lỗi trích dẫn Bảng 17a. 2. Thêm biến thể kiến trúc partial decoupling. 3. Tái huấn luyện một baseline để so sánh. 4. Kiểm định thống kê cho các tuyên bố cải thiện. 5. Cắt nội dung xuống 25 trang."
+        }
+      ],
+      "must_mention": [
+        "17a",
+        "25"
+      ],
+      "must_not_invent": [
+        "TAPB-1"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "jira-only-cluster",
+      "why": "Cụm toàn Jira đi đường rule-based có chủ đích — tóm tắt vẫn phải nêu người được giao.",
+      "language": "vi",
+      "title": "Hộp duyệt việc",
+      "items": [
+        {
+          "message": {
+            "id": "TAPB-127",
+            "provider": "jira",
+            "author_name": "HoaiAn Thai",
+            "author_id": "acc-hoaian",
+            "jira_assignee_name": "Yen Nhi",
+            "jira_status": "In Progress"
+          },
+          "evidence_quote": "Hộp duyệt việc hiển thị extracted và resolved item.",
+          "detail": "Việc hiển thị extracted/resolved item trong hộp duyệt."
+        }
+      ],
+      "must_mention": [
+        "yen nhi"
+      ],
+      "must_not_invent": [
+        "TAPB-999"
+      ],
+      "require_paraphrase": false
+    },
+    {
+      "id": "sender-with-vietnamese-name",
+      "why": "Tên có dấu — so khớp phải bỏ dấu, không được coi là thiếu attribution.",
+      "language": "vi",
+      "title": "Nộp bài tập",
+      "items": [
+        {
+          "message": {
+            "id": "m8",
+            "provider": "google",
+            "author_name": "Lê Thị Yến Nhi",
+            "author_id": "nhi@example.com",
+            "to": [
+              "an@example.com"
+            ]
+          },
+          "evidence_quote": "Nhóm mình nộp bài tập trước thứ Tư nhé.",
+          "detail": "Nộp bài tập nhóm trước thứ Tư."
+        }
+      ],
+      "must_mention": [
+        "yen nhi"
+      ],
+      "must_not_invent": [],
+      "require_paraphrase": true
+    },
+    {
+      "id": "numbers-must-survive",
+      "why": "Số liệu là thứ người dùng hành động theo; sai số là sai việc.",
+      "language": "vi",
+      "title": "Nộp báo cáo",
+      "items": [
+        {
+          "message": {
+            "id": "m9",
+            "provider": "google",
+            "author_name": "Mentor",
+            "author_id": "mentor@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Nộp báo cáo 12 trang trước 20/08, kèm 3 phụ lục.",
+          "detail": "Báo cáo 12 trang, 3 phụ lục, hạn 20/08."
+        }
+      ],
+      "must_mention": [
+        "12",
+        "20/08|august 20|20 thang 8|thang 8|ngay 20"
+      ],
+      "must_not_invent": [
+        "30/08"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "two-mails-same-topic",
+      "why": "Hai mail cùng chủ đề gộp cụm — không được chỉ kể mail mới nhất.",
+      "language": "vi",
+      "title": "Sửa bài NCKH",
+      "items": [
+        {
+          "message": {
+            "id": "m10",
+            "provider": "google",
+            "author_name": "Mentor",
+            "author_id": "mentor@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Em bổ sung phần related work cho bài NCKH.",
+          "detail": "Bổ sung related work."
+        },
+        {
+          "message": {
+            "id": "m11",
+            "provider": "google",
+            "author_name": "Mentor",
+            "author_id": "mentor@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Nhớ kiểm định thống kê cho phần kết quả nữa nhé.",
+          "detail": "Thêm kiểm định thống kê."
+        }
+      ],
+      "must_mention": [
+        "related work"
+      ],
+      "must_not_invent": [
+        "TAPB-1"
+      ],
+      "require_paraphrase": true
+    },
+    {
+      "id": "english-ui-english-source",
+      "why": "Đối chứng cùng ngôn ngữ: đường grounding từ vựng cũ phải vẫn chạy.",
+      "language": "en",
+      "title": "Deploy checklist",
+      "items": [
+        {
+          "message": {
+            "id": "m12",
+            "provider": "google",
+            "author_name": "Ops Bot",
+            "author_id": "ops@example.com",
+            "to": [
+              "nhi@example.com"
+            ]
+          },
+          "evidence_quote": "Please finish the deploy checklist and confirm rollback steps before 21/08.",
+          "detail": "Finish deploy checklist, confirm rollback."
+        }
+      ],
+      "must_mention": [
+        "21/08|august 21|21 thang 8|thang 8|ngay 21"
+      ],
+      "must_not_invent": [
+        "22/08"
+      ],
+      "require_paraphrase": true
+    }
+  ]
+}

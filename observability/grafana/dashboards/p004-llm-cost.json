@@ -1,0 +1,211 @@
+{
+  "uid": "p004-llm-cost",
+  "title": "P-004 · LLM usage, cost & measurement gaps",
+  "description": "LLM ledger is cumulative snapshot. Missing data stays No data: it is not zero calls, zero cost, or known pricing.",
+  "schemaVersion": 40,
+  "version": 2,
+  "timezone": "browser",
+  "refresh": "30s",
+  "datasource": {
+    "type": "prometheus",
+    "uid": "p004-prometheus"
+  },
+  "panels": [
+    {
+      "type": "row",
+      "title": "LLM usage/cost & measurement gaps",
+      "description": "Cumulative LLM ledger: status, cost and explicit metadata/pricing gaps; not selected-range rates.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "panels": [
+        {
+          "id": 1,
+          "type": "timeseries",
+          "title": "LLM calls by terminal status · cumulative",
+          "description": "Cumulative LLM calls grouped by terminal status. No data means no ledger series.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (status) (p004_llm_calls_total)",
+              "legendFormat": "{{status}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        },
+        {
+          "id": 2,
+          "type": "stat",
+          "title": "Estimated LLM cost · cumulative",
+          "description": "Cumulative estimated USD cost only for configured prices. Unknown pricing is separate; No data is not $0.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum(p004_llm_estimated_cost_usd_total)",
+              "legendFormat": "priced cost"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "currencyUSD",
+              "min": 0,
+              "decimals": 4
+            },
+            "overrides": []
+          },
+          "options": {}
+        },
+        {
+          "id": 3,
+          "type": "timeseries",
+          "title": "Pricing unknown · cumulative",
+          "description": "Cumulative calls with tokens but no configured model price by model/lane. Missing stays No data, never known $0 pricing.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (model, lane) (p004_llm_pricing_unknown_total)",
+              "legendFormat": "{{model}} / {{lane}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        },
+        {
+          "id": 4,
+          "type": "timeseries",
+          "title": "Usage metadata gaps · cumulative",
+          "description": "Cumulative successful calls without usage metadata or user attribution. Null remains No data, never fabricated zero.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (model, lane) (p004_llm_usage_metadata_missing_total)",
+              "legendFormat": "{{model}} / {{lane}}"
+            },
+            {
+              "refId": "B",
+              "expr": "sum by (reason) (p004_llm_user_attribution_missing_total)",
+              "legendFormat": "attribution / {{reason}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {
+            "legend": {
+              "showLegend": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "title": "Privacy-safe drilldown",
+      "description": "Pseudonymous user_hash is outside the narrative and cannot be mapped here to user ID or email.",
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "panels": [
+        {
+          "id": 5,
+          "type": "table",
+          "title": "Attributed cost by user_hash · drilldown",
+          "description": "Cumulative estimated cost by HMAC user_hash only; this dashboard exposes no email/user-ID mapping.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (user_hash) (p004_llm_user_estimated_cost_usd_total)",
+              "legendFormat": "{{user_hash}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "currencyUSD",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {}
+        },
+        {
+          "id": 6,
+          "type": "table",
+          "title": "Tokens by user_hash · drilldown",
+          "description": "Cumulative tokens by pseudonymous HMAC user_hash/direction for controlled drilldown; no PII is displayed.",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "p004-prometheus"
+          },
+          "targets": [
+            {
+              "refId": "A",
+              "expr": "sum by (user_hash, direction) (p004_llm_user_tokens_total)",
+              "legendFormat": "{{user_hash}} / {{direction}}"
+            }
+          ],
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short",
+              "min": 0
+            },
+            "overrides": []
+          },
+          "options": {}
+        }
+      ]
+    }
+  ]
+}

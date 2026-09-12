@@ -1,0 +1,166 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+  # Nút bấm tay cho lúc chuỗi tự động không tới đích: CI bị huỷ, runner
+  # self-hosted offline, hoặc cần phát hành lại đúng một SHA. Không có nút này
+  # thì đường duy nhất còn lại là deploy từ máy cá nhân, và frontend bị bỏ quên
+  # vì nó là một lệnh riêng — đúng chuyện đã xảy ra ngày 25/08.
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Bề mặt cần phát hành'
+        type: choice
+        default: frontend
+        options: [frontend, backend, all]
+      sha:
+        description: 'SHA để phát hành (để trống = HEAD của nhánh đang chọn)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+# Một commit mới là trạng thái duy nhất cần được phát hành. Huỷ cả run cũ đang
+# chờ hoặc đang chạy để một runner không tiếp tục build/deploy SHA lỗi thời.
+# Các lệnh deploy trên VM dùng `docker compose up -d`, nên run mới sẽ hội tụ
+# dịch vụ về image của SHA mới nhất.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  build-backend:
+    # Bấm tay mặc định CHỈ phát hành frontend. Đường backend của workflow này
+    # kéo ảnh từ GHCR, trong khi BACKEND_IMAGE trên VM đang trỏ một tag local do
+    # scripts/deploy_vm_local.sh build tại chỗ — hai đường chưa khớp nhau. Job
+    # `deploy` phía dưới còn `up -d` cả db/redis/minio và stack quan trắc, tức
+    # restart database production. Phải chọn `backend`/`all` một cách có ý thức.
+    if: >-
+      (github.event_name == 'workflow_dispatch' &&
+      (inputs.target == 'backend' || inputs.target == 'all')) ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main')
+    runs-on: [self-hosted, linux, x64, cohort3]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute image name
+        id: image
+        run: |
+          echo "name=ghcr.io/$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')-backend" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ steps.image.outputs.name }}:latest
+            ${{ steps.image.outputs.name }}:${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy-frontend:
+    name: Deploy frontend to Vercel
+    if: >-
+      (github.event_name == 'workflow_dispatch' &&
+      (inputs.target == 'frontend' || inputs.target == 'all')) ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main')
+    runs-on: [self-hosted, linux, x64, cohort3]
+    defaults:
+      run:
+        working-directory: client/web-app
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: client/web-app/package-lock.json
+
+      - name: Pull Vercel production settings
+        run: npx --yes vercel@50.34.3 pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"
+
+      - name: Build frontend for Vercel
+        run: npx --yes vercel@50.34.3 build --prod --token="${{ secrets.VERCEL_TOKEN }}"
+
+      - name: Deploy frontend production
+        run: npx --yes vercel@50.34.3 deploy --prebuilt --prod --token="${{ secrets.VERCEL_TOKEN }}"
+
+  deploy:
+    # Frontend được job Vercel ở trên xử lý độc lập. Job này chỉ cập nhật
+    # backend VM, nên lỗi một bề mặt không làm gián đoạn bề mặt còn lại.
+    needs: build-backend
+    runs-on: [self-hosted, linux, x64, cohort3]
+    env:
+      DEPLOY_DIR: ${{ secrets.DEPLOY_DIR || vars.DEPLOY_DIR }}
+      DOMAIN: ${{ secrets.DOMAIN || vars.DOMAIN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || inputs.sha || github.sha }}
+
+      - name: Sync production compose to VM
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          source: docker-compose.prod.yml,observability
+          target: ${{ env.DEPLOY_DIR || '/opt/p-004' }}
+          overwrite: true
+
+      - name: SSH deploy — pull ảnh mới + restart
+        uses: appleboy/ssh-action@v1
+        env:
+          GHCR_USERNAME: ${{ github.actor }}
+          GHCR_PULL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          envs: GHCR_USERNAME,GHCR_PULL_TOKEN
+          script: |
+            set -e
+            cd "${{ env.DEPLOY_DIR || '/opt/p-004' }}"
+            echo "$GHCR_PULL_TOKEN" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
+            trap 'docker logout ghcr.io >/dev/null 2>&1 || true' EXIT
+            docker compose -f docker-compose.prod.yml config -q
+            docker compose -f docker-compose.prod.yml pull db redis minio loki promtail p004-backend worker github-actions-exporter prometheus node-exporter cadvisor grafana
+            docker logout ghcr.io
+            trap - EXIT
+            docker compose -f docker-compose.prod.yml up -d db redis minio loki promtail p004-backend worker github-actions-exporter prometheus node-exporter cadvisor grafana
+            docker image prune -f
+
+      - name: Smoke test
+        if: env.DOMAIN != ''
+        run: |
+          sleep 5
+          curl -fsS "https://${DOMAIN}/health"

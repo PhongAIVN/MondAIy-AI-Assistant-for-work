@@ -1,0 +1,148 @@
+% Compile: xelatex mondaiy-std.tex && xelatex mondaiy-std.tex
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{fontspec,polyglossia,microtype,setspace}
+\setmainfont{Times New Roman}\setsansfont{Arial}\setdefaultlanguage{vietnamese}\onehalfspacing
+\usepackage{booktabs,longtable,tabularx,array,enumitem,xcolor,hyperref,fancyhdr,titlesec,float}
+\definecolor{mondaiyblue}{HTML}{174B63}\definecolor{mondaiyteal}{HTML}{167B7F}\definecolor{mondaiylight}{HTML}{EEF5F4}\definecolor{mondaiywarn}{HTML}{8A4B08}
+\hypersetup{colorlinks=true,linkcolor=mondaiyblue,urlcolor=mondaiyteal,pdftitle={STD mondaiy}}
+\pagestyle{fancy}\fancyhf{}\lhead{mondaiy -- STD}\rhead{Bản 1.0}\cfoot{\thepage}\setlength{\headheight}{14pt}
+\titleformat{\section}{\Large\bfseries\color{mondaiyblue}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries\color{mondaiyteal}}{\thesubsection}{0.6em}{}
+\renewcommand{\arraystretch}{1.2}\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\begin{document}
+\begin{titlepage}\centering\vspace*{2.4cm}
+{\Huge\bfseries\color{mondaiyblue} Tài liệu kiểm thử phần mềm\\[0.2cm]mondaiy -- Personal Program Navigator\par}
+\vspace{0.9cm}{\Large Software Testing Documentation (STD)\par}\vfill
+\begin{tabular}{rl}\textbf{Phiên bản:} & 1.0 \\ \textbf{Ngày lập:} & 23/08/2026 \\ \textbf{Chuẩn tham chiếu:} & ISO/IEC/IEEE 29119 \\ \textbf{Nguồn chuẩn:} & PRD, SRS, test suite và Gate evidence P-004 \\end{tabular}\vfill
+\colorbox{mondaiylight}{\parbox{0.86\textwidth}{Tài liệu này xác định chiến lược test, test case, defect report và tiêu chí release. Nó không thay thế Jira cho backlog/owner/trạng thái bug.}}
+\end{titlepage}
+\tableofcontents\clearpage
+
+\section{Kiểm soát tài liệu và trách nhiệm}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.3cm}X}
+\toprule Vai trò & Trách nhiệm/đầu ra \\ \midrule
+QA lead & Duy trì plan, fixture version, test execution report và release recommendation. Không tự đóng Critical/Major defect. \\
+Tech Lead & Bảo đảm testability, test command, environment parity, triage defect và regression test. \\
+Product owner/CMO & Xác nhận pilot cohort, thông điệp consent, metric value và diễn giải kết quả người dùng; không đổi hard safety gate thành KPI marketing. \\
+CTO & Phê duyệt waiver có thời hạn, security/operational risk và quyết định go/no-go. \emph{Trạng thái hiện tại: pending execution, không phải approved}. \\
+Test item baseline & SRS 1.0, PRD 0.5, ADR API contract, ADR test-driven, source code và exact SHA/artifact được ghi trong mỗi run. \\
+\bottomrule
+\end{tabularx}
+
+\section{Kế hoạch kiểm thử}
+\subsection{Mục tiêu và phạm vi}
+Mục tiêu là xác minh các killer journey: kết nối nguồn $\rightarrow$ evidence $\rightarrow$ briefing/ask có căn cứ $\rightarrow$ action draft/confirm; đồng thời bảo vệ boundary user, consent, OAuth, file intake, pipeline failure và native mobile state.
+
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.1cm}X}
+\toprule Trong phạm vi & Unit/service/API integration, pipeline regression, web/mobile interaction, auth success/denial, file safety, deploy health, golden datasets và LangSmith evidence. \\
+Ngoài phạm vi & SLA tuyệt đối của Google/Apple/LLM, pentest độc lập đầy đủ, khả năng tương thích mọi thiết bị cũ chưa có trong device matrix. \\
+\bottomrule
+\end{tabularx}
+
+\subsection{Chiến lược}
+\begin{longtable}{p{3cm}p{4cm}p{7cm}}
+\toprule Tầng & Mục tiêu & Evidence/kỹ thuật \\ \midrule\endhead
+Unit & Hàm thuần, parser, ownership helper, validation & Pytest/Node test; positive và negative proof. \\
+Integration API & Auth, DB, multipart, error mapping, service contract & FastAPI ASGI client, fixture tách user, HTTP status/body. \\
+Pipeline/evaluation & Filter/extraction/summary, counts, blocked state & Golden dataset, pipeline run output, LangSmith trace. \\
+Web/mobile & Tương tác/keyboard/state/native config & Typecheck, component/source contract, device smoke test. \\
+Release/ops & Artifact/deploy/rollback health & CI, Compose validation, public health, logs và deployment evidence. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Entry/exit criteria}
+Entry: requirement đã có acceptance criteria, fixture không chứa secret/PII thực, environment và dependency cần thiết sẵn sàng. Exit: test liên quan pass, không còn defect Critical/Major mở không có waiver, thay đổi có regression test, typecheck/lint/build theo client bị ảnh hưởng pass, và evidence release ghi rõ check bỏ qua/rủi ro còn lại.
+
+\subsection{Môi trường, dữ liệu và tính tái lập}
+\begin{longtable}{p{3.1cm}p{4.2cm}p{6cm}}
+\toprule Hạng mục & Baseline tối thiểu & Evidence phải lưu \\ \midrule\endhead
+API/integration & Isolated test DB, ít nhất hai user fixture, fake/mocked provider cho denial/retry; không dùng token thật. & Commit SHA, dependency lock, migration level, command, log redacted và result XML/JSON. \\
+Web/mobile & Supported browser matrix do release owner chốt; iOS native build trên thiết bị thật cho widget/share extension. Expo Go chỉ kiểm UI JS, không chứng minh WidgetKit. & App version/build number, OS/device/family, screenshot/video đã redaction, result theo case. \\
+Performance & Môi trường gần release và workload 50 active users; source/LLM mock hoặc ghi rõ provider mode. & Script, duration, concurrency, p50/p95/p99, error rate, queue age và resource saturation. \\
+Golden/eval data & Fixture khử định danh, versioned, provenance/license review và expected label/contract. & Dataset version/hash, case ID, reviewer, expected/observed, rationale cho override. \\
+\bottomrule
+\end{longtable}
+
+Không case nào được đánh dấu pass chỉ từ log partial, screenshot UI, hoặc observed behavior chưa có contract. Nếu provider credential, device hoặc môi trường thiếu, kết quả là \code{blocked}, nêu owner và đường khắc phục.
+
+\section{Ma trận test case}
+\begin{longtable}{p{1.4cm}p{3cm}p{4.2cm}p{5.2cm}}
+\toprule ID & Scenario & Bước/dữ liệu & Kết quả mong đợi \\ \midrule\endhead
+TC-AUTH-01 & Đăng nhập hợp lệ & Email/password hoặc Google/Apple identity token hợp lệ & Nhận session đúng user; token không lộ trong UI/log. \\
+TC-AUTH-02 & Từ chối truy cập chéo & User A gọi object của User B & 401/403/404 theo contract; không có data leak. \\
+TC-CONN-01 & Connection thiếu refresh token & Chạy task extraction trên Gmail connection lỗi & Status blocked/failed, nêu nguyên nhân; filtered/extracted/persisted bằng 0. \\
+TC-CONN-02 & Connection không tồn tại & Gọi pipeline với connection ID không thuộc user & Dừng an toàn, không batch/cluster/task giả. \\
+TC-FILTER-01 & Email actionable & Fixture có yêu cầu/hạn/owner rõ & KEEP/extract theo golden label; có provenance. \\
+TC-FILTER-02 & Hard negative & Marketing/phishing chứa ``urgent''/``deadline'' & DROP; không nhầm keyword với action thực. \\
+TC-ASK-01 & Grounded answer & Hỏi về evidence đã cấp quyền & Answer có citation, chỉ dùng scope đúng user. \\
+TC-ASK-02 & Không đủ bằng chứng & Hỏi fact không có trong evidence & Abstain/clarify, không bịa. \\
+TC-ACT-01 & Calendar/task draft & Ý định action có đủ evidence & Tạo proposal/draft; chưa confirm thì không external write. \\
+TC-FILE-01 & DOCX/XLSX hợp lệ & Chọn một file dưới 200 KB & Multipart thành công, proposal hiển thị, chỉ tạo task khi người dùng thêm. \\
+TC-FILE-02 & File bị từ chối & PDF, quá 200 KB hoặc hơn 5 file & UI/API trả lỗi rõ; không parse/persist dữ liệu giả. \\
+TC-MOB-01 & Keyboard state & Chat/Meeting Notes/File sheet, focus input rồi tap/scroll & Keyboard dismiss được; nội dung không bị che. \\
+TC-WIDGET-01 & Native widget & iPhone native build, task thiếu detail và các family Lock Screen & Snapshot không crash; family được render đúng; Expo Go được ghi rõ không hỗ trợ. \\
+TC-DEPLOY-01 & Production rollout & Deploy SHA đã kiểm chứng & Chỉ backend/worker restart; container healthy và \code{/health} trả OK. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Test specification trọng yếu}
+\begin{longtable}{p{2cm}p{3.1cm}p{4.3cm}p{4.1cm}}
+\toprule ID & Precondition/test data & Procedure/observable assertion & Requirement/risk \\ \midrule\endhead
+TS-PRIV-01 & User A/B; evidence A đã ingest; session B hợp lệ. & B gọi list/search/detail/action bằng ID của A. Không có content/metadata A; status đúng contract; audit không chứa raw source. & FR-03/04/07, NFR-09; cross-user leak = release blocker. \\
+TS-PRIV-02 & Consent/evidence/memory của A; request revoke hoặc delete hoàn tất. & Thử sync mới, search, briefing và ask sau revoke/delete. Không xuất hiện dữ liệu đã thu hồi; audit giữ metadata an toàn. & FR-02/03/08, NFR-10. \\
+TS-ACT-02 & Intent tạo lịch, thời gian mơ hồ hoặc chưa confirm. & Agent tạo proposal hoặc hỏi rõ; kiểm provider/event store trước confirm. Số external write bằng 0. & FR-05/07, NFR-09. \\
+TS-SYNC-03 & Same source event replay; worker bị restart giữa run. & Replay/retry; kiểm evidence identity/count và pending item. Duplicate/lost item bằng 0; status không false-success. & FR-03, NFR-03/09. \\
+TS-AI-03 & Malicious text trong email/attachment đòi lộ dữ liệu hoặc gọi tool. & Ask/summary với fixture. Response không lộ dữ liệu user khác, không bỏ consent/draft-confirm; tool call audit hợp lệ. & FR-07/08, threat prompt injection. \\
+TS-PERF-01 & Workload 50 active users; dữ liệu/provider mode được ghi. & Chạy script; p95 batch/brief $\leq2$s, first answer $\leq10$s, draft $\leq3$s; record error/queue. & NFR-07; fail nếu vượt ngưỡng hoặc không tái lập được. \\
+TS-ACC-01 & Keyboard-only web và iOS device matrix. & Tab/focus/state không dựa màu; preview timezone; chat/note/file input dismiss/avoid keyboard. & NFR-11, TC-MOB-01. \\
+TS-REC-01 & Backup snapshot và rollback image ở staging. & Restore theo runbook rồi health/read-only smoke; thử rollback artifact. Không claim production readiness nếu drill chưa chạy. & NFR-03, operational readiness. \\
+\bottomrule
+\end{longtable}
+
+\subsection{Ma trận traceability}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.2cm}p{4.6cm}X}
+\toprule SRS scope & Test IDs tối thiểu & Pass condition \\ \midrule
+Identity/consent/source & TC-AUTH-01/02, TC-CONN-01/02, TS-PRIV-02 & Không access trái phép; revoke/expiry không cho ingest/retrieval mới. \\
+Evidence/pipeline/briefing & TC-FILTER-01/02, TS-SYNC-03, TS-PERF-01 & Provenance/count/status đúng; retry/restart không mất hoặc duplicate. \\
+Ask/AI & TC-ASK-01/02, TS-AI-03 & Citation/abstain đúng scoped set; source prompt không vượt boundary. \\
+Action/file/mobile/widget & TC-ACT-01, TC-FILE-01/02, TC-MOB-01, TC-WIDGET-01, TS-ACT-02, TS-ACC-01 & Draft-confirm, validation, native capability và keyboard/accessibility đúng. \\
+Operations/privacy & TC-DEPLOY-01, TS-PRIV-01/02, TS-REC-01 & Exact artifact healthy; deletion, isolation, restore/rollback có evidence. \\
+\bottomrule
+\end{tabularx}
+
+\section{Dataset và đánh giá AI}
+Dataset filter tham chiếu các pattern email doanh nghiệp và action item, nhưng golden fixture phải được khử định danh và versioned trong repo. Các nguồn tham khảo gồm Enron (thread/CC/noise), RADAR (action item), BC3/EmailSum (thread reasoning), Avocado (enterprise workflow) và TREC Spam Track (hard negative). Chúng cung cấp pattern, không tự động trở thành ground truth của sản phẩm.
+
+Đánh giá trace dùng contract: input, expected behavior, tool/result state và final response phải nhất quán. Với pipeline, expected output tối thiểu gồm trạng thái, counts và error object; không được suy diễn success từ log partial. Khi LLM inference không có golden answer, báo cáo phải nói rõ đó là observed behavior hoặc prompt contract.
+
+Mỗi eval case cần \code{case\_id}, input đã khử định danh, source scope, expected label/behavior, judge rubric, model/provider version, prompt/template version, tool trace, actual output, verdict và reviewer. Human review bắt buộc cho citation correctness, abstain, conflict và action safety; một LLM-as-judge không tự nó là ground truth. Dataset tham chiếu bên ngoài chỉ được dùng sau license/provenance review và không được copy dữ liệu nhạy cảm vào repo.
+
+\section{Defect report template}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.4cm}X}
+\toprule Trường & Nội dung bắt buộc \\ \midrule
+Bug ID/Title & Mã Jira và mô tả ngắn, có component. \\
+Severity/Priority & Critical, Major hoặc Minor; ưu tiên xử lý và lý do. \\
+Environment & Commit/build number, OS/device/browser, account role, provider/connection state. \\
+Steps to reproduce & Bước ngắn, xác định được fixture/data không nhạy cảm. \\
+Expected/actual & Kết quả hợp đồng và kết quả quan sát được; đính log/screenshot đã redaction. \\
+Resolution evidence & PR/commit, regression test, trạng thái retest và risk còn lại. \\
+\bottomrule
+\end{tabularx}
+
+\section{Báo cáo tổng kết và release gate}
+Mỗi release report ghi số test executed/passed/failed/blocked, defect theo severity, SHA/artifact, môi trường, dataset version, lệnh thực thi và hạn chế. Đặc biệt phải tách ba trường hợp: \textbf{completed} (đã xong theo contract), \textbf{blocked} (thiếu quyền/connection/dependency có nguyên nhân) và \textbf{failed} (lỗi xử lý). Không coi blocked là pass, cũng không coi test chưa chạy là pass.
+
+\begin{center}\colorbox{mondaiylight}{\parbox{0.86\textwidth}{\textbf{Release recommendation.} Chỉ recommend release khi không có cross-user leak, external action trước confirm, secret exposure, hoặc pipeline success giả; các kiểm tra native/TestFlight chưa chạy phải được ghi ``blocked/pending'' thay vì đánh dấu pass.}}\end{center}
+
+\subsection{Mẫu test execution report bắt buộc}
+\begin{tabularx}{\textwidth}{>{\bfseries}p{3.4cm}X}
+\toprule Trường & Giá trị phải ghi cho mỗi release candidate \\ \midrule
+Identity & Release/version, Git SHA, artifact digest/build number, environment, migration version, test window và người chạy. \\
+Coverage & Requirement/test case/dataset version; executed/passed/failed/blocked/skipped theo suite, không chỉ tổng số. \\
+Quality & p95/throughput/error/queue result, security/privacy scan, accessibility/device result, LLM eval verdict và variance/rerun nếu có. \\
+Defect/waiver & Bug ID, severity, owner, mitigation, expiry và người phê duyệt waiver. Waiver không che Critical hoặc cross-user/action/privacy violation. \\
+Decision & \code{go}, \code{no-go} hoặc \code{conditional-go}; điều kiện chưa đạt ghi rõ follow-up, owner và deadline. \\
+\bottomrule
+\end{tabularx}
+\end{document}

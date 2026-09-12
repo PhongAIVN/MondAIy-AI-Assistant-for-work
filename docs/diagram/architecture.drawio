@@ -1,0 +1,213 @@
+<mxfile host="Electron" pages="2">
+  <diagram name="1. Kiến trúc tổng thể" id="page1">
+    <mxGraphModel dx="612" dy="269" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="960" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="legend" parent="1" style="text;html=1;fontSize=12;align=center;fontColor=#666666;" value="Xanh = Mã thuần · Cam = gọi LLM · Xám = bên ngoài · Xanh lá = dữ liệu" vertex="1">
+          <mxGeometry height="20" width="640" x="380" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="react" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" value="React (ứng dụng web)&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;chọn nguồn + chọn khoảng thời gian&lt;br&gt;hộp duyệt việc&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="280" x="560" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="api" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" value="FastAPI" vertex="1">
+          <mxGeometry height="60" width="280" x="560" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="lg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9673a6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;fontColor=#9673a6;" value="LangGraph - quy trình xử lý" vertex="1">
+          <mxGeometry height="500" width="880" x="260" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="1. fetch&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;gọi song song 3 nguồn&#xa;IN: sources[] + time_range&#xa;OUT: raw_message[] {platform, content, sent_at}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="150" width="180" x="285" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="2. normalize&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;làm sạch, đổi múi giờ&#xa;IN: raw_message&#xa;OUT: normalized_message {content_clean, sent_at_local, source_url}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="150" width="180" x="495" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" value="3. filter&lt;br&gt;&lt;font style=&quot;font-size:9px&quot;&gt;Luật - loại bỏ tin nhắn thừa&lt;br&gt;giữ: thời gian/việc/nhờ vả/@mention/DM&lt;br&gt;loại: quá ngắn/tự gửi/hệ thống/sticker&lt;br&gt;IN: normalized_message&lt;br&gt;OUT: filtered_message {keep, score, matched_signals}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="150" width="180" x="705" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="4. make_batches&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;cắt lô 15 tin + ngữ cảnh&#xa;IN: filtered_message[] (keep=true) + tin ngữ cảnh&#xa;OUT: batch {batch_id, messages[]}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="150" width="180" x="915" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="5. extract_batch&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;LLM đọc 15 tin -&amp;gt; JSON&#xa;IN: batch&#xa;OUT: extracted_item[] {title, time_phrase, assignee_hint, quote, confidence}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="180" x="285" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="n6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="6. resolve&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;tính ngày giờ + danh tính&#xa;IN: extracted_item + identity table + tz&#xa;OUT: resolved_item {deadline_normalized, assignee, keep}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="180" x="495" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="n7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;" value="7. cluster&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;gộp trùng xuyên nền tảng&#xa;IN: resolved_item[]&#xa;OUT: cluster {cluster_id, item_ids[], deadline_normalized, source_count}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="180" x="705" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="n8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" value="8. reduce&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;LLM viết tóm tắt + ưu tiên&#xa;IN: cluster[] rút gọn (~26 dòng)&#xa;OUT: brief {summary, top_priority[], schedule_conflicts[]}&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="180" x="915" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="n9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="9. persist&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;lưu PostgreSQL, đẩy SSE kết quả&#xa;IN: cluster[] + brief&#xa;OUT: {briefing_id, result_url}&#xa;Calendar handoff (template/.ics) là API riêng, chạy sau khi user Xác nhận&lt;/font&gt;" vertex="1">
+          <mxGeometry height="130" width="180" x="915" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="disc" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" value="Discord&lt;font style=&quot;font-size:9px&quot;&gt;&lt;br&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="60" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="tele" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" value="Telegram&lt;font style=&quot;font-size:9px&quot;&gt;&lt;br&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="60" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="gmail" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" value="Gmail&lt;font style=&quot;font-size:9px&quot;&gt;&lt;br&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="55" width="140" x="60" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="llm" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;fontStyle=1;" value="LLM&#xa;&lt;font style=&quot;font-size:10px&quot;&gt;mô hình rẻ cho extract&#xa;mô hình mạnh cho reduce&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="150" x="1200" y="525" as="geometry" />
+        </mxCell>
+        <mxCell id="pg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="PostgreSQL + pgvector&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;tin nhắn, việc, cụm&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="220" x="380" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="gcal" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;" value="Google Calendar&#xa;&lt;font style=&quot;font-size:9px&quot;&gt;P0: chỉ template URL / .ics&#xa;KHÔNG OAuth, KHÔNG CRUD event&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="220" x="840" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="react" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;" target="api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="api" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;fontSize=10;" target="n1" value="astream()">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#666666;" target="disc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#666666;" target="tele">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;startArrow=block;dashed=1;strokeColor=#666666;" target="gmail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="n1" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;fontSize=10;" target="n2" value="1.680">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="n2" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;" target="n3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="n3" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;fontSize=10;" target="n4" value="90 tin">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="n4" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;strokeWidth=2;strokeColor=#d79b00;fontSize=10;fontColor=#d79b00;fontStyle=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="n5" value="Send() x 14 lô - SONG SONG">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1005" y="505" />
+              <mxPoint x="375" y="505" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="n5" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;fontSize=10;" target="n6" value="63 mục">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="n6" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;fontSize=10;" target="n7" value="46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="n7" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;fontSize=10;" target="n8" value="26 cụm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="n8" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;" target="n9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="n5" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;startArrow=block;strokeColor=#d79b00;" target="llm">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="375" y="530" />
+              <mxPoint x="1275" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="n8" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;startArrow=block;strokeColor=#d79b00;" target="llm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="n9" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;strokeColor=#82b366;" target="pg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="n7" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;startArrow=block;strokeColor=#82b366;fontSize=10;" target="pg" value="vector nhúng">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="n9" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;dashed=1;strokeColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" target="api" value="SSE: tiến trình + kết quả">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1160" y="695" />
+              <mxPoint x="1160" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="api" style="edgeStyle=orthogonalEdgeStyle;html=1;rounded=1;endArrow=block;strokeWidth=2;strokeColor=#82b366;fontSize=10;fontStyle=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" target="gcal" value="mở handoff sau khi bấm Xác nhận (không tự ghi event)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="230" y="215" />
+              <mxPoint x="230" y="800" />
+              <mxPoint x="950" y="800" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2. Phễu 4 tầng" id="page2">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="t2" value="Phễu 4 tầng - 1.680 tin nhắn thành 26 việc" style="text;html=1;fontSize=20;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="in" value="1.680 tin nhắn thô&#xa;&lt;font style=&quot;font-size:11px&quot;&gt;Discord + Telegram + Gmail, 3 ngày&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="80" width="400" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="t1b" value="TẦNG 1 - LỌC THÔ&#xa;&lt;font style=&quot;font-size:11px&quot;&gt;Mã thuần. 0 đồng. 0,1 giây.&#xa;Tìm từ khóa: mai, deadline, nhớ, @tên, 8h...&#xa;Bỏ: ok, haha, sticker, newsletter, tin của chính mình&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="190" width="500" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="t2b" value="TẦNG 2 - HIỂU (LLM)&#xa;&lt;font style=&quot;font-size:11px&quot;&gt;14 lô x 15 tin, chạy SONG SONG.&#xa;Mỗi lần LLM chỉ nhìn 15 tin -&amp;gt; bắt được ~100%.&#xa;Điền vào biểu mẫu có cấu trúc dữ liệu cố định.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="330" width="500" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="t3b" value="TẦNG 3 - DỌN &amp;amp; GỘP&#xa;&lt;font style=&quot;font-size:11px&quot;&gt;Mã thuần. 0 đồng.&#xa;Tính ngày giờ thật - bỏ việc người khác&#xa;Gộp trùng xuyên nền tảng (khóa cứng / so khớp mờ / vector nhúng)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="470" width="500" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="t4b" value="TẦNG 4 - VIẾT (LLM)&#xa;&lt;font style=&quot;font-size:11px&quot;&gt;1 lần gọi duy nhất, ~3.000 token.&#xa;KHÔNG nhìn tin nhắn thô - chỉ đọc 26 dòng đã gọn.&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="610" width="500" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="out" value="Tóm tắt + 26 việc + Cảnh báo trùng lịch&#xa;&lt;font style=&quot;font-size:11px&quot;&gt;mỗi việc kèm bằng chứng + liên kết tin nhắn gốc&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="740" width="400" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="bỏ 1.590 tin&#xa;(-94,6%)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="200" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="LLM loại 27 mục&#xa;(-30%)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="340" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="bỏ 37, gộp 20&#xa;(-59%)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="480" width="140" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="in" target="t1b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="90 tin" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeWidth=2;fontSize=12;fontStyle=1;" edge="1" parent="1" source="t1b" target="t2b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="63 mục" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeWidth=2;fontSize=12;fontStyle=1;" edge="1" parent="1" source="t2b" target="t3b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" value="26 cụm" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeWidth=2;fontSize=12;fontStyle=1;" edge="1" parent="1" source="t3b" target="t4b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="t4b" target="out">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="t1b" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="t2b" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="g3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=block;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="t3b" target="d3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="k1" value="Chỉ 2 trong 4 tầng gọi LLM.&#xa;Hai tầng mã thuần làm 60% khối lượng công việc." style="text;html=1;fontSize=12;align=left;fontColor=#666666;fontStyle=2" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="500" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="k2" value="Cắt lô ở Tầng 2 làm tỷ lệ phát hiện tăng từ 0,43 lên 0,88.&#xa;Không phải do đổi mô hình đắt hơn." style="text;html=1;fontSize=12;align=left;fontColor=#d79b00;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="410" width="200" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,8 @@
+[
+  {"id": "BATCH-001", "description": "51 item -> nhiều lô 6, lô cuối 3 phần tử, không lô nào rỗng", "filtered_count": 51, "expected_batch_sizes": [6, 6, 6, 6, 6, 6, 6, 6, 3]},
+  {"id": "BATCH-002", "description": "Đúng bội số của 6 -> không sinh lô rỗng thừa ở cuối", "filtered_count": 36, "expected_batch_sizes": [6, 6, 6, 6, 6, 6]},
+  {"id": "BATCH-003", "description": "Ít hơn 1 lô -> 1 lô duy nhất bằng đúng số lượng", "filtered_count": 5, "expected_batch_sizes": [5]},
+  {"id": "BATCH-004", "description": "Không có filtered message nào -> danh sách lô rỗng, không lỗi", "filtered_count": 0, "expected_batch_sizes": []},
+  {"id": "BATCH-005", "description": "Đúng 1 lô đầy (6) -> không tràn sang lô 2 với 0 phần tử", "filtered_count": 6, "expected_batch_sizes": [6]},
+  {"id": "BATCH-006", "description": "1 phần tử nhiều hơn 1 lô đầy -> lô 2 chỉ có 1 phần tử", "filtered_count": 7, "expected_batch_sizes": [6, 1]}
+]

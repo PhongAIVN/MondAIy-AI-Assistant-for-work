@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "change_kind": "behavior_bug",
+  "bug_id": "TC_UI_04_01-04-05-06",
+  "symptom": "Task UI loses non-empty assignment data, lacks composable priority filtering and live counts, and leaves a globally empty list without an actionable chat handoff.",
+  "root_cause": "The task page derives and renders only the legacy task subset, uses one status-only filtered collection, and has no one-shot route contract to the existing chat submit boundary.",
+  "violated_invariant": "Every task view must preserve non-empty task fields without fabricating absent values, derive filters and live statistics from the canonical task set, and expose an actionable global-empty recovery path.",
+  "fix_boundary": {
+    "shared_layer": "client task type plus TasksPage list derivation/render boundary and DailyBriefing chat submit entry",
+    "rationale": "One normalized frontend boundary covers every task record, status/priority combination, state transition and empty-list entry into chat."
+  },
+  "generalization_strategy": "shared_boundary",
+  "dimensions": [
+    {
+      "name": "task_data_shape",
+      "classes": ["non_empty_assignment_fields", "null_blank_or_unknown_fields"]
+    },
+    {
+      "name": "collection_state",
+      "classes": ["global_or_matching_results", "filtered_empty_or_transitioned_results"]
+    }
+  ],
+  "cases": [
+    {
+      "id": "reported-visible-task-data",
+      "role": "reported",
+      "dimensions": {
+        "task_data_shape": "non_empty_assignment_fields",
+        "collection_state": "global_or_matching_results"
+      },
+      "expected_invariant": "Non-empty priority and assignment fields render on the owning task card.",
+      "product_test_ref": "client/web-app/tests/TasksCalendarPage.test.tsx::hiện priority và phiếu giao việc nhưng không bịa dữ liệu rỗng"
+    },
+    {
+      "id": "sibling-composed-filters-and-sort",
+      "role": "sibling",
+      "dimensions": {
+        "task_data_shape": "non_empty_assignment_fields",
+        "collection_state": "filtered_empty_or_transitioned_results"
+      },
+      "expected_invariant": "Priority and status filters compose with AND and deterministic deadline/priority order.",
+      "product_test_ref": "client/web-app/tests/TasksCalendarPage.test.tsx::lọc priority độc lập và kết hợp đúng với trạng thái"
+    },
+    {
+      "id": "sibling-live-stats-and-empty-handoff",
+      "role": "sibling",
+      "dimensions": {
+        "task_data_shape": "null_blank_or_unknown_fields",
+        "collection_state": "global_or_matching_results"
+      },
+      "expected_invariant": "Canonical counts update after transitions and global empty state hands one default prompt to chat.",
+      "product_test_ref": "client/web-app/tests/TasksCalendarPage.test.tsx::thống kê từ toàn bộ task và cập nhật ngay sau chuyển trạng thái"
+    },
+    {
+      "id": "counterexample-filter-empty-and-null-priority",
+      "role": "counterexample",
+      "dimensions": {
+        "task_data_shape": "null_blank_or_unknown_fields",
+        "collection_state": "filtered_empty_or_transitioned_results"
+      },
+      "expected_invariant": "Null or blank priority creates no badge, and filter-empty keeps the compact no-result message instead of global onboarding actions.",
+      "product_test_ref": "client/web-app/tests/TasksCalendarPage.test.tsx::chỉ hiện hướng dẫn tạo việc khi danh sách thật sự rỗng"
+    }
+  ],
+  "implementation": {
+    "changed_shared_boundary": true,
+    "special_case_literals": [],
+    "known_exceptions": []
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "accepted",
+  "messages": [
+    {
+      "id": "msg-gml-017-1",
+      "source_id": "INBOX",
+      "provider": "google",
+      "thread_id": "thread-gml-017",
+      "author_id": "admin@vlearn.edu.vn",
+      "author_name": "Admin",
+      "is_self": false,
+      "is_dm": false,
+      "text": "Vui lòng kiểm tra lại tiến độ dự án.",
+      "sent_at": "2025-01-01T00:00:00+00:00",
+      "deep_link": "https://mail.google.com/mail/u/0/#all/msg-gml-017-1",
+      "capture_mode": "gmail_api",
+      "attachments": []
+    }
+  ],
+  "error_info": "Gmail API error 504 at /messages during next page fetch"
+}

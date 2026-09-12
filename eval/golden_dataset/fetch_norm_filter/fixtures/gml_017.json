@@ -1,0 +1,29 @@
+[
+  {
+    "id": "msg-gml-017-1",
+    "threadId": "thread-gml-017",
+    "labelIds": [
+      "INBOX"
+    ],
+    "snippet": "Vui lòng kiểm tra lại tiến độ dự án.",
+    "historyId": "12345",
+    "internalDate": "1735689600000",
+    "payload": {
+      "mimeType": "text/plain",
+      "headers": [
+        {
+          "name": "From",
+          "value": "Admin <admin@vlearn.edu.vn>"
+        },
+        {
+          "name": "Subject",
+          "value": "Subject msg-gml-017-1"
+        }
+      ],
+      "body": {
+        "data": "VnVpIGzDsm5nIGtp4buDbSB0cmEgbOG6oWkgdGnhur9uIMSR4buZIGThu7Egw6FuLg==",
+        "size": 36
+      }
+    }
+  }
+]
