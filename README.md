@@ -12,6 +12,36 @@ test suites.
 > Status: active MVP / pilot project. Some integrations are opt-in and require
 > provider OAuth credentials.
 
+👥 Team & Contributors
+
+Built with ❤️ by our team.
+
+<p align="center">
+<a href="https://github.com/lynnhatsuki3010">
+<img src="https://github.com/lynnhatsuki3010.png" width="100" height="100" alt="lynnhatsuki3010"/>
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/hoaianthai345">
+<img src="https://github.com/hoaianthai345.png" width="100" height="100" alt="hoaianthai345"/>
+</a>
+&nbsp;&nbsp;&nbsp;
+<a href="https://github.com/DucDung-1107">
+<img src="https://github.com/DucDung-1107.png" width="100" height="100" alt="DucDung-1107"/>
+</a>
+</p>
+
+<p align="center">
+<a href="https://github.com/lynnhatsuki3010">lynnhatsuki3010</a>
+&nbsp; • &nbsp;
+<a href="https://github.com/hoaianthai345">hoaianthai345</a>
+&nbsp; • &nbsp;
+<a href="https://github.com/DucDung-1107">DucDung-1107</a>
+</p>
+
+<p align="center">
+<sub>Special thanks to everyone who contributed to building Mondaiy together!</sub>
+</p>
+
 ## Highlights
 
 - Ask questions across Gmail, Discord, Jira, Outlook and Calendar.
